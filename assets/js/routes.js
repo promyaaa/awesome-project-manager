@@ -22,11 +22,11 @@ const EditMessage = require('./components/partials/EditMessage.vue');
 const routes = [
     { path: '/', component: Home },
 
-    { path: '/activities', component: Activities },
-
     { path: '/projects', component: Home },
 
     { path: '/projects/:projectid', component: Summary },
+
+    { path: '/projects/:projectid/activities', component: Activities },
 
     { path: '/projects/:projectid/edit', component: EditProject },
 

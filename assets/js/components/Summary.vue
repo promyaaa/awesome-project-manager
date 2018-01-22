@@ -78,13 +78,18 @@
                     </div>
                 </div> -->
             </div>
+            <activities></activities>  
         </div>
     </div>
 </template>
 
 <script>
     import store from '../store';
+    import Activities from './Activities.vue';
     export default {
+        components: {
+            Activities
+        },
         data() {
             return {
                 listSummary : [],

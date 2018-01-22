@@ -998,14 +998,14 @@ class FusionPM_Ajax {
             wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
-        // $projectID = $this->get_validated_input('project_id');
+        $projectID = $this->get_validated_input('project_id');
 
-        // if(!$projectID) {
-        //     wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
-        // }
+        if(!$projectID) {
+            wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
+        }
 
         $activityModel = FusionPM_Activity::init();
-        $activites = $activityModel->get_activities();
+        $activites = $activityModel->get_activities( $projectID );
 
         if ($activites) {
             wp_send_json_success( $activites );

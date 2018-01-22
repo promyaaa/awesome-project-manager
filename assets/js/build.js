@@ -522,7 +522,7 @@ module.exports = function(fn, that, length){
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(21)(function(){
+module.exports = !__webpack_require__(20)(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
 
@@ -532,7 +532,7 @@ module.exports = !__webpack_require__(21)(function(){
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = __webpack_require__(58)
-  , defined = __webpack_require__(20);
+  , defined = __webpack_require__(19);
 module.exports = function(it){
   return IObject(defined(it));
 };
@@ -554,7 +554,7 @@ module.exports = function(it){
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(8)
   , core    = __webpack_require__(3)
-  , fails   = __webpack_require__(21);
+  , fails   = __webpack_require__(20);
 module.exports = function(KEY, exec){
   var fn  = (core.Object || {})[KEY] || Object[KEY]
     , exp = {};
@@ -586,7 +586,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(0).setDesc
-  , has = __webpack_require__(23)
+  , has = __webpack_require__(22)
   , TAG = __webpack_require__(4)('toStringTag');
 
 module.exports = function(it, tag, stat){
@@ -595,29 +595,6 @@ module.exports = function(it, tag, stat){
 
 /***/ }),
 /* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_script__, __vue_template__
-__webpack_require__(120)
-__vue_script__ = __webpack_require__(122)
-__vue_template__ = __webpack_require__(123)
-module.exports = __vue_script__ || {}
-if (module.exports.__esModule) module.exports = module.exports.default
-if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-if (false) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "/home/promy/www/wordpress/wp-content/plugins/fusion-pm-free/assets/js/components/partials/FileUploadComponent.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, __vue_template__)
-  }
-})()}
-
-/***/ }),
-/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -693,7 +670,7 @@ var store = {
 exports.default = store;
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // 7.2.1 RequireObjectCoercible(argument)
@@ -703,7 +680,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = function(exec){
@@ -715,13 +692,13 @@ module.exports = function(exec){
 };
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports) {
 
 var hasOwnProperty = {}.hasOwnProperty;
@@ -730,7 +707,7 @@ module.exports = function(it, key){
 };
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx         = __webpack_require__(10)
@@ -754,6 +731,29 @@ module.exports = function(iterable, entries, fn, that){
 };
 
 /***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(121)
+__vue_script__ = __webpack_require__(123)
+__vue_template__ = __webpack_require__(124)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/home/promy/www/wordpress/wp-content/plugins/fusion-pm-free/assets/js/components/partials/FileUploadComponent.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
 /* 25 */
 /***/ (function(module, exports) {
 
@@ -772,7 +772,7 @@ var LIBRARY        = __webpack_require__(27)
   , $export        = __webpack_require__(8)
   , redefine       = __webpack_require__(28)
   , hide           = __webpack_require__(15)
-  , has            = __webpack_require__(23)
+  , has            = __webpack_require__(22)
   , Iterators      = __webpack_require__(16)
   , $iterCreate    = __webpack_require__(68)
   , setToStringTag = __webpack_require__(17)
@@ -922,7 +922,7 @@ module.exports = { "default": __webpack_require__(95), __esModule: true };
 var __vue_script__, __vue_template__
 __webpack_require__(117)
 __vue_script__ = __webpack_require__(119)
-__vue_template__ = __webpack_require__(124)
+__vue_template__ = __webpack_require__(120)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10363,7 +10363,7 @@ var _routes = __webpack_require__(109);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _store = __webpack_require__(19);
+var _store = __webpack_require__(18);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -10567,7 +10567,7 @@ module.exports = { "default": __webpack_require__(66), __esModule: true };
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(22);
+__webpack_require__(21);
 __webpack_require__(40);
 __webpack_require__(43);
 __webpack_require__(71);
@@ -10579,7 +10579,7 @@ module.exports = __webpack_require__(3).Set;
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(41)
-  , defined   = __webpack_require__(20);
+  , defined   = __webpack_require__(19);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -10690,12 +10690,12 @@ var $            = __webpack_require__(0)
   , redefineAll  = __webpack_require__(31)
   , ctx          = __webpack_require__(10)
   , strictNew    = __webpack_require__(32)
-  , defined      = __webpack_require__(20)
-  , forOf        = __webpack_require__(24)
+  , defined      = __webpack_require__(19)
+  , forOf        = __webpack_require__(23)
   , $iterDefine  = __webpack_require__(26)
   , step         = __webpack_require__(44)
   , ID           = __webpack_require__(30)('id')
-  , $has         = __webpack_require__(23)
+  , $has         = __webpack_require__(22)
   , isObject     = __webpack_require__(7)
   , setSpecies   = __webpack_require__(45)
   , DESCRIPTORS  = __webpack_require__(11)
@@ -10907,10 +10907,10 @@ module.exports = __webpack_require__(3).getIteratorMethod = function(it){
 var $              = __webpack_require__(0)
   , global         = __webpack_require__(5)
   , $export        = __webpack_require__(8)
-  , fails          = __webpack_require__(21)
+  , fails          = __webpack_require__(20)
   , hide           = __webpack_require__(15)
   , redefineAll    = __webpack_require__(31)
-  , forOf          = __webpack_require__(24)
+  , forOf          = __webpack_require__(23)
   , strictNew      = __webpack_require__(32)
   , isObject       = __webpack_require__(7)
   , setToStringTag = __webpack_require__(17)
@@ -10973,7 +10973,7 @@ $export($export.P, 'Set', {toJSON: __webpack_require__(79)('Set')});
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var forOf   = __webpack_require__(24)
+var forOf   = __webpack_require__(23)
   , classof = __webpack_require__(33);
 module.exports = function(NAME){
   return function toJSON(){
@@ -10988,7 +10988,7 @@ module.exports = function(NAME){
 /* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(22);
+__webpack_require__(21);
 __webpack_require__(40);
 __webpack_require__(43);
 __webpack_require__(81);
@@ -11010,7 +11010,7 @@ var $          = __webpack_require__(0)
   , anObject   = __webpack_require__(9)
   , aFunction  = __webpack_require__(25)
   , strictNew  = __webpack_require__(32)
-  , forOf      = __webpack_require__(24)
+  , forOf      = __webpack_require__(23)
   , setProto   = __webpack_require__(82).set
   , same       = __webpack_require__(83)
   , SPECIES    = __webpack_require__(4)('species')
@@ -11601,7 +11601,7 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(96);
-__webpack_require__(22);
+__webpack_require__(21);
 module.exports = __webpack_require__(3).Symbol;
 
 /***/ }),
@@ -11613,11 +11613,11 @@ module.exports = __webpack_require__(3).Symbol;
 // ECMAScript 6 symbols shim
 var $              = __webpack_require__(0)
   , global         = __webpack_require__(5)
-  , has            = __webpack_require__(23)
+  , has            = __webpack_require__(22)
   , DESCRIPTORS    = __webpack_require__(11)
   , $export        = __webpack_require__(8)
   , redefine       = __webpack_require__(28)
-  , $fails         = __webpack_require__(21)
+  , $fails         = __webpack_require__(20)
   , shared         = __webpack_require__(42)
   , setToStringTag = __webpack_require__(17)
   , uid            = __webpack_require__(30)
@@ -11941,7 +11941,7 @@ __webpack_require__(14)('keys', function($keys){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(20);
+var defined = __webpack_require__(19);
 module.exports = function(it){
   return Object(defined(it));
 };
@@ -11998,12 +11998,12 @@ var Users = __webpack_require__(165);
 
 var Activities = __webpack_require__(175);
 
-var Messages = __webpack_require__(178);
-var Message = __webpack_require__(183);
-var NewMessage = __webpack_require__(188);
-var EditMessage = __webpack_require__(193);
+var Messages = __webpack_require__(180);
+var Message = __webpack_require__(185);
+var NewMessage = __webpack_require__(190);
+var EditMessage = __webpack_require__(195);
 
-var routes = [{ path: '/', component: Home }, { path: '/activities', component: Activities }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '*', redirect: '/' }];
+var routes = [{ path: '/', component: Home }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/activities', component: Activities }, { path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '*', redirect: '/' }];
 
 exports.default = new _vueRouter2.default({
     // mode: 'history',
@@ -14520,7 +14520,7 @@ module.exports = { "default": __webpack_require__(112), __esModule: true };
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(22);
+__webpack_require__(21);
 module.exports = __webpack_require__(4)('toStringTag');
 
 /***/ }),
@@ -14605,7 +14605,7 @@ var _CommentsComponent = __webpack_require__(35);
 
 var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
 
-var _FileUploadComponent = __webpack_require__(18);
+var _FileUploadComponent = __webpack_require__(24);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
@@ -15227,12 +15227,18 @@ exports.default = {
 
 /***/ }),
 /* 120 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div class=\"comment-content\">\n        <h3 style=\"padding-left: 14px;\">Comments</h3>\n        <!-- <pre>\n            {{comments}}\n        </pre> -->\n        <div v-for=\"(commentObject, cindex) in comments\" style=\"padding:0px 15px 15px 15px;border-radius: 5px;\">    \n            <div v-if=\"editindex !== cindex\">\n                <img :src=\"commentObject.avatar_url\" alt=\"\">\n                <div v-html=\"commentObject.comment\"></div><br>\n                commented by {{commentObject.user_name}}\n                \n                <br>\n                <div class=\"action\" style=\"border-bottom: 1px solid #eee; padding-bottom:10px;\">\n                    <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\n                        <a>Edit</a> |\n                    </span>\n                    <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\n                        <a>Delete</a>\n                    </span>\n                </div>\n            </div>\n            <!-- edit section -->\n            <div v-if=\"editindex === cindex\">\n                <div class=\"add_form_style\">\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\n                    <br>\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"updateComment(commentObject)\"\n                        >Update</button>\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">Cancel</button>\n                </div>\n            </div>\n        </div>\n        <br><br><hr>\n        <div style=\"margin-top: 15px;\">\n            <div class=\"add_form_style\">\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\n                <br>\n                  \n                <div class=\"action\">\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"addComment()\"\n                        >Add</button>\n                    <!-- <button class=\"button button-default\" @click=\"toggleMessageForm\">Cancel</button> -->\n                </div>\n            </div>\n            \n        </div>\n        \n    </div>\n";
+
+/***/ }),
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(121);
+var content = __webpack_require__(122);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -15252,7 +15258,7 @@ if(false) {
 }
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -15266,7 +15272,7 @@ exports.push([module.i, "\n    .remove-attachment {\n        cursor: pointer;\n 
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15351,16 +15357,10 @@ exports.default = {
 //
 
 /***/ }),
-/* 123 */
-/***/ (function(module, exports) {
-
-module.exports = "\n    <div>\n        <div class=\"images-to-upload\">\n            <div v-for=\"(file, index) in attachments\" style=\"float:left;padding-right:10px\" class=\"text-center\">\n                <img :src=\"file.url\" width=\"100\" height=\"100\" class=\"image-common\" style=\"display:block;\">\n                <span @click=\"removeAttachment(index)\" class=\"remove-attachment\">x</span>\n            </div>\n        </div>\n        <br>\n        <button\n            class=\"button button-default\" \n            @click=\"fileUpload\">+add files</button>\n    </div>\n";
-
-/***/ }),
 /* 124 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class=\"comment-content\">\n        <h3 style=\"padding-left: 14px;\">Comments</h3>\n        <!-- <pre>\n            {{comments}}\n        </pre> -->\n        <div v-for=\"(commentObject, cindex) in comments\" style=\"padding:0px 15px 15px 15px;border-radius: 5px;\">    \n            <div v-if=\"editindex !== cindex\">\n                <img :src=\"commentObject.avatar_url\" alt=\"\">\n                <div v-html=\"commentObject.comment\"></div><br>\n                commented by {{commentObject.user_name}}\n                \n                <br>\n                <div class=\"action\" style=\"border-bottom: 1px solid #eee; padding-bottom:10px;\">\n                    <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\n                        <a>Edit</a> |\n                    </span>\n                    <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\n                        <a>Delete</a>\n                    </span>\n                </div>\n            </div>\n            <!-- edit section -->\n            <div v-if=\"editindex === cindex\">\n                <div class=\"add_form_style\">\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\n                    <br>\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"updateComment(commentObject)\"\n                        >Update</button>\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">Cancel</button>\n                </div>\n            </div>\n        </div>\n        <br><br><hr>\n        <div style=\"margin-top: 15px;\">\n            <div class=\"add_form_style\">\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\n                <br>\n                  \n                <div class=\"action\">\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"addComment()\"\n                        >Add</button>\n                    <!-- <button class=\"button button-default\" @click=\"toggleMessageForm\">Cancel</button> -->\n                </div>\n            </div>\n            \n        </div>\n        \n    </div>\n";
+module.exports = "\n    <div>\n        <div class=\"images-to-upload\">\n            <div v-for=\"(file, index) in attachments\" style=\"float:left;padding-right:10px\" class=\"text-center\">\n                <img :src=\"file.url\" width=\"100\" height=\"100\" class=\"image-common\" style=\"display:block;\">\n                <span @click=\"removeAttachment(index)\" class=\"remove-attachment\">x</span>\n            </div>\n        </div>\n        <br>\n        <button\n            class=\"button button-default\" \n            @click=\"fileUpload\">+add files</button>\n    </div>\n";
 
 /***/ }),
 /* 125 */
@@ -15846,13 +15846,106 @@ var _stringify = __webpack_require__(6);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _store = __webpack_require__(19);
+var _store = __webpack_require__(18);
 
 var _store2 = _interopRequireDefault(_store);
 
+var _Activities = __webpack_require__(175);
+
+var _Activities2 = _interopRequireDefault(_Activities);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// <template>
+//     <div>
+//         <div class="container summary-section">
+//             <div class="row">
+//                 <div class="col-12">
+//                     <div class="text-center project-info">
+//                         <h1><strong>{{project.project_title}}</strong></h1>
+//                         <br>
+//                         <span>{{project.project_desc}}</span>
+//
+//                         <router-link :to="'/projects/' + $route.params.projectid + '/edit'" class="link-style edit" tag="span" v-if="isShowEdit">
+//                             <a>Edit info</a>
+//                         </router-link>
+//                     </div>
+//                 </div>
+//                 <div class="col-12">
+//                     <div class="users-summary">
+//                         <div style="display: inline-block">
+//                             <img :src="user.avatar_url" v-for="user in users" alt="" class="small-round-image">
+//                         </div>
+//                         <div v-if="project.user_count > 10" style="display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;">
+//                             <a>+{{project.user_count - 10}} people</a>
+//                         </div>
+//
+//                         <div style="margin-top: 15px;">
+//                             <router-link :to="'/projects/' + $route.params.projectid + '/users'" class="link-style button button-default">
+//                                 Add/Remove People...
+//                             </router-link>
+//                         </div>
+//
+//                     </div>
+//                 </div>
+//
+//             </div>
+//             <div class="row">
+//                 <div class="col-2"></div>
+//                 <div class="col-4">
+//                     <div class="summary-card">
+//                         <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" tag="h3" class="link-style">
+//                             <a>To-dos</a>
+//                         </router-link>
+//                         <hr>
+//                         <div style="position: absolute;" class="text-left">
+//                             <div v-for="list in listSummary">
+//                                 <h3>{{list.list_title}}</h3>
+//                                 <ul>
+//                                     <li v-for="todo in list.todos">
+//                                         <input type="checkbox">{{todo.todo}}
+//                                     </li>
+//                                 </ul>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <div class="col-4">
+//                     <div class="summary-card">
+//                         <router-link :to="'/projects/' + $route.params.projectid + '/messages'" tag="h3" class="link-style">
+//                             <a>Message Board</a>
+//                         </router-link>
+//                         <hr>
+//                         <div style="position: absolute;" class="text-left">
+//                             <div v-for="messageObj in messages">
+//                                 <div>
+//                                     <img class="small-round-image" :src="messageObj.avatar_url" alt="" width="20" height="20" style="float:left;margin-right:10px;">
+//                                     <strong>{{messageObj.message_title}}</strong>
+//                                 </div><br>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <!-- <div class="col-4">
+//                     <div class="summary-card">
+//                         <router-link :to="'/projects/' + $route.params.projectid + '/files'" tag="h3" class="link-style">
+//                             <a>Docs & Files</a>
+//                         </router-link>
+//                         <hr>
+//                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet architecto cupiditate consequuntur placeat atque neque. Voluptates odio in omnis, rem laboriosam magni eos corporis, error voluptatibus ut tempora, ullam adipisci!</p>
+//                     </div>
+//                 </div> -->
+//             </div>
+//             <activities></activities>  
+//         </div>
+//     </div>
+// </template>
+//
+// <script>
 exports.default = {
+    components: {
+        Activities: _Activities2.default
+    },
     data: function data() {
         return {
             listSummary: [],
@@ -16054,97 +16147,12 @@ exports.default = {
 //         display: none;
 //     }
 // </style>
-// <template>
-//     <div>
-//         <div class="container summary-section">
-//             <div class="row">
-//                 <div class="col-12">
-//                     <div class="text-center project-info">
-//                         <h1><strong>{{project.project_title}}</strong></h1>
-//                         <br>
-//                         <span>{{project.project_desc}}</span>
-//
-//                         <router-link :to="'/projects/' + $route.params.projectid + '/edit'" class="link-style edit" tag="span" v-if="isShowEdit">
-//                             <a>Edit info</a>
-//                         </router-link>
-//                     </div>
-//                 </div>
-//                 <div class="col-12">
-//                     <div class="users-summary">
-//                         <div style="display: inline-block">
-//                             <img :src="user.avatar_url" v-for="user in users" alt="" class="small-round-image">
-//                         </div>
-//                         <div v-if="project.user_count > 10" style="display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;">
-//                             <a>+{{project.user_count - 10}} people</a>
-//                         </div>
-//
-//                         <div style="margin-top: 15px;">
-//                             <router-link :to="'/projects/' + $route.params.projectid + '/users'" class="link-style button button-default">
-//                                 Add/Remove People...
-//                             </router-link>
-//                         </div>
-//
-//                     </div>
-//                 </div>
-//
-//             </div>
-//             <div class="row">
-//                 <div class="col-2"></div>
-//                 <div class="col-4">
-//                     <div class="summary-card">
-//                         <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" tag="h3" class="link-style">
-//                             <a>To-dos</a>
-//                         </router-link>
-//                         <hr>
-//                         <div style="position: absolute;" class="text-left">
-//                             <div v-for="list in listSummary">
-//                                 <h3>{{list.list_title}}</h3>
-//                                 <ul>
-//                                     <li v-for="todo in list.todos">
-//                                         <input type="checkbox">{{todo.todo}}
-//                                     </li>
-//                                 </ul>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div class="col-4">
-//                     <div class="summary-card">
-//                         <router-link :to="'/projects/' + $route.params.projectid + '/messages'" tag="h3" class="link-style">
-//                             <a>Message Board</a>
-//                         </router-link>
-//                         <hr>
-//                         <div style="position: absolute;" class="text-left">
-//                             <div v-for="messageObj in messages">
-//                                 <div>
-//                                     <img class="small-round-image" :src="messageObj.avatar_url" alt="" width="20" height="20" style="float:left;margin-right:10px;">
-//                                     <strong>{{messageObj.message_title}}</strong>
-//                                 </div><br>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <!-- <div class="col-4">
-//                     <div class="summary-card">
-//                         <router-link :to="'/projects/' + $route.params.projectid + '/files'" tag="h3" class="link-style">
-//                             <a>Docs & Files</a>
-//                         </router-link>
-//                         <hr>
-//                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet architecto cupiditate consequuntur placeat atque neque. Voluptates odio in omnis, rem laboriosam magni eos corporis, error voluptatibus ut tempora, ullam adipisci!</p>
-//                     </div>
-//                 </div> -->
-//             </div>
-//         </div>
-//     </div>
-// </template>
-//
-// <script>
 
 /***/ }),
 /* 135 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <div class=\"container summary-section\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"text-center project-info\">\n                        <h1><strong>{{project.project_title}}</strong></h1>\n                        <br>\n                        <span>{{project.project_desc}}</span>\n\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\" class=\"link-style edit\" tag=\"span\" v-if=\"isShowEdit\">\n                            <a>Edit info</a>\n                        </router-link>\n                    </div>\n                </div>\n                <div class=\"col-12\">\n                    <div class=\"users-summary\">\n                        <div style=\"display: inline-block\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in users\" alt=\"\" class=\"small-round-image\">\n                        </div>\n                        <div v-if=\"project.user_count > 10\" style=\"display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;\">\n                            <a>+{{project.user_count - 10}} people</a>\n                        </div>\n\n                        <div style=\"margin-top: 15px;\">\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/users'\" class=\"link-style button button-default\">\n                                Add/Remove People...\n                            </router-link>\n                        </div>\n\n                    </div>\n                </div>\n\n            </div>\n            <div class=\"row\">\n                <div class=\"col-2\"></div>\n                <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" tag=\"h3\" class=\"link-style\">\n                            <a>To-dos</a>\n                        </router-link>\n                        <hr>\n                        <div style=\"position: absolute;\" class=\"text-left\">\n                            <div v-for=\"list in listSummary\">\n                                <h3>{{list.list_title}}</h3>\n                                <ul>\n                                    <li v-for=\"todo in list.todos\">\n                                        <input type=\"checkbox\">{{todo.todo}}\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" tag=\"h3\" class=\"link-style\">\n                            <a>Message Board</a>\n                        </router-link>\n                        <hr>\n                        <div style=\"position: absolute;\" class=\"text-left\">\n                            <div v-for=\"messageObj in messages\">\n                                <div>\n                                    <img class=\"small-round-image\" :src=\"messageObj.avatar_url\" alt=\"\" width=\"20\" height=\"20\" style=\"float:left;margin-right:10px;\">\n                                    <strong>{{messageObj.message_title}}</strong>\n                                </div><br>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <!-- <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/files'\" tag=\"h3\" class=\"link-style\">\n                            <a>Docs & Files</a>\n                        </router-link>\n                        <hr>\n                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet architecto cupiditate consequuntur placeat atque neque. Voluptates odio in omnis, rem laboriosam magni eos corporis, error voluptatibus ut tempora, ullam adipisci!</p>\n                    </div>\n                </div> -->\n            </div>\n        </div>\n    </div>\n";
+module.exports = "\n    <div>\n        <div class=\"container summary-section\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"text-center project-info\">\n                        <h1><strong>{{project.project_title}}</strong></h1>\n                        <br>\n                        <span>{{project.project_desc}}</span>\n\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\" class=\"link-style edit\" tag=\"span\" v-if=\"isShowEdit\">\n                            <a>Edit info</a>\n                        </router-link>\n                    </div>\n                </div>\n                <div class=\"col-12\">\n                    <div class=\"users-summary\">\n                        <div style=\"display: inline-block\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in users\" alt=\"\" class=\"small-round-image\">\n                        </div>\n                        <div v-if=\"project.user_count > 10\" style=\"display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;\">\n                            <a>+{{project.user_count - 10}} people</a>\n                        </div>\n\n                        <div style=\"margin-top: 15px;\">\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/users'\" class=\"link-style button button-default\">\n                                Add/Remove People...\n                            </router-link>\n                        </div>\n\n                    </div>\n                </div>\n\n            </div>\n            <div class=\"row\">\n                <div class=\"col-2\"></div>\n                <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" tag=\"h3\" class=\"link-style\">\n                            <a>To-dos</a>\n                        </router-link>\n                        <hr>\n                        <div style=\"position: absolute;\" class=\"text-left\">\n                            <div v-for=\"list in listSummary\">\n                                <h3>{{list.list_title}}</h3>\n                                <ul>\n                                    <li v-for=\"todo in list.todos\">\n                                        <input type=\"checkbox\">{{todo.todo}}\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" tag=\"h3\" class=\"link-style\">\n                            <a>Message Board</a>\n                        </router-link>\n                        <hr>\n                        <div style=\"position: absolute;\" class=\"text-left\">\n                            <div v-for=\"messageObj in messages\">\n                                <div>\n                                    <img class=\"small-round-image\" :src=\"messageObj.avatar_url\" alt=\"\" width=\"20\" height=\"20\" style=\"float:left;margin-right:10px;\">\n                                    <strong>{{messageObj.message_title}}</strong>\n                                </div><br>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <!-- <div class=\"col-4\">\n                    <div class=\"summary-card\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/files'\" tag=\"h3\" class=\"link-style\">\n                            <a>Docs & Files</a>\n                        </router-link>\n                        <hr>\n                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet architecto cupiditate consequuntur placeat atque neque. Voluptates odio in omnis, rem laboriosam magni eos corporis, error voluptatibus ut tempora, ullam adipisci!</p>\n                    </div>\n                </div> -->\n            </div>\n            <activities></activities>  \n        </div>\n    </div>\n";
 
 /***/ }),
 /* 136 */
@@ -17245,11 +17253,11 @@ var _stringify = __webpack_require__(6);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _store = __webpack_require__(19);
+var _store = __webpack_require__(18);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _FileUploadComponent = __webpack_require__(18);
+var _FileUploadComponent = __webpack_require__(24);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
@@ -17706,7 +17714,7 @@ var _SingleUserComponent = __webpack_require__(169);
 
 var _SingleUserComponent2 = _interopRequireDefault(_SingleUserComponent);
 
-var _store = __webpack_require__(19);
+var _store = __webpack_require__(18);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -18114,8 +18122,9 @@ module.exports = "\n    <div class=\"container\">\n        <div class=\"row\">\n
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__vue_script__ = __webpack_require__(176)
-__vue_template__ = __webpack_require__(177)
+__webpack_require__(176)
+__vue_script__ = __webpack_require__(178)
+__vue_template__ = __webpack_require__(179)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -18135,6 +18144,46 @@ if (false) {(function () {  module.hot.accept()
 /* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(177);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-b609a2f4&file=Activities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Activities.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-b609a2f4&file=Activities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Activities.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.activity-content {\n    padding: 35px 20px; \n    /*border: 1px solid #e5e5e5;*/\n    box-shadow: 0 1px 1px rgba(0,0,0,0.04);\n    background: #fff;\n}    \n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -18142,15 +18191,49 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 // <template>
-//     <div>
-//         <div v-for="record in activities">
-//                 <h3>{{record.activity_date}}</h3><br>
-//             <div v-for="activity in record.activities">
-//                 {{activity.activity}}
-//             </div><br>
+//     <!-- <div class="container"> -->
+//         <div class="row">
+//             <div class="col-12 text-center">
+//                 <div class="activity-content">
+//                     <div class="row">
+//                         <div class="col-12">
+//                             <h2 class="decorated-center"><span>Project Activity</span></h2>
+//                         </div>
+//                     </div>
+//                     <ul class="timeline timeline-centered">
+//                         <li class="timeline-item" v-for="(record, index) in activities">
+//                             <div>
+//                                 <h3>{{record.activity_date}}</h3>
+//                             </div>
+//                             <div class="timeline-marker"></div>
+//                             <div class="timeline-content" v-for="activity in record.activities">
+//                                 <div class="row" v-if="index % 2===0">
+//                                     <div class="col-2">{{activity.formatted_time}}</div>
+//                                     <div class="col-10">{{activity.activity}}</div>
+//                                 </div>
+//                                 <div class="row" v-else>
+//                                     <div class="col-10">{{activity.activity}}</div>
+//                                     <div class="col-2">{{activity.formatted_time}}</div>
+//                                 </div>
+//                             </div>
+//                         </li>
+//                     </ul>
+//                 </div>
+//             </div>  
+//             </div>
 //         </div>
-//     </div>
+//     <!-- </div> -->
 // </template>
+//
+// <style>
+// .activity-content {
+//     padding: 35px 20px; 
+//     /*border: 1px solid #e5e5e5;*/
+//     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+//     box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+//     background: #fff;
+// }    
+// </style>
 //
 // <script>
 exports.default = {
@@ -18168,7 +18251,7 @@ exports.default = {
 
             var data = {
                 action: 'fpm-get-activities',
-                // project_id: vm.$route.params.projectid,
+                project_id: vm.$route.params.projectid,
                 nonce: fpm.nonce
             };
 
@@ -18189,19 +18272,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <div v-for=\"record in activities\">\n                <h3>{{record.activity_date}}</h3><br>\n            <div v-for=\"activity in record.activities\">\n                {{activity.activity}}\n            </div><br>\n        </div>\n    </div>\n";
+module.exports = "\n    <!-- <div class=\"container\"> -->\n        <div class=\"row\">\n            <div class=\"col-12 text-center\">\n                <div class=\"activity-content\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <h2 class=\"decorated-center\"><span>Project Activity</span></h2>\n                        </div>\n                    </div>\n                    <ul class=\"timeline timeline-centered\">\n                        <li class=\"timeline-item\" v-for=\"(record, index) in activities\">\n                            <div>\n                                <h3>{{record.activity_date}}</h3>\n                            </div>\n                            <div class=\"timeline-marker\"></div>\n                            <div class=\"timeline-content\" v-for=\"activity in record.activities\">\n                                <div class=\"row\" v-if=\"index % 2===0\">\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                    <div class=\"col-10\">{{activity.activity}}</div>\n                                </div>\n                                <div class=\"row\" v-else>\n                                    <div class=\"col-10\">{{activity.activity}}</div>\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                </div>\n                            </div>\n                        </li>\n                    </ul>\n                </div>\n            </div>  \n            </div>\n        </div>\n    <!-- </div> -->\n";
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(179)
-__vue_script__ = __webpack_require__(181)
-__vue_template__ = __webpack_require__(182)
+__webpack_require__(181)
+__vue_script__ = __webpack_require__(183)
+__vue_template__ = __webpack_require__(184)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -18218,13 +18301,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(180);
+var content = __webpack_require__(182);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -18244,7 +18327,7 @@ if(false) {
 }
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -18258,7 +18341,7 @@ exports.push([module.i, "\n    .messages-section {\n        background-color: #f
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18502,19 +18585,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div>\n        <div class=\"container\">\n            <!-- <div class=\"row\">\n                <div class=\"col-1\"></div>\n                <div class=\"col-10 section-head\" v-if=\"project\">\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" class=\"link-style\" tag=\"span\">\n                        <a>{{project.project_title}}</a>\n                    </router-link>\n                </div>\n            </div> -->\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"row\">\n                        <div class=\"col-1\"></div>\n                        <div class=\"col-10\">\n                            <div v-if=\"project\" class=\"project-navigation\">\n                                <router-link :to=\"'/projects/' + $route.params.projectid\" class=\"link-style\" tag=\"h3\">\n                                    <a>{{project.project_title}}</a>\n                                </router-link>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"messages-section\">\n                        <div class=\"row\">\n                            <div class=\"col-4\">\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/new'\" class=\"button button-default\">\n                                    +Add\n                                </router-link>\n                            </div>\n                            <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;\">\n                                <h3>Message Board</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"loading\" v-if=\"loading\">\n                            <p>Loading . . .</p>\n                        </div>\n\n                        <div v-if=\"messages.length < 1 && !loading\">\n                            <h4>No Message Added Yet</h4>\n                        </div>\n                        <!-- <pre>\n                            {{messages}}\n                        </pre> -->\n                        <div v-if=\"messages.length > 0 && !loading\">\n                            <ul>\n                                <li v-for=\"(messageObj, mindex) in messages\" style=\"border-bottom: 1px solid #f2f2f2\">\n                                    <div class=\"row\">\n                                        <div class=\"col-2 text-center\">\n                                            <img :src=\"messageObj.avatar_url\" class=\"small-round-image\" style=\"margin-top: 10px\">\n                                        </div>\n                                        <div class=\"col-10\">\n                                            <div>\n                                                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID\" tag=\"h3\" class=\"ellipsis-90 link-style\">\n                                                    <a>{{messageObj.message_title}}</a>\n                                                </router-link>\n                                                <p>posted by <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p> \n                                            </div>\n                                        </div>\n                                    </div>\n                                </li>\n                            </ul>   \n                        </div>\n                        <br>\n                        <div class=\"row\" v-if=\"messages.length < messageCount\">\n                            <div class=\"col-12 text-center\">\n                                <button class=\"button button-default\" @click=\"loadMoreMessages\">Load More...{{messageCount}}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(184)
-__vue_script__ = __webpack_require__(186)
-__vue_template__ = __webpack_require__(187)
+__webpack_require__(186)
+__vue_script__ = __webpack_require__(188)
+__vue_template__ = __webpack_require__(189)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -18531,13 +18614,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(185);
+var content = __webpack_require__(187);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -18557,7 +18640,7 @@ if(false) {
 }
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -18571,7 +18654,7 @@ exports.push([module.i, "\n    .image-common {\n        padding:10px;\n        b
 
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18581,7 +18664,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _store = __webpack_require__(19);
+var _store = __webpack_require__(18);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -18804,19 +18887,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-12 text-center\" style=\"text-decoration: none;\">\n                <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"span\" class=\"link-style\">\n                    <a>{{messageObject.project_title}}</a> >\n                </router-link>\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" tag=\"span\" class=\"link-style\">\n                    <a>Messages Board</a> > Message\n                </router-link>\n            </div>\n        </div>\n        <div class=\"row\">\n           <!-- <pre>\n               {{messageObject}}\n           </pre> -->\n        </div>\n        <div class=\"row\">\n            <div class=\"col-12\">\n                <!-- <h3>Message</h3> -->\n                <div class=\"loading\" v-if=\"loading\">\n                    <p>Loading . . .</p>\n                </div>\n\n                <div v-if=\"messageObject\" class=\"box\">\n                    <div v-if=\"isShowEdit\">\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'\" class=\"button button-default\">\n                            Edit\n                        </router-link>\n                        <span style=\"float:right\" @click=\"deleteMessage(messageObject)\">\n                            <a style=\"color: #d54e21;cursor:pointer;\">Delete</a>\n                        </span> \n                    </div>\n                    <br>\n                    <div class=\"message-content\">\n                        <div class=\"text-center message-by\">\n                            <img :src=\"messageObject.avatar_url\" class=\"small-round-image\" alt=\"\">\n                            <p>\n                                <i>posted by <strong>{{messageObject.user_name}}</strong>\n                                at {{messageObject.formatted_created}}</i>\n                            </p>\n                        </div>\n                        \n                        <h1><strong>{{messageObject.message_title}}</strong></h1>\n                        \n                        <div class=\"message-desc\" v-html=\"messageObject.message\"></div>\n                        \n                        <div v-if=\"messageObject.files.length > 0\">\n                            <div v-for=\"file in messageObject.files\" class=\"image-common\">\n                                <img :src=\"file.url\" alt=\"\" class=\"image-resize\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <br>\n                <comments :comments=\"messageObject.comments\" type=\"message\"></comments>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(189)
-__vue_script__ = __webpack_require__(191)
-__vue_template__ = __webpack_require__(192)
+__webpack_require__(191)
+__vue_script__ = __webpack_require__(193)
+__vue_template__ = __webpack_require__(194)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -18833,13 +18916,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(190);
+var content = __webpack_require__(192);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -18859,7 +18942,7 @@ if(false) {
 }
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -18873,7 +18956,7 @@ exports.push([module.i, "\n    .ql-container {\n        background: #ffffff;\n  
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18885,7 +18968,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vue2Editor = __webpack_require__(36);
 
-var _FileUploadComponent = __webpack_require__(18);
+var _FileUploadComponent = __webpack_require__(24);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
@@ -19121,19 +19204,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div>\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-12 text-center\">\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"span\" class=\"link-style\">\n                        <a>{{project.project_title}}</a> >\n                    </router-link>\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" tag=\"span\" class=\"link-style\">\n                        <a>Messages Board</a> > New Message\n                    </router-link>\n                    <!-- <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"span\">\n                        <a>Message Board</a>\n                    </router-link> -->\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"list-title\">\n                        <!-- <a class=\"page-title-action\" @click.prevent=\"toggleMessageForm\" v-if=\"!isShowMessageForm\">+ Add</a> -->\n                    </div>\n                    <div>\n                        <!-- <vue-editor v-model=\"content\" :editorToolbar=\"customToolbar\"></vue-editor> -->\n                        <div class=\"add_form_style\">\n                            <div>\n                                <input type=\"text\" \n                                       v-model=\"messageTitle\"\n                                       class=\"form-control\"\n                                       v-focus\n                                       placeholder=\"add message title\">\n                            </div>\n                            <!-- <div>\n                                <textarea \n                                    name=\"message\" \n                                    v-model=\"message\" \n                                    class=\"form-control\" \n                                    placeholder=\"message . . .\" \n                                    @keyup.enter=\"createMessage\" \n                                    @keyup.esc=\"toggleMessageForm\"\n                                    rows=\"3\"></textarea>\n                            </div> -->\n                            <div>\n                                <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\n                            </div>\n                            <br>\n                            <file-upload \n                                v-on:attach=\"updateAttachments\" \n                                v-on:remove=\"removeAttachment\" \n                                :attachments=\"attachments\"></file-upload>\n                            <br>    \n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createMessage\">\n                                    Add\n                                </button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!-- <div class=\"row\"></div> -->\n        </div>\n    </div>\n";
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(194)
-__vue_script__ = __webpack_require__(196)
-__vue_template__ = __webpack_require__(197)
+__webpack_require__(196)
+__vue_script__ = __webpack_require__(198)
+__vue_template__ = __webpack_require__(199)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -19150,13 +19233,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(195);
+var content = __webpack_require__(197);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -19176,7 +19259,7 @@ if(false) {
 }
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -19190,7 +19273,7 @@ exports.push([module.i, "\n    .messages-section {\n        background-color: #f
 
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19202,7 +19285,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vue2Editor = __webpack_require__(36);
 
-var _FileUploadComponent = __webpack_require__(18);
+var _FileUploadComponent = __webpack_require__(24);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
@@ -19432,7 +19515,7 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div>\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-12 text-center\">\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"span\" class=\"link-style\">\n                        <a>{{messageObject.project_title}}</a> >\n                    </router-link>\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"span\">\n                        <a>Message Board</a> >\n                    </router-link>\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" tag=\"span\" class=\"link-style\">\n                        <a>{{messageObject.message_title}}</a> > Edit Message\n                    </router-link>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div>\n                        <div class=\"add_form_style\">\n                            <div>\n                                <input type=\"text\" \n                                       v-model=\"messageTitle\"\n                                       class=\"form-control\"\n                                       v-focus\n                                       placeholder=\"add message title\">\n                            </div>\n                            <div>\n                                <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\n                            </div>\n                            <br>\n                            <file-upload \n                                v-on:attach=\"updateAttachments\" \n                                v-on:remove=\"removeAttachment\" \n                                :attachments=\"attachments\"></file-upload>\n                            <br>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" \n                                        @click.prevent=\"updateMessage\"\n                                        >update</button>\n                                <!-- <button class=\"button button-default\" @click=\"toggleMessageForm\">Cancel</button> -->\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!-- <div class=\"row\"></div> -->\n        </div>\n    </div>\n";

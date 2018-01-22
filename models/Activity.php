@@ -1,9 +1,5 @@
 <?php 
 
-
-/**
-* 
-*/
 class FusionPM_Activity {
 
     protected $table_name;
@@ -78,16 +74,15 @@ class FusionPM_Activity {
         if ( !$offset ) {
             $offset = 0;
         }
-        //SELECT *, DATE_FORMAT( `created`, '%Y-%m-%d' ) as timeline_date FROM {$this->table_name} ORDER BY `ID` DESC
-        $data = $wpdb->get_results( "SELECT * FROM {$this->table_name} ORDER BY `ID` DESC", ARRAY_A);
-
+        
+        $data = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC", ARRAY_A);
 
         $temp = array();
         foreach ( $data as $element ) {
-            $nameOfDay = date('l, j F, Y', strtotime($element['created']));
+            $nameOfDay = date('l, j M, Y', strtotime($element['created']));
             $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>70));
             $element['formatted_date'] = $this->get_formatted_date( $element['created'] );
-            $element['formatted_time'] = $this->get_formatted_date( $elemen['created'] );
+            $element['formatted_time'] = $this->get_formatted_time( $elemen['created'] );
             $temp[$nameOfDay][] = $element;
         }
 
@@ -98,18 +93,6 @@ class FusionPM_Activity {
                 'activities' => $activities
             );
         }
-
-        // $result = $wpdb->get_results( 
-        //     "SELECT *, DAY(created) as day FROM {$this->table_name} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}"
-        // );
-
-        // var_dump($result);
-        // die();
-        // foreach ($result as $activityObject) {
-        //     $activityObject->avatar_url = get_avatar_url($activityObject->userID, array('size'=>70));
-        //     $activityObject->formatted_date = $this->get_formatted_date( $messageObject->created );
-        //     $activityObject->formatted_time = $this->get_formatted_date( $messageObject->created );
-        // }
 
         return $result;
     }
