@@ -1,0 +1,404 @@
+/*@import "~vue-wysiwyg/dist/vueWysiwyg.css";*/
+
+/*grid section start*/
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-heavy {
+  font-weight: 700;
+}
+
+/* POSITIONING */
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.justify {
+  text-align: justify;
+}
+
+/* ==== GRID SYSTEM ==== */
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.row [class^="col"] {
+  float: left;
+  margin: 0.5rem 1%;
+  min-height: 0.125rem;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  width: 98%;
+}
+
+.col-1-sm {
+  width: 6.33%;
+}
+
+.col-2-sm {
+  width: 14.66%;
+}
+
+.col-3-sm {
+  width: 23%;
+}
+
+.col-4-sm {
+  width: 31.33%;
+}
+
+.col-5-sm {
+  width: 39.66%;
+}
+
+.col-6-sm {
+  width: 48%;
+}
+
+.col-7-sm {
+  width: 56.33%;
+}
+
+.col-8-sm {
+  width: 64.66%;
+}
+
+.col-9-sm {
+  width: 73%;
+}
+
+.col-10-sm {
+  width: 81.33%;
+}
+
+.col-11-sm {
+  width: 89.66%;
+}
+
+.col-12-sm {
+  width: 98%;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.hidden-sm {
+  display: none;
+}
+
+@media only screen and (min-width: 33.75em) {  /* 540px */
+  .container {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 45em) {  /* 720px */
+  .col-1 {
+    width: 6.33%;
+  }
+
+  .col-2 {
+    width: 14.66%;
+  }
+
+  .col-3 {
+    width: 23%;
+  }
+
+  .col-4 {
+    width: 31.33%;
+  }
+
+  .col-5 {
+    width: 39.66%;
+  }
+
+  .col-6 {
+    width: 48%;
+  }
+
+  .col-7 {
+    width: 56.33%;
+  }
+
+  .col-8 {
+    width: 64.66%;
+  }
+
+  .col-9 {
+    width: 73%;
+  }
+
+  .col-10 {
+    width: 81.33%;
+  }
+
+  .col-11 {
+    width: 89.66%;
+  }
+
+  .col-12 {
+    width: 98%;
+  }
+
+  .hidden-sm {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 60em) { /* 960px */
+  .container {
+    width: 75%;
+    max-width: 60rem;
+  }
+}
+
+/*grid section end*/
+
+textarea.form-control {
+    height: auto;
+}
+
+.form-control {
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 6px;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.small-round-image {
+  border-radius: 55px !important;
+}
+
+.decorated{
+    overflow: hidden;
+    text-align: left;
+}
+.decorated > span{
+    position: relative;
+    display: inline-block;
+}
+.decorated > span:before, .decorated > span:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+        border: 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #fafafa;
+    width: 750px; /* half of limiter*/
+    margin: 0 20px;
+}
+.decorated > span:before{
+    right: 100%;
+}
+.decorated > span:after{
+    left: 100%;
+}
+
+.dropup,
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle:focus {
+  outline: 0;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: -13px;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+}
+
+.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  right: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+.dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #337ab7;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #777777;
+}
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  cursor: not-allowed;
+}
+.open > .dropdown-menu {
+  display: block;
+}
+.open > a {
+  outline: 0;
+}
+.dropdown-menu-right {
+  left: auto;
+  right: 0;
+}
+.dropdown-menu-left {
+  left: 0;
+  right: auto;
+}
+.dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #777777;
+  white-space: nowrap;
+}
+.dropdown-backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 990;
+}
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9;
+  content: "";
+}
+.dropup .dropdown-menu,
+.navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 2px;
+}
+@media (min-width: 768px) {
+  .navbar-right .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+  .navbar-right .dropdown-menu-left {
+    left: 0;
+    right: auto;
+  }
+}
+
+
