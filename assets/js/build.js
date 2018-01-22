@@ -18143,14 +18143,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 // <template>
 //     <div>
-//
+//         <div v-for="record in activities">
+//                 <h3>{{record.activity_date}}</h3><br>
+//             <div v-for="activity in record.activities">
+//                 {{activity.activity}}
+//             </div><br>
+//         </div>
 //     </div>
 // </template>
 //
 // <script>
 exports.default = {
     data: function data() {
-        return {};
+        return {
+            activities: []
+        };
     },
 
 
@@ -18169,7 +18176,7 @@ exports.default = {
                 // vm.loading = false;
                 console.log(resp);
                 if (resp.success) {
-                    // vm.lists = resp.data;
+                    vm.activities = resp.data;
                 }
             });
         }
@@ -18185,7 +18192,7 @@ exports.default = {
 /* 177 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        \n    </div>\n";
+module.exports = "\n    <div>\n        <div v-for=\"record in activities\">\n                <h3>{{record.activity_date}}</h3><br>\n            <div v-for=\"activity in record.activities\">\n                {{activity.activity}}\n            </div><br>\n        </div>\n    </div>\n";
 
 /***/ }),
 /* 178 */

@@ -30,7 +30,7 @@ class FusionPM_Activity {
         // $datetime_format = $date_format.' '.$time_format;
 
         $given_date = date_create( $date );
-        $formatted_date = date_format( $given_date, $datetime_format );
+        $formatted_date = date_format( $given_date, $date_format );
 
         return $formatted_date;
     }
@@ -78,20 +78,27 @@ class FusionPM_Activity {
         if ( !$offset ) {
             $offset = 0;
         }
+        //SELECT *, DATE_FORMAT( `created`, '%Y-%m-%d' ) as timeline_date FROM {$this->table_name} ORDER BY `ID` DESC
+        $data = $wpdb->get_results( "SELECT * FROM {$this->table_name} ORDER BY `ID` DESC", ARRAY_A);
 
-        $data = $wpdb->get_results( "SELECT *, DATE_FORMAT( `created`, '%Y-%m-%d' ) as timeline_date FROM {$this->table_name}", ARRAY_A);
 
-        $result = array();
+        $temp = array();
         foreach ( $data as $element ) {
-            $nameOfDay = date('l', strtotime($element['timeline_date']));
+            $nameOfDay = date('l, j F, Y', strtotime($element['created']));
             $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>70));
             $element['formatted_date'] = $this->get_formatted_date( $element['created'] );
             $element['formatted_time'] = $this->get_formatted_date( $elemen['created'] );
-            $result[$nameOfDay][] = $element;
+            $temp[$nameOfDay][] = $element;
         }
 
-        var_dump( $result );
-        die();  
+        $result = array();
+        foreach ($temp as $day => $activities) {
+            $result[] = array(
+                'activity_date' => $day,
+                'activities' => $activities
+            );
+        }
+
         // $result = $wpdb->get_results( 
         //     "SELECT *, DAY(created) as day FROM {$this->table_name} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}"
         // );

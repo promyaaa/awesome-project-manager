@@ -1005,10 +1005,10 @@ class FusionPM_Ajax {
         // }
 
         $activityModel = FusionPM_Activity::init();
-        $activites = $activityModel->get_activities( );
+        $activites = $activityModel->get_activities();
 
-        if ($project) {
-            wp_send_json_success( $project );
+        if ($activites) {
+            wp_send_json_success( $activites );
         }
         wp_send_json_error( __( 'something went wrong', 'fusion-pm' ) );
     }

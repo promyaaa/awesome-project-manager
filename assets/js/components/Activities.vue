@@ -1,6 +1,11 @@
 <template>
     <div>
-        
+        <div v-for="record in activities">
+                <h3>{{record.activity_date}}</h3><br>
+            <div v-for="activity in record.activities">
+                {{activity.activity}}
+            </div><br>
+        </div>
     </div>
 </template>
 
@@ -8,7 +13,7 @@
     export default {
         data () {
             return {
-
+                activities: []
             }
         },
 
@@ -27,7 +32,7 @@
                     // vm.loading = false;
                     console.log(resp);
                     if ( resp.success ) {
-                        // vm.lists = resp.data;
+                        vm.activities = resp.data;
                     }
                 });
             }
