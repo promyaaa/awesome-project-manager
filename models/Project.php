@@ -119,6 +119,25 @@ class FusionPM_Project {
         return false;
     }
 
+    public function delete( $project_id ) {
+        global $wpdb;
+
+        $listModel = FusionPM_List::init();
+        $messageModel = FusionPM_Message::init();
+        $activityModel = FusionPM_Activity::init();
+
+        $listModel->delete_lists_by_column( $project_id, 'projectID' );
+        $messageModel->delete_messages_by_column( $project_id, 'projectID' );
+        $activityModel->delete_activities_by_column( $project_id, 'projectID' );
+
+        $result = $wpdb->delete(
+            $this->table_name,
+            array( 'ID' => $project_id )
+        );
+        return $result;
+    
+    }
+
     public function get_project( $project_id ) {
         global $wpdb;
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );

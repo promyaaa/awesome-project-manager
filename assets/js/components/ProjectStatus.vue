@@ -11,7 +11,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button class="button" style="background:#d54e21; color: white;">
+                        <button @click="deleteProject" class="button" style="background:#d54e21; color: white;">
                             Delete ? Are you sure ??
                         </button>
                     </div>
@@ -55,10 +55,33 @@
                         } else {
                             vm.$router.push({ path: `/projects/${projectID}?type=unauthorized` });
                         }
-                        
                     }
                 });
             },
+
+            deleteProject: function() {
+
+                if (confirm("Please confirm one more time? This action cannot be undone.")) {
+                    var vm = this,
+                        projectID = +vm.$route.params.projectid,
+                        data = {
+                            action : 'fpm-delete-project',
+                            nonce : fpm.nonce,
+                            project_id: projectID
+                        };
+                        
+                    jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                        console.log(resp)
+                        if ( resp.success ) {
+                            vm.$router.push({ 
+                                path: `/projects?type=delete_project` 
+                            });
+                        } else {
+                            
+                        }
+                    });
+                }
+            }
         },
         created() {
             this.fetchProjectInfo();

@@ -55,6 +55,29 @@ class FusionPM_Activity {
         return false;
     }
 
+    public function delete( $activity_id ) {
+        global $wpdb;
+
+        $result = $wpdb->delete( 
+            $this->table_name,
+            array( 'ID' => $activity_id )
+        );
+        return $result;
+    }
+
+    public function delete_activities_by_column( $value, $column ) {
+
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
+
+        foreach ($result as $activity) {
+            $isSuccess = $this->delete($activity->ID);
+        }
+
+        return $isSuccess;
+    }
+
     public function get_activity_count( $project_id ) {
         global $wpdb;
 
@@ -80,7 +103,7 @@ class FusionPM_Activity {
         $temp = array();
         foreach ( $data as $element ) {
             $nameOfDay = date('D, j M Y', strtotime($element['created']));
-            $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>70));
+            $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>32));
             $element['formatted_date'] = $this->get_formatted_date( $element['created'] );
             $element['formatted_time'] = $this->get_formatted_time( $element['created'] );
             $temp[$nameOfDay][] = $element;

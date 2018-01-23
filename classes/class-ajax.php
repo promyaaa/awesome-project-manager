@@ -22,6 +22,7 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-get-projects', array( $this, 'fetch_projects' ), 10 );
         add_action( 'wp_ajax_fpm-get-project', array( $this, 'fetch_project' ), 10 );
         add_action( 'wp_ajax_fpm-insert-project', array( $this, 'insert_project' ), 10 );
+        add_action( 'wp_ajax_fpm-delete-project', array( $this, 'delete_project' ), 10 );
 
         add_action( 'wp_ajax_fpm-get-project-count', array( $this, 'fetch_project_count' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-projects', array( $this, 'load_more_projects' ), 10 );
@@ -888,6 +889,27 @@ class FusionPM_Ajax {
 
         wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
 
+    }
+
+    public function delete_project() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+        }
+
+        $projectID = $this->get_validated_input('project_id'); 
+
+        if( ! $projectID ) {
+            wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
+        }
+
+        $projectModel = FusionPM_Project::init();
+        $delete = $projectModel->delete( $projectID );
+
+        if( $delete ) {
+            wp_send_json_success( array('message' => __( 'message successfully deleted', 'fusion-pm' )) );
+        } else {
+            wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
+        }
     }
 
     public function load_more_projects() {

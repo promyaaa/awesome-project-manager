@@ -19,23 +19,14 @@
                                 <router-link :to="'/projects/' + $route.params.projectid + '/edit'" 
                                     class="link-style" 
                                     tag="li">
-                                    <a><i class="fa fa-edit" aria-hidden="true"></i>Edit info</a>
+                                    <a><i class="fa fa-edit p-r-10" aria-hidden="true"></i>Edit info</a>
                                 </router-link>
                                 <li role="separator" class="divider"></li>
                                 <router-link :to="'/projects/' + $route.params.projectid + '/status'" 
                                     class="link-style" 
                                     tag="li">
-                                    <a><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                                    <a><i class="fa fa-trash p-r-10" aria-hidden="true"></i>Delete</a>
                                 </router-link>
-                                <!-- <li>
-                                    <a href="#">
-                                        <i class="fa fa-archive" aria-hidden="true"></i>
-                                        Test 2
-                                    </a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Test 1</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li> -->
                             </ul>
                         </span>
                     </div>
@@ -54,7 +45,6 @@
                                 Add/Remove People...
                             </router-link>
                         </div>
-
                     </div>
                 </div>
 
@@ -72,7 +62,7 @@
                                 <h3>{{list.list_title}}</h3>
                                 <ul>
                                     <li v-for="todo in list.todos">
-                                        <input type="checkbox">{{todo.todo}}
+                                        <span class="checkbox-style"></span>{{todo.todo}}
                                     </li>
                                 </ul>
                             </div>
@@ -236,6 +226,14 @@
 </script>
 
 <style>
+    .p-r-10 {
+        padding-right: 10px;
+    }
+    .checkbox-style {
+        padding: 0px 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+    }
     .link-style a:link {
         text-decoration: none;
         cursor: pointer;
@@ -309,7 +307,7 @@
         padding: 30px 40px 10px;
     }
     .project-info:hover .show-edit {
-        display: block;
+        /*display: block;*/
     }
 
     .show-edit {
@@ -318,6 +316,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        display: none;
+        cursor: pointer;
+        /*display: none;*/
     }
 </style>
