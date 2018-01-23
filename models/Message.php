@@ -59,18 +59,31 @@ class FusionPM_Message {
         return false;
     }
 
-    public function delete( $id ) {
+    public function delete( $message_id ) {
         global $wpdb;
 
         $commentModel = FusionPM_Comment::init();
 
-        $commentModel->delete_comments( $id, 'message' );
+        $commentModel->delete_comments( $message_id, 'message' );
 
         $result = $wpdb->delete( 
             $this->table_name,
-            array( 'ID' => $id )
+            array( 'ID' => $message_id )
         );
         return $result;
+    }
+
+    public function delete_messages_by_column( $value, $column ) {
+
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
+
+        foreach ($result as $message) {
+            $isSuccess = $this->delete($message->ID);
+        }
+
+        return $isSuccess;
     }
 
     public function get_message_count( $project_id ) {

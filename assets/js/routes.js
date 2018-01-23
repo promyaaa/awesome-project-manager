@@ -13,6 +13,7 @@ const TodoList = require('./components/TodoList.vue');
 const Users = require('./components/Users.vue');
 
 const Activities = require('./components/Activities.vue');
+const ProjectStatus = require('./components/ProjectStatus.vue');
 
 const Messages = require('./components/Messages.vue');
 const Message = require('./components/Message.vue');
@@ -29,6 +30,8 @@ const routes = [
     { path: '/projects/:projectid/activities', component: Activities },
 
     { path: '/projects/:projectid/edit', component: EditProject },
+
+    { path: '/projects/:projectid/status', component: ProjectStatus },
 
     { path: '/projects/:projectid/todolists', component: TodoLists },
 

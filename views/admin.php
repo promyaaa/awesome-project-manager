@@ -57,10 +57,10 @@
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <a> Home</a>
                     </router-link>
-                    <router-link to="/projects/2/activities" tag="span" class="link-style common-nav">
+                    <!-- <router-link to="/projects/2/activities" tag="span" class="link-style common-nav">
                         <i class="fa fa-rss" aria-hidden="true"></i>
                         <a> Activity</a>
-                    </router-link>
+                    </router-link> -->
                     <!-- <router-link to="/" tag="span" class="link-style common-nav">
                         <a>Reports</a>
                     </router-link> -->

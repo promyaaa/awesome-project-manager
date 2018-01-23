@@ -72,7 +72,7 @@
                                 <a class="">{{project.project_title}}</a>
                             </div>
                         </router-link>
-                        <span class="dropdown project-settings">
+                        <!-- <span class="dropdown project-settings">
                             <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
                                 <i class="fa fa-gear" aria-hidden="true"></i>
                             </a>
@@ -82,7 +82,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
                             </ul>
-                        </span>
+                        </span> -->
                         <p class="ellipsis-90">{{project.project_desc}}</p>
                         <!-- <div > -->
                         <div class="user-avatars">

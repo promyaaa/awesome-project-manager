@@ -15,6 +15,9 @@
                             </div>
                             <div class="timeline-marker"></div>
                             <div class="timeline-content" v-for="activity in record.activities">
+                                <!-- <pre>
+                                    {{activity}}
+                                </pre> -->
                                 <div class="row" v-if="index % 2===0">
                                     <div class="col-2">{{activity.formatted_time}}</div>
                                     <div class="col-10">{{activity.activity}}</div>
@@ -37,8 +40,8 @@
 .activity-content {
     padding: 35px 20px; 
     /*border: 1px solid #e5e5e5;*/
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
+    /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
     background: #fff;
 }    
 </style>

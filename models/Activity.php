@@ -79,10 +79,10 @@ class FusionPM_Activity {
 
         $temp = array();
         foreach ( $data as $element ) {
-            $nameOfDay = date('l, j M, Y', strtotime($element['created']));
+            $nameOfDay = date('D, j M Y', strtotime($element['created']));
             $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>70));
             $element['formatted_date'] = $this->get_formatted_date( $element['created'] );
-            $element['formatted_time'] = $this->get_formatted_time( $elemen['created'] );
+            $element['formatted_time'] = $this->get_formatted_time( $element['created'] );
             $temp[$nameOfDay][] = $element;
         }
 

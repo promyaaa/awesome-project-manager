@@ -75,7 +75,7 @@
 
                         // messageID = resp.data.messageInfo.ID;
                         // projectID = data.project_id;
-                        vm.$router.push({ path: `/projects/${projectID}` })
+                        vm.$router.push({ path: `/projects/${projectID}` });
                         // resp.data.messageInfo.message = vm.message;
                         // vm.messages.unshift(resp.data.messageInfo);
                         // vm.message = '';
@@ -86,7 +86,8 @@
                 });
             },
             fetchProjectInfo: function() {
-                var vm = this;
+                var vm = this,
+                    projectID = vm.$route.params.projectid;
                 // vm.loading = true;
                 
                 var data = {
@@ -96,12 +97,16 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    vm.loading = false;
-                    console.log(resp);
+                    // vm.loading = false;
                     if ( resp.success ) {
-                        vm.project = resp.data[0];
-                        vm.projectTitle = vm.project.project_title;
-                        vm.projectDesc = vm.project.project_desc;
+                        if( vm.currentUser.data.ID === resp.data[0].userID ) {
+                            vm.project = resp.data[0];
+                            vm.projectTitle = vm.project.project_title;
+                            vm.projectDesc = vm.project.project_desc;
+                        } else {
+                            vm.$router.push({ path: `/projects/${projectID}?type=unauthorized` });
+                        }
+                        
                     }
                 });
             },

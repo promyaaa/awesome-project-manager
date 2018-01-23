@@ -8,9 +8,36 @@
                         <br>
                         <span>{{project.project_desc}}</span>
 
-                        <router-link :to="'/projects/' + $route.params.projectid + '/edit'" class="link-style edit" tag="span" v-if="isShowEdit">
+                        <!-- <router-link :to="'/projects/' + $route.params.projectid + '/edit'" class="link-style edit" tag="span" v-if="isShowEdit">
                             <a>Edit info</a>
-                        </router-link>
+                        </router-link> -->
+                        <span class="dropdown project-settings show-edit" v-if="isShowEdit">
+                            <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
+                                <i class="fa fa-gear" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <router-link :to="'/projects/' + $route.params.projectid + '/edit'" 
+                                    class="link-style" 
+                                    tag="li">
+                                    <a><i class="fa fa-edit" aria-hidden="true"></i>Edit info</a>
+                                </router-link>
+                                <li role="separator" class="divider"></li>
+                                <router-link :to="'/projects/' + $route.params.projectid + '/status'" 
+                                    class="link-style" 
+                                    tag="li">
+                                    <a><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                                </router-link>
+                                <!-- <li>
+                                    <a href="#">
+                                        <i class="fa fa-archive" aria-hidden="true"></i>
+                                        Test 2
+                                    </a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Test 1</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li> -->
+                            </ul>
+                        </span>
                     </div>
                 </div>
                 <div class="col-12">
@@ -281,11 +308,11 @@
         position: relative;
         padding: 30px 40px 10px;
     }
-    .project-info:hover .edit {
+    .project-info:hover .show-edit {
         display: block;
     }
 
-    .edit {
+    .show-edit {
         padding-top: 7px;
         padding-right: 7px;
         position: absolute;

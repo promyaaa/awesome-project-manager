@@ -73,8 +73,6 @@ class FusionPM_Comment {
         $files_array = array();
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `commentable_id` = {$id} AND `commentable_type` = '{$type}'", ARRAY_A );
 
-
-        
         foreach ($result as $commentObject) {
             $commentObject['avatar_url'] = get_avatar_url($commentObject['userID'], array('size'=>32));
             $files = $commentObject['file_ids'];

@@ -77,6 +77,19 @@ class FusionPM_List {
         
     }
 
+    public function delete_lists_by_column( $value, $column ) {
+
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
+
+        foreach ($result as $list) {
+            $isSuccess = $this->delete($list->ID);
+        }
+
+        return $isSuccess;
+    }
+
     public function get_list_count( $project_id ) {
         global $wpdb;
 
