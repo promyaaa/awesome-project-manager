@@ -125,7 +125,7 @@
             },
             fetchMessage: function() {
                 var vm = this,
-                    messageKey;
+                    projectID = vm.$route.params.projectid;
                 vm.loading = true;
                 
                 var data = {
@@ -140,6 +140,10 @@
                     console.log(resp);
                     if ( resp.success ) {
                         vm.messageObject = resp.data[0];
+                    } else {
+                        vm.$router.push({ 
+                            path: `/projects/${projectID}/messages?type=message&info=notfound` 
+                        });
                     }
                 });
             },
@@ -182,7 +186,11 @@
                         data = {
                             action : 'fpm-delete-message',
                             nonce : fpm.nonce,
-                            message_id: messageObj.ID
+                            message_id: messageObj.ID,
+                            project_id: messageObj.projectID,
+                            user_name: messageObj.user_name,
+                            user_id: messageObj.userID,
+                            message_title: messageObj.message_title
                         };
                         
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {

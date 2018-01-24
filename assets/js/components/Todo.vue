@@ -234,7 +234,7 @@
                         vm.is_complete = +vm.todoObject.is_complete
                     } else {
                         vm.$router.push({ 
-                            path: `/projects/${projectID}/todolists/${listID}?type=notfound` 
+                            path: `/projects/${projectID}/todolists/${listID}?type=todo&info=notfound` 
                         });
                     }
                 });

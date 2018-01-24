@@ -101,7 +101,9 @@ class FusionPM_Message {
         $result = $wpdb->get_results(
             "SELECT * FROM {$this->table_name} WHERE `ID` = {$messageid} AND `projectID` = {$projectid}"
         );
-
+        if ( !$result ) {
+            return $result;
+        }
         $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
         $result[0]->avatar_url = get_avatar_url( $result[0]->userID );
         

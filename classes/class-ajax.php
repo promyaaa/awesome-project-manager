@@ -404,6 +404,10 @@ class FusionPM_Ajax {
         }
 
         $messageID = $this->get_validated_input('message_id'); 
+        $userID = $this->get_validated_input('user_id'); 
+        $userName = $this->get_validated_input('user_name'); 
+        $projectID = $this->get_validated_input('project_id'); 
+        $messageTitle = $this->get_validated_input('message_title'); 
 
         if( ! $messageID ) {
             wp_send_json_error( __( 'messageid not provided', 'fusion-pm' ) );
@@ -413,6 +417,17 @@ class FusionPM_Ajax {
         $delete = $messageModel->delete( $messageID );
 
         if( $delete ) {
+            $activities = array(
+                'userID' => $userID,
+                'user_name' => $userName,
+                'projectID' => $projectID,
+                'activity_id' => $messageID,
+                'activity_type' => 'delete_message',
+                'activity' => $messageTitle,
+                'created' => date("Y-m-d H:i:s")
+            );
+
+            $this->create_activity($activities);
             wp_send_json_success( array('message' => __( 'message successfully deleted', 'fusion-pm' )) );
         } else {
             wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
