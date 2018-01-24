@@ -15,7 +15,6 @@ class FusionPM_Ajax {
 
 
     public function __construct(  ) {
-        // wp_ajax_{{name your action}}
         // Common
         add_action( 'wp_ajax_fpm-get-user-avatar', array( $this, 'get_user_avatar' ), 10 );
         // PROJECT

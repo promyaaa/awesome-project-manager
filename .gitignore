@@ -4,7 +4,8 @@
 
 requirement.txt
 assets/.DS_Store
-assets/js
+assets/js/build.js
+classes
 node_modules
 build
 npm-debug.log
