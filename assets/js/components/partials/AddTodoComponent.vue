@@ -95,6 +95,7 @@
 
             hideTodoForm: function() {
                 this.sectionIndex = -1;
+                this.todoName = '';
             },
 
             createTodo: function() {
