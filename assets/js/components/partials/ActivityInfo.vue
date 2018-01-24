@@ -9,27 +9,19 @@
             <strong>{{activity.user_name}}</strong> created a todo <br>
             <div class="m-t-5">
                 <span class="checkbox-style"></span>
+                <!-- <i class="fa fa-square-o fa-5" aria-hidden="true"></i> -->
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
                 </router-link>  
             </div>
         </div>
 
-        <div v-if="isUpdateTodo" style="margin-top:5px">
-            <strong>{{activity.user_name}}</strong> updated a todo <br>
-            <div class="m-t-5" style="cursor:pointer">
-                <span class="checkbox-style"></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+        <div v-if="isCreateMessage" style="margin-top:5px">
+            <strong>{{activity.user_name}}</strong> added a new message called
+            <div class="m-t-5">
+                <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
-            </div>
-        </div>
-
-        <div v-if="isDeleteTodo" style="margin-top:5px">
-            <strong>{{activity.user_name}}</strong> deleted a todo <br>
-            <div class="m-t-5" style="cursor:default">
-                <span class="checkbox-style"></span>
-                <span style="color:a2a2a2;">{{activity.activity}}</span>
+                </router-link>  
             </div>
         </div>
 
@@ -52,15 +44,12 @@
         },
 
         computed: {
-            isUpdateTodo() {
-                return this.activity.activity_type === 'update_todo';
-            },
             isCreateTodo() {
                 return this.activity.activity_type === 'create_todo';
             },
-            isDeleteTodo() {
-                return this.activity.activity_type === 'delete_todo';
-            }
+            isCreateMessage() {
+                return this.activity.activity_type === 'create_message';
+            },
         },
 
         methods: {
