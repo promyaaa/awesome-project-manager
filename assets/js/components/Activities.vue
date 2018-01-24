@@ -21,16 +21,12 @@
                                 <div class="row" v-if="index % 2===0">
                                     <div class="col-2">{{activity.formatted_time}}</div>
                                     <div class="col-10">
-                                        <div class="activity-info">
-                                            <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
-                                            <span>{{activity.activity}}</span>
-                                        </div>
+                                        <activity-info :activity="activity"></activity-info>
                                     </div>
                                 </div>
                                 <div class="row" v-else>
                                     <div class="col-10 text-left">
-                                        <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
-                                        <span>{{activity.activity}}</span>
+                                        <activity-info :activity="activity"></activity-info>
                                     </div>
                                     <div class="col-2">{{activity.formatted_time}}</div>
                                 </div>
@@ -55,12 +51,17 @@
 .activity-avatar {
     float: left;
     margin-right: 10px;
-    margin-top: -5px;
+    margin-top: 5px;
 }
 </style>
 
 <script>
+    import ActivityInfo from './partials/ActivityInfo.vue';
     export default {
+        components: {
+            ActivityInfo
+        },
+
         data () {
             return {
                 activities: []

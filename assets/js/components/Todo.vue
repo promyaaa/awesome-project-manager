@@ -312,7 +312,9 @@
                         data = {
                             action : 'fpm-delete-todo',
                             nonce : fpm.nonce,
-                            todo_id: todo.ID
+                            todo_id: todo.ID,
+                            todo: todo.todo,
+                            project_id: projectID
                         };
                         
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {

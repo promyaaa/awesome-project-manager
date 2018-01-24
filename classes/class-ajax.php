@@ -91,6 +91,7 @@ class FusionPM_Ajax {
         return $result;
     }
 
+    // updated
     public function create_activity( $data ) {
         $activityModel = FusionPM_Activity::init();
         $activityModel->create( $data );
@@ -584,6 +585,7 @@ class FusionPM_Ajax {
         wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
     } 
 
+    // updated
     public function insert_todo() {
 
         if ( $this->is_nonce_verified() ) {
@@ -670,9 +672,10 @@ class FusionPM_Ajax {
                 'userID' => $userID ? $userID : get_current_user_id(),
                 'user_name' => $userName,
                 'projectID' => $projectID,
+                'listID' => $listID,
                 'activity_id' => $activityID,
                 'activity_type' => $insertID ? 'create_todo' : 'update_todo',
-                'activity' => $insertID ? 'a todo has been created' : 'a todo has been updated',
+                'activity' => $todo,
                 'created' => $date
             );
 
@@ -689,7 +692,9 @@ class FusionPM_Ajax {
             wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
-        $todoID = $this->get_validated_input('todo_id'); // !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
+        $todoID = $this->get_validated_input('todo_id');
+        $projectID = $this->get_validated_input('project_id');
+        $todo = $this->get_validated_input('todo');
 
         if( ! $todoID ) {
             wp_send_json_error( __( 'todoid not provided', 'fusion-pm' ) );
@@ -698,7 +703,22 @@ class FusionPM_Ajax {
         $todoObject = FusionPM_Todo::init();
         $delete = $todoObject->delete( $todoID );
 
+        $userObject = get_user_by( 'ID', get_current_user_id() );
+
         if( $delete ) {
+            $activities = array(
+                'userID' => $userObject->ID,
+                'user_name' => $userObject->display_name,
+                'projectID' => $projectID,
+                // 'listID' => $listID,
+                'activity_id' => $todoID,
+                'activity_type' => 'delete_todo',
+                'activity' => $todo,
+                'created' => date("Y-m-d H:i:s")
+            );
+
+            $this->create_activity($activities);
+
             wp_send_json_success( array('message' => __( 'Successfully deleted', 'fusion-pm' )) );
         } else {
             wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );

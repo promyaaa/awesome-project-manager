@@ -19,7 +19,7 @@
                                     <!-- <li class="link-style"><a>My Bookmarks</a></li>
                                     <li class="link-style"><a>My Schedule</a></li>
                                     <li class="link-style"><a>My Drafts</a></li> -->
-                                    <li class="link-style"><a>My Recent Activity</a></li>
+                                    <!-- <li class="link-style"><a>My Recent Activity</a></li> -->
                                 </ul>
                             </div>
                         </div>

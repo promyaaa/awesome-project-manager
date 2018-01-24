@@ -14947,7 +14947,9 @@ exports.default = {
                     data = {
                     action: 'fpm-delete-todo',
                     nonce: fpm.nonce,
-                    todo_id: todo.ID
+                    todo_id: todo.ID,
+                    todo: todo.todo,
+                    project_id: projectID
                 };
 
                 jQuery.post(fpm.ajaxurl, data, function (resp) {
@@ -15486,7 +15488,7 @@ Object.defineProperty(exports, "__esModule", {
 //                                     <!-- <li class="link-style"><a>My Bookmarks</a></li>
 //                                     <li class="link-style"><a>My Schedule</a></li>
 //                                     <li class="link-style"><a>My Drafts</a></li> -->
-//                                     <li class="link-style"><a>My Recent Activity</a></li>
+//                                     <!-- <li class="link-style"><a>My Recent Activity</a></li> -->
 //                                 </ul>
 //                             </div>
 //                         </div>
@@ -15790,7 +15792,7 @@ exports.default = {
 /* 131 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <div class=\"container\">\n\n            <div id=\"pageparentdiv\" class=\"postbox\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-6 text-center user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\" class=\"small-round-image\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-6 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <li class=\"link-style\"><a>My Assignment</a></li>\n                                    <!-- <li class=\"link-style\"><a>My Bookmarks</a></li>\n                                    <li class=\"link-style\"><a>My Schedule</a></li>\n                                    <li class=\"link-style\"><a>My Drafts</a></li> -->\n                                    <li class=\"link-style\"><a>My Recent Activity</a></li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>Projects</span></h2>\n                </div>\n                <div class=\"col-6\">\n                    <!-- <input type=\"search\" class=\"left\"> -->\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ Add New Project</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>No Project added yet. Hit the '+Add' button to add one.</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" placeholder=\"project title . . .\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" placeholder=\"description . . .\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">Add</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>Loading . . .</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n                        <!-- <span class=\"dropdown project-settings\">\n                            <a data-target=\"#\" class=\"setting-icon dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" title=\"Settings\">\n                                <i class=\"fa fa-gear\" aria-hidden=\"true\"></i>\n                            </a>\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\n                                <li><a href=\"#\"><i class=\"fa fa-archive\" aria-hidden=\"true\"></i> Test 2</a></li>\n                                <li><a href=\"#\"><i class=\"fa fa-archive\" aria-hidden=\"true\"></i> Test 1</a></li>\n                                <li role=\"separator\" class=\"divider\"></li>\n                                <li><a href=\"#\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> Delete</a></li>\n                            </ul>\n                        </span> -->\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n                        <!-- <div > -->\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                        <!-- </div> -->\n                    </div>\n                </div>\n            </div>\n            <br>\n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">Load More...</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
+module.exports = "\n    <div>\n        <div class=\"container\">\n\n            <div id=\"pageparentdiv\" class=\"postbox\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-6 text-center user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\" class=\"small-round-image\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-6 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <li class=\"link-style\"><a>My Assignment</a></li>\n                                    <!-- <li class=\"link-style\"><a>My Bookmarks</a></li>\n                                    <li class=\"link-style\"><a>My Schedule</a></li>\n                                    <li class=\"link-style\"><a>My Drafts</a></li> -->\n                                    <!-- <li class=\"link-style\"><a>My Recent Activity</a></li> -->\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>Projects</span></h2>\n                </div>\n                <div class=\"col-6\">\n                    <!-- <input type=\"search\" class=\"left\"> -->\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ Add New Project</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>No Project added yet. Hit the '+Add' button to add one.</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" placeholder=\"project title . . .\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" placeholder=\"description . . .\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">Add</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">Cancel</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>Loading . . .</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n                        <!-- <span class=\"dropdown project-settings\">\n                            <a data-target=\"#\" class=\"setting-icon dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" title=\"Settings\">\n                                <i class=\"fa fa-gear\" aria-hidden=\"true\"></i>\n                            </a>\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\n                                <li><a href=\"#\"><i class=\"fa fa-archive\" aria-hidden=\"true\"></i> Test 2</a></li>\n                                <li><a href=\"#\"><i class=\"fa fa-archive\" aria-hidden=\"true\"></i> Test 1</a></li>\n                                <li role=\"separator\" class=\"divider\"></li>\n                                <li><a href=\"#\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> Delete</a></li>\n                            </ul>\n                        </span> -->\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n                        <!-- <div > -->\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                        <!-- </div> -->\n                    </div>\n                </div>\n            </div>\n            <br>\n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">Load More...</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
 
 /***/ }),
 /* 132 */
@@ -16233,7 +16235,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n.activity-content {\n    padding: 35px 20px; \n    /*border: 1px solid #e5e5e5;*/\n    /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/\n    /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/\n    background: #fff;\n}    \n.activity-avatar {\n    float: left;\n    margin-right: 10px;\n    margin-top: -5px;\n}\n", ""]);
+exports.push([module.i, "\n.activity-content {\n    padding: 35px 20px; \n    /*border: 1px solid #e5e5e5;*/\n    /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/\n    /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/\n    background: #fff;\n}    \n.activity-avatar {\n    float: left;\n    margin-right: 10px;\n    margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -16248,69 +16250,18 @@ exports.push([module.i, "\n.activity-content {\n    padding: 35px 20px; \n    /*
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-// <template>
-//     <!-- <div class="container"> -->
-//         <div class="row">
-//             <div class="col-12 text-center">
-//                 <div class="activity-content">
-//                     <div class="row">
-//                         <div class="col-12">
-//                             <h2 class="decorated-center"><span>Project Activity</span></h2>
-//                         </div>
-//                     </div>
-//                     <ul class="timeline timeline-centered">
-//                         <li class="timeline-item" v-for="(record, index) in activities">
-//                             <div>
-//                                 <h3>{{record.activity_date}}</h3>
-//                             </div>
-//                             <div class="timeline-marker"></div>
-//                             <div class="timeline-content" v-for="activity in record.activities">
-//                                 <!-- <pre>
-//                                     {{activity}}
-//                                 </pre> -->
-//                                 <div class="row" v-if="index % 2===0">
-//                                     <div class="col-2">{{activity.formatted_time}}</div>
-//                                     <div class="col-10">
-//                                         <div class="activity-info">
-//                                             <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
-//                                             <span>{{activity.activity}}</span>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                                 <div class="row" v-else>
-//                                     <div class="col-10 text-left">
-//                                         <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
-//                                         <span>{{activity.activity}}</span>
-//                                     </div>
-//                                     <div class="col-2">{{activity.formatted_time}}</div>
-//                                 </div>
-//                             </div>
-//                         </li>
-//                     </ul>
-//                 </div>
-//             </div>  
-//             </div>
-//         </div>
-//     <!-- </div> -->
-// </template>
-//
-// <style>
-// .activity-content {
-//     padding: 35px 20px; 
-//     /*border: 1px solid #e5e5e5;*/
-//     /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
-//     /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
-//     background: #fff;
-// }    
-// .activity-avatar {
-//     float: left;
-//     margin-right: 10px;
-//     margin-top: -5px;
-// }
-// </style>
-//
-// <script>
+
+var _ActivityInfo = __webpack_require__(206);
+
+var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
+    components: {
+        ActivityInfo: _ActivityInfo2.default
+    },
+
     data: function data() {
         return {
             activities: []
@@ -16344,12 +16295,70 @@ exports.default = {
     }
 };
 // </script>
+// <template>
+//     <!-- <div class="container"> -->
+//         <div class="row">
+//             <div class="col-12 text-center">
+//                 <div class="activity-content">
+//                     <div class="row">
+//                         <div class="col-12">
+//                             <h2 class="decorated-center"><span>Project Activity</span></h2>
+//                         </div>
+//                     </div>
+//                     <ul class="timeline timeline-centered">
+//                         <li class="timeline-item" v-for="(record, index) in activities">
+//                             <div>
+//                                 <h3>{{record.activity_date}}</h3>
+//                             </div>
+//                             <div class="timeline-marker"></div>
+//                             <div class="timeline-content" v-for="activity in record.activities">
+//                                 <!-- <pre>
+//                                     {{activity}}
+//                                 </pre> -->
+//                                 <div class="row" v-if="index % 2===0">
+//                                     <div class="col-2">{{activity.formatted_time}}</div>
+//                                     <div class="col-10">
+//                                         <activity-info :activity="activity"></activity-info>
+//                                     </div>
+//                                 </div>
+//                                 <div class="row" v-else>
+//                                     <div class="col-10 text-left">
+//                                         <activity-info :activity="activity"></activity-info>
+//                                     </div>
+//                                     <div class="col-2">{{activity.formatted_time}}</div>
+//                                 </div>
+//                             </div>
+//                         </li>
+//                     </ul>
+//                 </div>
+//             </div>  
+//             </div>
+//         </div>
+//     <!-- </div> -->
+// </template>
+//
+// <style>
+// .activity-content {
+//     padding: 35px 20px; 
+//     /*border: 1px solid #e5e5e5;*/
+//     /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
+//     /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
+//     background: #fff;
+// }    
+// .activity-avatar {
+//     float: left;
+//     margin-right: 10px;
+//     margin-top: 5px;
+// }
+// </style>
+//
+// <script>
 
 /***/ }),
 /* 139 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <!-- <div class=\"container\"> -->\n        <div class=\"row\">\n            <div class=\"col-12 text-center\">\n                <div class=\"activity-content\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <h2 class=\"decorated-center\"><span>Project Activity</span></h2>\n                        </div>\n                    </div>\n                    <ul class=\"timeline timeline-centered\">\n                        <li class=\"timeline-item\" v-for=\"(record, index) in activities\">\n                            <div>\n                                <h3>{{record.activity_date}}</h3>\n                            </div>\n                            <div class=\"timeline-marker\"></div>\n                            <div class=\"timeline-content\" v-for=\"activity in record.activities\">\n                                <!-- <pre>\n                                    {{activity}}\n                                </pre> -->\n                                <div class=\"row\" v-if=\"index % 2===0\">\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                    <div class=\"col-10\">\n                                        <div class=\"activity-info\">\n                                            <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\">\n                                            <span>{{activity.activity}}</span>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"row\" v-else>\n                                    <div class=\"col-10 text-left\">\n                                        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\">\n                                        <span>{{activity.activity}}</span>\n                                    </div>\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                </div>\n                            </div>\n                        </li>\n                    </ul>\n                </div>\n            </div>  \n            </div>\n        </div>\n    <!-- </div> -->\n";
+module.exports = "\n    <!-- <div class=\"container\"> -->\n        <div class=\"row\">\n            <div class=\"col-12 text-center\">\n                <div class=\"activity-content\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <h2 class=\"decorated-center\"><span>Project Activity</span></h2>\n                        </div>\n                    </div>\n                    <ul class=\"timeline timeline-centered\">\n                        <li class=\"timeline-item\" v-for=\"(record, index) in activities\">\n                            <div>\n                                <h3>{{record.activity_date}}</h3>\n                            </div>\n                            <div class=\"timeline-marker\"></div>\n                            <div class=\"timeline-content\" v-for=\"activity in record.activities\">\n                                <!-- <pre>\n                                    {{activity}}\n                                </pre> -->\n                                <div class=\"row\" v-if=\"index % 2===0\">\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                    <div class=\"col-10\">\n                                        <activity-info :activity=\"activity\"></activity-info>\n                                    </div>\n                                </div>\n                                <div class=\"row\" v-else>\n                                    <div class=\"col-10 text-left\">\n                                        <activity-info :activity=\"activity\"></activity-info>\n                                    </div>\n                                    <div class=\"col-2\">{{activity.formatted_time}}</div>\n                                </div>\n                            </div>\n                        </li>\n                    </ul>\n                </div>\n            </div>  \n            </div>\n        </div>\n    <!-- </div> -->\n";
 
 /***/ }),
 /* 140 */
@@ -17350,7 +17359,9 @@ exports.default = {
                     data = {
                     action: 'fpm-delete-todo',
                     nonce: fpm.nonce,
-                    todo_id: todo.ID
+                    todo_id: todo.ID,
+                    todo: todo.todo,
+                    project_id: todo.projectID
                 };
 
                 jQuery.post(fpm.ajaxurl, data, function (resp) {
@@ -19767,6 +19778,155 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div>\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-12 text-center\">\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"span\" class=\"link-style\">\n                        <a>{{messageObject.project_title}}</a> >\n                    </router-link>\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"span\">\n                        <a>Message Board</a> >\n                    </router-link>\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" tag=\"span\" class=\"link-style\">\n                        <a>{{messageObject.message_title}}</a> > Edit Message\n                    </router-link>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div>\n                        <div class=\"add_form_style\">\n                            <div>\n                                <input type=\"text\" \n                                       v-model=\"messageTitle\"\n                                       class=\"form-control\"\n                                       v-focus\n                                       placeholder=\"add message title\">\n                            </div>\n                            <div>\n                                <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\n                            </div>\n                            <br>\n                            <file-upload \n                                v-on:attach=\"updateAttachments\" \n                                v-on:remove=\"removeAttachment\" \n                                :attachments=\"attachments\"></file-upload>\n                            <br>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" \n                                        @click.prevent=\"updateMessage\"\n                                        >update</button>\n                                <!-- <button class=\"button button-default\" @click=\"toggleMessageForm\">Cancel</button> -->\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!-- <div class=\"row\"></div> -->\n        </div>\n    </div>\n";
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(207)
+__vue_script__ = __webpack_require__(209)
+__vue_template__ = __webpack_require__(210)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/home/promy/www/wordpress/wp-content/plugins/fusion-pm-free/assets/js/components/partials/ActivityInfo.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(208);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5d16f61e&file=ActivityInfo.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ActivityInfo.vue", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5d16f61e&file=ActivityInfo.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ActivityInfo.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n    .m-t-5 {\n        margin-top: 5px;\n    }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// <template>
+//     <div class="m-t-5">
+//         <!-- <pre>
+//             {{activity}}
+//         </pre> -->
+//         <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
+//
+//         <div v-if="isCreateTodo" style="margin-top:5px">
+//             <strong>{{activity.user_name}}</strong> created a todo <br>
+//             <div class="m-t-5">
+//                 <span class="checkbox-style"></span>
+//                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+//                     <a>{{activity.activity}}</a>
+//                 </router-link>  
+//             </div>
+//         </div>
+//
+//         <div v-if="isUpdateTodo" style="margin-top:5px">
+//             <strong>{{activity.user_name}}</strong> updated a todo <br>
+//             <div class="m-t-5" style="cursor:pointer">
+//                 <span class="checkbox-style"></span>
+//                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+//                     <a>{{activity.activity}}</a>
+//                 </router-link>
+//             </div>
+//         </div>
+//
+//         <div v-if="isDeleteTodo" style="margin-top:5px">
+//             <strong>{{activity.user_name}}</strong> deleted a todo <br>
+//             <div class="m-t-5" style="cursor:default">
+//                 <span class="checkbox-style"></span>
+//                 <span style="color:a2a2a2;">{{activity.activity}}</span>
+//             </div>
+//         </div>
+//
+//     </div>
+// </template>
+//
+// <style>
+//     .m-t-5 {
+//         margin-top: 5px;
+//     }
+// </style>
+//
+// <script>
+exports.default = {
+    props: ['activity'],
+    data: function data() {
+        return {};
+    },
+
+
+    computed: {
+        isUpdateTodo: function isUpdateTodo() {
+            return this.activity.activity_type === 'update_todo';
+        },
+        isCreateTodo: function isCreateTodo() {
+            return this.activity.activity_type === 'create_todo';
+        },
+        isDeleteTodo: function isDeleteTodo() {
+            return this.activity.activity_type === 'delete_todo';
+        }
+    },
+
+    methods: {},
+
+    created: function created() {}
+};
+// </script>
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div class=\"m-t-5\">\n        <!-- <pre>\n            {{activity}}\n        </pre> -->\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\">\n\n        <div v-if=\"isCreateTodo\" style=\"margin-top:5px\">\n            <strong>{{activity.user_name}}</strong> created a todo <br>\n            <div class=\"m-t-5\">\n                <span class=\"checkbox-style\"></span>\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id\" tag=\"span\">\n                    <a>{{activity.activity}}</a>\n                </router-link>  \n            </div>\n        </div>\n\n        <div v-if=\"isUpdateTodo\" style=\"margin-top:5px\">\n            <strong>{{activity.user_name}}</strong> updated a todo <br>\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\n                <span class=\"checkbox-style\"></span>\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id\" tag=\"span\">\n                    <a>{{activity.activity}}</a>\n                </router-link>\n            </div>\n        </div>\n\n        <div v-if=\"isDeleteTodo\" style=\"margin-top:5px\">\n            <strong>{{activity.user_name}}</strong> deleted a todo <br>\n            <div class=\"m-t-5\" style=\"cursor:default\">\n                <span class=\"checkbox-style\"></span>\n                <span style=\"color:a2a2a2;\">{{activity.activity}}</span>\n            </div>\n        </div>\n\n    </div>\n";
 
 /***/ })
 /******/ ]);
