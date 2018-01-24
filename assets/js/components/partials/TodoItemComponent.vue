@@ -138,14 +138,18 @@
             
             toggleCheckbox: function( todo, tindex ) {
                 var self = this,
-                    data;
-                if ( todo.is_complete ) {
                     data = {
                         action : 'fpm-complete-todo',
                         nonce : fpm.nonce,
+                        todo: todo.todo,
                         todo_id: todo.ID,
-                        is_complete: todo.is_complete
+                        is_complete: todo.is_complete,
+                        list_id: todo.listID,
+                        project_id: todo.projectID,
+                        user_id: todo.userID,
+                        user_name: todo.user_name
                     };
+                if ( todo.is_complete ) {
 
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
@@ -156,12 +160,6 @@
                         }
                     });
                 } else {
-                    data = {
-                        action : 'fpm-complete-todo',
-                        nonce : fpm.nonce,
-                        todo_id: todo.ID,
-                        is_complete: todo.is_complete
-                    };
 
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {

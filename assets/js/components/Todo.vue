@@ -212,60 +212,63 @@
             },
 
             fetchTodo: function() {
-                var self = this;
-                self.loading = true;
+                var vm = this,
+                    listID = vm.$route.params.listid,
+                    projectID = vm.$route.params.projectid;
+
+                vm.loading = true;
                 
                 var data = {
                     action: 'fpm-get-todo-details',
-                    project_id: self.$route.params.projectid,
-                    list_id: self.$route.params.listid,
-                    todo_id: self.$route.params.todoid,
+                    project_id: vm.$route.params.projectid,
+                    list_id: vm.$route.params.listid,
+                    todo_id: vm.$route.params.todoid,
                     nonce: fpm.nonce,
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    self.loading = false;
+                    vm.loading = false;
                     console.log(resp);
                     if ( resp.success ) {
-                        self.todoObject = resp.data[0];
-                        self.is_complete = +self.todoObject.is_complete
+                        vm.todoObject = resp.data[0];
+                        vm.is_complete = +vm.todoObject.is_complete
+                    } else {
+                        vm.$router.push({ 
+                            path: `/projects/${projectID}/todolists/${listID}?type=notfound` 
+                        });
                     }
                 });
             },
 
             toggleCheckbox: function( todo ) {
-                var self = this,
-                    data;
-                if ( todo.is_complete ) {
+                var vm = this,
                     data = {
                         action : 'fpm-complete-todo',
                         nonce : fpm.nonce,
+                        todo: todo.todo,
                         todo_id: todo.ID,
-                        is_complete: todo.is_complete
+                        is_complete: todo.is_complete,
+                        list_id: todo.listID,
+                        project_id: todo.projectID,
+                        user_id: todo.userID,
+                        user_name: todo.user_name
                     };
-
+                if ( todo.is_complete ) {
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            // self.todoObject.is_complete = todo.is_complete;
-                            self.is_complete = todo.is_complete;
+                            // vm.todoObject.is_complete = todo.is_complete;
+                            vm.is_complete = todo.is_complete;
                         } else {
-                            self.message = resp.data;
+                            vm.message = resp.data;
                         }
                     });
                 } else {
-                    data = {
-                        action : 'fpm-complete-todo',
-                        nonce : fpm.nonce,
-                        todo_id: todo.ID,
-                        is_complete: todo.is_complete
-                    };
-
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            // self.todo.is_complete = todo.is_complete;
-                            self.is_complete = todo.is_complete;
+                            // vm.todo.is_complete = todo.is_complete;
+                            vm.is_complete = todo.is_complete;
                         } else {
-                            self.message = resp.data;
+                            vm.message = resp.data;
                         }
                     });
                 }

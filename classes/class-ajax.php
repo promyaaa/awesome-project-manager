@@ -378,22 +378,20 @@ class FusionPM_Ajax {
             )
         );
 
-        if ( $insertID ) {
-            $activityID = $insertID;
+        if ( $insertID || $successResponse ) {
+            $activityID = $insertID ? $insertID : $messageID;
             $activities = array(
                 'userID' => $userObject->ID,
                 'user_name' => $userObject->display_name,
                 'projectID' => $projectID,
                 'activity_id' => $activityID,
-                'activity_type' => 'create_message',
+                'activity_type' => $insertID ? 'create_message' : 'update_message',
                 'activity' => $messageTitle,
                 'created' => $date
             );
 
             $this->create_activity($activities);
-        }
 
-        if ( $insertID || $successResponse ) {
             wp_send_json_success( $resp );
         }
 
@@ -680,23 +678,21 @@ class FusionPM_Ajax {
             )
         );
 
-        if ( $insertID ) {
-            $activityID = $insertID;
+        if ( $insertID || $successResponse ) {
+            $activityID = $insertID ? $insertID : $todoID;
             $activities = array(
                 'userID' => $userID ? $userID : get_current_user_id(),
                 'user_name' => $userName,
                 'projectID' => $projectID,
                 'listID' => $listID,
                 'activity_id' => $activityID,
-                'activity_type' => 'create_todo',
+                'activity_type' => $insertID ? 'create_todo' : 'update_todo',
                 'activity' => $todo,
                 'created' => $date
             );
 
             $this->create_activity($activities);
-        }
 
-        if ( $insertID || $successResponse ) {
             wp_send_json_success( $resp );
         }
 
@@ -719,7 +715,22 @@ class FusionPM_Ajax {
         $todoObject = FusionPM_Todo::init();
         $delete = $todoObject->delete( $todoID );
 
+        $userObject = get_user_by( 'ID', get_current_user_id() );
+
         if( $delete ) {
+            $activities = array(
+                'userID' => $userObject->ID,
+                'user_name' => $userObject->display_name,
+                'projectID' => $projectID,
+                // 'listID' => $listID,
+                'activity_id' => $todoID,
+                'activity_type' => 'delete_todo',
+                'activity' => $todo,
+                'created' => date("Y-m-d H:i:s")
+            );
+
+            $this->create_activity($activities);
+
             wp_send_json_success( array('message' => __( 'Successfully deleted', 'fusion-pm' )) );
         } else {
             wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
@@ -732,6 +743,11 @@ class FusionPM_Ajax {
         }
         
         $todoID = !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
+        $listID = !empty( $_POST['list_id'] ) ? $_POST['list_id'] : '';
+        $projectID = !empty( $_POST['project_id'] ) ? $_POST['project_id'] : '';
+        $userID = !empty( $_POST['user_id'] ) ? $_POST['user_id'] : '';
+        $userName = !empty( $_POST['user_name'] ) ? $_POST['user_name'] : '';
+        $todo = !empty( $_POST['todo'] ) ? $_POST['todo'] : '';
 
         if( ! $todoID ) {
             wp_send_json_error( __( 'todoid not provided', 'fusion-pm' ) );
@@ -741,6 +757,24 @@ class FusionPM_Ajax {
 
         $todoObject = FusionPM_Todo::init();
         $update = $todoObject->complete_todo( $todoID, $is_complete );
+
+        $activities = array(
+            'userID' => $userID,
+            'user_name' => $userName,
+            'projectID' => $projectID,
+            'listID' => $listID,
+            'activity_id' => $todoID,
+            'activity' => $todo,
+            'created' => date("Y-m-d H:i:s")
+        );
+
+        if ( $is_complete ) {
+            $activities['activity_type'] = 'check_todo';
+            $this->create_activity($activities);
+        } else {
+            $activities['activity_type'] = 'uncheck_todo';
+            $this->create_activity($activities);
+        }
         
         if( $update ) {
             $resp = array(
@@ -748,6 +782,7 @@ class FusionPM_Ajax {
             );
             wp_send_json_success( $resp );
         }
+
     }
 
     public function create_list() {
@@ -1048,7 +1083,7 @@ class FusionPM_Ajax {
         }
 
         $activityModel = FusionPM_Activity::init();
-        $activites = $activityModel->get_activities( $projectID );
+        $activites = $activityModel->get_project_activities( $projectID );
 
         if ($activites) {
             wp_send_json_success( $activites );

@@ -78,6 +78,19 @@ class FusionPM_Activity {
         return $isSuccess;
     }
 
+    public function delete_activities_by_columns( $value1, $column1, $value2, $column2 ) {
+
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column1} = {$value1} AND {$column2} = '{$value2}'" );
+
+        foreach ($result as $activity) {
+            $isSuccess = $this->delete($activity->ID);
+        }
+
+        return $isSuccess;
+    }
+
     public function get_activity_count( $project_id ) {
         global $wpdb;
 
@@ -86,7 +99,7 @@ class FusionPM_Activity {
         return $activity_count;
     }
 
-    public function get_activities( $project_id = NULL, $limit = NULL, $offset = NULL ) {
+    public function get_project_activities( $project_id = NULL, $limit = NULL, $offset = NULL ) {
 
         global $wpdb;
 
