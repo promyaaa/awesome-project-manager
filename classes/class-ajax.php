@@ -29,6 +29,7 @@ class FusionPM_Ajax {
         // add_action( 'wp_ajax_fpm-get-message-count', array( $this, 'fetch_message_count' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-messages', array( $this, 'load_more_messages' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-lists', array( $this, 'load_more_lists' ), 10 );
+        add_action( 'wp_ajax_fpm-load-more-activities', array( $this, 'load_more_activities' ), 10 );
         add_action( 'wp_ajax_fpm-get-activities', array( $this, 'fetch_activities' ), 10 );
 
 
@@ -1022,9 +1023,24 @@ class FusionPM_Ajax {
         $limit = 10;
 
         $listModel = FusionPM_List::init();
-        $messages = $listModel->get_lists_by_column_info( 'projectID', $projectID, $limit, $offset );
+        $lists = $listModel->get_lists_by_column_info( 'projectID', $projectID, $limit, $offset );
 
-        wp_send_json_success( $messages );
+        wp_send_json_success( $lists );
+    }
+
+    public function load_more_activities() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $offset = $this->get_validated_input('offset');
+        $limit = 10;
+
+        $activityModel = FusionPM_Activity::init();
+        $activites = $activityModel->get_project_activities( $projectID, $limit, $offset );
+
+        wp_send_json_success( $activites );
     }
 
     public function fetch_project_count() {

@@ -96,6 +96,7 @@
                 </div>
             </div>
             <br>
+            <!-- {{projects.length}}/{{projectCount}} -->
             <div class="row" v-if="projects.length < projectCount">
                 <div class="col-12 text-center">
                     <button class="button button-default" @click="loadMoreProjects">Load More...</button>
@@ -254,6 +255,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
+                    console.log(resp);
                     if ( resp.success ) {
                         vm.projects = resp.data;
                     }

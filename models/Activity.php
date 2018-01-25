@@ -99,37 +99,27 @@ class FusionPM_Activity {
         return $activity_count;
     }
 
-    public function get_project_activities( $project_id = NULL, $limit = NULL, $offset = NULL ) {
+    public function get_project_activities( $project_id, $limit = NULL, $offset = NULL ) {
 
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 25;
+            $limit = 10;
         }
 
         if ( !$offset ) {
             $offset = 0;
         }
+
+        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}");
+
+        foreach ($result as $activity) {
+            $activity->avatar_url = get_avatar_url($activity->userID, array('size'=>32));
+            $activity->formatted_date = $this->get_formatted_date( $activity->created );
+            $activity->formatted_time = $this->get_formatted_time( $activity->created );
+        }
+        $result[0]->total_activity = $this->get_activity_count( $project_id );
         
-        $data = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC", ARRAY_A);
-
-        $temp = array();
-        foreach ( $data as $element ) {
-            $nameOfDay = date('D, j M Y', strtotime($element['created']));
-            $element['avatar_url'] = get_avatar_url($element['userID'], array('size'=>32));
-            $element['formatted_date'] = $this->get_formatted_date( $element['created'] );
-            $element['formatted_time'] = $this->get_formatted_time( $element['created'] );
-            $temp[$nameOfDay][] = $element;
-        }
-
-        $result = array();
-        foreach ($temp as $day => $activities) {
-            $result[] = array(
-                'activity_date' => $day,
-                'activities' => $activities
-            );
-        }
-
         return $result;
     }
 

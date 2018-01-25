@@ -1,87 +1,81 @@
 <template>
     <div>
-        <!-- <pre>
-            {{activity}}
-        </pre> -->
-        <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar">
+        <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar" style="margin-right:15px; margin-top: 0px;">
 
-        <div v-if="isCreateTodo">
-            <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong> <br>
-            <div class="m-t-5">
+        <div v-if="isCreateTodo" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> created a <strong>Todo ,</strong>
                 <span class="checkbox-style"></span>
-                <!-- <i class="fa fa-square-o fa-5" aria-hidden="true"></i> -->
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>  
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isUpdateTodo">
-            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>
-            <div class="m-t-5" style="cursor:pointer">
+        <div v-if="isUpdateTodo" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> updated a <strong>Todo ,</strong>
                 <span class="checkbox-style"></span>
-                <!-- <i class="fa fa-square-o fa-2" aria-hidden="true"></i> -->
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isCheckTodo">
-            <strong>{{activity.user_name}}</strong> checked off a <strong>Todo</strong> <br>
-            <div class="m-t-5" style="cursor:pointer">
-                <span class="checkbox-checked-style"><i class="fa fa-check" aria-hidden="true"></i></span>
-                <!-- <i class="fa fa-square-o fa-2" aria-hidden="true"></i> -->
+        <div v-if="isDeleteTodo" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> deleted a <strong>Todo ,</strong>
+                <span class="checkbox-style"></span>
+                <span>{{activity.activity}}</span>
+            </div>
+        </div>
+
+        <div v-if="isCheckTodo" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> checked off a <strong>Todo ,</strong>
+                <span class="checkbox-checked-style" style="margin-left: 10px;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isUncheckTodo">
-            <strong>{{activity.user_name}}</strong> re-open a <strong>Todo</strong> <br>
-            <div class="m-t-5" style="cursor:pointer">
+        <div v-if="isUncheckTodo" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> re-open a <strong>Todo ,</strong>
                 <span class="checkbox-style"></span>
-                <!-- <i class="fa fa-square-o fa-2" aria-hidden="true"></i> -->
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isDeleteTodo">
-            <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong> <br>
-            <div class="m-t-5" style="cursor:default">
-                <span class="checkbox-style"></span>
-                <span style="color:a2a2a2;">{{activity.activity}}</span>
-            </div>
-        </div>
-
-        <div v-if="isCreateMessage">
-            <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called
-            <div class="m-t-5">
+        <div v-if="isCreateMessage" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> created a <strong>Message ,</strong> called
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>  
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isUpdateMessage">
-            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called
-            <div class="m-t-5">
+        <div v-if="isUpdateMessage" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> updated a <strong>Message ,</strong> called
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>  
+                </router-link> 
             </div>
         </div>
 
-        <div v-if="isDeleteMessage">
-            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>
-            <div class="m-t-5" style="cursor:default">
-                <span style="color:a2a2a2;">{{activity.activity}}</span>
+        <div v-if="isDeleteMessage" class="text-left" style="padding-top:2px;">
+            <div>
+                <strong>{{activity.user_name}}</strong> deleted a <strong>Message ,</strong> called
+                <span>{{activity.activity}}</span>
             </div>
         </div>
-
     </div>
 </template>
 

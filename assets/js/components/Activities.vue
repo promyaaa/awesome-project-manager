@@ -8,31 +8,23 @@
                             <h2 class="decorated-center"><span>Project Activity</span></h2>
                         </div>
                     </div>
-                    <ul class="timeline timeline-centered">
-                        <li class="timeline-item" v-for="(record, index) in activities">
-                            <div>
-                                <h3>{{record.activity_date}}</h3>
-                            </div>
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content" v-for="activity in record.activities">
-                                <!-- <pre>
-                                    {{activity}}
-                                </pre> -->
-                                <div class="row" v-if="index % 2===0">
-                                    <div class="col-2">{{activity.formatted_time}}</div>
-                                    <div class="col-10">
-                                        <activity-info :activity="activity"></activity-info>
-                                    </div>
-                                </div>
-                                <div class="row" v-else>
-                                    <div class="col-10 text-left">
-                                        <activity-info :activity="activity"></activity-info>
-                                    </div>
-                                    <div class="col-2">{{activity.formatted_time}}</div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="row" v-for="(activity, index) in activities">
+                        <div class="col-2">
+                            <span>{{activity.formatted_date}}</span>
+                        </div>
+                        <div class="col-2">
+                            <span>{{activity.formatted_time}}</span>
+                        </div>
+                        <div class="col-8">
+                            <activity-info :activity="activity"></activity-info>
+                        </div>
+                    </div>
+                    
+                    <div class="row" v-if="activities.length < totalActivityCount">
+                        <div class="col-12">
+                            <button class="button" @click="loadMoreActivities">Load More</button>
+                        </div>
+                    </div>
                 </div>
             </div>  
             </div>
@@ -64,7 +56,8 @@
 
         data () {
             return {
-                activities: []
+                activities: [],
+                totalActivityCount: ''
             }
         },
 
@@ -84,9 +77,32 @@
                     console.log(resp);
                     if ( resp.success ) {
                         vm.activities = resp.data;
+                        vm.totalActivityCount = resp.data[0].total_activity;
                     }
                 });
-            }
+            },
+
+            loadMoreActivities() {
+                var vm = this;
+                vm.loadMore = true;
+                var data = {
+                    action: 'fpm-load-more-activities',
+                    nonce: fpm.nonce,
+                    offset: vm.activities.length,
+                    project_id: vm.$route.params.projectid
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    vm.loadMore = false;
+                    console.log(resp);
+                    if ( resp.success ) {
+                        vm.activityCount = vm.activityCount + resp.data[0].record_count;
+                        for(var i = 0; i < resp.data.length; i++ ) {
+                            vm.activities.push(resp.data[i]);
+                        }
+                    }
+                });
+            },
         },
 
         created() {

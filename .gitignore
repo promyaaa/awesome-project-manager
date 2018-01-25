@@ -1,6 +1,6 @@
 # .babelrc
-package.json
-webpack.config.js
+# package.json
+# webpack.config.js
 
 requirement.txt
 assets/.DS_Store

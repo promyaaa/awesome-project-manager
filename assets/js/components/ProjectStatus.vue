@@ -6,7 +6,7 @@
                     <div class="col-2"></div>
                     <div class="col-8">
                         <h1 style="border-bottom: 2px solid grey;"><strong>Delete this project?</strong></h1>
-                        <p style="font-size: 15px"><strong>Delete it if you want it gone for good. It cannot be undone !!</strong></p>
+                        <p style="font-size: 15px"><strong>Delete it if you want it gone for good. All the information of this project will be lost forever. It cannot be undone !!</strong></p>
                     </div>
                 </div>
                 <div class="row">
@@ -50,7 +50,8 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // vm.loading = false;
                     if ( resp.success ) {
-                        if( vm.currentUser.data.ID === resp.data[0].userID ) {
+                        if( (vm.currentUser.data.ID === resp.data[0].userID) || 
+                            (vm.currentUser.roles[0] === 'administrator') ) {
                             
                         } else {
                             vm.$router.push({ path: `/projects/${projectID}?type=unauthorized` });
@@ -61,7 +62,7 @@
 
             deleteProject: function() {
 
-                if (confirm("Please confirm one more time? This action cannot be undone.")) {
+                if (confirm("Please confirm one more time. This action cannot be undone.")) {
                     var vm = this,
                         projectID = +vm.$route.params.projectid,
                         data = {

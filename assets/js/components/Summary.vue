@@ -232,6 +232,7 @@
     .checkbox-style {
         padding: 0px 8px;
         margin-right: 10px;
+        margin-left: 10px;
         border: 1px solid #ccc;
     }
     .link-style a:link {
