@@ -11,7 +11,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button @click="deleteProject" class="button" style="background:#d54e21; color: white;">
+                        <button @click="deleteProject" class="button" style="background:#d54e21; color: white;margin-bottom:15px;">
                             Delete ? Are you sure ??
                         </button>
                     </div>

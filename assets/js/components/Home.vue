@@ -15,7 +15,9 @@
                         <div class="col-6 user-quick-link">
                             <div>
                                 <ul>
-                                    <li class="link-style"><a>My Assignment</a></li>
+                                    <router-link to="/my/assignments" tag="li" class="link-style">
+                                        <a>My Assignments</a>
+                                    </router-link>
                                     <!-- <li class="link-style"><a>My Bookmarks</a></li>
                                     <li class="link-style"><a>My Schedule</a></li>
                                     <li class="link-style"><a>My Drafts</a></li> -->

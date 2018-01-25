@@ -33,7 +33,7 @@
         <div v-if="isCheckTodo" class="text-left" style="padding-top:2px;">
             <div>
                 <strong>{{activity.user_name}}</strong> checked off a <strong>Todo ,</strong>
-                <span class="checkbox-checked-style" style="margin-left: 10px;">
+                <span class="checkbox-checked-style">
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
@@ -86,6 +86,7 @@
     .checkbox-checked-style {
         padding: 0px 1px;
         margin-right: 10px;
+        margin-left: 10px;
         border: 1px solid #ccc;
     }
 </style>
