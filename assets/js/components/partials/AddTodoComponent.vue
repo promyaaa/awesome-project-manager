@@ -121,7 +121,10 @@
                         todo.todo = vm.todoName;
                         todo.is_complete = '0';
                         todo.userID = vm.currentUser.data.ID;
+                        todo.user_name = vm.currentUser.data.display_name;
                         todo.files = vm.attachments;
+                        todo.listID = vm.list.ID;
+                        todo.projectID = vm.$route.params.projectid;
 
                         vm.list.todos.push(todo);
 

@@ -104,7 +104,7 @@ class FusionPM_Activity {
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 10;
+            $limit = 20;
         }
 
         if ( !$offset ) {
