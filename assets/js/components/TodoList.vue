@@ -2,16 +2,16 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style">
                         Back to To-dos
                     </router-link>
                 </div>
             </div>
             <div class="row">
-            <!-- <pre>
+            <pre>
                 {{list}}
-            </pre> -->
+            </pre>
                 <div class="col-12">
                     <div class="lists">
                     

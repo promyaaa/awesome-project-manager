@@ -8,6 +8,7 @@ assets/js/build.js
 node_modules
 build
 npm-debug.log
+fusion-pm.php
 .DS_Store
 includes/.DS_Store
 .DS_Store

@@ -2,8 +2,11 @@
     <div>
         <div class="container">
             <div class="row text-center">
+                <!-- {{project.project_title}} -->
                 <div class="col-12">
-                    <router-link :to="'/projects/' + $route.params.projectid">Back to summary</router-link>
+                    <router-link :to="'/projects/' + $route.params.projectid" tag="h3">
+                        <a>{{project.project_title}}</a>
+                    </router-link>
                 </div>
             </div>
             <!-- <div class="row">
@@ -126,7 +129,8 @@
                 listTitle: '',
                 loading: false,
                 currentUser: '',
-                listCount: ''
+                listCount: '',
+                project: ''
             }
         },
 
