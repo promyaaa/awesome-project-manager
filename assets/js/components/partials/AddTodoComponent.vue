@@ -121,7 +121,7 @@
                         attachments: vm.attachmentIDs,
                         due_date: vm.todoDueDate
                     };
-
+                    
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         todo = resp.data.todo;

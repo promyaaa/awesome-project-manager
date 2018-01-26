@@ -17,8 +17,16 @@
             <div class="col-9">
                 <div class="todo-item">
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span" :class="{ completed: is_complete }">
-                        {{todo.todo}}/, Due ON: {{todo.formatted_due_date}}, assigned To {{todo.assignee_name}},
-                        <span v-if="fileCount > 0">fileIcon</span>
+                        {{todo.todo}},
+                        <span v-if="todo.formatted_due_date">
+                            <i class="fa fa-calendar" aria-hidden="true"></i> {{todo.formatted_due_date}},
+                        </span>
+                        <span v-if="todo.assignee_name">
+                            <i class="fa fa-user" aria-hidden="true"></i> {{todo.assignee_name}},
+                        </span>
+                        <span v-if="fileCount > 0">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </span>
                     </router-link>
                 </div>
             </div>
@@ -149,7 +157,6 @@
                         attachments: todoObject.attachmentIDs,
                         due_date: vm.updateDueDate ? vm.updateDueDate : ''
                     };
-
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     console.log(resp);

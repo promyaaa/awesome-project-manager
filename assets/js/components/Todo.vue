@@ -296,7 +296,7 @@
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
                         attachments: vm.attachmentIDsToEdit,
-                        due_date: vm.updateDueDate ? vm.updateDueDate.slice(0,-3) + ':00' : ''
+                        due_date: vm.updateDueDate ? vm.updateDueDate : ''
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
