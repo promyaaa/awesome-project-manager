@@ -1,6 +1,6 @@
 # .babelrc
-# package.json
-# webpack.config.js
+package.json
+webpack.config.js
 
 requirement.txt
 assets/.DS_Store
@@ -8,7 +8,6 @@ assets/js/build.js
 node_modules
 build
 npm-debug.log
-fusion-pm.php
 .DS_Store
 includes/.DS_Store
 .DS_Store

@@ -4,8 +4,8 @@
             <div class="row text-center">
                 <!-- {{project.project_title}} -->
                 <div class="col-12">
-                    <router-link :to="'/projects/' + $route.params.projectid" tag="h3">
-                        <a>{{project.project_title}}</a>
+                    <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
+                        <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>{{project.project_title}}</a>
                     </router-link>
                 </div>
             </div>
