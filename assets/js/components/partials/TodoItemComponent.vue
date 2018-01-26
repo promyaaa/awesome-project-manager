@@ -22,10 +22,10 @@
             <div class="col-2">
                 <div class="actions text-center" v-if="isShowEdit">
                     <span @click="showEditForm( todo, tindex )">
-                        <a style="cursor: pointer">Edit</a>
+                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </span>
                     <span class="trash" @click="deleteTodo(todo, tindex)">| 
-                        <a style="color: #D54E21;cursor: pointer;">Delete</a>
+                        <a style="color: #D54E21;cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                 </div> 
             </div>

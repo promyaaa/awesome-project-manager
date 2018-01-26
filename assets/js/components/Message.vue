@@ -1,28 +1,23 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center" style="text-decoration: none;">
-                <router-link :to="'/projects/' + $route.params.projectid" tag="span" class="link-style">
-                    <a>{{messageObject.project_title}}</a> >
+            <div class="col-12 text-center">
+                <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
+                    <a>{{messageObject.project_title}}</a>
                 </router-link>
-                <router-link :to="'/projects/' + $route.params.projectid + '/messages/'" tag="span" class="link-style">
-                    <a>Messages Board</a> > Message
+                <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style inline-block" tag="h4">
+                    <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>Message Board</a>
                 </router-link>
             </div>
         </div>
-        <div class="row">
-           <!-- <pre>
-               {{messageObject}}
-           </pre> -->
-        </div>
-        <div class="row">
+        <div class="row lists">
             <div class="col-12">
                 <!-- <h3>Message</h3> -->
                 <div class="loading" v-if="loading">
                     <p>Loading . . .</p>
                 </div>
 
-                <div v-if="messageObject" class="box">
+                <div v-if="messageObject">
                     <div v-if="isShowEdit">
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'" class="button button-default">
                             Edit

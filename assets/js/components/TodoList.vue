@@ -3,11 +3,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style" tag="h3">
-                        <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>To-dos</a>
+                    <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
+                        <a>{{project.project_title}}</a>
                     </router-link>
-                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style" tag="h3">
-                        <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>To-dos</a>
+                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style inline-block" tag="h4">
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>To-dos</a>
                     </router-link>
                 </div>
             </div>
@@ -40,6 +40,9 @@
         padding: 15px 25px;
         border-radius: 5px;
     }
+    .inline-block {
+        display: inline-block;
+    }
 </style>
 
 <script>
@@ -55,41 +58,41 @@
             return {
                 list: {},
                 loading: false,
-                sindex: 0
+                sindex: 0,
+                project: ''
             }
         },
 
         methods: {
             fetchListDetails: function() {
-                var self = this;
-                self.loading = true;
+                var vm = this;
+                vm.loading = true;
                 
                 var data = {
                     action: 'fpm-get-list-details',
-                    project_id: self.$route.params.projectid,
-                    list_id: self.$route.params.listid,
+                    project_id: vm.$route.params.projectid,
+                    list_id: vm.$route.params.listid,
                     nonce: fpm.nonce,
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    self.loading = false;
+                    vm.loading = false;
                     console.log(resp);
                     if ( resp.success ) {
-                        self.list = resp.data[0];
+                        vm.list = resp.data[0];
+                        vm.project = resp.data[0].projectInfo;
                     }
                 });
             }
         },
 
         created() {
-            var self = this;
-            self.fetchListDetails();
-
-            console.log('Component created.')
+            var vm = this;
+            vm.fetchListDetails();
         },
 
         mounted() {
-            console.log('Component mounted.')
+            
         }
     }
 </script>

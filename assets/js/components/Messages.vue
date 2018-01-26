@@ -1,72 +1,59 @@
 <template>
-    <div>
-        <div class="container">
-            <!-- <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10 section-head" v-if="project">
-                    <router-link :to="'/projects/' + $route.params.projectid" class="link-style" tag="span">
+    <div class="container">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div v-if="project" class="project-navigation">
+                    <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
                         <a>{{project.project_title}}</a>
                     </router-link>
                 </div>
-            </div> -->
+            </div>
+        </div>
+
+        <div class="lists">
+            <div class="row">
+                <div class="col-4">
+                    <router-link :to="'/projects/' + $route.params.projectid + '/messages/new'" class="button button-default">
+                        +Add
+                    </router-link>
+                </div>
+                <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
+                    <h3>Message Board</h3>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="row">
-                        <div class="col-1"></div>
-                        <div class="col-10">
-                            <div v-if="project" class="project-navigation">
-                                <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
-                                    <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>{{project.project_title}}</a>
-                                </router-link>
-                            </div>
-                        </div>
+                    <div class="loading" v-if="loading">
+                        <p>Loading . . .</p>
                     </div>
-                    <div class="messages-section">
-                        <div class="row">
-                            <div class="col-4">
-                                <router-link :to="'/projects/' + $route.params.projectid + '/messages/new'" class="button button-default">
-                                    +Add
-                                </router-link>
-                            </div>
-                            <div class="col-4 text-center" style="border-bottom: 2px solid grey;">
-                                <h3>Message Board</h3>
-                            </div>
-                        </div>
 
-                        <div class="loading" v-if="loading">
-                            <p>Loading . . .</p>
-                        </div>
-
-                        <div v-if="messages.length < 1 && !loading">
-                            <h4>No Message Added Yet</h4>
-                        </div>
-                        <!-- <pre>
-                            {{messages}}
-                        </pre> -->
-                        <div v-if="messages.length > 0 && !loading">
-                            <ul>
-                                <li v-for="(messageObj, mindex) in messages" style="border-bottom: 1px solid #f2f2f2">
-                                    <div class="row">
-                                        <div class="col-2 text-center">
-                                            <img :src="messageObj.avatar_url" class="small-round-image" style="margin-top: 10px">
-                                        </div>
-                                        <div class="col-10">
-                                            <div>
-                                                <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID" tag="h3" class="ellipsis-90 link-style">
-                                                    <a>{{messageObj.message_title}}</a>
-                                                </router-link>
-                                                <p>posted by <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p> 
-                                            </div>
+                    <div v-if="messages.length < 1 && !loading">
+                        <h4>No Message Added Yet</h4>
+                    </div>
+                    <div v-if="messages.length > 0 && !loading">
+                        <ul>
+                            <li v-for="(messageObj, mindex) in messages" style="border-bottom: 1px solid #f2f2f2">
+                                <div class="row">
+                                    <div class="col-2 text-center">
+                                        <img :src="messageObj.avatar_url" class="small-round-image" style="margin-top: 10px">
+                                    </div>
+                                    <div class="col-10">
+                                        <div>
+                                            <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID" tag="h3" class="ellipsis-90 link-style">
+                                                <a>{{messageObj.message_title}}</a>
+                                            </router-link>
+                                            <p>posted by <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p> 
                                         </div>
                                     </div>
-                                </li>
-                            </ul>   
-                        </div>
-                        <br>
-                        <div class="row" v-if="messages.length < messageCount">
-                            <div class="col-12 text-center">
-                                <button class="button button-default" @click="loadMoreMessages">Load More...{{messageCount}}</button>
-                            </div>
+                                </div>
+                            </li>
+                        </ul>   
+                    </div>
+                    <br>
+                    <div class="row" v-if="messages.length < messageCount">
+                        <div class="col-12 text-center">
+                            <button class="button button-default" @click="loadMoreMessages">Load More...{{messageCount}}</button>
                         </div>
                     </div>
                 </div>
@@ -76,11 +63,11 @@
 </template>
 
 <style>
-    .messages-section {
+    /*.messages-section {
         background-color: #fff;
         padding: 15px;
         border-radius: 5px;
-    }
+    }*/
     .project-navigation {
         text-align: center;
     }
