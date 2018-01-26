@@ -5,7 +5,7 @@
                 <!-- {{project.project_title}} -->
                 <div class="col-12">
                     <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
-                        <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>{{project.project_title}}</a>
+                        <a>{{project.project_title}}<i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i></a>To-Dos
                     </router-link>
                 </div>
             </div>
@@ -37,9 +37,9 @@
                     </div>
                 </div>
             </div> -->
-            <div class="row">
+            <div class="row lists">
                 <div class="col-12">
-                    <div class="lists">
+                    <div>
                         <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">Make List</button>
                         <div style="margin: 40px 35px;">
                             <div v-if="isShowListForm" class="add_form_style">

@@ -15,8 +15,8 @@
                         <div class="col-1"></div>
                         <div class="col-10">
                             <div v-if="project" class="project-navigation">
-                                <router-link :to="'/projects/' + $route.params.projectid" class="link-style" tag="h3">
-                                    <a>{{project.project_title}}</a>
+                                <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
+                                    <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>{{project.project_title}}</a>
                                 </router-link>
                             </div>
                         </div>

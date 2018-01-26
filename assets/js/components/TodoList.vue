@@ -6,6 +6,9 @@
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style" tag="h3">
                         <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>To-dos</a>
                     </router-link>
+                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style" tag="h3">
+                        <a><i class="fa fa-long-arrow-left p-r-10" aria-hidden="true"></i>To-dos</a>
+                    </router-link>
                 </div>
             </div>
             <div class="row">

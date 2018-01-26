@@ -138,12 +138,18 @@ class FusionPM_Project {
     
     }
 
-    public function get_project( $project_id ) {
+    public function get_project( $project_id, $summary = NULL ) {
         global $wpdb;
+
+        if ( $summary ) {
+            return $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );
+        }
+        
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );
         $result[0]->user_count = $this->get_project_user_count( $project_id );
         $result[0]->message_count = $this->get_project_message_count( $project_id );
         $result[0]->list_count = $this->get_project_list_count( $project_id );
+
         return $result;
     }
 

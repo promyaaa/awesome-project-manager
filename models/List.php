@@ -105,28 +105,13 @@ class FusionPM_List {
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$list_id}" );
 
         $todoModel = FusionPM_Todo::init();
-        $commentModel = FusionPM_Comment::init();
+        $projectModel = FusionPM_Project::init();
 
         $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
         $result[0]->todos = $todoModel->get_todos_by_column_info( 'listID', $list_id );
+        $result[0]->projectInfo = $projectModel->get_project( $result[0]->projectID, true );
 
         return $result;
-
-    
-        // $result_array = array();
-        // foreach ($result as $list) {
-        //     $list_array = array();
-        //     $list_array = $list;
-
-        //     $listTodos = $todoModel->get_todos_by_column_info( 'listID', $list_id );
-        //     $listComments = $commentModel->get_comments_by_column_info( $list_id, 'list' ); // (id, type)
-            
-        //     $list_array['todos'] = $listTodos;
-        //     $list_array['comments'] = $listComments;
-        //     array_push( $result_array, $list_array );
-        // }
-        
-        // return $result_array;
     }
 
     public function get_lists_by_column_info( $column, $param, $limit = NULL, $offset = NULL ) {

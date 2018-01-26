@@ -229,6 +229,9 @@
     .p-r-10 {
         padding-right: 10px;
     }
+    .p-l-10 {
+        padding-left: 10px;
+    }
     .checkbox-style {
         padding: 0px 8px;
         margin-right: 10px;
