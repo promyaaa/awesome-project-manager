@@ -93,7 +93,6 @@
                         </div>
 
                         <div class="add_form_style" v-if="editTodo">
-                        
                             <div class="todo_name inline">
                                 <input type="text"
                                     v-model="todoName" 
@@ -116,7 +115,7 @@
                                 v-on:attach="updateEditAttachments" 
                                 v-on:remove="removeEditAttachment" 
                                 :attachments="attachmentsToEdit"></file-upload>
-                            <br> 
+                            <br>
                             
                             <div class="inline">
                                 <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" value="Update Todo">
@@ -129,12 +128,6 @@
                     <comments :comments="todoObject.comments" type="todo"></comments> 
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
-                    
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -174,7 +167,8 @@
                 attachmentIDsToEdit: [],
                 updateDueDate: '',
                 list: '',
-                project: ''
+                project: '',
+                users: ''
             }
         },
 
@@ -302,17 +296,18 @@
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
                         attachments: vm.attachmentIDsToEdit,
-                        due_date: vm.updateDueDate ? vm.updateDueDate + ':00' : ''
+                        due_date: vm.updateDueDate ? vm.updateDueDate.slice(0,-3) + ':00' : ''
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         vm.todoObject.todo = vm.todoName;
+                        vm.todoObject.formatted_due_date = resp.data.todo.formatted_duedate;
                         vm.todoObject.assigneeID = vm.selected.ID;
                         vm.todoObject.assignee_name = vm.selected.assignee;
                         
-                        vm.editTodo = false;
                         vm.todoName = '';
+                        vm.editTodo = false;
                     } else {
                         vm.message = resp.data;
                     }

@@ -1,133 +1,71 @@
 <template>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <div v-if="project" class="project-navigation">
-                <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
-                    <a>{{project.project_title}}</a>
-                </router-link>
-            </div>
-        </div>
-    </div>
-
-    <div class="lists">
+    <div class="container">
         <div class="row">
-            <div class="col-4">
-                <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">Make List</button>
-            </div>
-            <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
-                <h3>To-Dos</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div v-if="isShowListForm" class="add_form_style">
-                    <div>
-                        <input type="text" 
-                            name="list_title" 
-                            v-model="listTitle" 
-                            class="form-control" 
-                            placeholder="Name this list . . ." 
-                            @keyup.enter="createList" 
-                            @keyup.esc="toggleListForm"
-                            v-focus>
-                    </div>
-                    <div class="action">
-                        <button class="button button-primary" 
-                                @click.prevent="createList"
-                                >Add</button>
-                        <button class="button button-default" @click="toggleListForm">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="loading" v-if="loading">
-                    <p>Loading . . .</p>
-                </div>
-
-                <div v-if="lists.length < 1 && !loading">
-                    <h4>No Lists Added Yet</h4>
-                </div>
-                
-                <div v-if="lists.length > 0 && !loading">
-                    <ul>
-                        <list v-for="(list, sindex) in lists" :list="list" :sindex="sindex" :key="list.ID"></list>
-                    </ul>
-                    <div class="row" v-if="lists.length < listCount">
-                        <div class="col-12 text-center">
-                            <button class="button button-default" @click="loadMoreLists">Load More...</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- <div>
-        <div class="container">
-            <div class="row text-center">
-                
-                <div class="col-12">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div v-if="project" class="project-navigation">
                     <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
-                        <a>{{project.project_title}}<i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i></a>To-Dos
+                        <a>{{project.project_title}}</a>
                     </router-link>
                 </div>
             </div>
-            
-            <div class="row lists">
-                <div class="col-12">
-                    <div>
-                        <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">Make List</button>
-                        <div style="margin: 40px 35px;">
-                            <div v-if="isShowListForm" class="add_form_style">
-                                <div>
-                                    <input type="text" 
-                                        name="list_title" 
-                                        v-model="listTitle" 
-                                        class="form-control" 
-                                        placeholder="Name this list . . ." 
-                                        @keyup.enter="createList" 
-                                        @keyup.esc="toggleListForm"
-                                        v-focus>
-                                </div>
-                                <div class="action">
-                                    <button class="button button-primary" 
-                                            @click.prevent="createList"
-                                            >Add</button>
-                                    <button class="button button-default" @click="toggleListForm">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="loading" v-if="loading">
-                            <p>Loading . . .</p>
-                        </div>
+        </div>
 
-                        <div v-if="lists.length < 1 && !loading">
-                            <h4>No Lists Added Yet</h4>
+        <div class="lists">
+            <div class="row">
+                <div class="col-4">
+                    <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">Make List</button>
+                </div>
+                <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
+                    <h3>To-Dos</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div v-if="isShowListForm" class="add_form_style">
+                        <div>
+                            <input type="text" 
+                                name="list_title" 
+                                v-model="listTitle" 
+                                class="form-control" 
+                                placeholder="Name this list . . ." 
+                                @keyup.enter="createList" 
+                                @keyup.esc="toggleListForm"
+                                v-focus>
                         </div>
-                        
-                        <div v-if="lists.length > 0 && !loading">
-                            <ul>
-                                <list v-for="(list, sindex) in lists" :list="list" :sindex="sindex" :key="list.ID"></list>
-                            </ul>
-                            <div class="row" v-if="lists.length < listCount">
-                                <div class="col-12 text-center">
-                                    <button class="button button-default" @click="loadMoreLists">Load More...</button>
-                                </div>
+                        <div class="action">
+                            <button class="button button-primary" 
+                                    @click.prevent="createList"
+                                    >Add</button>
+                            <button class="button button-default" @click="toggleListForm">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="loading" v-if="loading">
+                        <p>Loading . . .</p>
+                    </div>
+
+                    <div v-if="lists.length < 1 && !loading">
+                        <h4>No Lists Added Yet</h4>
+                    </div>
+                    
+                    <div v-if="lists.length > 0 && !loading">
+                        <ul>
+                            <list v-for="(list, sindex) in lists" :list="list" :sindex="sindex" :key="list.ID"></list>
+                        </ul>
+                        <div class="row" v-if="lists.length < listCount">
+                            <div class="col-12 text-center">
+                                <button class="button button-default" @click="loadMoreLists">Load More...</button>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
 
 <style>

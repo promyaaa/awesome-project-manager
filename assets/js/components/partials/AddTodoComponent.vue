@@ -27,7 +27,7 @@
                             </select>
                         </div>
                         <div>
-                            <date-picker v-model="todoDueDate"></date-picker>
+                            <date-picker id="add-duedate" v-model="todoDueDate"></date-picker>
                         </div>
                         <file-upload
                             v-on:attach="updateAttachments"
@@ -119,7 +119,7 @@
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
                         attachments: vm.attachmentIDs,
-                        due_date: vm.todoDueDate + ':00'
+                        due_date: vm.todoDueDate
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {

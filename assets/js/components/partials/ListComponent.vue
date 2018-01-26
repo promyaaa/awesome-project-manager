@@ -39,7 +39,6 @@
                 </router-link>
             </div>
             
-            <!-- <hr> -->
             <ul v-if="list.todos.length > 0">
                 <todo-item v-for="(todo, tindex) in list.todos" :todo="todo" :tindex="tindex" :list="list" :key="todo.ID"></todo-item>
             </ul>

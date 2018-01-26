@@ -144,6 +144,16 @@ class FusionPM_Todo {
         }
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE {$column} = {$param}" );
+
+        foreach ($result as $todo) {
+            $todo->attachmentIDs = maybe_unserialize( $todo->file_ids );
+            if ( $todo->due_date ) {
+                $todo->formatted_due_date = $this->get_formatted_date( $todo->due_date );
+            } else {
+                $todo->formatted_due_date = '';
+                $todo->due_date = '';
+            }
+        }
         
         return $result;
     }

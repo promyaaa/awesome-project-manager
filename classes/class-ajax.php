@@ -714,6 +714,7 @@ class FusionPM_Ajax {
             'message' => __( 'Successfully inserted', 'fusion-pm' ),
             'todo' => array(
                 'ID' => $insertID ? $insertID : $todoID,
+                'formatted_duedate' => $dueDate ? $todosModel->get_formatted_date( $dueDate ) : '', 
                 'created' => $date
             )
         );
