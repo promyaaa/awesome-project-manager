@@ -242,7 +242,9 @@ textarea.form-control {
 .decorated > span:after{
     left: 100%;
 }
-
+h4 {
+  font-size: 18px;
+}
 /*decorated center*/
 .decorated-center{
     overflow: hidden;

@@ -80,7 +80,7 @@
                     console.log(resp);
                     if ( resp.success ) {
                         vm.list = resp.data[0];
-                        vm.project = resp.data[0].projectInfo;
+                        vm.project = resp.data[0].project_info;
                     }
                 });
             }

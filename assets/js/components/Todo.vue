@@ -11,9 +11,9 @@
                     </router-link>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10 box">
+            <div class="row lists">
+                <!-- <div class="col-1"></div> -->
+                <div class="col-12">
                     
                     <div class="loading" v-if="loading">
                         <p>Loading . . .</p>
@@ -23,7 +23,7 @@
                     </pre> -->
                     <div v-if="todoObject && !loading" class="single-todo">
                         <div>
-                            <div v-if="isShowEdit">
+                            <div v-if="isShowEdit && !editTodo">
                                 <button class="button button-default" 
                                         @click="showTodoEdit(todoObject)">Edit</button>
                                 <span style="float:right" @click="deleteTodo(todoObject)">
@@ -63,7 +63,7 @@
                                     <strong style="padding-right: 15%">Due Date :</strong>
                                 </div>
                                 <div class="col-9">
-                                    Due date er kaj korte hbe
+                                    {{todoObject.formatted_due_date}}
                                 </div>
                             </div>
 
@@ -107,7 +107,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <br>
+                            <date-picker v-model="updateDueDate"></date-picker>
                             <file-upload 
                                 v-on:attach="updateEditAttachments" 
                                 v-on:remove="removeEditAttachment" 
@@ -149,12 +149,14 @@
     
 </style>
 <script>
+    import DatePicker from './partials/DatePickerComponent.vue';
     import Comments from './partials/CommentsComponent.vue';
     import FileUpload from './partials/FileUploadComponent.vue';
     export default {
         components: {
-            'comments': Comments,
-            FileUpload
+            Comments,
+            FileUpload,
+            DatePicker
         },
         data() {
             return {
@@ -166,6 +168,7 @@
                 selected: '',
                 attachmentsToEdit: [],
                 attachmentIDsToEdit: [],
+                updateDueDate: ''
             }
         },
 
@@ -200,6 +203,7 @@
                 var vm = this;
                 vm.editTodo = true;
                 vm.todoName = vm.todoObject.todo;
+                vm.updateDueDate = vm.todoObject.due_date;
                 vm.selected = {
                     ID: vm.todoObject.assigneeID, assignee: vm.todoObject.assignee_name 
                 }
@@ -289,7 +293,8 @@
                         user_name: vm.currentUser.data.display_name,
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
-                        attachments: vm.attachmentIDsToEdit
+                        attachments: vm.attachmentIDsToEdit,
+                        due_date: vm.updateDueDate + ':00'
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {

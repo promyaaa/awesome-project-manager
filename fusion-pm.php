@@ -266,7 +266,9 @@ class Fusion_PM {
         // wp_register_script( 'fusion-vue-router', FUSION_PM_ASSETS . '/js/vue-router'. $suffix .'.js', array( 'jquery', 'fusion-vue' ), false, true );
         // wp_register_style( 'simple_grid_css', FUSION_PM_ASSETS . '/css/simple-grid.css', false, '1.0.0' );
         wp_register_style( 'style_css', FUSION_PM_ASSETS . '/css/style.css', false, time() );
+        wp_register_style( 'jquery-ui-style', FUSION_PM_ASSETS . '/css/jquery-ui.css', false, time() );
         wp_register_style( 'fusion-fontawesome', FUSION_PM_ASSETS . '/css/font-awesome.min.css', false, time() );
+        wp_register_script( 'fusion-timepicker', FUSION_PM_ASSETS . '/js/jquery-ui-timepicker.js', array( 'jquery' ), false, true );
         wp_register_script( 'fusion-dropdown', FUSION_PM_ASSETS . '/js/dropdown.js', array( 'jquery' ), time(), true ); // array( 'jquery', 'fusion-vue' )
         wp_register_script( 'fusion-admin', FUSION_PM_ASSETS . '/js/build'. $suffix .'.js', array( 'jquery', 'fusion-dropdown' ), time(), true ); // array( 'jquery', 'fusion-vue' )
 
@@ -276,7 +278,11 @@ class Fusion_PM {
             // wp_enqueue_style( 'simple_grid_css' );
 
             wp_enqueue_style( 'style_css' );
+            wp_enqueue_style( 'jquery-ui-style' );
             wp_enqueue_style( 'fusion-fontawesome' );
+            wp_enqueue_script( 'jquery-ui' );
+            wp_enqueue_script( 'jquery-ui-datepicker' );
+            wp_enqueue_script( 'fusion-timepicker' );
             wp_enqueue_script( 'fusion-dropdown' );
             wp_enqueue_script( 'fusion-admin' );
 

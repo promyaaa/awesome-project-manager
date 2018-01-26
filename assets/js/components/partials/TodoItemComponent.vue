@@ -1,6 +1,6 @@
 <template>
 
-    <li style="margin-bottom: 0px;">
+    <li style="margin-bottom: 0px; cursor: pointer;">
         <div class="row" v-if="editindex !== tindex">
             <div class="col-1 text-right">
                 <div style="margin-bottom: 6px;">

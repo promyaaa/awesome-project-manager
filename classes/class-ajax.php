@@ -653,6 +653,8 @@ class FusionPM_Ajax {
 
         $userName = !empty( $_POST['user_name'] ) ? $_POST['user_name'] : '';
 
+        $dueDate = !empty( $_POST['due_date'] ) ? $_POST['due_date'] : '';
+
         $fileIDs = !empty( $_POST['attachments'] ) ? $_POST['attachments'] : [];
 
         $assigneeID = !empty( $_POST['assignee_id'] ) ? $_POST['assignee_id'] : NULL;
@@ -697,6 +699,7 @@ class FusionPM_Ajax {
             'assignee_name' => $assigneeName,
             'assigneeID' => $assigneeID,
             'file_ids' => maybe_serialize( $fileIDs ),
+            'due_date' => $dueDate,
             'created' => $date
         );
 

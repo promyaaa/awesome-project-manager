@@ -1,19 +1,19 @@
 <template>
     <div>
-        <a href="#" 
-                @click.prevent="showTodoForm(sindex, list)" 
+        <a href="#"
+                @click.prevent="showTodoForm(sindex, list)"
                 v-if="sectionIndex !== sindex"
                 style="margin-left: 50px;">+ add todo</a>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
                 <div class="add_form_style" v-if="sectionIndex === sindex">
-                    
+
                         <div class="todo_name inline">
                             <input type="text"
-                                v-model="todoName" 
-                                class="form-control" 
-                                placeholder="add todo . . ." 
+                                v-model="todoName"
+                                class="form-control"
+                                placeholder="add todo . . ."
                                 v-focus
                                 @keyup.esc="hideTodoForm">
                             <span class="form-note"><i>*required field</i></span>
@@ -26,36 +26,41 @@
                                 </option>
                             </select>
                         </div>
-                        <file-upload 
-                            v-on:attach="updateAttachments" 
-                            v-on:remove="removeAttachment" 
+                        <div>
+                            <date-picker v-model="todoDueDate"></date-picker>
+                        </div>
+                        <file-upload
+                            v-on:attach="updateAttachments"
+                            v-on:remove="removeAttachment"
                             :attachments="attachments"></file-upload>
                         <br>
-                        
+
                         <div class="inline">
                             <input style="vertical-align: middle;" type="submit" @click.prevent="createTodo" name="add_todo" class="button button-primary" value="Add Todo">
                             <input style="vertical-align: middle;" type="submit" @click.prevent="hideTodoForm" class="button button-default" value="Cancel">
                         </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
     </div>
 </template>
 
 <style>
-   
+
 </style>
 
 <script>
     import store from '../../store';
     import FileUpload from './FileUploadComponent.vue';
+    import DatePicker from './DatePickerComponent.vue';
     export default {
         props: [ 'sindex', 'list' ],
 
         components: {
-            FileUpload
+            FileUpload,
+            DatePicker
         },
 
         data() {
@@ -63,6 +68,7 @@
                 sectionIndex: -1,
                 todoName: '',
                 selected: '',
+                todoDueDate: '',
                 attachments: [],
                 attachmentIDs: [],
             }
@@ -112,7 +118,8 @@
                         user_name: vm.currentUser.data.display_name,
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
-                        attachments: vm.attachmentIDs
+                        attachments: vm.attachmentIDs,
+                        due_date: vm.todoDueDate + ':00'
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
@@ -143,7 +150,7 @@
         mounted() {
             // var self = this;
             // jQuery('#datepicker').datepicker({
-            //     onSelect:function(selectedDate, datePicker) {            
+            //     onSelect:function(selectedDate, datePicker) {
             //         self.date = selectedDate;
             //     }
             // });
@@ -154,13 +161,17 @@
                 projectid,
                 key;
 
+                vm.$on('input', function(data) {
+                    console.log(data);
+                })
+
             vm.currentUser = fpm.currentUserInfo;
 
             projectid = vm.$route.params.projectid;
 
             key = projectid + '-users';
             vm.users = JSON.parse(localStorage.getItem(key));
-            
+
             if (!vm.users) {
 
                 localStorage.setItem('pid', projectid);
