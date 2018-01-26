@@ -653,7 +653,7 @@ class FusionPM_Ajax {
 
         $userName = !empty( $_POST['user_name'] ) ? $_POST['user_name'] : '';
 
-        $dueDate = !empty( $_POST['due_date'] ) ? $_POST['due_date'] : '';
+        $dueDate = !empty( $_POST['due_date'] ) ? $_POST['due_date'] : NULL;
 
         $fileIDs = !empty( $_POST['attachments'] ) ? $_POST['attachments'] : [];
 

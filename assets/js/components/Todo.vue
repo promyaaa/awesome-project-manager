@@ -3,23 +3,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <router-link :to="'/projects/' + $route.params.projectid" tag="span" class="link-style">
-                        <a>Project</a> >
+                    <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
+                        <a>{{project.project_title}}</a>
                     </router-link>
-                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid" tag="span" class="link-style">
-                        <a>List</a>
+                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style inline-block" tag="h4">
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>To-dos</a>
+                    </router-link>
+                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid" class="link-style inline-block" tag="h4">
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{list.list_title}}</a>
                     </router-link>
                 </div>
             </div>
             <div class="row lists">
-                <!-- <div class="col-1"></div> -->
                 <div class="col-12">
-                    
                     <div class="loading" v-if="loading">
                         <p>Loading . . .</p>
                     </div>
                     <!-- <pre>
                         {{todoObject}}
+                    </pre> -->
+                    <!-- <pre>
+                        {{listObject}}
                     </pre> -->
                     <div v-if="todoObject && !loading" class="single-todo">
                         <div>
@@ -107,7 +111,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <date-picker v-model="updateDueDate"></date-picker>
+                            <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
                             <file-upload 
                                 v-on:attach="updateEditAttachments" 
                                 v-on:remove="removeEditAttachment" 
@@ -118,19 +122,19 @@
                                 <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" value="Update Todo">
                                 <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" value="Cancel">
                             </div>
-                        
+                        </div>
                     </div>
-                        
-                    </div>
-                    
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-10">
+                <div class="col-12">
                     <comments :comments="todoObject.comments" type="todo"></comments> 
                 </div>
             </div>
+            <!-- <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    
+                </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -168,7 +172,9 @@
                 selected: '',
                 attachmentsToEdit: [],
                 attachmentIDsToEdit: [],
-                updateDueDate: ''
+                updateDueDate: '',
+                list: '',
+                project: ''
             }
         },
 
@@ -235,7 +241,9 @@
                     console.log(resp);
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
-                        vm.is_complete = +vm.todoObject.is_complete
+                        vm.is_complete = +vm.todoObject.is_complete;
+                        vm.list = resp.data[0].list_info;
+                        vm.project = resp.data[0].project_info;
                     } else {
                         vm.$router.push({ 
                             path: `/projects/${projectID}/todolists/${listID}?type=todo&info=notfound` 
@@ -294,7 +302,7 @@
                         assignee_id: vm.selected.ID,
                         assignee_name: vm.selected.assignee,
                         attachments: vm.attachmentIDsToEdit,
-                        due_date: vm.updateDueDate + ':00'
+                        due_date: vm.updateDueDate ? vm.updateDueDate + ':00' : ''
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {

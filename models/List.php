@@ -104,7 +104,7 @@ class FusionPM_List {
 
         if ( $summary ) {
             $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$list_id}" );
-            return $result;
+            return $result[0];
         }
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$list_id}" );

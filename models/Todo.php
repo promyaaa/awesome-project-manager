@@ -116,14 +116,17 @@ class FusionPM_Todo {
         
         $commentModel = FusionPM_Comment::init();
         $listModel = FusionPM_List::init();
+        $projectModel = FusionPM_Project::init();
 
-        $todoComments = $commentModel->get_comments_by_column_info( $todo_id, 'todo' );
-        $result[0]->comments = $todoComments;
+        $result[0]->comments = $commentModel->get_comments_by_column_info( $todo_id, 'todo' );
         $result[0]->list_info = $listModel->get_list_details( $result[0]->listID, true );
+        $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
+
         if ( $result[0]->due_date ) {
             $result[0]->formatted_due_date = $this->get_formatted_date( $result[0]->due_date );
         } else {
-            $result[0]->formatted_due_date = NULL;
+            $result[0]->formatted_due_date = '';
+            $result[0]->due_date = '';
         }
 
         return $result;
