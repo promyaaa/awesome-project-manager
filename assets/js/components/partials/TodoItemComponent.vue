@@ -1,9 +1,9 @@
 <template>
 
     <li style="margin-bottom: 0px; cursor: pointer;">
-        <div class="row" v-if="editindex !== tindex">
-            <div class="col-1 text-right">
-                <div style="margin-bottom: 6px;">
+        <div class="row" v-if="editindex !== tindex" style="margin-bottom: 7px;">
+            <div class="col-1 text-right" style="margin-top:0px; margin-bottom: 0px;">
+                <div style="margin-bottom: 6px; margin-top: 2px;">
                     <input type="checkbox"
                         @click="toggleCheckbox(todo, tindex)"
                         v-model="todo.is_complete"
@@ -12,18 +12,20 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-9" style="margin-top:0px; margin-bottom: 0px;">
                 <div class="todo-item">
-                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span" :class="{ completed: is_complete }">
-                        {{todo.todo}}
+                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span">
+                        <span :class="{ completed: is_complete }">{{todo.todo}}</span>
                         <span v-if="todo.formatted_due_date">
-                            | <i class="fa fa-calendar" aria-hidden="true"></i> {{todo.formatted_due_date}}
+                            <span class="pipe">|</span><i class="fa fa-calendar p-r-5" aria-hidden="true"></i> <span>{{todo.formatted_due_date}}</span>
                         </span>
                         <span v-if="todo.assignee_name">
-                            | <i class="fa fa-user" aria-hidden="true"></i> {{todo.assignee_name}}
+                            <span class="pipe">|</span><i class="fa fa-user p-r-5" aria-hidden="true"></i> 
+                            <span>{{todo.assignee_name}}</span>
                         </span>
                         <span v-if="fileCount > 0">
-                            | <i class="fa fa-file" aria-hidden="true"></i>
+                            <span class="pipe">|</span><i class="fa fa-file p-r-5" aria-hidden="true"></i>
+                            <span style="font-size:11px;">{{fileCount}}</span>
                         </span>
                     </router-link>
                 </div>
@@ -81,6 +83,20 @@
         text-decoration: line-through;
         font-style: italic;
         color: #a2a2a2;
+    }
+    .pipe {
+        padding-left: 3px;
+        padding-right: 6px;
+        color: #e3e3e3;
+    }
+    i.fa {
+        font-size: 12px;
+        color: #b5b5b5;
+        position: relative;
+        top: -1px;
+    }
+    .p-r-5 {
+        padding-right: 5px;
     }
 </style>
 
