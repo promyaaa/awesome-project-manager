@@ -2,7 +2,7 @@
     <div>
         <li>
             <div v-if="isSingle">
-                <div v-if="!isListEdit" style="margin-top: -10px">
+                <div v-if="!isListEdit && isShowEdit" style="margin-top: -10px">
                     <button class="button button-default" 
                             @click="showListEditForm( list )">Edit</button>
                     <span style="float:right" @click="deleteList(list)">
@@ -75,6 +75,13 @@
                 listTitle: '',
                 listCloneObj: '',
                 currentUser: ''
+            }
+        },
+        computed: {
+            isShowEdit: function() {
+                var vm = this;
+                return (vm.currentUser.roles[0] === 'administrator') || 
+                        (vm.currentUser.data.ID === vm.list.userID);
             }
         },
         directives: {
