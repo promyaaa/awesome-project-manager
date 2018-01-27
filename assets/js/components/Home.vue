@@ -165,6 +165,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .ellipsis-70 {
+        white-space: nowrap;
+        width: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .ellipsis-99 {
         white-space: nowrap;
         width: 99%;

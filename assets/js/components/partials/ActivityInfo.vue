@@ -3,7 +3,7 @@
         <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar" style="margin-right:15px; margin-top: 0px;">
 
         <div v-if="isCreateTodo" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.create_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
@@ -13,7 +13,7 @@
         </div>
 
         <div v-if="isUpdateTodo" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.updated_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
@@ -23,7 +23,7 @@
         </div>
 
         <div v-if="isDeleteTodo" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.delete_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <span>{{activity.activity}}</span>
@@ -31,7 +31,7 @@
         </div>
 
         <div v-if="isCheckTodo" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.checked_off_todo }} ,
                 <span class="checkbox-checked-style">
                     <i class="fa fa-check" aria-hidden="true"></i>
@@ -43,7 +43,7 @@
         </div>
 
         <div v-if="isUncheckTodo" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.reopen_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
@@ -53,7 +53,7 @@
         </div>
 
         <div v-if="isCreateMessage" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.created_a_message_called }}
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
@@ -62,7 +62,7 @@
         </div>
 
         <div v-if="isUpdateMessage" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.udpated_a_message_called }}
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
@@ -71,7 +71,7 @@
         </div>
 
         <div v-if="isDeleteMessage" class="text-left" style="padding-top:2px;">
-            <div>
+            <div class="ellipsis-90">
                 <strong>{{activity.user_name}}</strong> {{ i18n.deleted_a_message_called }}
                 <span>{{activity.activity}}</span>
             </div>
