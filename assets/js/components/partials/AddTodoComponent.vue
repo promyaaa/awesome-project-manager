@@ -1,9 +1,14 @@
 <template>
     <div>
-        <a href="#"
-                @click.prevent="showTodoForm(sindex, list)"
-                v-if="sectionIndex !== sindex"
-                style="margin-left: 50px;">+ {{ i18n.add_new_todo }}</a>
+        <div class="row">
+            <div class="col-12">
+                <a href="#"
+                    @click.prevent="showTodoForm(sindex, list)"
+                    v-if="sectionIndex !== sindex"
+                    style="margin-left: 63px;">+ {{ i18n.add_new_todo }}</a>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
