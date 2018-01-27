@@ -1,7 +1,3 @@
-# .babelrc
-package.json
-webpack.config.js
-
 requirement.txt
 assets/.DS_Store
 assets/js/build.js
