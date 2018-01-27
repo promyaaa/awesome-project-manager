@@ -7,10 +7,10 @@ window.wpmedia = wp.media;
 // Tooltip directive
 Vue.directive('tooltip', {
     bind: function( el, binding, vnode ) {
-        $(el).tooltip('show');
+        jQuery(el).tooltip('show');
     },
     unbind: function( el, binding, vnode ) {
-        $(el).tooltip('destroy');
+        jQuery(el).tooltip('destroy');
     }
 });
 
