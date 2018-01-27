@@ -41,7 +41,7 @@
 
                         <div v-if="messageObject.files.length > 0">
                             <div v-for="file in messageObject.files" class="image-common">
-                                <img :src="file.url" alt="" class="image-resize">
+                                <a :href="file.url" target="_blank"><img :src="file.url" alt="" class="image-resize"></a>
                             </div>
                         </div>
                     </div>
@@ -56,9 +56,10 @@
 <style>
     .image-common {
         padding:10px;
-        border: 1px solid #eee;
         margin-bottom:20px;
         text-align:center;
+        padding-left: 30px;
+        box-sizing: border-box;
     }
     .image-resize {
         max-width:100%;
@@ -69,7 +70,7 @@
     }
     .message-desc {
         padding-left: 30px;
-        border-left: 3px solid #fafafa;
+        border-left: 3px solid #eaeaea;
     }
     .message-by {
         margin-top: -40px;

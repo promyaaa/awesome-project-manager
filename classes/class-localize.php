@@ -204,6 +204,7 @@ class FusionPM_Localize {
             'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
             'edit'                 => __( 'Edit', 'fusion-pm' ),
             'delete'               => __( 'Delete', 'fusion-pm' ),
+            'cancel'                    => __( 'Cancel', 'fusion-pm' ),
             'update'               => __( 'Update', 'fusion-pm' ),
             'add_files'            => __( 'Add files', 'fusion-pm' ),
             'comment_label'            => __( 'Comments', 'fusion-pm' ),
@@ -228,6 +229,7 @@ class FusionPM_Localize {
             'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
             'edit'                      => __( 'Edit', 'fusion-pm' ),
             'delete'                    => __( 'Delete', 'fusion-pm' ),
+            'cancel'                    => __( 'Cancel', 'fusion-pm' ),
             'update'                    => __( 'Update', 'fusion-pm' ),
             'add_files'                 => __( 'Add files', 'fusion-pm' ),
         );
@@ -249,6 +251,7 @@ class FusionPM_Localize {
             'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
             'edit'                      => __( 'Edit', 'fusion-pm' ),
             'delete'                    => __( 'Delete', 'fusion-pm' ),
+            'cancel'                    => __( 'Cancel', 'fusion-pm' ),
             'update'                    => __( 'Update', 'fusion-pm' ),
             'add_files'                 => __( 'Add files', 'fusion-pm' ),
         );

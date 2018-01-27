@@ -54,16 +54,17 @@
                             <a>{{ i18n.todos }}</a>
                         </router-link>
                         <hr>
-                        <div style="position: absolute;" class="text-left">
+                        <div style="" class="text-left">
                             <div v-for="list in listSummary">
                                 <h4>{{list.list_title}}</h4>
                                 <ul>
                                     <li v-for="todo in list.todos">
-                                        <span class="checkbox-style"></span>{{todo.todo}}
+                                        <span class="checkbox-style ellipsis-90"></span>{{todo.todo}}
                                     </li>
                                 </ul>
                             </div>
                         </div>
+                        <span class="preview-fade"></span>
                     </div>
                 </div>
                 <div class="col-5">
@@ -72,14 +73,15 @@
                             <a>{{ i18n.message_board }}</a>
                         </router-link>
                         <hr>
-                        <div style="position: absolute;" class="text-left">
-                            <div v-for="messageObj in messages">
-                                <div>
-                                    <img class="small-round-image" :src="messageObj.avatar_url" alt="" width="20" height="20" style="float:left;margin-right:10px;">
-                                    <strong>{{messageObj.message_title}}</strong>
-                                </div><br>
+                        <div style="position: absolute;margin-top:10px;" class="text-left">
+                            <div v-for="messageObj in messages" class="messages">
+                                <div class="message-list">
+                                    <img class="small-round-image" :src="messageObj.avatar_url" alt="" width="20" height="20" style="float:left;margin-right:10px; width:7%;">
+                                    <div style="float:left; width:82%">{{messageObj.message_title}}</div>
+                                </div>
                             </div>
                         </div>
+                        <span class="preview-fade"></span>
                     </div>
                 </div>
             </div>
@@ -167,8 +169,8 @@
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                     } else {
-                        vm.$router.push({ 
-                            path: `/?type=todo&info=notfound` 
+                        vm.$router.push({
+                            path: `/?type=todo&info=notfound`
                         });
                     }
                 });
@@ -274,7 +276,8 @@
     }
 
     .summary-card {
-        padding: 0.7em 2em 1em;
+        position: relative;
+        padding: 10px 25px;
         border-radius: 5px;
         text-align: center;
         position: relative;
@@ -286,6 +289,16 @@
         overflow: hidden;
     }
 
+    .summary-card ul li{
+        margin-bottom: 10px;
+    }
+
+    .summary-card h3,
+    .summary-card h4 {
+        margin: 15px 0px;
+        padding: 0px;
+    }
+
     .users-summary {
         padding: 0.7em 2em 1em;
         border-radius: 3px;
@@ -295,6 +308,11 @@
     .project-info {
         position: relative;
         padding: 30px 40px 10px;
+    }
+
+    .messages .message-list {
+        overflow: hidden;
+        margin-bottom: 10px;
     }
 
     .show-edit {
