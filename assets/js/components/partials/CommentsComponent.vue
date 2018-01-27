@@ -12,7 +12,7 @@
                     <div class="commented-by">
                         -- {{ i18n.comment_by}} {{commentObject.user_name}}
                     </div>
-                    <div class="comment-action" v-if="currentUser.roles[0] === 'administrator' || currentUser.data.ID === commentObject.userID">
+                    <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
                             <a>{{i18n.edit}}</a> |
                         </span>
@@ -185,7 +185,8 @@
                     if ( resp.success ) {
                         vm.comments.push({
                             comment: vm.comment,
-                            user_name: data.user_name,
+                            user_name: vm.currentUserInfo.data.display_name,
+                            userID: vm.currentUserInfo.data.ID,
                             ID: resp.data.comment.ID,
                             avatar_url: resp.data.comment.avatar_url
                         });
