@@ -15,21 +15,21 @@
             <div class="row">
                 <div class="col-4">
                     <router-link :to="'/projects/' + $route.params.projectid + '/messages/new'" class="button button-default">
-                        +Add
+                        +{{ i18n.add_new_msg_btn }}
                     </router-link>
                 </div>
                 <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
-                    <h3>Message Board</h3>
+                    <h3>{{ i18n.message_heading }}</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="loading" v-if="loading">
-                        <p>Loading . . .</p>
+                        <p>{{ i18n.loading }}</p>
                     </div>
 
                     <div v-if="messages.length < 1 && !loading">
-                        <h4>No Message Added Yet</h4>
+                        <h4>{{ i18n.no_message_yet }}</h4>
                     </div>
                     <div v-if="messages.length > 0 && !loading">
                         <ul>
@@ -43,17 +43,17 @@
                                             <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID" tag="h3" class="ellipsis-90 link-style">
                                                 <a>{{messageObj.message_title}}</a>
                                             </router-link>
-                                            <p>posted by <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p> 
+                                            <p>{{ i18n.posted_by}} <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                        </ul>   
+                        </ul>
                     </div>
                     <br>
                     <div class="row" v-if="messages.length < messageCount">
                         <div class="col-12 text-center">
-                            <button class="button button-default" @click="loadMoreMessages">Load More...{{messageCount}}</button>
+                            <button class="button button-default" @click="loadMoreMessages">{{ i18n.load_more_btn }}{{messageCount}}</button>
                         </div>
                     </div>
                 </div>
@@ -63,35 +63,27 @@
 </template>
 
 <style>
-    /*.messages-section {
-        background-color: #fff;
-        padding: 15px;
-        border-radius: 5px;
-    }*/
+
     .project-navigation {
         text-align: center;
     }
-    /*.message-title{
-        cursor: pointer;
-        white-space: nowrap; 
-        width: 90%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }*/
+
 </style>
 
 <script>
+    import store from '../store';
+
     export default {
         components: {
-            
+
         },
 
         data() {
             return {
+                i18n: {},
                 messages: [],
                 loading: false,
                 mindex: 0,
-                // isShowMessageForm: false,
                 message: '',
                 project: {},
                 messageTitle: '',
@@ -103,8 +95,7 @@
         methods: {
             fetchProjectInfo: function() {
                 var vm = this;
-                // vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-project',
                     project_id: vm.$route.params.projectid,
@@ -159,7 +150,7 @@
             fetchMessages: function() {
                 var vm = this;
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-messages',
                     project_id: vm.$route.params.projectid,
@@ -212,6 +203,11 @@
 
         created() {
             var vm = this;
+
+            store.setLocalization( 'fpm-get-messages-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
             vm.fetchProjectInfo();
             vm.fetchMessages();
         },

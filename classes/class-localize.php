@@ -17,6 +17,10 @@ class FusionPM_Localize {
         add_action( 'wp_ajax_fpm-get-summary-local-data', array( $this, 'summary_localoze_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-todo-lists-local-data', array( $this, 'todolists_localoze_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-messages-local-data', array( $this, 'messages_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-message-local-data', array( $this, 'single_messages_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-new-message-local-data', array( $this, 'new_messages_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-edit-message-local-data', array( $this, 'edit_messages_localoze_data' ), 10 );
     }
 
     /* class common methods */
@@ -158,6 +162,95 @@ class FusionPM_Localize {
             'comment_label'            => __( 'Comments', 'fusion-pm' ),
             'comment_by'            => __( 'commented by', 'fusion-pm' ),
             'add_comment'            => __( 'Add Comment', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get messages_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function messages_localoze_data() {
+        $localize_data = array(
+            'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
+            'message_heading'      => __( 'Message Board', 'fusion-pm' ),
+            'no_message_yet'      => __( 'No Message Added Yet', 'fusion-pm' ),
+            'posted_by'      => __( 'posted by', 'fusion-pm' ),
+            'loading'              => __( 'Loading ...', 'fusion-pm' ),
+            'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get single_messages_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function single_messages_localoze_data() {
+        $localize_data = array(
+            'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
+            'message_heading'      => __( 'Message Board', 'fusion-pm' ),
+            'no_message_yet'      => __( 'No Message Added Yet', 'fusion-pm' ),
+            'posted_by'      => __( 'posted by', 'fusion-pm' ),
+            'loading'              => __( 'Loading ...', 'fusion-pm' ),
+            'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
+            'edit'                 => __( 'Edit', 'fusion-pm' ),
+            'delete'               => __( 'Delete', 'fusion-pm' ),
+            'update'               => __( 'Update', 'fusion-pm' ),
+            'add_files'            => __( 'Add files', 'fusion-pm' ),
+            'comment_label'            => __( 'Comments', 'fusion-pm' ),
+            'comment_by'            => __( 'commented by', 'fusion-pm' ),
+            'add_comment'            => __( 'Add Comment', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get new_messages_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function new_messages_localoze_data() {
+        $localize_data = array(
+            'message_label'             => __( 'Messages', 'fusion-pm' ),
+            'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
+            'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
+            'edit'                      => __( 'Edit', 'fusion-pm' ),
+            'delete'                    => __( 'Delete', 'fusion-pm' ),
+            'update'                    => __( 'Update', 'fusion-pm' ),
+            'add_files'                 => __( 'Add files', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get edit_messages_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function edit_messages_localoze_data() {
+        $localize_data = array(
+            'message_label'             => __( 'Messages', 'fusion-pm' ),
+            'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
+            'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
+            'edit'                      => __( 'Edit', 'fusion-pm' ),
+            'delete'                    => __( 'Delete', 'fusion-pm' ),
+            'update'                    => __( 'Update', 'fusion-pm' ),
+            'add_files'                 => __( 'Add files', 'fusion-pm' ),
         );
 
         wp_send_json_success( $localize_data );

@@ -3,14 +3,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <router-link :to="'/projects/' + $route.params.projectid" tag="span" class="link-style">
-                        <a>{{messageObject.project_title}}</a> >
+                    <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
+                        <a>{{messageObject.project_title}}</a>
                     </router-link>
-                    <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style" tag="span">
-                        <a>Message Board</a> >
+                    <router-link :to="'/projects/' + $route.params.projectid + '/messages/'" class="link-style inline-block" tag="h4">
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{ i18n.message_label }}</a>
                     </router-link>
-                    <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid" tag="span" class="link-style">
-                        <a>{{messageObject.message_title}}</a> > Edit Message
+
+                    <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid" class="link-style inline-block" tag="h4">
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{messageObject.message_title}} </a>
                     </router-link>
                 </div>
             </div>
@@ -19,26 +20,27 @@
                     <div>
                         <div class="add_form_style">
                             <div>
-                                <input type="text" 
+                                <input type="text"
                                        v-model="messageTitle"
                                        class="form-control"
                                        v-focus
-                                       placeholder="add message title">
+                                       required
+                                       :placeholder="i18n.message_title_placeholder">
                             </div>
                             <div>
                                 <vue-editor v-model="message" :editorToolbar="customToolbar"></vue-editor>
                             </div>
                             <br>
-                            <file-upload 
-                                v-on:attach="updateAttachments" 
-                                v-on:remove="removeAttachment" 
+                            <file-upload
+                                :i18n="i18n"
+                                v-on:attach="updateAttachments"
+                                v-on:remove="removeAttachment"
                                 :attachments="attachments"></file-upload>
                             <br>
                             <div class="action">
-                                <button class="button button-primary" 
+                                <button class="button button-primary"
                                         @click.prevent="updateMessage"
-                                        >update</button>
-                                <!-- <button class="button button-default" @click="toggleMessageForm">Cancel</button> -->
+                                        >{{ i18n.update }}</button>
                             </div>
                         </div>
                     </div>
@@ -67,6 +69,7 @@
 </style>
 
 <script>
+    import store from '../../store';
     import { VueEditor } from 'vue2-editor'
     import FileUpload from './FileUploadComponent.vue';
     export default {
@@ -84,8 +87,7 @@
 
         data() {
             return {
-                // messages: [],
-                // loading: false,
+                i18n:{},
                 mindex: 0,
                 isShowMessageForm: false,
                 message: '',
@@ -117,7 +119,7 @@
                 this.attachments.splice(index, 1);
                 this.attachmentIDs.splice(index, 1);
             },
-            
+
             toggleMessageForm: function() {
                 var vm = this;
 
@@ -130,7 +132,7 @@
                 var vm = this,
                     messageKey;
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-message-details',
                     project_id: vm.$route.params.projectid,
@@ -169,65 +171,19 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     console.log(resp);
                     if ( resp.success ) {
-
-                        // messageID = resp.data.messageInfo.ID;
-                        // projectID = data.project_id;
                         vm.$router.push({ path: `/projects/${projectID}/messages/${messageID}` })
-                        // resp.data.messageInfo.message = vm.message;
-                        // vm.messages.unshift(resp.data.messageInfo);
-                        // vm.message = '';
-                        // vm.messageTitle = '';
-                    } else {
-                        // vm.message = resp.data;
                     }
                 });
-            },
-
-            // fetchProjectInfo: function() {
-            //     var vm = this;
-                
-            //     var data = {
-            //         action: 'fpm-get-project',
-            //         project_id: vm.$route.params.projectid,
-            //         nonce: fpm.nonce,
-            //     };
-
-            //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-            //         vm.loading = false;
-            //         console.log(resp);
-            //         if ( resp.success ) {
-            //             vm.project = resp.data[0];
-            //         }
-            //     });
-            // },
+            }
         },
 
         created() {
+            var vm = this;
+            store.setLocalization( 'fpm-get-edit-message-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
             this.fetchMessage();
-            // var project_id,
-            //     message_id,
-            //     messageKey,
-            //     vm = this,
-            //     messageObject;
-
-            // vm.$nextTick(() => {
-            //     project_id = vm.$route.params.projectid;
-            //     message_id = vm.$route.params.messageid;
-
-            //     messageKey = 'm' + message_id + '-p' + project_id;
-            //     messageObject = JSON.parse(localStorage.getItem(messageKey));
-
-            //     vm.messageObj = messageObject;
-
-            //     vm.messageTitle = messageObject.message_title;
-            //     vm.message = messageObject.message;
-            //     vm.attachments = messageObject.files;
-            //     vm.attachmentIDs = messageObject.attachmentIDs;
-            // });
-        },
-
-        mounted() {
-
         }
     }
 </script>

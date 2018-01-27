@@ -6,40 +6,39 @@
                     <a>{{messageObject.project_title}}</a>
                 </router-link>
                 <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style inline-block" tag="h4">
-                    <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>Message Board</a>
+                    <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{ i18n.message_heading }}</a>
                 </router-link>
             </div>
         </div>
         <div class="row lists">
             <div class="col-12">
-                <!-- <h3>Message</h3> -->
                 <div class="loading" v-if="loading">
-                    <p>Loading . . .</p>
+                    <p>{{ i18n.loading }}</p>
                 </div>
 
                 <div v-if="messageObject">
                     <div v-if="isShowEdit">
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'" class="button button-default">
-                            Edit
+                            {{ i18n.edit }}
                         </router-link>
                         <span style="float:right" @click="deleteMessage(messageObject)">
-                            <a style="color: #d54e21;cursor:pointer;">Delete</a>
-                        </span> 
+                            <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
+                        </span>
                     </div>
                     <br>
                     <div class="message-content">
                         <div class="text-center message-by">
                             <img :src="messageObject.avatar_url" class="small-round-image" alt="">
                             <p>
-                                <i>posted by <strong>{{messageObject.user_name}}</strong>
+                                <i>{{ i18n.posted_by }} <strong>{{messageObject.user_name}}</strong>
                                 at {{messageObject.formatted_created}}</i>
                             </p>
                         </div>
-                        
+
                         <h1><strong>{{messageObject.message_title}}</strong></h1>
-                        
+
                         <div class="message-desc" v-html="messageObject.message"></div>
-                        
+
                         <div v-if="messageObject.files.length > 0">
                             <div v-for="file in messageObject.files" class="image-common">
                                 <img :src="file.url" alt="" class="image-resize">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
                 <br>
-                <comments :comments="messageObject.comments" type="message"></comments>
+                <comments :i18n="i18n" :comments="messageObject.comments" type="message"></comments>
             </div>
         </div>
     </div>
@@ -70,6 +69,7 @@
     }
     .message-desc {
         padding-left: 30px;
+        border-left: 3px solid #fafafa;
     }
     .message-by {
         margin-top: -40px;
@@ -86,6 +86,7 @@
         },
         data() {
             return {
+                i18n: {},
                 loading: false,
                 localString: '',
                 messageObject: ''
@@ -94,7 +95,7 @@
         computed: {
             isShowEdit: function() {
                 var vm = this;
-                return (vm.currentUser.roles[0] === 'administrator') || 
+                return (vm.currentUser.roles[0] === 'administrator') ||
                         (vm.currentUser.data.ID === vm.messageObject.userID);
             }
         },
@@ -110,7 +111,7 @@
             //         height: srcHeight * ratio,
             //     };
             // },
-            
+
             somethingCool: function() { // @click.native test method
                 var vm = this,
                     messageKey;
@@ -122,7 +123,7 @@
                 var vm = this,
                     projectID = vm.$route.params.projectid;
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-message-details',
                     project_id: vm.$route.params.projectid,
@@ -136,8 +137,8 @@
                     if ( resp.success ) {
                         vm.messageObject = resp.data[0];
                     } else {
-                        vm.$router.push({ 
-                            path: `/?type=message&info=notfound` 
+                        vm.$router.push({
+                            path: `/?type=message&info=notfound`
                         });
                     }
                 });
@@ -187,16 +188,16 @@
                             user_id: messageObj.userID,
                             message_title: messageObj.message_title
                         };
-                        
+
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            
-                            vm.$router.push({ 
-                                path: `/projects/${projectID}/messages` 
+
+                            vm.$router.push({
+                                path: `/projects/${projectID}/messages`
                             });
 
                         } else {
-                            
+
                         }
                     });
                 }
@@ -205,6 +206,10 @@
 
         created() {
             var vm = this;
+            store.setLocalization( 'fpm-get-single-message-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
             vm.fetchMessage();
             vm.currentUser = fpm.currentUserInfo;
             store.getLocalizeString().then(function(resp){

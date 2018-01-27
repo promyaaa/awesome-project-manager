@@ -12,7 +12,7 @@
                     <div class="commented-by">
                         -- {{ i18n.comment_by}} {{commentObject.user_name}}
                     </div>
-                    <div class="comment-action">
+                    <div class="comment-action" v-if="currentUser.roles[0] === 'administrator' || currentUser.data.ID === commentObject.userID">
                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
                             <a>{{i18n.edit}}</a> |
                         </span>
