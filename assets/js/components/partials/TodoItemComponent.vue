@@ -4,76 +4,72 @@
         <div class="row" v-if="editindex !== tindex">
             <div class="col-1 text-right">
                 <div style="margin-bottom: 6px;">
-                    <input type="checkbox" 
-                        @click="toggleCheckbox(todo, tindex)" 
+                    <input type="checkbox"
+                        @click="toggleCheckbox(todo, tindex)"
                         v-model="todo.is_complete"
                         v-bind:true-value="1"
                         v-bind:false-value="0">
                 </div>
             </div>
-            <!-- <pre>
-                {{todo}}
-            </pre> -->
+
             <div class="col-9">
                 <div class="todo-item">
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span" :class="{ completed: is_complete }">
                         {{todo.todo}}
                         <span v-if="todo.formatted_due_date">
-                            , <i class="fa fa-calendar" aria-hidden="true"></i> {{todo.formatted_due_date}}
+                            | <i class="fa fa-calendar" aria-hidden="true"></i> {{todo.formatted_due_date}}
                         </span>
                         <span v-if="todo.assignee_name">
-                            , <i class="fa fa-user" aria-hidden="true"></i> {{todo.assignee_name}}
+                            | <i class="fa fa-user" aria-hidden="true"></i> {{todo.assignee_name}}
                         </span>
                         <span v-if="fileCount > 0">
-                            , <i class="fa fa-file" aria-hidden="true"></i>
+                            | <i class="fa fa-file" aria-hidden="true"></i>
                         </span>
                     </router-link>
                 </div>
             </div>
             <div class="col-2">
                 <div class="actions text-center" v-if="isShowEdit">
-                    <span @click="showEditForm( todo, tindex )">
+                    <span @click="showEditForm( todo, tindex )" v-tooltip :title="i18n.edit">
                         <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </span>
-                    <span class="trash" @click="deleteTodo(todo, tindex)">| 
+                    <span class="trash" @click="deleteTodo(todo, tindex)" v-tooltip :title="i18n.delete">|
                         <a style="color: #D54E21;cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
-                </div> 
+                </div>
             </div>
         </div>
-        <!-- <pre>
-            {{todo}}
-        </pre> -->
+
         <div class="row" v-if="editindex === tindex">
             <div class="col-1"></div>
             <div class="col-10">
                 <div class="add_form_style">
-                    
+
                     <div class="todo_name inline">
-                        <input type="text" 
-                            name="todo_text" 
-                            v-model="todoName" 
-                            class="form-control" 
-                            placeholder="add todo . . ." 
+                        <input type="text"
+                            name="todo_text"
+                            v-model="todoName"
+                            class="form-control"
+                            :placeholder="i18n.add_todo_placeholder"
                             v-focus
+                            required
                             @keyup.esc="hideTodoForm">
-                        <span class="form-note"><i>*required field</i></span>
                     </div>
                     <div>
                         <select v-model="selected" class="form-control">
-                            <option disabled value="">select user</option>
+                            <option disabled value="">{{ i18n.select_user }}</option>
                             <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
-                            {{ option.display_name }}
+                                {{ option.display_name }}
                             </option>
                         </select>
                     </div>
                     <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
-            
+
                     <div class="inline">
-                        <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo(todo)" name="add_todo" class="button button-primary" value="Update">
-                        <input style="vertical-align: middle;" type="submit" @click.prevent="cancelEdit" class="button button-default" value="Cancel">
+                        <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo(todo)" name="add_todo" class="button button-primary" :value="i18n.update">
+                        <input style="vertical-align: middle;" type="submit" @click.prevent="cancelEdit" class="button button-default" :value="i18n.cancel">
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -81,10 +77,6 @@
 </template>
 
 <style>
-    .todo-item {
-        /*margin-bottom: 8px;*/
-        /*line-height: 124%;*/
-    }
     .completed {
         text-decoration: line-through;
         font-style: italic;
@@ -96,7 +88,7 @@
     import DatePicker from './DatePickerComponent.vue';
     import store from '../../store';
     export default {
-        props: ['todo', 'tindex', 'list'],
+        props: ['todo', 'tindex', 'list', 'i18n' ],
         components: {
             DatePicker
         },
@@ -121,7 +113,7 @@
         computed: {
             isShowEdit: function() {
                 var vm = this;
-                return (vm.currentUser.roles[0] === 'administrator' && !vm.is_complete) || 
+                return (vm.currentUser.roles[0] === 'administrator' && !vm.is_complete) ||
                         (!vm.is_complete && (vm.currentUser.data.ID === vm.todo.userID));
             }
         },
@@ -130,7 +122,7 @@
                 this.todoName = todoObj.todo;
                 this.updateDueDate = todoObj.due_date;
                 this.selected = {
-                    ID: todoObj.assigneeID, assignee: todoObj.assignee_name 
+                    ID: todoObj.assigneeID, assignee: todoObj.assignee_name
                 }
                 this.editindex = index;
             },
@@ -165,7 +157,7 @@
                         todoObject.formatted_due_date = resp.data.todo.formatted_duedate;
                         todoObject.assigneeID = vm.selected.ID;
                         todoObject.assignee_name = vm.selected.assignee;
-                        
+
                         vm.todoName = '';
                         vm.editindex = -1;
                     } else {
@@ -173,7 +165,7 @@
                     }
                 });
             },
-            
+
             toggleCheckbox: function( todo, tindex ) {
                 var self = this,
                     data = {
@@ -222,14 +214,14 @@
                             todo: todo.todo,
                             project_id: todo.projectID
                         };
-                        
+
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            
+
                             self.list.todos.splice( tindex, 1 );
 
                         } else {
-                            
+
                         }
                     });
                 }
@@ -237,7 +229,7 @@
         },
 
         mounted() {
-            
+
         },
 
         created() {
@@ -253,7 +245,7 @@
 
             key = projectid + '-users';
             vm.users = JSON.parse(localStorage.getItem(key));
-            
+
             if (!vm.users) {
 
                 localStorage.setItem('pid', projectid);

@@ -12,6 +12,11 @@ class FusionPM_Localize {
     */
     public function __construct() {
         add_action( 'wp_ajax_fpm-get-local-data', array( $this, 'get_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-home-local-data', array( $this, 'home_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-myassignment-local-data', array( $this, 'myassignment_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-summary-local-data', array( $this, 'summary_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-todo-lists-local-data', array( $this, 'todolists_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_localoze_data' ), 10 );
     }
 
     /* class common methods */
@@ -26,12 +31,144 @@ class FusionPM_Localize {
         return $instance;
     }
 
-    /* Ajax Callbacks */
+    /**
+     * Get home localize data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function home_localoze_data() {
+        $localize_data = array(
+            'my_assignments'                  => __( 'My Assignments', 'fusion-pm' ),
+            'projects'                        => __( 'Projects', 'fusion-pm' ),
+            'add_new_project'                 => __( 'Add New Project', 'fusion-pm' ),
+            'no_prject_found_message'         => __( 'No Project added yet. Hit the +Add button to add one.', 'fusion-pm' ),
+            'project_title_placeholder'       => __( 'Enter your project title ...', 'fusion-pm' ),
+            'project_description_placeholder' => __( 'Write some details about your project ...', 'fusion-pm' ),
+            'create_project_label'            => __( 'Create Project', 'fusion-pm' ),
+            'cancel_project_label'            => __( 'Cancel', 'fusion-pm' ),
+            'loading'                         => __( 'Loading ...', 'fusion-pm' ),
+            'load_more'                         => __( 'Load More...', 'fusion-pm' ),
+        );
 
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get myassignment_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function myassignment_localoze_data() {
+        $localize_data = array(
+            'my_assignments' => __( 'My Assignments', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get myassignment_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function summary_localoze_data() {
+        $localize_data = array(
+            'edit_info'                => __( 'Edit info', 'fusion-pm' ),
+            'delete'                   => __( 'Delete', 'fusion-pm' ),
+            'people'                   => __( 'People', 'fusion-pm' ),
+            'add_remove_people'        => __( 'Add/Remove People...', 'fusion-pm' ),
+            'todos'                    => __( 'To-dos', 'fusion-pm' ),
+            'message_board'            => __( 'Message Board', 'fusion-pm' ),
+            'project_activity'         => __( 'Project Activity', 'fusion-pm' ),
+            'create_a_todo'            => __( 'created a Todo', 'fusion-pm' ),
+            'updated_a_todo'           => __( 'updated a Todo', 'fusion-pm' ),
+            'deleted_a_todo'           => __( 'deleted a Todo', 'fusion-pm' ),
+            'deleted_a_todo'           => __( 'deleted a Todo', 'fusion-pm' ),
+            'checked_off_todo'         => __( 'checked off a Todo', 'fusion-pm' ),
+            'reopen_a_todo'            => __( 're-open a Todo', 'fusion-pm' ),
+            'created_a_message_called' => __( 'created a Message, called', 'fusion-pm' ),
+            'udpated_a_message_called' => __( 'updated a Message, called', 'fusion-pm' ),
+            'deleted_a_message_called' => __( 'deleted a Message, called', 'fusion-pm' ),
+            'no_activity_yet'          => __( 'No activiy yet.', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get todolists_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function todolists_localoze_data() {
+        $localize_data = array(
+            'make_list_btn'         => __( 'Make List', 'fusion-pm' ),
+            'todos'                 => __( 'To-Dos', 'fusion-pm' ),
+            'name_list_placeholder' => __( 'Enter the name of the list...', 'fusion-pm' ),
+            'create_list'           => __( 'Create List', 'fusion-pm' ),
+            'cancel'                => __( 'Cancel', 'fusion-pm' ),
+            'loading'               => __( 'Loading ...', 'fusion-pm' ),
+            'no_list_added_yet'     => __( 'No Lists Added Yet', 'fusion-pm' ),
+            'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
+            'edit'                  => __( 'Edit', 'fusion-pm' ),
+            'delete'                => __( 'Delete', 'fusion-pm' ),
+            'update'           => __( 'Update', 'fusion-pm' ),
+            'add_new_todo'           => __( 'Add New Todo', 'fusion-pm' ),
+            'add_todo'           => __( 'Add todo', 'fusion-pm' ),
+            'add_todo_placeholder'           => __( 'Enter your todo...', 'fusion-pm' ),
+            'select_user'           => __( '--select user--', 'fusion-pm' ),
+            'add_files'           => __( 'Add files', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * Get single_todo_localoze_data
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function single_todo_localoze_data() {
+        $localize_data = array(
+            'assign_to_label'      => __( 'Assigned To :', 'fusion-pm' ),
+            'due_date_label'       => __( 'Due Date :', 'fusion-pm' ),
+            'attachment_label'     => __( 'Attachments :', 'fusion-pm' ),
+            'added_by'             => __( 'Added by', 'fusion-pm' ),
+            'on'                   => __( 'on', 'fusion-pm' ),
+            'todos'                => __( 'To-Dos', 'fusion-pm' ),
+            'cancel'               => __( 'Cancel', 'fusion-pm' ),
+            'loading'              => __( 'Loading ...', 'fusion-pm' ),
+            'edit'                 => __( 'Edit', 'fusion-pm' ),
+            'delete'               => __( 'Delete', 'fusion-pm' ),
+            'update'               => __( 'Update', 'fusion-pm' ),
+            'add_todo'             => __( 'Add todo', 'fusion-pm' ),
+            'add_todo_placeholder' => __( 'Enter your todo...', 'fusion-pm' ),
+            'select_user'          => __( '--select user--', 'fusion-pm' ),
+            'add_files'            => __( 'Add files', 'fusion-pm' ),
+            'comment_label'            => __( 'Comments', 'fusion-pm' ),
+            'comment_by'            => __( 'commented by', 'fusion-pm' ),
+            'add_comment'            => __( 'Add Comment', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    /**
+     * [get_localize_data description]
+     *
+     * @return html
+     */
     public function get_localize_data() {
-        // if ( $this->is_nonce_verified() ) {
-        //     wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
-        // }
         wp_send_json_success(
             array(
                 'actions' => array(
@@ -45,6 +182,6 @@ class FusionPM_Localize {
             )
         );
     }
-    
+
 }
 

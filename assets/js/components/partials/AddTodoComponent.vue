@@ -3,7 +3,7 @@
         <a href="#"
                 @click.prevent="showTodoForm(sindex, list)"
                 v-if="sectionIndex !== sindex"
-                style="margin-left: 50px;">+ add todo</a>
+                style="margin-left: 50px;">+ {{ i18n.add_new_todo }}</a>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
@@ -13,16 +13,16 @@
                             <input type="text"
                                 v-model="todoName"
                                 class="form-control"
-                                placeholder="add todo . . ."
+                                :placeholder="i18n.add_todo_placeholder"
                                 v-focus
+                                required
                                 @keyup.esc="hideTodoForm">
-                            <span class="form-note"><i>*required field</i></span>
                         </div>
                         <div>
                             <select v-model="selected" class="form-control">
-                                <option disabled value="">select user</option>
+                                <option disabled value="">{{ i18n.select_user }}</option>
                                 <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
-                                {{ option.display_name }}
+                                    {{ option.display_name }}
                                 </option>
                             </select>
                         </div>
@@ -30,16 +30,16 @@
                             <date-picker id="add-duedate" v-model="todoDueDate"></date-picker>
                         </div>
                         <file-upload
+                            :i18n="i18n"
                             v-on:attach="updateAttachments"
                             v-on:remove="removeAttachment"
                             :attachments="attachments"></file-upload>
                         <br>
 
                         <div class="inline">
-                            <input style="vertical-align: middle;" type="submit" @click.prevent="createTodo" name="add_todo" class="button button-primary" value="Add Todo">
-                            <input style="vertical-align: middle;" type="submit" @click.prevent="hideTodoForm" class="button button-default" value="Cancel">
+                            <input style="vertical-align: middle;" type="submit" @click.prevent="createTodo" name="add_todo" class="button button-primary" :value="i18n.add_todo">
+                            <input style="vertical-align: middle;" type="submit" @click.prevent="hideTodoForm" class="button button-default" :value="i18n.cancel">
                         </div>
-
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
     import FileUpload from './FileUploadComponent.vue';
     import DatePicker from './DatePickerComponent.vue';
     export default {
-        props: [ 'sindex', 'list' ],
+        props: [ 'sindex', 'list', 'i18n' ],
 
         components: {
             FileUpload,
@@ -121,7 +121,7 @@
                         attachments: vm.attachmentIDs,
                         due_date: vm.todoDueDate
                     };
-                    
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         todo = resp.data.todo;

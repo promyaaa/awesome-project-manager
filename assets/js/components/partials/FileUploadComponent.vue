@@ -8,8 +8,8 @@
         </div>
         <br>
         <button
-            class="button button-default" 
-            @click="fileUpload">+add files</button>
+            class="button button-default"
+            @click="fileUpload">+ {{ i18n.add_files }}</button>
     </div>
 </template>
 
@@ -26,9 +26,9 @@
 <script>
     export default {
         components: {
-            
+
         },
-        props: ['attachments'],
+        props: ['attachments', 'i18n'],
         methods: {
             removeAttachment: function(index) {
                 this.$emit('remove', index);
@@ -73,4 +73,3 @@
         }
     }
 </script>
-    

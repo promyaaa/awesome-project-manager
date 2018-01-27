@@ -3,10 +3,10 @@
         <li>
             <div v-if="isSingle">
                 <div v-if="!isListEdit && isShowEdit" style="margin-top: -10px">
-                    <button class="button button-default" 
-                            @click="showListEditForm( list )">Edit</button>
+                    <button class="button button-default"
+                            @click="showListEditForm( list )">{{ i18n.edit }}</button>
                     <span style="float:right" @click="deleteList(list)">
-                        <a style="color: #d54e21;cursor:pointer;">Delete</a>
+                        <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
                     </span>
                 </div>
                 <div class="row">
@@ -14,20 +14,20 @@
                         <h3 v-if="!isListEdit" style="padding-left: 4%;padding-top:2%">{{list.list_title}}</h3>
                         <div v-if="isListEdit" class="add_form_style">
                             <div>
-                                <input type="text" 
-                                    name="list_title" 
-                                    v-model="listTitle" 
-                                    class="form-control" 
-                                    placeholder="Name this list . . ." 
-                                    @keyup.enter="updateList(list)" 
+                                <input type="text"
+                                    name="list_title"
+                                    v-model="listTitle"
+                                    class="form-control"
+                                    :placeholder="i18n.name_list_placeholder"
+                                    @keyup.enter="updateList(list)"
                                     @keyup.esc="cancelListEdit"
                                     v-focus>
                             </div>
                             <div class="action">
-                                <button class="button button-primary" 
+                                <button class="button button-primary"
                                         @click.prevent="updateList"
-                                        >Update</button>
-                                <button class="button button-default" @click="cancelListEdit">Cancel</button>
+                                        >{{ i18n.udpate_list }}</button>
+                                <button class="button button-default" @click="cancelListEdit">{{ i18n.cancel }}</button>
                             </div>
                         </div>
                     </div>
@@ -38,11 +38,11 @@
                     <a>{{list.list_title}}</a>
                 </router-link>
             </div>
-            
+
             <ul v-if="list.todos.length > 0">
-                <todo-item v-for="(todo, tindex) in list.todos" :todo="todo" :tindex="tindex" :list="list" :key="todo.ID"></todo-item>
+                <todo-item :i18n="i18n" v-for="(todo, tindex) in list.todos" :todo="todo" :tindex="tindex" :list="list" :key="todo.ID"></todo-item>
             </ul>
-            <add-todo :sindex="sindex" :list="list"></add-todo>
+            <add-todo :i18n="i18n" :sindex="sindex" :list="list"></add-todo>
             <br>
             <div class="row" v-if="isSingle">
                 <div class="col-12">
@@ -51,7 +51,7 @@
             </div>
         </li>
     </div>
-    
+
 </template>
 
 <style>
@@ -68,7 +68,7 @@
             'todo-item': TodoItem,
             'add-todo': AddTodo
         },
-        props: ['isSingle', 'list', 'sindex', 'users'],
+        props: ['isSingle', 'list', 'sindex', 'users', 'i18n'],
         data() {
             return {
                 isListEdit: false,
@@ -80,7 +80,7 @@
         computed: {
             isShowEdit: function() {
                 var vm = this;
-                return (vm.currentUser.roles[0] === 'administrator') || 
+                return (vm.currentUser.roles[0] === 'administrator') ||
                         (vm.currentUser.data.ID === vm.list.userID);
             }
         },
@@ -116,7 +116,7 @@
                     list_id: vm.$route.params.listid,
                     user_name: vm.currentUser.data.display_name
                 };
-                
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         vm.list.list_title = vm.listTitle;
@@ -136,16 +136,16 @@
                             nonce : fpm.nonce,
                             list_id: listObj.ID
                         };
-                        
+
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            
-                            vm.$router.push({ 
-                                path: `/projects/${projectID}/todolists` 
+
+                            vm.$router.push({
+                                path: `/projects/${projectID}/todolists`
                             });
 
                         } else {
-                            
+
                         }
                     });
                 }

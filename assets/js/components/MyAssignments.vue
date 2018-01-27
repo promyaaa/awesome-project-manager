@@ -4,7 +4,7 @@
             <div class="col-2"></div>
             <div class="col-8">
                 <div class="text-center assignment-heading">
-                    <h1>My Assignments</h1>
+                    <h1>{{ i18n.my_assignments }}</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -34,24 +34,23 @@
 </style>
 
 <script>
+    import store from '../store';
     export default {
         data() {
             return {
+                i18n: {},
                 todos:[]
             }
         },
         methods: {
             fetchAssignments() {
                 var vm = this;
-                // vm.loading = true;
                 var data = {
                     action: 'fpm-get-todos',
                     nonce: fpm.nonce,
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // vm.loading = false;
-                    console.log(resp);
                     if ( resp.success ) {
                         vm.todos = resp.data;
                     }
@@ -60,6 +59,11 @@
         },
 
         created() {
+            var self = this;
+            store.setLocalization( 'fpm-get-myassignment-local-data' ).then( function( data ) {
+                self.i18n = data;
+            });
+
             this.fetchAssignments();
         }
     }

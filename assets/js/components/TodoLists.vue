@@ -14,30 +14,30 @@
         <div class="lists">
             <div class="row">
                 <div class="col-4">
-                    <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">Make List</button>
+                    <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">{{ i18n.make_list_btn }}</button>
                 </div>
                 <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
-                    <h3>To-Dos</h3>
+                    <h3>{{ i18n.todos }}</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div v-if="isShowListForm" class="add_form_style">
                         <div>
-                            <input type="text" 
-                                name="list_title" 
-                                v-model="listTitle" 
-                                class="form-control" 
-                                placeholder="Name this list . . ." 
-                                @keyup.enter="createList" 
+                            <input type="text"
+                                name="list_title"
+                                v-model="listTitle"
+                                class="form-control"
+                                :placeholder="i18n.name_list_placeholder"
+                                @keyup.enter="createList"
                                 @keyup.esc="toggleListForm"
                                 v-focus>
                         </div>
                         <div class="action">
-                            <button class="button button-primary" 
+                            <button class="button button-primary"
                                     @click.prevent="createList"
-                                    >Add</button>
-                            <button class="button button-default" @click="toggleListForm">Cancel</button>
+                                    >{{ i18n.create_list }}</button>
+                            <button class="button button-default" @click="toggleListForm">{{ i18n.cancel }}</button>
                         </div>
                     </div>
                 </div>
@@ -45,20 +45,20 @@
             <div class="row">
                 <div class="col-12">
                     <div class="loading" v-if="loading">
-                        <p>Loading . . .</p>
+                        <p>{{ i18n.loading }}</p>
                     </div>
 
                     <div v-if="lists.length < 1 && !loading">
-                        <h4>No Lists Added Yet</h4>
+                        <h4>{{ i18n.no_list_added_yet }}</h4>
                     </div>
-                    
+
                     <div v-if="lists.length > 0 && !loading">
                         <ul>
-                            <list v-for="(list, sindex) in lists" :list="list" :sindex="sindex" :key="list.ID"></list>
+                            <list :i18n="i18n" v-for="(list, sindex) in lists" :list="list" :sindex="sindex" :key="list.ID"></list>
                         </ul>
                         <div class="row" v-if="lists.length < listCount">
                             <div class="col-12 text-center">
-                                <button class="button button-default" @click="loadMoreLists">Load More...</button>
+                                <button class="button button-default" @click="loadMoreLists">{{ i18n.load_more_btn }}</button>
                             </div>
                         </div>
                     </div>
@@ -84,12 +84,14 @@
         border: 1px dotted #ccc;
         border-radius: 5px;
     }
-    
+
 
 </style>
 
 <script>
+    import store from '../store';
     import List from './partials/ListComponent.vue';
+
     export default {
         components: {
             'list': List
@@ -105,6 +107,7 @@
 
         data() {
             return {
+                i18n: {},
                 lists: [],
                 isShowListForm: false,
                 listTitle: '',
@@ -119,15 +122,12 @@
             toggleListForm: function() {
                 var vm = this;
                 vm.isShowListForm = !vm.isShowListForm;
-                // vm.$nextTick(function () {
-                //     vm.$refs.addList.focus();
-                // });
             },
 
             fetchLists: function() {
                 var vm = this;
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-lists',
                     project_id: vm.$route.params.projectid,
@@ -166,7 +166,7 @@
             fetchProjectInfo: function() {
                 var vm = this;
                 // vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-project',
                     project_id: vm.$route.params.projectid,
@@ -206,15 +206,13 @@
             }
         },
 
-        mounted() {
-            console.log('Component mounted.');
-            // this.$on('deleted', function() {
-            //     console.log('deleted');
-            // });
-        },
-
         created() {
             var vm = this;
+
+            store.setLocalization( 'fpm-get-todo-lists-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
             vm.fetchProjectInfo();
             vm.fetchLists();
             vm.currentUser = fpm.currentUserInfo;

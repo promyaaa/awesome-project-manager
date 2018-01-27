@@ -4,27 +4,27 @@
 
         <div v-if="isCreateTodo" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> created a <strong>Todo ,</strong>
+                <strong>{{activity.user_name}}</strong> {{ i18n.create_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isUpdateTodo" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> updated a <strong>Todo ,</strong>
+                <strong>{{activity.user_name}}</strong> {{ i18n.updated_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isDeleteTodo" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> deleted a <strong>Todo ,</strong>
+                <strong>{{activity.user_name}}</strong> {{ i18n.delete_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <span>{{activity.activity}}</span>
             </div>
@@ -32,47 +32,47 @@
 
         <div v-if="isCheckTodo" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> checked off a <strong>Todo ,</strong>
+                <strong>{{activity.user_name}}</strong> {{ i18n.checked_off_todo }} ,
                 <span class="checkbox-checked-style">
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isUncheckTodo" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> re-open a <strong>Todo ,</strong>
+                <strong>{{activity.user_name}}</strong> {{ i18n.reopen_a_todo }} ,
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isCreateMessage" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> created a <strong>Message ,</strong> called
+                <strong>{{activity.user_name}}</strong> {{ i18n.created_a_message_called }}
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isUpdateMessage" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> updated a <strong>Message ,</strong> called
+                <strong>{{activity.user_name}}</strong> {{ i18n.udpated_a_message_called }}
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link> 
+                </router-link>
             </div>
         </div>
 
         <div v-if="isDeleteMessage" class="text-left" style="padding-top:2px;">
             <div>
-                <strong>{{activity.user_name}}</strong> deleted a <strong>Message ,</strong> called
+                <strong>{{activity.user_name}}</strong> {{ i18n.deleted_a_message_called }}
                 <span>{{activity.activity}}</span>
             </div>
         </div>
@@ -93,12 +93,7 @@
 
 <script>
     export default {
-        props: ['activity'],
-        data() {
-            return {
-
-            }
-        },
+        props: ['activity', 'i18n'],
 
         computed: {
             isCreateTodo() {
@@ -126,13 +121,5 @@
                 return this.activity.activity_type === 'delete_message';
             }
         },
-
-        methods: {
-
-        },
-
-        created() {
-
-        }
     }
 </script>

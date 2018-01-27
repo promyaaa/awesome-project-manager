@@ -16,12 +16,8 @@
                             <div>
                                 <ul>
                                     <router-link to="/my/assignments" tag="li" class="link-style">
-                                        <a>My Assignments</a>
+                                        <a>{{ i18n.my_assignments }}</a>
                                     </router-link>
-                                    <!-- <li class="link-style"><a>My Bookmarks</a></li>
-                                    <li class="link-style"><a>My Schedule</a></li>
-                                    <li class="link-style"><a>My Drafts</a></li> -->
-                                    <!-- <li class="link-style"><a>My Recent Activity</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -30,18 +26,17 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h2 class="decorated"><span>Projects</span></h2>
+                    <h2 class="decorated"><span>{{ i18n.projects }}</span></h2>
                 </div>
                 <div class="col-6">
-                    <!-- <input type="search" class="left"> -->
                 </div>
                 <div class="col-6">
-                    <a class="button button-primary right" @click.prevent="toggleProjectForm" v-if="!isShowProjectForm">+ Add New Project</a>
+                    <a class="button button-primary right" @click.prevent="toggleProjectForm" v-if="!isShowProjectForm">+ {{ i18n.add_new_project }}</a>
                 </div>
             </div>
             <div class="row" v-if="isNoProject">
                 <div class="col-12">
-                    <p><strong>No Project added yet. Hit the '+Add' button to add one.</strong></p>
+                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>
                 </div>
             </div>
             <div class="row" v-if="isShowProjectForm">
@@ -49,12 +44,12 @@
                     <div class="add_form_style" style="margin: 5px;">
                         <form>
                             <div class='section'>
-                                <input type="text" name="project_title" v-model="projectTitle" class="form-control" placeholder="project title . . ." v-focus @keyup.esc="toggleProjectForm">
-                                <textarea class="form-control" name="project_desc" v-model="projectDesc" rows="3" placeholder="description . . ."></textarea>
+                                <input type="text" name="project_title" v-model="projectTitle" class="form-control" :placeholder="i18n.project_title_placeholder" v-focus @keyup.esc="toggleProjectForm">
+                                <textarea class="form-control" name="project_desc" v-model="projectDesc" rows="3" :placeholder="i18n.project_description_placeholder"></textarea>
                             </div>
                             <div class="action">
-                                <button class="button button-primary" @click.prevent="createProject">Add</button>
-                                <button class="button button-default" @click="toggleProjectForm">Cancel</button>
+                                <button class="button button-primary" @click.prevent="createProject">{{ i18n.create_project_label }}</button>
+                                <button class="button button-default" @click="toggleProjectForm">{{ i18n.cancel_project_label }}</button>
                             </div>
                         </form>
                     </div>
@@ -63,7 +58,7 @@
             <div class="row">
                 <div class="col-12" v-if="loading">
                     <div class="loading">
-                        <h2>Loading . . .</h2>
+                        <h2>{{ i18n.loading }}</h2>
                     </div>
                 </div>
 
@@ -74,34 +69,22 @@
                                 <a class="">{{project.project_title}}</a>
                             </div>
                         </router-link>
-                        <!-- <span class="dropdown project-settings">
-                            <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
-                                <i class="fa fa-gear" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Test 2</a></li>
-                                <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Test 1</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
-                            </ul>
-                        </span> -->
+
                         <p class="ellipsis-90">{{project.project_desc}}</p>
-                        <!-- <div > -->
+
                         <div class="user-avatars">
                             <img :src="user.avatar_url" v-for="user in project.users" class="small-round-image" width="32" height="32">
                             <span v-if="project.user_count > 5" class="more-user">
                                 <a>+{{project.user_count - 5}}</a>
                             </span>
                         </div>
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
             <br>
-            <!-- {{projects.length}}/{{projectCount}} -->
             <div class="row" v-if="projects.length < projectCount">
                 <div class="col-12 text-center">
-                    <button class="button button-default" @click="loadMoreProjects">Load More...</button>
+                    <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
                 </div>
             </div>
         </div>
@@ -153,7 +136,6 @@
         color: #afafaf;
 
     }
-
     .project h3{
         padding: 10px 15px;
         border-bottom: 1px solid #eee;
@@ -196,9 +178,11 @@
 </style>
 
 <script>
+    import store from '../store';
     export default {
         data() {
             return {
+                i18n: {},
                 projects: [],
                 isShowProjectForm: false,
                 projectTitle: '',
@@ -303,18 +287,17 @@
                         vm.projects.push(resp.data.project);
                         vm.projectTitle = '';
                         vm.projectDesc = '';
-                    } else {
-                        // vm.message = resp.data;
                     }
                 });
             }
         },
 
-        mounted() {
-            console.log('home mounted.');
-        },
-
         created() {
+            var self = this;
+            store.setLocalization( 'fpm-get-home-local-data' ).then( function( data ) {
+                self.i18n = data;
+            });
+
             this.fetchProjects();
             this.fetchProjectCount();
             this.currentUser = fpm.currentUserInfo;

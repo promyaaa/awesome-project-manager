@@ -11,11 +11,24 @@ var store = {
             };
         return new Promise((resolve) => {
             jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                // console.log(resp);
                 if ( resp.success ) {
                     resolve(resp);
                 } else {
-                    
+
+                }
+            });
+        });
+    },
+
+    setLocalization: function( action ) {
+        var self = this,
+            data = {
+                action: action
+            }
+        return new Promise((resolve) => {
+            jQuery.get( fpm.ajaxurl, data, function(resp) {
+                if ( resp.success ) {
+                    resolve(resp.data);
                 }
             });
         });
@@ -35,28 +48,11 @@ var store = {
                 if ( resp.success ) {
                     resolve(resp);
                 } else {
-                    
+
                 }
             });
         });
     },
-
-    // updateLocalUsers: function( type, index, data ) {
-    //     switch( type ) {
-    //         'create':
-    //             break;
-    //         'update':
-    //             break;
-    //         'remove':
-    //             break;
-    //     }
-    // }
-    // setLocalizeData (newValue) {
-    //     this.dataObject.localizedData = newValue;
-    // },
-    // getLocalizeData () {
-    //     return this.dataObject.localizedData;
-    // }
 }
 
 export default store;

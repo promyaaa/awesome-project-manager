@@ -8,24 +8,21 @@
                         <br>
                         <span>{{project.project_desc}}</span>
 
-                        <!-- <router-link :to="'/projects/' + $route.params.projectid + '/edit'" class="link-style edit" tag="span" v-if="isShowEdit">
-                            <a>Edit info</a>
-                        </router-link> -->
                         <span class="dropdown project-settings show-edit" v-if="isShowEdit">
                             <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
                                 <i class="fa fa-gear" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <router-link :to="'/projects/' + $route.params.projectid + '/edit'" 
-                                    class="link-style" 
+                                <router-link :to="'/projects/' + $route.params.projectid + '/edit'"
+                                    class="link-style"
                                     tag="li">
-                                    <a><i class="fa fa-edit p-r-10" aria-hidden="true"></i>Edit info</a>
+                                    <a><i class="fa fa-edit p-r-10" aria-hidden="true"></i>{{ i18n.edit_info }}</a>
                                 </router-link>
                                 <li role="separator" class="divider"></li>
-                                <router-link :to="'/projects/' + $route.params.projectid + '/status'" 
-                                    class="link-style" 
+                                <router-link :to="'/projects/' + $route.params.projectid + '/status'"
+                                    class="link-style"
                                     tag="li">
-                                    <a><i class="fa fa-trash p-r-10" aria-hidden="true"></i>Delete</a>
+                                    <a><i class="fa fa-trash p-r-10" aria-hidden="true"></i>{{ i18n.delete }}</a>
                                 </router-link>
                             </ul>
                         </span>
@@ -37,12 +34,12 @@
                             <img :src="user.avatar_url" v-for="user in users" alt="" class="small-round-image">
                         </div>
                         <div v-if="project.user_count > 10" style="display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;">
-                            <a>+{{project.user_count - 10}} people</a>
+                            <a>+{{project.user_count - 10}} {{ i18n.people }}</a>
                         </div>
 
                         <div style="margin-top: 15px;">
                             <router-link :to="'/projects/' + $route.params.projectid + '/users'" class="link-style button button-default">
-                                Add/Remove People...
+                                {{ i18n.add_remove_people }}
                             </router-link>
                         </div>
                     </div>
@@ -54,12 +51,12 @@
                 <div class="col-4">
                     <div class="summary-card">
                         <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" tag="h3" class="link-style">
-                            <a>To-dos</a>
+                            <a>{{ i18n.todos }}</a>
                         </router-link>
                         <hr>
                         <div style="position: absolute;" class="text-left">
                             <div v-for="list in listSummary">
-                                <h3>{{list.list_title}}</h3>
+                                <h4>{{list.list_title}}</h4>
                                 <ul>
                                     <li v-for="todo in list.todos">
                                         <span class="checkbox-style"></span>{{todo.todo}}
@@ -72,7 +69,7 @@
                 <div class="col-4">
                     <div class="summary-card">
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages'" tag="h3" class="link-style">
-                            <a>Message Board</a>
+                            <a>{{ i18n.message_board }}</a>
                         </router-link>
                         <hr>
                         <div style="position: absolute;" class="text-left">
@@ -85,17 +82,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-4">
-                    <div class="summary-card">
-                        <router-link :to="'/projects/' + $route.params.projectid + '/files'" tag="h3" class="link-style">
-                            <a>Docs & Files</a>
-                        </router-link>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet architecto cupiditate consequuntur placeat atque neque. Voluptates odio in omnis, rem laboriosam magni eos corporis, error voluptatibus ut tempora, ullam adipisci!</p>
-                    </div>
-                </div> -->
             </div>
-            <activities></activities>  
+            <activities :i18n="i18n"></activities>
         </div>
     </div>
 </template>
@@ -109,6 +97,7 @@
         },
         data() {
             return {
+                i18n: {},
                 listSummary : [],
                 messages: [],
                 users: [],
@@ -136,7 +125,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
                     if ( resp.success ) {
                         vm.listSummary = resp.data;
                     }
@@ -186,6 +174,12 @@
                 projectid,
                 prevID,
                 prevKey;
+
+            var self = this;
+            store.setLocalization( 'fpm-get-summary-local-data' ).then( function( data ) {
+                self.i18n = data;
+            });
+
             vm.fetchProject();
             vm.fetchTodoSummary();
             vm.fetchMessageSummary();
@@ -195,7 +189,6 @@
             projectid = vm.$route.params.projectid;
 
             if ( prevID !== projectid ) {
-                console.log('prevID !== projectid')
                 prevKey = prevID + '-users';
                 localStorage.removeItem(prevKey);
                 localStorage.setItem('pid', projectid);
@@ -208,9 +201,7 @@
             } else {
                 var key = projectid + '-users';
                 vm.users = JSON.parse(localStorage.getItem(key));
-                console.log('prevID === projectid')
                 if (!vm.users) {
-                    console.log('!vm.users');
                     store.fetchUsers( projectid ).then(function(resp){
                         vm.users = resp.data;
                         localStorage.setItem(key, JSON.stringify(vm.users));
@@ -220,7 +211,7 @@
         },
 
         mounted() {
-            console.log('Summary Component mounted.')
+
         }
     }
 </script>
@@ -260,9 +251,6 @@
     .small-round-image {
         border-radius: 40%;
     }
-    /*.link-style {
-        cursor: pointer;
-    }*/
     .text-center {
         text-align: center;
     }
@@ -280,10 +268,6 @@
     }
 
     .summary-card {
-        /*float: left;
-        width: 27%;*/
-        /*margin-right: 10px; */
-        /*margin-top: 20px;*/
         padding: 0.7em 2em 1em;
         border-radius: 5px;
         text-align: center;
@@ -292,7 +276,6 @@
         -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);
         box-shadow: 0 1px 1px rgba(0,0,0,0.04);
         background: #fff;
-        /*display: block;*/
         height: 200px;
         overflow: hidden;
     }
@@ -301,17 +284,11 @@
         padding: 0.7em 2em 1em;
         border-radius: 3px;
         text-align: center;
-        /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
-        /*box-shadow: 0 1px 1px rgba(0,0,0,0.04);*/
-        /*background: #fff;*/
         height: auto;
     }
     .project-info {
         position: relative;
         padding: 30px 40px 10px;
-    }
-    .project-info:hover .show-edit {
-        /*display: block;*/
     }
 
     .show-edit {
@@ -321,6 +298,5 @@
         right: 0;
         top: 0;
         cursor: pointer;
-        /*display: none;*/
     }
 </style>

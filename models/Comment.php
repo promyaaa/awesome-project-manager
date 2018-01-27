@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 
 class FusionPM_Comment {
 
     protected $table_name;
-    
+
     function __construct() {
         global $wpdb;
         $this->table_name = $wpdb->prefix . 'fpm_comments';
@@ -58,7 +58,7 @@ class FusionPM_Comment {
 
     public function delete( $id ) {
         global $wpdb;
-        $result = $wpdb->delete( 
+        $result = $wpdb->delete(
             $this->table_name,
             array( 'ID' => $id )
         );
@@ -70,11 +70,11 @@ class FusionPM_Comment {
         global $wpdb;
 
         $final_result = array();
-        $files_array = array();
-        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `commentable_id` = {$id} AND `commentable_type` = '{$type}'", ARRAY_A );
+        $files_array  = array();
+        $result       = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `commentable_id` = {$id} AND `commentable_type` = '{$type}'", ARRAY_A );
 
-        foreach ($result as $commentObject) {
-            $commentObject['avatar_url'] = get_avatar_url($commentObject['userID'], array('size'=>32));
+        foreach ( $result as $commentObject ) {
+            $commentObject['avatar_url'] = get_avatar_url( $commentObject['userID'], array( 'size'=>50 ) );
             $files = $commentObject['file_ids'];
             $fileIDs = maybe_unserialize( $files );
             if ($fileIDs) {
@@ -90,7 +90,7 @@ class FusionPM_Comment {
                 $commentObject['files'] = [];
                 $commentObject['attachmentIDs'] = [];
             }
-            
+
             array_push($final_result, $commentObject);
         }
         return $final_result;

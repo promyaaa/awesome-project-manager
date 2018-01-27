@@ -7,7 +7,7 @@
                         <a>{{project.project_title}}</a>
                     </router-link>
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style inline-block" tag="h4">
-                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>To-dos</a>
+                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{ i18n.todos }}</a>
                     </router-link>
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid" class="link-style inline-block" tag="h4">
                         <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{list.list_title}}</a>
@@ -17,30 +17,24 @@
             <div class="row lists">
                 <div class="col-12">
                     <div class="loading" v-if="loading">
-                        <p>Loading . . .</p>
+                        <p>{{ i18n.loading }}</p>
                     </div>
-                    <!-- <pre>
-                        {{todoObject}}
-                    </pre> -->
-                    <!-- <pre>
-                        {{listObject}}
-                    </pre> -->
                     <div v-if="todoObject && !loading" class="single-todo">
                         <div>
                             <div v-if="isShowEdit && !editTodo">
-                                <button class="button button-default" 
-                                        @click="showTodoEdit(todoObject)">Edit</button>
+                                <button class="button button-default"
+                                        @click="showTodoEdit(todoObject)">{{ i18n.edit }}</button>
                                 <span style="float:right" @click="deleteTodo(todoObject)">
-                                    <a style="color: #d54e21;cursor:pointer;">Delete</a>
-                                </span>    
+                                    <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
+                                </span>
                             </div>
                         </div>
                         <br>
                         <div v-if="!editTodo" class="todo-details-div">
                             <div>
                                 <h1>
-                                    <input type="checkbox" 
-                                    @click="toggleCheckbox(todoObject)" 
+                                    <input type="checkbox"
+                                    @click="toggleCheckbox(todoObject)"
                                     v-model="todoObject.is_complete"
                                     v-bind:true-value="1"
                                     v-bind:false-value="0">
@@ -49,12 +43,12 @@
                             </div>
                             <div class="row todo-info">
                                 <div class="col-3 text-right">
-                                    <strong style="padding-right: 15%">Assigned To :</strong>
+                                    <strong style="padding-right: 15%">{{ i18n.assign_to_label }}</strong>
                                 </div>
                                 <div class="col-9">
                                     <div>
-                                        <img :src="todoObject.avatar_url" 
-                                            alt="" 
+                                        <img :src="todoObject.avatar_url"
+                                            alt=""
                                             class="small-round-image"
                                             style="margin-right: 7px; margin-bottom: -3px;">
                                             {{todoObject.assignee_name}}
@@ -64,7 +58,7 @@
 
                             <div class="row todo-info">
                                 <div class="col-3 text-right todo-info-title">
-                                    <strong style="padding-right: 15%">Due Date :</strong>
+                                    <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
                                 </div>
                                 <div class="col-9">
                                     {{todoObject.formatted_due_date}}
@@ -73,7 +67,7 @@
 
                             <div class="row todo-info">
                                 <div class="col-3 text-right todo-info-title">
-                                    <strong style="padding-right: 15%">Attachments :</strong>
+                                    <strong style="padding-right: 15%">{{ i18n.attachment_label }}</strong>
                                 </div>
                                 <div class="col-9">
                                     <div v-if="todoObject.files.length > 0">
@@ -84,10 +78,10 @@
                                 </div>
                             </div>
                             <br>
-                    
+
                             <div class="row">
                                 <div class="col-12">
-                                    <i>Added by <strong>{{todoObject.user_name}}</strong> on {{todoObject.formatted_created}}</i>
+                                    <i>{{ i18n.added_by }} <strong>{{todoObject.user_name}}</strong> {{ i18n.on }} {{todoObject.formatted_created}}</i>
                                 </div>
                             </div>
                         </div>
@@ -95,37 +89,38 @@
                         <div class="add_form_style" v-if="editTodo">
                             <div class="todo_name inline">
                                 <input type="text"
-                                    v-model="todoName" 
-                                    class="form-control" 
-                                    placeholder="add todo . . ." 
+                                    v-model="todoName"
+                                    class="form-control"
+                                    :placeholder="i18n.add_todo_placeholder"
                                     v-focus
                                     @keyup.esc="hideTodoForm">
                                 <span class="form-note"><i>*required field</i></span>
                             </div>
                             <div>
                                 <select v-model="selected" class="form-control">
-                                    <option disabled value="">select user</option>
+                                    <option disabled value="">{{ i18n.select_user }}</option>
                                     <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
                                     {{ option.display_name }}
                                     </option>
                                 </select>
                             </div>
                             <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
-                            <file-upload 
-                                v-on:attach="updateEditAttachments" 
-                                v-on:remove="removeEditAttachment" 
+                            <file-upload
+                                :i18n="i18n"
+                                v-on:attach="updateEditAttachments"
+                                v-on:remove="removeEditAttachment"
                                 :attachments="attachmentsToEdit"></file-upload>
                             <br>
-                            
+
                             <div class="inline">
-                                <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" value="Update Todo">
-                                <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" value="Cancel">
+                                <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" :value="i18n.udpate">
+                                <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" :value="i18n.cancel">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12">
-                    <comments :comments="todoObject.comments" type="todo"></comments> 
+                    <comments :i18n="i18n" :comments="todoObject.comments" type="todo"></comments>
                 </div>
             </div>
         </div>
@@ -143,9 +138,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-    
+
 </style>
 <script>
+    import store from '../store';
     import DatePicker from './partials/DatePickerComponent.vue';
     import Comments from './partials/CommentsComponent.vue';
     import FileUpload from './partials/FileUploadComponent.vue';
@@ -157,6 +153,7 @@
         },
         data() {
             return {
+                i18n: {},
                 loading: false,
                 todoObject: {},
                 is_complete: '',
@@ -182,7 +179,7 @@
         computed: {
             isShowEdit: function() {
                 var vm = this;
-                return (vm.currentUser.roles[0] === 'administrator' && !vm.is_complete) || 
+                return (vm.currentUser.roles[0] === 'administrator' && !vm.is_complete) ||
                         (!vm.is_complete && (vm.currentUser.data.ID === vm.todoObject.userID));
             }
         },
@@ -205,7 +202,7 @@
                 vm.todoName = vm.todoObject.todo;
                 vm.updateDueDate = vm.todoObject.due_date;
                 vm.selected = {
-                    ID: vm.todoObject.assigneeID, assignee: vm.todoObject.assignee_name 
+                    ID: vm.todoObject.assigneeID, assignee: vm.todoObject.assignee_name
                 }
                 vm.attachmentsToEdit = todoObject.files;
                 vm.attachmentIDsToEdit = todoObject.attachmentIDs;
@@ -221,7 +218,7 @@
                     projectID = vm.$route.params.projectid;
 
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-todo-details',
                     project_id: vm.$route.params.projectid,
@@ -239,8 +236,8 @@
                         vm.list = resp.data[0].list_info;
                         vm.project = resp.data[0].project_info;
                     } else {
-                        vm.$router.push({ 
-                            path: `/projects/${projectID}/todolists/${listID}?type=todo&info=notfound` 
+                        vm.$router.push({
+                            path: `/projects/${projectID}/todolists/${listID}?type=todo&info=notfound`
                         });
                     }
                 });
@@ -305,7 +302,7 @@
                         vm.todoObject.formatted_due_date = resp.data.todo.formatted_duedate;
                         vm.todoObject.assigneeID = vm.selected.ID;
                         vm.todoObject.assignee_name = vm.selected.assignee;
-                        
+
                         vm.todoName = '';
                         vm.editTodo = false;
                     } else {
@@ -327,16 +324,16 @@
                             todo: todo.todo,
                             project_id: projectID
                         };
-                        
+
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            
-                            vm.$router.push({ 
-                                path: `/projects/${projectID}/todolists/${listID}` 
+
+                            vm.$router.push({
+                                path: `/projects/${projectID}/todolists/${listID}`
                             });
 
                         } else {
-                            
+
                         }
                     });
                 }
@@ -349,13 +346,17 @@
                 projectid,
                 key;
 
+            store.setLocalization( 'fpm-get-single-todo-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
             vm.currentUser = fpm.currentUserInfo;
 
             projectid = vm.$route.params.projectid;
 
             key = projectid + '-users';
             vm.users = JSON.parse(localStorage.getItem(key));
-            
+
             if (!vm.users) {
 
                 localStorage.setItem('pid', projectid);

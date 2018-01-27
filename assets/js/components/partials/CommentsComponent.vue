@@ -1,22 +1,20 @@
 <template>
     <div class="comment-content">
-        <h3 style="padding-left: 14px;">Comments</h3>
-        <!-- <pre>
-            {{comments}}
-        </pre> -->
-        <div v-for="(commentObject, cindex) in comments" style="padding:0px 15px 15px 15px;border-radius: 5px;">    
+        <h3 style="padding-left: 14px;">{{ i18n.comment_label }}</h3>
+
+        <div v-for="(commentObject, cindex) in comments" style="padding:0px 15px 15px 15px;border-radius: 5px;">
             <div v-if="editindex !== cindex">
                 <img :src="commentObject.avatar_url" alt="">
                 <div v-html="commentObject.comment"></div><br>
-                commented by {{commentObject.user_name}}
-                
+                {{ i18n.comment_by}} {{commentObject.user_name}}
+
                 <br>
                 <div class="action" style="border-bottom: 1px solid #eee; padding-bottom:10px;">
                     <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
-                        <a>Edit</a> |
+                        <a>{{i18n.edit}}</a> |
                     </span>
                     <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
-                        <a>Delete</a>
+                        <a>{{ i18n.delete }}</a>
                     </span>
                 </div>
             </div>
@@ -27,8 +25,8 @@
                     <br>
                     <button class="button button-primary"
                         @click.prevent="updateComment(commentObject)"
-                        >Update</button>
-                    <button class="button button-default" @click="cancelCommentEdit(cindex)">Cancel</button>
+                        >{{ i18n.update }}</button>
+                    <button class="button button-default" @click="cancelCommentEdit(cindex)">{{ i18n.cancel }}</button>
                 </div>
             </div>
         </div>
@@ -37,17 +35,16 @@
             <div class="add_form_style">
                 <vue-editor id="add-comment" v-model="comment" :editorToolbar="customToolbar"></vue-editor>
                 <br>
-                  
+
                 <div class="action">
                     <button class="button button-primary"
                         @click.prevent="addComment()"
-                        >Add</button>
-                    <!-- <button class="button button-default" @click="toggleMessageForm">Cancel</button> -->
+                        >{{ i18n.add_comment }}</button>
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
 </template>
 <style>
@@ -58,7 +55,7 @@
 <script>
     import { VueEditor } from 'vue2-editor'
     export default {
-        props: ['comments', 'type'],
+        props: ['comments', 'type', 'i18n'],
         components: {
             VueEditor
         },
@@ -71,7 +68,7 @@
                 editindex: -1,
                 customToolbar : [
                     ['bold', 'italic', 'underline', 'strike'],
-                    ['blockquote', 'code-block'], 
+                    ['blockquote', 'code-block'],
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                     [{ 'indent': '-1'}, { 'indent': '+1' }],
                     [{ 'header': [3, 4, 5, 6, false] }],
@@ -86,7 +83,7 @@
                     data;
                 if (!vm.comment.trim()) {
                     return;
-                }    
+                }
                     data = {
                         action : 'fpm-insert-comment',
                         nonce : fpm.nonce,
@@ -107,8 +104,8 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         vm.comments.push({
-                            comment: vm.comment, 
-                            user_name: data.user_name, 
+                            comment: vm.comment,
+                            user_name: data.user_name,
                             ID: resp.data.comment.ID,
                             avatar_url: resp.data.comment.avatar_url
                         });
@@ -135,14 +132,14 @@
             },
 
             updateComment: function( commentObj ) {
-                
+
                 var vm = this,
                     data;
 
                 // if (!vm.comment.trim()) {
                 //     return;
                 // }
-                
+
                     data = {
                         action : 'fpm-insert-comment',
                         nonce : fpm.nonce,
@@ -184,14 +181,14 @@
                             nonce : fpm.nonce,
                             comment_id: comment.ID
                         };
-                        
+
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-                            
+
                             vm.comments.splice( cindex, 1 );
 
                         } else {
-                            
+
                         }
                     });
                 }

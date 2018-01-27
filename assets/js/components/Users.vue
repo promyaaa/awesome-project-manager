@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="box">
                     <div class="text-center">
-                        <button class="button button-large button-primary" 
+                        <button class="button button-large button-primary"
                                 @click="toggleAddForm"
                                 v-if="!isShowAddForm">Add People</button>
                     </div>
@@ -52,7 +52,7 @@
 <style>
     .user-info {
         padding-left: 15px;
-    } 
+    }
     .user-info span.info{
         display: block;
     }
@@ -92,11 +92,11 @@
             //         if ( resp.success ) {
             //             vm.users = resp.data;
             //         } else {
-                        
+
             //         }
             //     });
             // },
-            
+
             removeUser( index ) {
                 if (confirm("Are you sure ??")) {
                     var vm = this,
@@ -112,13 +112,13 @@
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         console.log(resp);
                         if ( resp.success ) {
-                            
+
                             vm.users.splice(index, 1);
                             localStorage.removeItem(localUsersKey);
                             localStorage.setItem(localUsersKey, JSON.stringify(vm.users));
-                            
+
                         } else {
-                            
+
                         }
                     });
                 }
@@ -187,7 +187,7 @@
             store.fetchUsers( projectid ).then(function(resp){
                 vm.users = resp.data;
             });
-            
+
         },
 
         mounted() {
