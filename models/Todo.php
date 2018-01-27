@@ -89,44 +89,46 @@ class FusionPM_Todo {
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$todo_id}" );
 
-        $files = $result[0]->file_ids;
-        $fileIDs = maybe_unserialize( $files );
+        if ( $result ) {
+            $files = $result[0]->file_ids;
+            $fileIDs = maybe_unserialize( $files );
 
-        if( $fileIDs ) {
-            foreach ($fileIDs as $ID) {
-                $fileObject = new stdClass();
-                $fileObject->ID = $ID;
-                $fileObject->url = wp_get_attachment_url( $ID );
-                // $fileObject->attachmentMeta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
-                array_push( $files_array, $fileObject );
+            if( $fileIDs ) {
+                foreach ($fileIDs as $ID) {
+                    $fileObject = new stdClass();
+                    $fileObject->ID = $ID;
+                    $fileObject->url = wp_get_attachment_url( $ID );
+                    // $fileObject->attachmentMeta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
+                    array_push( $files_array, $fileObject );
+                }
+                $result[0]->files = $files_array;
+                $result[0]->attachmentIDs = $fileIDs;
+            } else {
+                $result[0]->files = [];
+                $result[0]->attachmentIDs = [];
             }
-            $result[0]->files = $files_array;
-            $result[0]->attachmentIDs = $fileIDs;
-        } else {
-            $result[0]->files = [];
-            $result[0]->attachmentIDs = [];
-        }
 
-        if ( $result[0]->assigneeID ) {
-            $result[0]->avatar_url = get_avatar_url($result[0]->assigneeID, array('size'=>15));
-        } else {
-            $result[0]->avatar_url = '';
-        }
-        $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
-        
-        $commentModel = FusionPM_Comment::init();
-        $listModel = FusionPM_List::init();
-        $projectModel = FusionPM_Project::init();
+            if ( $result[0]->assigneeID ) {
+                $result[0]->avatar_url = get_avatar_url($result[0]->assigneeID, array('size'=>15));
+            } else {
+                $result[0]->avatar_url = '';
+            }
+            $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
+            
+            $commentModel = FusionPM_Comment::init();
+            $listModel = FusionPM_List::init();
+            $projectModel = FusionPM_Project::init();
 
-        $result[0]->comments = $commentModel->get_comments_by_column_info( $todo_id, 'todo' );
-        $result[0]->list_info = $listModel->get_list_details( $result[0]->listID, true );
-        $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
+            $result[0]->comments = $commentModel->get_comments_by_column_info( $todo_id, 'todo' );
+            $result[0]->list_info = $listModel->get_list_details( $result[0]->listID, true );
+            $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
 
-        if ( $result[0]->due_date ) {
-            $result[0]->formatted_due_date = $this->get_formatted_date( $result[0]->due_date );
-        } else {
-            $result[0]->formatted_due_date = '';
-            $result[0]->due_date = '';
+            if ( $result[0]->due_date ) {
+                $result[0]->formatted_due_date = $this->get_formatted_date( $result[0]->due_date );
+            } else {
+                $result[0]->formatted_due_date = '';
+                $result[0]->due_date = '';
+            }
         }
 
         return $result;
