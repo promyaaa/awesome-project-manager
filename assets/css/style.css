@@ -1,5 +1,14 @@
 /*@import "~vue-wysiwyg/dist/vueWysiwyg.css";*/
 
+.pm-clearfix:before,
+.pm-clearfix:after {
+  display: table;
+  content: " ";
+}
+.pm-clearfix:after {
+  clear: both;
+}
+
 /*grid section start*/
 .font-light {
   font-weight: 300;

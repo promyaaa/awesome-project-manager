@@ -1,25 +1,33 @@
 <template>
     <div class="comment-content">
-        <h3 style="padding-left: 14px;">{{ i18n.comment_label }}</h3>
+        <h3 class="decorated"><span>{{ i18n.comment_label }}</span></h3>
 
-        <div v-for="(commentObject, cindex) in comments" style="padding:0px 15px 15px 15px;border-radius: 5px;">
-            <div v-if="editindex !== cindex">
-                <img :src="commentObject.avatar_url" alt="">
-                <div v-html="commentObject.comment"></div><br>
-                {{ i18n.comment_by}} {{commentObject.user_name}}
-
-                <br>
-                <div class="action" style="border-bottom: 1px solid #eee; padding-bottom:10px;">
-                    <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
-                        <a>{{i18n.edit}}</a> |
-                    </span>
-                    <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
-                        <a>{{ i18n.delete }}</a>
-                    </span>
+        <div v-for="(commentObject, cindex) in comments" class="comment-item">
+            <div v-if="editindex !== cindex" class="comment">
+                <div class="comment-avatar">
+                    <img :src="commentObject.avatar_url" alt="">
+                </div>
+                <div class="comment-data">
+                    <div v-html="commentObject.comment" class="comment-body"></div>
+                    <div class="commented-by">
+                        -- {{ i18n.comment_by}} {{commentObject.user_name}}
+                    </div>
+                    <div class="comment-action">
+                        <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
+                            <a>{{i18n.edit}}</a> |
+                        </span>
+                        <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
+                            <a>{{ i18n.delete }}</a>
+                        </span>
+                    </div>
                 </div>
             </div>
+
             <!-- edit section -->
-            <div v-if="editindex === cindex">
+            <div v-if="editindex === cindex" class="comment-form">
+                <div class="current-user-avatar">
+                    <img src="http://2.gravatar.com/avatar/ef220452c72c3a83fa3ddd5a7b82c045?s=50&d=mm&r=g" alt="">
+                </div>
                 <div class="add_form_style">
                     <vue-editor id="edit-comment" v-model="commentEditText" :editorToolbar="customToolbar"></vue-editor>
                     <br>
@@ -30,8 +38,11 @@
                 </div>
             </div>
         </div>
-        <br><br><hr>
-        <div style="margin-top: 15px;">
+
+        <div style="margin-top: 15px;" class="comment-form">
+            <div class="current-user-avatar">
+                <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
+            </div>
             <div class="add_form_style">
                 <vue-editor id="add-comment" v-model="comment" :editorToolbar="customToolbar"></vue-editor>
                 <br>
@@ -42,7 +53,7 @@
                         >{{ i18n.add_comment }}</button>
                 </div>
             </div>
-
+            <div class="pm-clearfix"></div>
         </div>
 
     </div>
@@ -50,6 +61,74 @@
 <style>
     .comment-content {
         padding: 20px 32px;
+    }
+
+    .comment-content h3{
+        margin-bottom: 30px;
+    }
+
+    .comment-content .comment-form .current-user-avatar {
+        width: 7%;
+        height: 50px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .comment-content .comment-form .current-user-avatar img{
+        border-radius: 50px;
+    }
+    .comment-content .comment-form .add_form_style {
+        width: 85.667%;
+        float: left;
+        padding: 5px 15px 25px;
+    }
+
+    .comment-item{
+        position: relative;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+
+    .comment-item .comment-action {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 14px;
+        visibility: hidden;
+    }
+
+    .comment-item:hover .comment-action{
+        visibility: visible;
+    }
+
+    .comment-item .comment .comment-avatar {
+        width: 7%;
+        height: 50px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .comment-item .comment .comment-avatar img{
+        border-radius: 50px;
+    }
+
+    .comment-item .comment .comment-data {
+        width: 90%;
+        float: left;
+        background: #fafafa;
+        padding: 5px 15px 25px;
+        box-sizing: border-box;
+        border:1px solid #f1f1f1;
+        position: relative;
+    }
+    .comment-item .comment .comment-data .commented-by {
+        position: absolute;
+        bottom: 10px;
+        right: 15px;
+        font-style: italic;
+        color: #c1c1c1;
+        font-size: 14px;
     }
 </style>
 <script>
@@ -61,6 +140,7 @@
         },
         data() {
             return {
+                currentUserInfo:{},
                 cloneObject: '',
                 loading: false,
                 comment: '',
@@ -196,7 +276,7 @@
         },
 
         created() {
-            // var vm = this;
+            this.currentUserInfo = fpm.currentUserInfo;
         },
 
         mounted() {

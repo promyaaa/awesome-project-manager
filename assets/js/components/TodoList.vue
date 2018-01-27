@@ -17,14 +17,14 @@
             </pre> -->
                 <div class="col-12">
                     <div class="lists">
-                    
+
                         <div class="loading" v-if="loading">
                             <p>Loading . . .</p>
                         </div>
 
                         <div v-if="list && !loading">
                             <ul>
-                                <list is-single="true" :list="list" :sindex="0"></list>
+                                <list :i18n="i18n" is-single="true" :list="list" :sindex="0"></list>
                             </ul>
                         </div>
                     </div>
@@ -46,6 +46,7 @@
 </style>
 
 <script>
+    import store from '../store';
     import List from './partials/ListComponent.vue';
     import Comments from './partials/CommentsComponent.vue';
     export default {
@@ -56,6 +57,7 @@
 
         data() {
             return {
+                i18n: {},
                 list: {},
                 loading: false,
                 sindex: 0,
@@ -67,7 +69,7 @@
             fetchListDetails: function() {
                 var vm = this;
                 vm.loading = true;
-                
+
                 var data = {
                     action: 'fpm-get-list-details',
                     project_id: vm.$route.params.projectid,
@@ -81,8 +83,8 @@
                         vm.list = resp.data[0];
                         vm.project = resp.data[0].project_info;
                     } else {
-                        vm.$router.push({ 
-                            path: `/?type=todolist&info=notfound` 
+                        vm.$router.push({
+                            path: `/?type=todolist&info=notfound`
                         });
                     }
                 });
@@ -91,11 +93,15 @@
 
         created() {
             var vm = this;
+
+            store.setLocalization( 'fpm-get-todo-lists-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
             vm.fetchListDetails();
         },
 
         mounted() {
-            
+
         }
     }
 </script>
