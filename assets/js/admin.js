@@ -4,7 +4,7 @@ import store from './store';
 
 window.wpmedia = wp.media;
 
-var app = new Vue({
+new Vue({
     el: '#app',
     router: router,
     components: {

@@ -240,7 +240,7 @@
                         vm.project = resp.data[0].project_info;
                     } else {
                         vm.$router.push({ 
-                            path: `/projects/${projectID}/todolists/${listID}?type=todo&info=notfound` 
+                            path: `/?type=todo&info=notfound` 
                         });
                     }
                 });
