@@ -137,7 +137,7 @@
                         vm.messageObject = resp.data[0];
                     } else {
                         vm.$router.push({ 
-                            path: `/projects/${projectID}/messages?type=message&info=notfound` 
+                            path: `/?type=message&info=notfound` 
                         });
                     }
                 });

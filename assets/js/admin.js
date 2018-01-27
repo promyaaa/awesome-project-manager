@@ -15,7 +15,8 @@ Vue.directive('tooltip', {
 });
 
 
-var app = new Vue({
+new Vue({
+
     el: '#app',
     router: router,
     components: {

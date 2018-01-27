@@ -109,12 +109,14 @@ class FusionPM_List {
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$list_id}" );
 
-        $todoModel = FusionPM_Todo::init();
-        $projectModel = FusionPM_Project::init();
+        if ( $result ) {
+            $todoModel = FusionPM_Todo::init();
+            $projectModel = FusionPM_Project::init();
 
-        $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
-        $result[0]->todos = $todoModel->get_todos_by_column_info( 'listID', $list_id );
-        $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
+            $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
+            $result[0]->todos = $todoModel->get_todos_by_column_info( 'listID', $list_id );
+            $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
+        }
 
         return $result;
     }

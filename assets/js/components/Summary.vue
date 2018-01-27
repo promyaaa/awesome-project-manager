@@ -152,7 +152,7 @@
 
             fetchProject() {
                 var vm = this;
-                vm.loading = true;
+                // vm.loading = true;
 
                 var data = {
                     action: 'fpm-get-project',
@@ -161,9 +161,15 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    vm.loading = false;
+                    // vm.loading = false;
+                    // console.log('baaaaaaaal');
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.project = resp.data[0];
+                    } else {
+                        vm.$router.push({ 
+                            path: `/?type=todo&info=notfound` 
+                        });
                     }
                 });
             }

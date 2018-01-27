@@ -55,7 +55,7 @@
                 <div class="col-12 text-center home-nav">
                     <router-link to="/" exact tag="span" class="link-style common-nav">
                         <i class="fa fa-home" aria-hidden="true"></i>
-                        <a> Home</a>
+                        <a> Home </a>
                     </router-link>
                     <!-- <router-link to="/projects/2/activities" tag="span" class="link-style common-nav">
                         <i class="fa fa-rss" aria-hidden="true"></i>
