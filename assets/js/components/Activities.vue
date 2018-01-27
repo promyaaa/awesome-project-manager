@@ -25,6 +25,9 @@
                             <button class="button" @click="loadMoreActivities">Load More</button>
                         </div>
                     </div>
+                    <div v-if="noActivity">
+                        No activiy yet.
+                    </div>
                 </div>
             </div>  
             </div>
@@ -57,7 +60,8 @@
         data () {
             return {
                 activities: [],
-                totalActivityCount: ''
+                totalActivityCount: '',
+                noActivity: false
             }
         },
 
@@ -78,6 +82,10 @@
                     if ( resp.success ) {
                         vm.activities = resp.data;
                         vm.totalActivityCount = resp.data[0].total_activity;
+
+                        if (vm.totalActivityCount < 1) {
+                            vm.noActivity = true;
+                        }
                     }
                 });
             },
