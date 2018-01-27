@@ -47,8 +47,8 @@
 
             </div>
             <div class="row">
-                <div class="col-2"></div>
-                <div class="col-4">
+                <div class="col-1"></div>
+                <div class="col-5">
                     <div class="summary-card">
                         <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" tag="h3" class="link-style">
                             <a>{{ i18n.todos }}</a>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-5">
                     <div class="summary-card">
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages'" tag="h3" class="link-style">
                             <a>{{ i18n.message_board }}</a>
