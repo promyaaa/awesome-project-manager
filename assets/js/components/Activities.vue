@@ -12,10 +12,11 @@
                         {{activitiesObject}}
                     </pre> -->
                     <div v-for="(value, key) in activitiesObject">
+                    <hr>
                         {{ key }}
                         <hr>
                         <div v-for="v in value">
-                            {{v.formatted_date}}
+                            {{v.activity_type}}
                         </div>
                     </div>
                     <!-- <div class="row" v-for="(activity, index) in activities">
@@ -29,7 +30,7 @@
                             <activity-info :activity="activity" :i18n="i18n"></activity-info>
                         </div>
                     </div> -->
-                    {{totalActivityCount}}/{{activitiesObject.length}}
+                    
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
                             <button class="button" @click="loadMoreActivities">Load More</button>
@@ -104,7 +105,8 @@
                             current,
                             next,
                             i,
-                            length = resp.data.length;
+                            length = resp.data.length,
+                            keys;
 
                         vm.currentCount = length;
                         vm.totalActivityCount = resp.data[0].total_activity;
@@ -112,7 +114,18 @@
 
                             current = resp.data[i],
                             next = resp.data[i+1]; 
-                            if(!next) continue;
+                            if(!next) {
+                                console.log('!next');
+                                activities = [];
+                                if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
+                                    keys = Object.keys(vm.activitiesObject);
+                                    vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
+                                } else {
+                                    activities.push(resp.data[i]);
+                                    vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
+                                }
+                                continue;
+                            };
 
                             if(current.formatted_date === next.formatted_date) {
                                 activities.push(resp.data[i]);
@@ -126,50 +139,6 @@
                                 activities = [];    
                             }
                         }
-                        // var data = [
-                        //     {
-                        //       "ID": "184",
-                        //       "userID": "5",
-                        //       "user_name": "usertwo",
-                        //       "projectID": "2",
-                        //       "listID": "12",
-                        //       "activity_id": "47",
-                        //       "activity_type": "create_todo",
-                        //       "activity": "asdasd 184",
-                        //       "created": "2018-01-26 08:29:22",
-                        //       "avatar_url": "http://0.gravatar.com/avatar/059be5f840e91fd6cf5efd81c788457d?s=32&d=mm&r=g",
-                        //       "formatted_date": "January 26, 2018",
-                        //       "formatted_time": "8:29 am"
-                        //     },
-                        //     {
-                        //       "ID": "185",
-                        //       "userID": "5",
-                        //       "user_name": "usertwo",
-                        //       "projectID": "2",
-                        //       "listID": "12",
-                        //       "activity_id": "47",
-                        //       "activity_type": "create_todo",
-                        //       "activity": "asdasd 185",
-                        //       "created": "2018-01-26 08:29:22",
-                        //       "avatar_url": "http://0.gravatar.com/avatar/059be5f840e91fd6cf5efd81c788457d?s=32&d=mm&r=g",
-                        //       "formatted_date": "January 25, 2018",
-                        //       "formatted_time": "8:29 am"
-                        //     },
-                        //     {
-                        //       "ID": "186",
-                        //       "userID": "5",
-                        //       "user_name": "usertwo",
-                        //       "projectID": "2",
-                        //       "listID": "12",
-                        //       "activity_id": "47",
-                        //       "activity_type": "create_todo",
-                        //       "activity": "asdasd 186",
-                        //       "created": "2018-01-25 08:29:22",
-                        //       "avatar_url": "http://0.gravatar.com/avatar/059be5f840e91fd6cf5efd81c788457d?s=32&d=mm&r=g",
-                        //       "formatted_date": "January 25, 2018",
-                        //       "formatted_time": "8:29 am"
-                        //     }
-                        // ];
                     }
                 });
             },
@@ -204,19 +173,20 @@
 
                         vm.currentCount += length;
                         console.log(previous);
-                        console.log(length);
+                        console.log(resp.data);
 
                         for(i = 0; i < length; i++ ) {
 
                             current = resp.data[i],
                             
                             console.log(i);
-                            console.log(previous[0].formatted_date);
+                            // console.log(previous[0].formatted_date);
                             console.log(current.formatted_date);
+                            console.log(current.activity_type);
 
                             if(previous[0].formatted_date === current.formatted_date) {
                                 console.log('previous===current');
-                                previous.push(resp.data[i]);
+                                previous.push(current);
                                 continue;
                             }
 
