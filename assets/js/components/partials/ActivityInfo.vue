@@ -2,9 +2,19 @@
     <div>
         <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar" style="margin-right:15px; margin-top: 0px;">
 
-        <div v-if="isCreateTodo" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.create_a_todo }} ,
+        <div v-if="isCreateTodo">
+            <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong> <br>
+            <div class="m-t-5">
+                <span class="checkbox-style"></span>
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                    <a>{{activity.activity}}</a>
+                </router-link>  
+            </div>
+        </div>
+
+        <div v-if="isUpdateTodo">
+            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>
+            <div class="m-t-5" style="cursor:pointer">
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
@@ -12,9 +22,19 @@
             </div>
         </div>
 
-        <div v-if="isUpdateTodo" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.updated_a_todo }} ,
+        <div v-if="isCheckTodo">
+            <strong>{{activity.user_name}}</strong> checked off a <strong>Todo</strong> <br>
+            <div class="m-t-5" style="cursor:pointer">
+                <span class="checkbox-checked-style"><i class="fa fa-check" aria-hidden="true"></i></span>
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                    <a>{{activity.activity}}</a>
+                </router-link>
+            </div>
+        </div>
+
+        <div v-if="isUncheckTodo">
+            <strong>{{activity.user_name}}</strong> re-open a <strong>Todo</strong> <br>
+            <div class="m-t-5" style="cursor:pointer">
                 <span class="checkbox-style"></span>
                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
@@ -22,58 +42,36 @@
             </div>
         </div>
 
-        <div v-if="isDeleteTodo" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.delete_a_todo }} ,
+        <div v-if="isDeleteTodo">
+            <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong> <br>
+            <div class="m-t-5" style="cursor:default">
                 <span class="checkbox-style"></span>
-                <span>{{activity.activity}}</span>
+                <span style="color:a2a2a2;">{{activity.activity}}</span>
             </div>
         </div>
 
-        <div v-if="isCheckTodo" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.checked_off_todo }} ,
-                <span class="checkbox-checked-style">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
-                    <a>{{activity.activity}}</a>
-                </router-link>
-            </div>
-        </div>
-
-        <div v-if="isUncheckTodo" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.reopen_a_todo }} ,
-                <span class="checkbox-style"></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
-                    <a>{{activity.activity}}</a>
-                </router-link>
-            </div>
-        </div>
-
-        <div v-if="isCreateMessage" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.created_a_message_called }}
+        <div v-if="isCreateMessage">
+            <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called
+            <div class="m-t-5">
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
+                </router-link>  
             </div>
         </div>
 
-        <div v-if="isUpdateMessage" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.udpated_a_message_called }}
+        <div v-if="isUpdateMessage">
+            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called
+            <div class="m-t-5">
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity}}</a>
-                </router-link>
+                </router-link>  
             </div>
         </div>
 
-        <div v-if="isDeleteMessage" class="text-left" style="padding-top:2px;">
-            <div class="ellipsis-90">
-                <strong>{{activity.user_name}}</strong> {{ i18n.deleted_a_message_called }}
-                <span>{{activity.activity}}</span>
+        <div v-if="isDeleteMessage">
+            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>
+            <div class="m-t-5" style="cursor:default">
+                <span style="color:a2a2a2;">{{activity.activity}}</span>
             </div>
         </div>
     </div>

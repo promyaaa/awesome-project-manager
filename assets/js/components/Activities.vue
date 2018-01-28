@@ -11,14 +11,36 @@
                     <!-- <pre>
                         {{activitiesObject}}
                     </pre> -->
-                    <div v-for="(value, key) in activitiesObject">
+                    <!-- <div v-for="(value, key, index) in activitiesObject">
                     <hr>
                         {{ key }}
                         <hr>
                         <div v-for="v in value">
                             {{v.activity_type}}
                         </div>
-                    </div>
+                    </div> -->
+                    <ul class="timeline timeline-centered">
+                        <li class="timeline-item" v-for="(value, key, index) in activitiesObject">
+                            <div>
+                                <h3>{{ key }}</h3>
+                            </div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content" v-for="activity in value">
+                                <div class="row" v-if="index % 2===0">
+                                    <div class="col-2">{{activity.formatted_time}}</div>
+                                    <div class="col-10">
+                                        <activity-info :activity="activity" :i18n="i18n"></activity-info>
+                                    </div>
+                                </div>
+                                <div class="row" v-else>
+                                    <div class="col-10 text-left">
+                                        <activity-info :activity="activity"></activity-info>
+                                    </div>
+                                    <div class="col-2">{{activity.formatted_time}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                     <!-- <div class="row" v-for="(activity, index) in activities">
                         <div class="col-2">
                             <span>{{activity.formatted_date}}</span>
@@ -81,9 +103,16 @@
 
         methods: {
             fetchActivities() {
-                var vm = this;
+                var vm = this,
+                    data,
+                    activities = [],
+                    current,
+                    next,
+                    i,
+                    length,
+                    keys;
 
-                var data = {
+                data = {
                     action: 'fpm-get-activities',
                     project_id: vm.$route.params.projectid,
                     nonce: fpm.nonce,
@@ -101,13 +130,7 @@
                     //     }
                     // }
                     if (resp.success) {
-                        var activities = [],
-                            current,
-                            next,
-                            i,
-                            length = resp.data.length,
-                            keys;
-
+                        length = resp.data.length;
                         vm.currentCount = length;
                         vm.totalActivityCount = resp.data[0].total_activity;
                         for(i = 0; i < length; i++ ) {
@@ -144,14 +167,22 @@
             },
 
             loadMoreActivities() {
-                var vm = this;
+                var vm = this,
+                    data = {
+                        action: 'fpm-load-more-activities',
+                        nonce: fpm.nonce,
+                        offset: vm.currentCount,
+                        project_id: vm.$route.params.projectid
+                    },
+                    activities = [],
+                    keys = Object.keys(vm.activitiesObject),
+                    previous = vm.activitiesObject[keys[keys.length-1]],
+                    i,
+                    current,
+                    next,
+                    length;
+
                 vm.loadMore = true;
-                var data = {
-                    action: 'fpm-load-more-activities',
-                    nonce: fpm.nonce,
-                    offset: vm.currentCount,
-                    project_id: vm.$route.params.projectid
-                };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loadMore = false;
@@ -163,14 +194,7 @@
                     // }
                     
                     if (resp.success) {
-                        var activities = [],
-                            keys = Object.keys(vm.activitiesObject),
-                            previous = vm.activitiesObject[keys[keys.length-1]],
-                            i,
-                            current,
-                            next,
-                            length = resp.data.length;
-
+                        length = resp.data.length;
                         vm.currentCount += length;
                         console.log(previous);
                         console.log(resp.data);
