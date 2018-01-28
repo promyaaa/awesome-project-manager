@@ -665,10 +665,6 @@ class FusionPM_Ajax {
             wp_send_json_error( __( 'Todo is required', 'fusion-pm' ) );
         }
 
-        // if ( ! $todoID ) {
-        //     wp_send_json_error( __( 'todoID is required', 'fusion-pm' ) );
-        // }
-
         if ( ! $listID ) {
             wp_send_json_error( __( 'listID is required', 'fusion-pm' ) );
         }
@@ -676,10 +672,6 @@ class FusionPM_Ajax {
         if ( ! $projectID ) {
             wp_send_json_error( __( 'projectID is required', 'fusion-pm' ) );
         }
-
-        // if ( ! $userID ) {
-        //     wp_send_json_error( __( 'userID is required', 'fusion-pm' ) );
-        // }
 
         if ( ! $userName ) {
             wp_send_json_error( __( 'user name is required', 'fusion-pm' ) );
@@ -714,7 +706,8 @@ class FusionPM_Ajax {
             'message' => __( 'Successfully inserted', 'fusion-pm' ),
             'todo' => array(
                 'ID' => $insertID ? $insertID : $todoID,
-                'formatted_duedate' => $dueDate ? $todosModel->get_formatted_date( $dueDate ) : '', 
+                'formatted_due_date' => $dueDate ? $todosModel->get_formatted_date( $dueDate ) : '', 
+                'formatted_created' => $todosModel->get_formatted_date( $date ),
                 'created' => $date
             )
         );

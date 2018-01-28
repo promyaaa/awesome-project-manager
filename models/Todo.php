@@ -149,6 +149,7 @@ class FusionPM_Todo {
 
         foreach ($result as $todo) {
             $todo->attachmentIDs = maybe_unserialize( $todo->file_ids );
+            $todo->formatted_created = $this->get_formatted_date( $todo->created );
             if ( $todo->due_date ) {
                 $todo->formatted_due_date = $this->get_formatted_date( $todo->due_date );
             } else {

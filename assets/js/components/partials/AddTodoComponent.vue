@@ -138,6 +138,14 @@
                         todo.listID = vm.list.ID;
                         todo.projectID = vm.$route.params.projectid;
 
+                        if( vm.selected ) {
+                            todo.assigneeID = vm.selected.ID;
+                            todo.assignee_name = vm.selected.assignee;
+                        } else {
+                            todo.assigneeID = null;
+                            todo.assignee_name = null;
+                        }
+
                         vm.list.todos.push(todo);
 
                         vm.selected = '';

@@ -26,7 +26,7 @@
                             <div class="action">
                                 <button class="button button-primary"
                                         @click.prevent="updateList"
-                                        >{{ i18n.udpate_list }}</button>
+                                        >{{ i18n.update }}</button>
                                 <button class="button button-default" @click="cancelListEdit">{{ i18n.cancel }}</button>
                             </div>
                         </div>

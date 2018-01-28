@@ -80,7 +80,7 @@
     .comment-content .comment-form .add_form_style {
         width: 85.667%;
         float: left;
-        padding: 5px 15px 25px;
+        padding: 15px 15px 25px;
     }
 
     .comment-item{
