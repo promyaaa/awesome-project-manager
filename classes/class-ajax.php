@@ -1060,7 +1060,7 @@ class FusionPM_Ajax {
 
         $projectID = $this->get_validated_input('project_id');
         $offset = $this->get_validated_input('offset');
-        $limit = 10;
+        $limit = 15;
 
         $activityModel = FusionPM_Activity::init();
         $activites = $activityModel->get_project_activities( $projectID, $limit, $offset );
