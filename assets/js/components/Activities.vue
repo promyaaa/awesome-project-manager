@@ -138,7 +138,7 @@
                             current = resp.data[i],
                             next = resp.data[i+1]; 
                             if(!next) {
-                                console.log('!next');
+                                // console.log('!next');
                                 activities = [];
                                 if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
                                     keys = Object.keys(vm.activitiesObject);
@@ -196,27 +196,27 @@
                     if (resp.success) {
                         length = resp.data.length;
                         vm.currentCount += length;
-                        console.log(previous);
-                        console.log(resp.data);
+                        // console.log(previous);
+                        // console.log(resp.data);
 
                         for(i = 0; i < length; i++ ) {
 
-                            current = resp.data[i],
+                            current = resp.data[i];
                             
-                            console.log(i);
+                            // console.log(i);
                             // console.log(previous[0].formatted_date);
-                            console.log(current.formatted_date);
-                            console.log(current.activity_type);
+                            // console.log(current.formatted_date);
+                            // console.log(current.activity_type);
 
                             if(previous[0].formatted_date === current.formatted_date) {
-                                console.log('previous===current');
+                                // console.log('previous===current');
                                 previous.push(current);
                                 continue;
                             }
 
                             next = resp.data[i+1]; 
                             if(!next) {
-                                console.log('!next');
+                                // console.log('!next');
                                 activities = [];
                                 if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
                                     keys = Object.keys(vm.activitiesObject);
@@ -229,7 +229,7 @@
                             };
 
                             if(current.formatted_date === next.formatted_date) {
-                                console.log('next===current');
+                                // console.log('next===current');
                                 activities.push(resp.data[i]);
                                 if((i+2) === length) {
                                     vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
@@ -242,7 +242,7 @@
                             }
                         }
 
-                        console.log(vm.activitiesObject);
+                        // console.log(vm.activitiesObject);
                     }
                 });
             },
