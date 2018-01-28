@@ -104,22 +104,24 @@ class FusionPM_Activity {
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 20;
+            $limit = 5;
         }
 
         if ( !$offset ) {
             $offset = 0;
         }
 
-        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}");
+        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}" );
 
-        foreach ($result as $activity) {
-            $activity->avatar_url = get_avatar_url($activity->userID, array('size'=>32));
-            $activity->formatted_date = $this->get_formatted_date( $activity->created );
-            $activity->formatted_time = $this->get_formatted_time( $activity->created );
+        if ( $result ) {
+            foreach ($result as $activity) {
+                $activity->avatar_url = get_avatar_url($activity->userID, array('size'=>32));
+                $activity->formatted_date = $this->get_formatted_date( $activity->created );
+                $activity->formatted_time = $this->get_formatted_time( $activity->created );
+            }
+            $result[0]->total_activity = $this->get_activity_count( $project_id );
         }
-        $result[0]->total_activity = $this->get_activity_count( $project_id );
-        
+
         return $result;
     }
 
