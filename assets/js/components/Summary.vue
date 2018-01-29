@@ -232,7 +232,7 @@
         padding-left: 10px;
     }
     .checkbox-style {
-        padding: 0px 8px;
+        padding: 0px 9px;
         margin-right: 10px;
         margin-left: 10px;
         border: 1px solid #ccc;

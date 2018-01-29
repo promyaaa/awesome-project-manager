@@ -98,6 +98,13 @@ class FusionPM_Todo {
                     $fileObject = new stdClass();
                     $fileObject->ID = $ID;
                     $fileObject->url = wp_get_attachment_url( $ID );
+
+                    $filetype = wp_check_filetype( $fileObject->url );
+
+                    $fileObject->mime = $filetype['type'];
+                    $fileObject->extension = $filetype['ext'];
+                    $fileObject->icon = wp_mime_type_icon( $filetype['type'] );
+                    $fileObject->title = get_the_title($ID);
                     // $fileObject->attachmentMeta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
                     array_push( $files_array, $fileObject );
                 }

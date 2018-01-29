@@ -14,10 +14,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="list-title">
-                        <!-- <a class="page-title-action" @click.prevent="toggleMessageForm" v-if="!isShowMessageForm">+ Add</a> -->
                     </div>
                     <div>
-                        <!-- <vue-editor v-model="content" :editorToolbar="customToolbar"></vue-editor> -->
                         <div class="add_form_style">
                             <div>
                                 <input type="text"
@@ -40,6 +38,9 @@
                                 <button class="button button-primary" @click.prevent="createMessage">
                                     {{ i18n.post_new_msg_btn }}
                                 </button>
+                                <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="button button-default">
+                                    {{ i18n.cancel }}
+                                </router-link>
                             </div>
                         </div>
                     </div>

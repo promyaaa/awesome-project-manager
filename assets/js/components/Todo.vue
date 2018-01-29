@@ -72,7 +72,8 @@
                                 <div class="col-9">
                                     <div v-if="todoObject.files.length > 0">
                                         <div v-for="file in todoObject.files" class="image-common">
-                                            <img :src="file.url" alt="" class="image-resize">
+                                            <files-type-display :file="file" type="normal"></files-type-display>
+                                            <!-- <img :src="file.url" alt="" class="image-resize"> -->
                                         </div>
                                     </div>
                                 </div>
@@ -144,12 +145,14 @@
     import store from '../store';
     import DatePicker from './partials/DatePickerComponent.vue';
     import Comments from './partials/CommentsComponent.vue';
+    import FilesTypeDisplay from './partials/FilesTypeDisplay.vue';
     import FileUpload from './partials/FileUploadComponent.vue';
     export default {
         components: {
             Comments,
             FileUpload,
-            DatePicker
+            DatePicker,
+            FilesTypeDisplay
         },
         data() {
             return {

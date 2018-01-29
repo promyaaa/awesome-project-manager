@@ -39,7 +39,7 @@
                                         <img :src="messageObj.avatar_url" class="small-round-image" style="margin-top: 10px">
                                     </div>
                                     <div class="col-10">
-                                        <div>
+                                        <div class="message-list-item">
                                             <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID" tag="h3" class="ellipsis-90 link-style">
                                                 <a>{{messageObj.message_title}}</a>
                                             </router-link>
@@ -63,7 +63,9 @@
 </template>
 
 <style>
-
+    .message-list-item a {
+        color: #444444;
+    }
     .project-navigation {
         text-align: center;
     }

@@ -41,6 +41,9 @@
                                 <button class="button button-primary"
                                         @click.prevent="updateMessage"
                                         >{{ i18n.update }}</button>
+                                <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID" class="button button-default">
+                                    {{ i18n.cancel }}
+                                </router-link>
                             </div>
                         </div>
                     </div>
