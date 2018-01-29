@@ -172,6 +172,8 @@ class Fusion_PM {
     private function init_filters() {
         // Load all filters
         add_filter( 'posts_where', array( $this, 'hide_others_uploads' ) );
+        add_filter( 'upload_mimes', array( $this, 'restrict_mime' ) );
+        // add_filter( 'wp_handle_upload_prefilter', array( $this, 'fpm_handle_upload_prefilter' ) );
     }
 
     public function hide_others_uploads( $where ) {
@@ -184,6 +186,58 @@ class Fusion_PM {
 
         return $where;
     }
+
+    public function restrict_mime($mimes) { 
+        $mimes = array( 
+                    'jpg|jpeg|jpe'   => 'image/jpeg', 
+                    'gif'            => 'image/gif', 
+                    'png'            => 'image/png',
+                    
+                    'txt|asc|c|cc|h' => 'text/plain',
+                    'csv'            => 'text/csv',
+                    'css'            => 'text/css',
+                    'htm|html'       => 'text/html',
+                    
+                    'js'             => 'application/javascript',
+                    'pdf'            => 'application/pdf',
+                    // 'swf'            => 'application/x-shockwave-flash',
+                    'tar'            => 'application/x-tar',
+                    'zip'            => 'application/zip',
+                    'gz|gzip'        => 'application/x-gzip',
+                    'rar'            => 'application/rar',
+                    '7z'             => 'application/x-7z-compressed',
+                    
+                    'doc'            => 'application/msword',
+                    'pot|pps|ppt'    => 'application/vnd.ms-powerpoint',
+                    'docx'           => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'odt'            => 'application/vnd.oasis.opendocument.text',
+                    'odp'            => 'application/vnd.oasis.opendocument.presentation',
+        ); 
+        return $mimes;
+    }
+
+    // public function fpm_handle_upload_prefilter( $file ) {
+    //     // This bit is for the flash uploader
+    //     if ( $file['type']=='application/octet-stream' && isset( $file['tmp_name'] ) ) {
+    //         $file_size = getimagesize( $file['tmp_name'] );
+    //         if ( isset( $file_size['error'] ) && $file_size['error']!=0 ) {
+    //             $file['error'] = "Unexpected Error: {$file_size['error']}";
+    //             return $file;
+    //         } else {
+    //             $file['type'] = $file_size['mime'];
+    //         }
+    //     }
+
+    //     list( $category, $type ) = explode( '/',$file['type'] );
+    //     // var_dump($category);
+    //     if ( 'image'!=$category || !in_array( $type, array( 'jpg','jpeg','gif','png', 'pdf' ) ) ) {
+    //         $file['error'] = "Sorry, you can only upload a .GIF, a .JPG, or a .PNG image file.";
+    //     } else if ( $post_id = ( isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : false ) ) {
+    //         if ( count( get_posts( "post_type=attachment&post_parent={ $post_id }" ) ) >0 )
+    //             $file['error'] = "Sorry, you cannot upload more than one (1) image.";
+    //     }
+    //     return $file;
+    // }
 
 
 

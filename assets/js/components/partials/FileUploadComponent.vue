@@ -1,8 +1,10 @@
 <template>
     <div>
         <div class="images-to-upload">
+        <!-- <pre>{{attachments}}</pre> -->
             <div v-for="(file, index) in attachments" style="float:left;padding-right:10px" class="text-center">
-                <img :src="file.url" width="100" height="100" class="image-common" style="display:block;">
+                <files-type-display :file="file" type="small"></files-type-display>
+                <!-- <img :src="file.url" width="100" height="100" class="image-common" style="display:block;"> -->
                 <span @click="removeAttachment(index)" class="remove-attachment">x</span>
             </div>
         </div>
@@ -15,6 +17,7 @@
 
 <style>
     .remove-attachment {
+        margin-top: 5px;
         cursor: pointer;
         border: 1px solid #d54e21;
         padding: 0px 5px;
@@ -24,9 +27,10 @@
 </style>
 
 <script>
+    import FilesTypeDisplay from './FilesTypeDisplay.vue'
     export default {
         components: {
-
+            FilesTypeDisplay
         },
         props: ['attachments', 'i18n'],
         methods: {
@@ -36,7 +40,33 @@
 
             fileUpload: function() {
                 var file_frame,
-                    vm = this;
+                    vm = this,
+                    mime_array,
+                    attachment,
+                    isAllowedType;
+
+                mime_array = [
+                    'image/jpeg',
+                    'image/gif',
+                    'image/png',
+                    'text/plain',
+                    'text/csv',
+                    'text/css',
+                    'text/html',
+                    'application/javascript',
+                    'application/pdf',
+                    'application/x-tar',
+                    'application/zip',
+                    'application/x-gzip',
+                    'application/rar',
+                    'application/x-7z-compressed',
+                    'application/msword',
+                    'application/vnd.ms-powerpoint',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'application/vnd.oasis.opendocument.text',
+                    'application/vnd.oasis.opendocument.presentation',
+                ]
+
                     self = jQuery(this);
                 if ( file_frame ) {
                     file_frame.open();
@@ -51,9 +81,16 @@
                     multiple: false
                 });
                 file_frame.on( 'select', function() {
-                    var attachment = file_frame.state().get('selection').first().toJSON();
+                    attachment = file_frame.state().get('selection').first().toJSON();
                     console.log(attachment);
-                    vm.$emit('attach', attachment);
+                    isAllowedType = mime_array.includes(attachment.mime);
+
+                    if(isAllowedType) {
+                        vm.$emit('attach', attachment);    
+                    } else {
+                        console.log('not allowed');
+                    }
+                    
                     // vm.attachments.push(attachment);
                     // vm.attachmentIDs.push(attachment.id);
                     // var wrap = self.closest('.dokan-banner');
