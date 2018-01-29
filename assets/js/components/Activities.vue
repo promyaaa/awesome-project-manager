@@ -8,17 +8,7 @@
                             <h2 class="decorated-center"><span>{{ i18n.project_activity }}</span></h2>
                         </div>
                     </div>
-                    <!-- <pre>
-                        {{activitiesObject}}
-                    </pre> -->
-                    <!-- <div v-for="(value, key, index) in activitiesObject">
-                    <hr>
-                        {{ key }}
-                        <hr>
-                        <div v-for="v in value">
-                            {{v.activity_type}}
-                        </div>
-                    </div> -->
+                    
                     <ul class="timeline timeline-centered">
                         <li class="timeline-item" v-for="(value, key, index) in activitiesObject">
                             <div>
@@ -26,13 +16,13 @@
                             </div>
                             <div class="timeline-marker"></div>
                             <div class="timeline-content" v-for="activity in value">
-                                <div class="row" v-if="index % 2===0">
+                                <div class="row" v-if="index % 2===0" style="margin-bottom: 10px;">
                                     <div class="col-2">{{activity.formatted_time}}</div>
                                     <div class="col-10">
                                         <activity-info :activity="activity" :i18n="i18n"></activity-info>
                                     </div>
                                 </div>
-                                <div class="row" v-else>
+                                <div class="row" v-else style="margin-bottom: 10px;">
                                     <div class="col-10 text-left">
                                         <activity-info :activity="activity"></activity-info>
                                     </div>
@@ -119,16 +109,6 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // if ( resp.success ) {
-                    //     console.log(Object.values(resp.data.groupBy('formatted_date')));
-                    //     vm.activities = resp.data.groupBy('formatted_date');
-                    //     console.log(vm.activities);
-                    //     vm.totalActivityCount = resp.data[0].total_activity;
-
-                    //     if (vm.totalActivityCount < 1) {
-                    //         vm.noActivity = true;
-                    //     }
-                    // }
                     if (resp.success) {
                         length = resp.data.length;
                         vm.currentCount = length;
@@ -138,7 +118,6 @@
                             current = resp.data[i],
                             next = resp.data[i+1]; 
                             if(!next) {
-                                // console.log('!next');
                                 activities = [];
                                 if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
                                     keys = Object.keys(vm.activitiesObject);
@@ -159,7 +138,7 @@
                             } else {
                                 activities.push(resp.data[i]);
                                 vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                activities = [];    
+                                activities = [];
                             }
                         }
                     }
@@ -186,37 +165,22 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loadMore = false;
-                    // if ( resp.success ) {
-                    //     vm.activityCount = vm.activityCount + resp.data[0].record_count;
-                    //     for(var i = 0; i < resp.data.length; i++ ) {
-                    //         vm.activities.push(resp.data[i]);
-                    //     }
-                    // }
                     
                     if (resp.success) {
                         length = resp.data.length;
                         vm.currentCount += length;
-                        // console.log(previous);
-                        // console.log(resp.data);
 
                         for(i = 0; i < length; i++ ) {
 
                             current = resp.data[i];
-                            
-                            // console.log(i);
-                            // console.log(previous[0].formatted_date);
-                            // console.log(current.formatted_date);
-                            // console.log(current.activity_type);
 
                             if(previous[0].formatted_date === current.formatted_date) {
-                                // console.log('previous===current');
                                 previous.push(current);
                                 continue;
                             }
 
                             next = resp.data[i+1]; 
                             if(!next) {
-                                // console.log('!next');
                                 activities = [];
                                 if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
                                     keys = Object.keys(vm.activitiesObject);
@@ -229,7 +193,6 @@
                             };
 
                             if(current.formatted_date === next.formatted_date) {
-                                // console.log('next===current');
                                 activities.push(resp.data[i]);
                                 if((i+2) === length) {
                                     vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
@@ -241,8 +204,6 @@
                                 activities = [];
                             }
                         }
-
-                        // console.log(vm.activitiesObject);
                     }
                 });
             },

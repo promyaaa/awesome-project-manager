@@ -41,7 +41,8 @@
 
                         <div v-if="messageObject.files.length > 0">
                             <div v-for="file in messageObject.files" class="image-common">
-                                <a :href="file.url" target="_blank"><img :src="file.url" alt="" class="image-resize"></a>
+                                <files-type-display :file="file" type="normal"></files-type-display>
+                                <!-- <a :href="file.url" target="_blank"><img :src="file.url" alt="" class="image-resize"></a> -->
                             </div>
                         </div>
                     </div>
@@ -81,9 +82,11 @@
 <script>
     import store from '../store';
     import Comments from './partials/CommentsComponent.vue';
+    import FilesTypeDisplay from './partials/FilesTypeDisplay.vue';
     export default {
         components: {
-            'comments': Comments
+            Comments,
+            FilesTypeDisplay
         },
         data() {
             return {

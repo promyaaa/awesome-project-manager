@@ -1,72 +1,97 @@
 <template>
     <div>
-        <div v-if="isSmallView">
+        <div v-if ="isSmallView">
             <div v-if="isImageFile">
-                <strong>Image</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.url" width="90" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.url" width="90" height="90" class="display-small-image">
             </div>
             <div v-if="isTextFile">
-                <strong>Text</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
             <div v-if="isPdfFile">
-                <strong>PDF</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
             <div v-if="isJavascriptFile">
-                <strong>Js</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
             <div v-if="isCompressedFile">
-                <strong>Compress</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
             <div v-if="isDocumentFile">
-                <strong>Document</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
             <div v-if="isPresentationFile">
-                <strong>Presentation</strong>
-                <div><i>{{file.title | truncate('11')}}</i></div>
-                <img :src="file.icon" width="68" height="90" style="display:block;" class="display-small-image">
+                <img :src="file.icon" width="68" height="90" class="display-small-image">
             </div>
         </div>
-        <div v-if="isNormalView">
-            normal view
+        <div v-if="isNormalView" class="text-center">
+            <div v-if="isImageFile">
+                <img :src="file.url" alt="" class="image-resize common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" target="_blank">View full-size</a> - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isTextFile">
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isPdfFile" >
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isJavascriptFile">
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isCompressedFile">
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isDocumentFile">
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
+            <div v-if="isPresentationFile" >
+                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <div class="file-action">
+                    {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
+                </div>
+            </div>
         </div>
-        <!-- <pre>
-            {{file}}
-        </pre> -->
     </div>
 </template>
 
 <style>
     .display-small-image {
-        padding: 5px;
+        padding: 2px;
         text-align: center;
         box-sizing: border-box;
+        border: 1px solid #e3e3e3;
+        margin-bottom: 7px;
+        display: block;
+    }
+    .common-file-style {
+        padding: 3px;
+        border: 1px solid #eee;
+    }
+    .file-action a {
+        font-size: 13px;
+        text-decoration: none;
     }
 </style>
 
 <script>
     export default {
         props: ['file', 'type'],
-        filters: {
-            truncate: function(string, value) {
-                var dotdot = '';
-
-                if (string.length > value) {
-                    dotdot = '...';
-                }
-                return string.substring(0, value) + dotdot;
-            }
-        },
         computed: {
             isSmallView() {
                 return this.type === 'small';
@@ -75,7 +100,17 @@
                 return this.type === 'normal';
             },
             isImageFile() {
-                return this.file.type === 'image';
+                var mime = this.file.mime;
+                if( mime === 'image/gif' ) {
+                    return true;
+                } 
+                if (mime === 'image/png') {
+                    return true;
+                }
+                if (mime === 'image/jpeg') {
+                    return true;
+                }
+                return false;
             },
             isTextFile() {
                 var mime = this.file.mime;

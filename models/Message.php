@@ -106,7 +106,7 @@ class FusionPM_Message {
         }
         $result[0]->formatted_created = $this->get_formatted_date( $result[0]->created );
         $result[0]->avatar_url = get_avatar_url( $result[0]->userID );
-        
+
         $files = $result[0]->file_ids;
         $fileIDs = maybe_unserialize( $files );
         if($fileIDs) {
@@ -114,7 +114,14 @@ class FusionPM_Message {
                 $fileObject = new stdClass();
                 $fileObject->ID = $ID;
                 $fileObject->url = wp_get_attachment_url( $ID );
-                // $fileObject->attachmentMeta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
+
+                $filetype = wp_check_filetype( $fileObject->url );
+
+                $fileObject->mime = $filetype['type'];
+                $fileObject->extension = $filetype['ext'];
+                $fileObject->icon = wp_mime_type_icon( $filetype['type'] );
+                $fileObject->title = get_the_title($ID);
+                // $fileObject->attachment_meta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
                 array_push( $files_array, $fileObject );
             }
             $result[0]->files = $files_array;

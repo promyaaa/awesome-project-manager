@@ -26,7 +26,7 @@
             <!-- edit section -->
             <div v-if="editindex === cindex" class="comment-form">
                 <div class="current-user-avatar">
-                    <img src="http://2.gravatar.com/avatar/ef220452c72c3a83fa3ddd5a7b82c045?s=50&d=mm&r=g" alt="">
+                    <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
                 </div>
                 <div class="add_form_style">
                     <vue-editor id="edit-comment" v-model="commentEditText" :editorToolbar="customToolbar"></vue-editor>

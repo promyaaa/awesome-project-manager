@@ -1,14 +1,15 @@
 <template>
     <div>
         <div class="images-to-upload">
-        <!-- <pre>{{attachments}}</pre> -->
             <div v-for="(file, index) in attachments" style="float:left;padding-right:10px" class="text-center">
                 <files-type-display :file="file" type="small"></files-type-display>
-                <!-- <img :src="file.url" width="100" height="100" class="image-common" style="display:block;"> -->
                 <span @click="removeAttachment(index)" class="remove-attachment">x</span>
             </div>
         </div>
         <br>
+        <p class="howto">
+            Note: png, jpeg, gif, plaintext, html, css, csv, js, pdf, tar, zip, gzip, rar, 7z, doc, pot, pps, ppt, docx, odt, odp files can be uploaded
+        </p>
         <button
             class="button button-default"
             @click="fileUpload">+ {{ i18n.add_files }}</button>
@@ -90,14 +91,6 @@
                     } else {
                         console.log('not allowed');
                     }
-                    
-                    // vm.attachments.push(attachment);
-                    // vm.attachmentIDs.push(attachment.id);
-                    // var wrap = self.closest('.dokan-banner');
-                    // wrap.find('input.dokan-file-field').val(attachment.id);
-                    // wrap.find('img.dokan-banner-img').attr('src', attachment.url);
-                    // jQuery('.image-wrap', wrap).removeClass('dokan-hide');
-                    // jQuery('.button-area').addClass('dokan-hide');
                 });
                 file_frame.open();
             },
