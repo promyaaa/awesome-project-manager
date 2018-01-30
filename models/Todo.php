@@ -131,10 +131,15 @@ class FusionPM_Todo {
             $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
 
             if ( $result[0]->due_date ) {
+                $result[0]->is_overdue = false;
+                if ( current_time( 'mysql' ) > $result[0]->due_date ) {
+                    $result[0]->is_overdue = true;
+                }
                 $result[0]->formatted_due_date = $this->get_formatted_date( $result[0]->due_date );
             } else {
                 $result[0]->formatted_due_date = '';
                 $result[0]->due_date = '';
+                $result[0]->is_overdue = false;
             }
         }
 

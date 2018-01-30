@@ -160,9 +160,10 @@ class FusionPM_Localize {
             'add_todo_placeholder' => __( 'Enter your todo...', 'fusion-pm' ),
             'select_user'          => __( '--select user--', 'fusion-pm' ),
             'add_files'            => __( 'Add files', 'fusion-pm' ),
-            'comment_label'            => __( 'Comments', 'fusion-pm' ),
-            'comment_by'            => __( 'commented by', 'fusion-pm' ),
-            'add_comment'            => __( 'Add Comment', 'fusion-pm' ),
+            'comment_label'        => __( 'Comments', 'fusion-pm' ),
+            'comment_by'           => __( 'commented by', 'fusion-pm' ),
+            'add_comment'          => __( 'Add Comment', 'fusion-pm' ),
+            'overdue'              => __( 'overdue', 'fusion-pm' ),
         );
 
         wp_send_json_success( $localize_data );

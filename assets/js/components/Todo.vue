@@ -61,7 +61,8 @@
                                     <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
                                 </div>
                                 <div class="col-9">
-                                    {{todoObject.formatted_due_date}}
+                                    {{todoObject.formatted_due_date}} 
+                                    <!-- <span v-if="is_overdue" class="overdue">{{i18n.overdue}}</span> -->
                                 </div>
                             </div>
 
@@ -133,7 +134,12 @@
 .todo-details-div {
     padding: 15px 50px 10px;
 }
-
+.overdue {
+    background: #D54E21;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
 .todo-info {
     border-bottom: 1px solid #eee;
     padding-top: 10px;
@@ -160,6 +166,7 @@
                 loading: false,
                 todoObject: {},
                 is_complete: '',
+                // is_overdue: '',
                 editTodo: false,
                 todoName: '',
                 selected: '',
@@ -236,6 +243,7 @@
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
                         vm.is_complete = +vm.todoObject.is_complete;
+                        // vm.is_overdue = vm.todoObject.is_overdue;
                         vm.list = resp.data[0].list_info;
                         vm.project = resp.data[0].project_info;
                     } else {
