@@ -19,7 +19,7 @@
                         </span>
                         <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
                             <!-- <a>{{ i18n.delete }}</a> -->
-                            <a><i class="fa fa-trash" aria-hidden="true"></a>
+                            <a><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </span>
                     </div>
                 </div>
