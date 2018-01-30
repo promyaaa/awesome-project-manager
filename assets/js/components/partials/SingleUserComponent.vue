@@ -9,15 +9,15 @@
             <div class="user-info" v-if="!isShowEdit">
                 <div style="float:right" v-if="isShowAction">
                     <span @click="showUserEdit(user)">
-                        <a style="cursor: pointer">{{ i18n.edit }}</a>
+                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </span>
                     <span class="trash" @click="removeUser(index)">| 
-                        <a style="cursor: pointer;">{{ i18n.remove }}</a>
+                        <a style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                 </div>
-                <span class="info">{{userObj.display_name}}</span>
+                <span class="info"><strong>{{userObj.display_name}}</strong></span>
                 <span class="info">{{userObj.title}}</span>
-                <span class="info">{{userObj.user_email}}</span>
+                <span class="info"><i>{{userObj.user_email}}</i></span>
             </div>
             <div v-if="isShowEdit" class="user-info">
                 <input type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">

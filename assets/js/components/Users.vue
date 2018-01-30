@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>{{ i18n.header_label }}<i style="color:#6d6d6d">{{project.project_title}}</i></h3>
-                        <p>{{ i18n.header_note }}</p>
+                        <p style="font-size: 14px;">{{ i18n.header_note }}</p>
                     </div>
                 </div>
                 <div>
@@ -61,6 +61,10 @@
 <style>
     .user-info {
         padding-left: 15px;
+    }
+    .user-info .fa {
+        font-size: 13px;
+        color: #b5b5b5;
     }
     .user-info span.info{
         display: block;
@@ -190,7 +194,6 @@
                 projectid;
 
             store.setLocalization( 'fpm-get-users-local-data' ).then( function( data ) {
-                console.log(data);
                 vm.i18n = data;
             });
 

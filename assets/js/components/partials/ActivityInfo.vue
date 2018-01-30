@@ -82,7 +82,7 @@
         margin-top: 5px;
     }
     .checkbox-checked-style {
-        padding: 0px 3px;
+        padding: 0px 2px;
         margin-right: 10px;
         margin-left: 10px;
         border: 1px solid #ccc;

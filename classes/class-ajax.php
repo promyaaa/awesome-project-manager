@@ -213,6 +213,7 @@ class FusionPM_Ajax {
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
                 'user' => array(
                     'ID' => $user_id,
+                    'user_name' => $user->display_name,
                     'avatar_url' => get_avatar_url($user_id, array('size'=>50))
                 )
             );

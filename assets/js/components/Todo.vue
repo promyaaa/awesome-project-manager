@@ -350,7 +350,6 @@
                 key;
 
             store.setLocalization( 'fpm-get-single-todo-local-data' ).then( function( data ) {
-                console.log(data);
                 vm.i18n = data;
             });
 
@@ -371,9 +370,5 @@
                 });
             }
         },
-
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>
