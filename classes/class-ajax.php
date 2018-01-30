@@ -192,6 +192,8 @@ class FusionPM_Ajax {
 
         $user_id = email_exists( $email_address );
 
+        $project_link = add_query_arg( array( 'page'=>'fusion-pm'), admin_url( 'admin.php' ) ) . '#/projects/' . $projectID;
+
         if( !$user_id ) {
 
             // Generate the password and create the user
@@ -214,7 +216,7 @@ class FusionPM_Ajax {
             wp_mail( 
                 $email_address, 
                 'Invitation!', 
-                'You have been invited to project - '. $projectTitle .'. You can access the project via following link - ' . $project_link 
+                'You have been invited to project - "'. $projectTitle .'". You can access the project via following link - ' . $project_link 
             );
 
             $resp = array(
@@ -241,7 +243,11 @@ class FusionPM_Ajax {
             $isRelated = $projectObject->checkRelation($projectID, $user_id);
             
             // Email the user
-            wp_mail( $email_address, 'Invitation!' , 'You have been invited to ' . $projectTitle );
+            wp_mail( 
+                $email_address, 
+                'Invitation!', 
+                'You have been invited to project - "'. $projectTitle .'". You can access the project via following link - ' . $project_link 
+            );
 
             if ($isRelated) {
                 wp_send_json_success(
@@ -624,7 +630,7 @@ class FusionPM_Ajax {
         if ( $isRelated ) {
             $listObject = $listModel->get_list_details( $listID );
             
-            wp_send_json_success( $listObject );    
+            wp_send_json_success( $listObject ); 
         }
 
         wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
@@ -700,7 +706,7 @@ class FusionPM_Ajax {
 
         if ( $dueDate ) {
             $overdue = false;
-            if ( current_time( 'mysql' ) > $due_date ) {
+            if ( current_time( 'mysql' ) > $dueDate ) {
                 $overdue = true;
             }
         }
@@ -709,6 +715,7 @@ class FusionPM_Ajax {
             'message' => __( 'Successfully inserted', 'fusion-pm' ),
             'todo' => array(
                 'ID' => $insertID ? $insertID : $todoID,
+                'due_date' => $dueDate ? $dueDate : NULL,
                 'formatted_due_date' => $dueDate ? $todosModel->get_formatted_date( $dueDate ) : '', 
                 'formatted_created' => $todosModel->get_formatted_date( $date ),
                 'is_overdue' => $overdue,

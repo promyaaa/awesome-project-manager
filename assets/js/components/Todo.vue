@@ -61,8 +61,9 @@
                                     <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
                                 </div>
                                 <div class="col-9">
-                                    {{todoObject.formatted_due_date}} 
-                                    <!-- <span v-if="is_overdue" class="overdue">{{i18n.overdue}}</span> -->
+                                    <span v-bind:class="[is_overdue ? 'overdue' : 'due']"><i>{{todoObject.formatted_due_date}}</i></span> 
+                                    <!-- <span v-if="is_overdue" class="overdue">{{i18n.overdue}}</span>
+                                    <span v-else class="overdue">notoverdue</span> -->
                                 </div>
                             </div>
 
@@ -140,6 +141,12 @@
     padding: 2px;
     border-radius: 5px;
 }
+.due {
+    background: #46B450;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
 .todo-info {
     border-bottom: 1px solid #eee;
     padding-top: 10px;
@@ -166,7 +173,7 @@
                 loading: false,
                 todoObject: {},
                 is_complete: '',
-                // is_overdue: '',
+                is_overdue: '',
                 editTodo: false,
                 todoName: '',
                 selected: '',
@@ -243,7 +250,7 @@
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
                         vm.is_complete = +vm.todoObject.is_complete;
-                        // vm.is_overdue = vm.todoObject.is_overdue;
+                        vm.is_overdue = vm.todoObject.is_overdue;
                         vm.list = resp.data[0].list_info;
                         vm.project = resp.data[0].project_info;
                     } else {
@@ -308,9 +315,12 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    console.log(resp);
                     if ( resp.success ) {
                         vm.todoObject.todo = vm.todoName;
-                        vm.todoObject.formatted_due_date = resp.data.todo.formatted_duedate;
+                        vm.todoObject.formatted_due_date = resp.data.todo.formatted_due_date;
+                        vm.todoObject.due_date = resp.data.todo.due_date;
+                        vm.is_overdue = resp.data.todo.is_overdue;
                         vm.todoObject.assigneeID = vm.selected.ID;
                         vm.todoObject.assignee_name = vm.selected.assignee;
 
