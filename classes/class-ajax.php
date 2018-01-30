@@ -350,7 +350,10 @@ class FusionPM_Ajax {
 
         // $projectObj = $projectClass->get_project( $projectID );
 
-        $date = date("Y-m-d H:i:s");
+        // $date = date("Y-m-d H:i:s");
+
+        $date = current_time( 'mysql' );
+
         $data = array(
             'message' => wp_kses_post( $message ),
             'message_title' => $messageTitle,
@@ -417,7 +420,7 @@ class FusionPM_Ajax {
 
         $messageModel = FusionPM_Message::init();
         $delete = $messageModel->delete( $messageID );
-
+        $date = current_time( 'mysql' );
         if( $delete ) {
             $activities = array(
                 'userID' => $userID,
@@ -426,7 +429,7 @@ class FusionPM_Ajax {
                 'activity_id' => $messageID,
                 'activity_type' => 'delete_message',
                 'activity' => $messageTitle,
-                'created' => date("Y-m-d H:i:s")
+                'created' => $date
             );
 
             $this->create_activity($activities);
@@ -484,9 +487,9 @@ class FusionPM_Ajax {
             wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
-        $projectID = $this->get_validated_input('project_id');        
-        $commentableID = $this->get_validated_input('commentable_id');        
-        $commentableType = $this->get_validated_input('commentable_type');        
+        $projectID = $this->get_validated_input('project_id');
+        $commentableID = $this->get_validated_input('commentable_id');
+        $commentableType = $this->get_validated_input('commentable_type');
         $comment = $this->get_validated_input('comment');
         $commentID = $this->get_validated_input('comment_id');
         // $userName = $this->get_validated_input('user_name');
@@ -506,7 +509,10 @@ class FusionPM_Ajax {
         
         $commentModel = FusionPM_Comment::init();
         
-        $date = date("Y-m-d H:i:s"); 
+        // $date = date("Y-m-d H:i:s"); 
+
+        $date = current_time( 'mysql' );
+
         $current_user = wp_get_current_user(); // TODO: Discuss with kukur
 
         $data = array(
@@ -679,7 +685,8 @@ class FusionPM_Ajax {
 
         $todosModel = FusionPM_Todo::init();
         
-        $date = date("Y-m-d H:i:s");
+        // $date = date("Y-m-d H:i:s");
+        $date = current_time( 'mysql' );
 
         $data = array(
             'todo' => $todo,
@@ -696,7 +703,7 @@ class FusionPM_Ajax {
         );
 
         if ( $todoID ) {
-            $where = array( 'ID' => intval($todoID) );
+            $where = array( 'ID' => intval( $todoID ) );
             $successResponse = $todosModel->update( $data, $where );
         } else {
             $insertID = $todosModel->create( $data );
@@ -750,7 +757,7 @@ class FusionPM_Ajax {
         $delete = $todoObject->delete( $todoID );
 
         $userObject = get_user_by( 'ID', get_current_user_id() );
-
+        $date = current_time( 'mysql' );
         if( $delete ) {
             $activities = array(
                 'userID' => $userObject->ID,
@@ -760,7 +767,7 @@ class FusionPM_Ajax {
                 'activity_id' => $todoID,
                 'activity_type' => 'delete_todo',
                 'activity' => $todo,
-                'created' => date("Y-m-d H:i:s")
+                'created' => $date
             );
 
             $this->create_activity($activities);
@@ -792,6 +799,8 @@ class FusionPM_Ajax {
         $todoObject = FusionPM_Todo::init();
         $update = $todoObject->complete_todo( $todoID, $is_complete );
 
+        $date = current_time( 'mysql' );
+
         $activities = array(
             'userID' => $userID,
             'user_name' => $userName,
@@ -799,7 +808,7 @@ class FusionPM_Ajax {
             'listID' => $listID,
             'activity_id' => $todoID,
             'activity' => $todo,
-            'created' => date("Y-m-d H:i:s")
+            'created' => $date
         );
 
         if ( $is_complete ) {
@@ -850,7 +859,9 @@ class FusionPM_Ajax {
         }
 
         // $table = $wpdb->prefix . 'fpm_lists';
-        $date = date("Y-m-d H:i:s");
+        // $date = date("Y-m-d H:i:s");
+
+        $date = current_time( 'mysql' );
         $data = array(
             'list_title' => $list_title,
             'userID' => get_current_user_id(),
@@ -947,7 +958,9 @@ class FusionPM_Ajax {
 
         // $table = $wpdb->prefix . 'fpm_projects';
         
-        $date = date("Y-m-d H:i:s");
+        // $date = date("Y-m-d H:i:s");
+        
+        $date = current_time( 'mysql' );
 
         $data = array(
             'project_title' => $project_title,

@@ -2,7 +2,7 @@
 
     <li style="margin-bottom: 0px; cursor: pointer;">
         <div class="row" v-if="editindex !== tindex" style="margin-bottom: 7px;">
-            <div class="col-1 text-right" style="margin-top:0px; margin-bottom: 0px;">
+            <div class="col-1 text-right" style="margin-top:0px; margin-bottom: 5px;">
                 <div style="margin-bottom: 6px; margin-top: 2px;">
                     <input type="checkbox"
                         @click="toggleCheckbox(todo, tindex)"
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-9" style="margin-top:0px; margin-bottom: 0px;">
+            <div class="col-9" style="margin-top:0px; margin-bottom: 5px;">
                 <div class="todo-item">
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span">
                         <span :class="{ completed: is_complete }">{{todo.todo}}</span>
@@ -30,13 +30,13 @@
                     </router-link>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-2" style="margin-top: 0px; margin-bottom: 5px;">
                 <div class="actions text-center" v-if="isShowEdit">
                     <span @click="showEditForm( todo, tindex )" v-tooltip :title="i18n.edit">
-                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:12px;"></i></a>
                     </span>
                     <span class="trash" @click="deleteTodo(todo, tindex)" v-tooltip :title="i18n.delete">|
-                        <a style="color: #D54E21;cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a style="color: #D54E21;cursor: pointer;"><i class="fa fa-trash" aria-hidden="true" style="font-size:12px;"></i></a>
                     </span>
                 </div>
             </div>
@@ -89,12 +89,19 @@
         padding-right: 6px;
         color: #e3e3e3;
     }
-    i.fa {
+     i.fa{
         font-size: 12px;
         color: #b5b5b5;
         position: relative;
         top: -1px;
     }
+
+    /*.actions i.fa {
+        font-size: 12px;
+        color: #b5b5b5;
+        position: relative;
+        top: -1px;
+    }*/
     .p-r-5 {
         padding-right: 5px;
     }

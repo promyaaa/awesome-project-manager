@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-12 text-center home-nav">
                     <router-link to="/" exact tag="span" class="link-style common-nav">
-                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <i class="fa fa-home" aria-hidden="true" style="font-size: 16px;"></i>
                         <a> Home </a>
                     </router-link>
                     <!-- <router-link to="/projects/2/activities" tag="span" class="link-style common-nav">
