@@ -61,9 +61,7 @@
                                     <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
                                 </div>
                                 <div class="col-9">
-                                    <span v-bind:class="[is_overdue ? 'overdue' : 'due']"><i>{{todoObject.formatted_due_date}}</i></span> 
-                                    <!-- <span v-if="is_overdue" class="overdue">{{i18n.overdue}}</span>
-                                    <span v-else class="overdue">notoverdue</span> -->
+                                    <span v-bind:class="[is_overdue ? 'overdue' : 'due']"><i>{{todoObject.formatted_due_date}}</i></span>
                                 </div>
                             </div>
 
@@ -246,7 +244,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
                         vm.is_complete = +vm.todoObject.is_complete;
@@ -315,7 +313,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.todoObject.todo = vm.todoName;
                         vm.todoObject.formatted_due_date = resp.data.todo.formatted_due_date;

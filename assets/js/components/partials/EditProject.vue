@@ -70,7 +70,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
 
                         // messageID = resp.data.messageInfo.ID;

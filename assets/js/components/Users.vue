@@ -107,7 +107,7 @@
                         };
 
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        console.log(resp);
+                        // console.log(resp);
                         if ( resp.success ) {
 
                             vm.users.splice(index, 1);
@@ -158,7 +158,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp)
+                    // console.log(resp)
                     if ( resp.success ) {
                         if ( !resp.data.user ) {
                             vm.username = '';

@@ -131,7 +131,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.messageObject = resp.data[0];
                     } else {
@@ -154,7 +154,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp)
+                    // console.log(resp)
                     if ( resp.success ) {
                         if ( !resp.data.user.ID ) {
                             return;

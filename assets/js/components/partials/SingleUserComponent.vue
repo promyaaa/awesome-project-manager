@@ -89,7 +89,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.userObj.user_email = vm.editUserEmail;
                         vm.userObj.title = vm.editUserTitle;

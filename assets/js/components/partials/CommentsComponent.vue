@@ -278,10 +278,6 @@
 
         created() {
             this.currentUserInfo = fpm.currentUserInfo;
-        },
-
-        mounted() {
-            console.log('comments component mounted.')
         }
     }
 </script>

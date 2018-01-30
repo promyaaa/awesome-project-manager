@@ -83,23 +83,23 @@
                 });
                 file_frame.on( 'select', function() {
                     attachment = file_frame.state().get('selection').first().toJSON();
-                    console.log(attachment);
+                    // console.log(attachment);
                     isAllowedType = mime_array.includes(attachment.mime);
 
                     if(isAllowedType) {
                         vm.$emit('attach', attachment);    
                     } else {
-                        console.log('not allowed');
+                        // console.log('not allowed');
                     }
                 });
                 file_frame.open();
             },
         },
         created() {
-            console.log(this.attachments);
+            // console.log(this.attachments);
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

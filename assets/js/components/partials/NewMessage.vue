@@ -176,7 +176,7 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        console.log(vm.$route);
+                        // console.log(vm.$route);
                     if ( resp.success ) {
                         messageID = resp.data.messageInfo.ID;
                         projectID = data.project_id;
@@ -205,7 +205,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                     }

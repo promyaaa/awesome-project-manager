@@ -175,7 +175,7 @@
                 key;
 
                 vm.$on('input', function(data) {
-                    console.log(data);
+                    // console.log(data);
                 })
 
             vm.currentUser = fpm.currentUserInfo;
