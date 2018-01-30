@@ -523,7 +523,7 @@ class FusionPM_Ajax {
         );
 
         if ( $commentID ) {
-            $where = array( 'ID' => intval($commentID) );
+            $where = array( 'ID' => intval( $commentID ) );
             $successResponse = $commentModel->update( $data, $where );
         } else {
             $insertID = $commentModel->create( $data );
@@ -532,7 +532,7 @@ class FusionPM_Ajax {
         $resp = array(
             'message' => __( 'Successfully inserted', 'fusion-pm' ),
             'comment' => array(
-                'ID' => $insertID ? insertID : $commentID,
+                'ID' => $insertID ? $insertID : $commentID,
                 'avatar_url' => get_avatar_url($current_user->ID, array('size'=>32)),
                 'created' => $date
             )
