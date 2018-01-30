@@ -165,7 +165,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         // vm.projectTitle = resp.data[0].project_title;
                         for(var i = 0; i < resp.data.length; i++ ) {

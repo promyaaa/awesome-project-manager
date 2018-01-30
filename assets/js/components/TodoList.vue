@@ -12,9 +12,6 @@
                 </div>
             </div>
             <div class="row">
-            <!-- <pre>
-                {{list}}
-            </pre> -->
                 <div class="col-12">
                     <div class="lists">
 

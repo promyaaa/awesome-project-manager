@@ -226,14 +226,9 @@
                 vm.i18n = data;
             });
 
-            // store.getLocalizeString().then(function(resp){
-            //     vm.localString = resp.data.actions;
-            // });
-
             projectid = vm.$route.params.projectid;
 
             store.fetchUsers( projectid ).then(function(resp){
-                console.log(resp);
                 vm.totalUsers = resp.data[0].user_count;
                 vm.users = resp.data;
             });
