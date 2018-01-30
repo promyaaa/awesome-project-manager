@@ -322,4 +322,7 @@
         top: 0;
         cursor: pointer;
     }
+    .project-settings .fa {
+        color: #b5b5b5;
+    }
 </style>

@@ -139,6 +139,10 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         vm.project = resp.data;
+                    } else {
+                        vm.$router.push({
+                            path: `/?type=project&info=notfound`
+                        });
                     }
                 });
             },
