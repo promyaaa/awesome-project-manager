@@ -94,8 +94,8 @@
                                     class="form-control"
                                     :placeholder="i18n.add_todo_placeholder"
                                     v-focus
+                                    required 
                                     @keyup.esc="hideTodoForm">
-                                <span class="form-note"><i>*required field</i></span>
                             </div>
                             <div>
                                 <select v-model="selected" class="form-control">
@@ -114,7 +114,7 @@
                             <br>
 
                             <div class="inline">
-                                <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" :value="i18n.udpate">
+                                <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" :value="i18n.update">
                                 <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" :value="i18n.cancel">
                             </div>
                         </div>
@@ -350,6 +350,7 @@
                 key;
 
             store.setLocalization( 'fpm-get-single-todo-local-data' ).then( function( data ) {
+                console.log(data);
                 vm.i18n = data;
             });
 

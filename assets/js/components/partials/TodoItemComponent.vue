@@ -89,13 +89,17 @@
         padding-right: 6px;
         color: #e3e3e3;
     }
-    .todo-item .fa{
+    h4 .fa {
+        font-size: 13px;
+        color: #b5b5b5;
+    }
+    .todo-item .fa {
         font-size: 13px;
         color: #b5b5b5;
         position: relative;
         top: -1px;
     }
-    .actions .fa{
+    .actions .fa {
         /*font-size: 16px;*/
         color: #b5b5b5;
         position: relative;

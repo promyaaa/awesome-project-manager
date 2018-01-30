@@ -16,7 +16,7 @@ class FusionPM_Localize {
         add_action( 'wp_ajax_fpm-get-myassignment-local-data', array( $this, 'myassignment_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-summary-local-data', array( $this, 'summary_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-todo-lists-local-data', array( $this, 'todolists_localize_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_licaloze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-messages-local-data', array( $this, 'messages_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-single-message-local-data', array( $this, 'single_messages_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-new-message-local-data', array( $this, 'new_messages_localize_data' ), 10 );
