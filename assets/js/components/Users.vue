@@ -51,6 +51,9 @@
                         <div class="col-6" v-for="(user, uindex) in users" v-if="!loading">
                             <single-user :user="user" v-on:remove="removeUser" :index="uindex" :i18n="i18n"></single-user>
                         </div>
+                        <div class="col-12 text-center" v-if="users.length < totalUsers">
+                            <button class="button" style="margin-top: 30px;" @click="loadMoreUsers">Load More</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,6 +85,7 @@
             return {
                 i18n: {},
                 users: [],
+                totalUsers: '',
                 project: '',
                 username: '',
                 email: '',
@@ -123,6 +127,27 @@
 
             toggleAddForm: function() {
                 this.isShowAddForm = !this.isShowAddForm;
+            },
+
+            loadMoreUsers() {
+                var vm = this;
+                // vm.loadMore = true;
+                var data = {
+                    action: 'fpm-load-more-users',
+                    nonce: fpm.nonce,
+                    project_id: vm.$route.params.projectid,
+                    offset: vm.users.length
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    // vm.loadMore = false;
+                    console.log(resp);
+                    if ( resp.success ) {
+                        for(var i = 0; i < resp.data.length; i++ ) {
+                            vm.users.push(resp.data[i]);
+                        }
+                    }
+                });
             },
 
             fetchProjectInfo: function() {
@@ -208,6 +233,8 @@
             projectid = vm.$route.params.projectid;
 
             store.fetchUsers( projectid ).then(function(resp){
+                console.log(resp);
+                vm.totalUsers = resp.data[0].user_count;
                 vm.users = resp.data;
             });
 

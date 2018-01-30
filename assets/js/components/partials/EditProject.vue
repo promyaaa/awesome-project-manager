@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 project-edit-content">
-                <h1 class="ellipsis-90">Edit <i style="color:#6d6d6d;">{{project.project_title}}</i></h1>
+                <h1 class="ellipsis-90">{{i18n.edit}} <i style="color:#6d6d6d;">{{project.project_title}}</i></h1>
                 <div class="project-edit-form">
                     <div>
                         <input type="text" v-model="projectTitle" class="form-control">
@@ -12,9 +12,11 @@
                         <textarea  v-model="projectDesc" class="form-control" rows="5"></textarea>
                     </div>
                     <br>
-                    <button class="button button-primary" @click="updateProject">Update</button>
+                    <button class="button button-primary" @click="updateProject">{{i18n.update}}</button>
+                    <router-link :to="'/projects/' + $route.params.projectid" class="button">
+                        {{i18n.cancel}}
+                    </router-link>
                 </div>
-                <router-link :to="'/projects/' + $route.params.projectid"><i class="fa fa-arrow-circle-left fa-lg" aria-hidden="true"></i>Back to summary</router-link>
             </div>
         </div>
     </div>
@@ -40,9 +42,11 @@
 </style>
 
 <script>
+    import store from '../../store';
     export default {
         data() {
             return {
+                i18n: {},
                 project: '',
                 currentUser: '',
                 projectTitle: '',
@@ -70,16 +74,8 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
                     if ( resp.success ) {
-
-                        // messageID = resp.data.messageInfo.ID;
-                        // projectID = data.project_id;
                         vm.$router.push({ path: `/projects/${projectID}` });
-                        // resp.data.messageInfo.message = vm.message;
-                        // vm.messages.unshift(resp.data.messageInfo);
-                        // vm.message = '';
-                        // vm.messageTitle = '';
                     } else {
                         // vm.message = resp.data;
                     }
@@ -112,8 +108,12 @@
             },
         },
         created() {
-            this.fetchProjectInfo();
-            this.currentUser = fpm.currentUserInfo;
+            var vm = this;
+            vm.fetchProjectInfo();
+            vm.currentUser = fpm.currentUserInfo;
+            store.setLocalization( 'fpm-get-project-edit-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
         }
     }
 </script>

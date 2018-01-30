@@ -29,6 +29,7 @@ class FusionPM_Ajax {
         // add_action( 'wp_ajax_fpm-get-message-count', array( $this, 'fetch_message_count' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-messages', array( $this, 'load_more_messages' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-lists', array( $this, 'load_more_lists' ), 10 );
+        add_action( 'wp_ajax_fpm-load-more-users', array( $this, 'load_more_users' ), 10 );
         add_action( 'wp_ajax_fpm-load-more-activities', array( $this, 'load_more_activities' ), 10 );
         add_action( 'wp_ajax_fpm-get-activities', array( $this, 'fetch_activities' ), 10 );
 
@@ -100,7 +101,7 @@ class FusionPM_Ajax {
     /* Ajax Callbacks */
     public function update_user() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $userID = $this->get_validated_input('user_id');
@@ -135,7 +136,7 @@ class FusionPM_Ajax {
 
     public function remove_user() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $userID = $this->get_validated_input('user_id');
@@ -163,7 +164,7 @@ class FusionPM_Ajax {
 
     public function insert_user () {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $user_name = $this->get_validated_input('user_name');
@@ -275,7 +276,7 @@ class FusionPM_Ajax {
 
     public function fetch_users() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -296,7 +297,7 @@ class FusionPM_Ajax {
 
     public function fetch_message_details() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -324,7 +325,7 @@ class FusionPM_Ajax {
     public function insert_message() {
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $message = $this->get_validated_input('message');
@@ -403,7 +404,7 @@ class FusionPM_Ajax {
 
     public function delete_message() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $messageID = $this->get_validated_input('message_id'); 
@@ -439,7 +440,7 @@ class FusionPM_Ajax {
 
     public function fetch_messages() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -461,7 +462,7 @@ class FusionPM_Ajax {
 
     public function delete_comment() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $commentID = $this->get_validated_input('comment_id');
@@ -482,7 +483,7 @@ class FusionPM_Ajax {
 
     public function insert_comment() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -547,7 +548,7 @@ class FusionPM_Ajax {
     public function fetch_todos() {
         
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $assigneeID = get_current_user_id();
@@ -567,7 +568,7 @@ class FusionPM_Ajax {
     public function fetch_todo_details() {
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
         
         $listID = $this->get_validated_input('list_id');
@@ -608,7 +609,7 @@ class FusionPM_Ajax {
     public function fetch_list_details() {
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $listID = $this->get_validated_input('list_id');
@@ -640,7 +641,7 @@ class FusionPM_Ajax {
     public function insert_todo() {
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $todo = !empty( $_POST['todo'] ) ? $_POST['todo'] : '';
@@ -746,7 +747,7 @@ class FusionPM_Ajax {
 
     public function delete_todo() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $todoID = $this->get_validated_input('todo_id');
@@ -783,7 +784,7 @@ class FusionPM_Ajax {
 
     public function complete_todo() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
         
         $todoID = !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
@@ -836,7 +837,7 @@ class FusionPM_Ajax {
         global $wpdb;
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $list_title = $this->get_validated_input('title');
@@ -895,7 +896,7 @@ class FusionPM_Ajax {
 
     public function delete_list() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $listID = $this->get_validated_input('list_id');
@@ -917,7 +918,7 @@ class FusionPM_Ajax {
     public function fetch_lists() {
         
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = !empty( $_POST['project_id'] ) ? $_POST['project_id'] : '';
@@ -937,7 +938,7 @@ class FusionPM_Ajax {
         global $wpdb;
 
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $project_title = !empty( $_POST['title'] ) ? $_POST['title'] : '';
@@ -988,7 +989,7 @@ class FusionPM_Ajax {
 
     public function delete_project() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id'); 
@@ -1009,7 +1010,7 @@ class FusionPM_Ajax {
 
     public function load_more_projects() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $offset = $this->get_validated_input('offset');
@@ -1023,7 +1024,7 @@ class FusionPM_Ajax {
 
     public function load_more_messages() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -1038,7 +1039,7 @@ class FusionPM_Ajax {
 
     public function load_more_lists() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -1051,9 +1052,25 @@ class FusionPM_Ajax {
         wp_send_json_success( $lists );
     }
 
+    public function load_more_users() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $offset = $this->get_validated_input('offset');
+        $limit = 15;
+        $avatar_size = 50;
+
+        $userModel = FusionPM_User::init();
+        $users = $userModel->get_project_users( $projectID, $avatar_size, $limit, $offset );
+
+        wp_send_json_success( $users );
+    }
+
     public function load_more_activities() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -1068,7 +1085,7 @@ class FusionPM_Ajax {
 
     public function fetch_project_count() {
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectModel = FusionPM_Project::init();
@@ -1079,7 +1096,7 @@ class FusionPM_Ajax {
 
     // public function fetch_message_count() {
     //     if ( $this->is_nonce_verified() ) {
-    //         wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+    //         wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
     //     }
 
     //     $projectID = $this->get_validated_input('project_id');
@@ -1093,7 +1110,7 @@ class FusionPM_Ajax {
     public function fetch_projects() {
         
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectModel = FusionPM_Project::init();
@@ -1105,7 +1122,7 @@ class FusionPM_Ajax {
     public function fetch_project() {
         
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');
@@ -1129,7 +1146,7 @@ class FusionPM_Ajax {
     public function fetch_activities() {
         
         if ( $this->is_nonce_verified() ) {
-            wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
         $projectID = $this->get_validated_input('project_id');

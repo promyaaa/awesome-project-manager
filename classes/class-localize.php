@@ -22,6 +22,7 @@ class FusionPM_Localize {
         add_action( 'wp_ajax_fpm-get-new-message-local-data', array( $this, 'new_messages_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-edit-message-local-data', array( $this, 'edit_messages_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-users-local-data', array( $this, 'get_users_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-project-edit-local-data', array( $this, 'get_project_edit_localize_data' ), 10 );
     }
 
     /* class common methods */
@@ -298,6 +299,16 @@ class FusionPM_Localize {
             'email_placeholder'                    => __( 'Email', 'fusion-pm' ),
             'name_placeholder'                    => __( 'Name', 'fusion-pm' ),
             'loading'                    => __( 'Loading . . .', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    public function get_project_edit_localize_data() {
+        $localize_data = array(
+            'edit'                      => __( 'Edit', 'fusion-pm' ),
+            'cancel'                    => __( 'Cancel', 'fusion-pm' ),
+            'update'                    => __( 'Update', 'fusion-pm' )
         );
 
         wp_send_json_success( $localize_data );

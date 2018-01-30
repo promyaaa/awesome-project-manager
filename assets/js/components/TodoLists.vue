@@ -136,7 +136,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
                     if ( resp.success ) {
                         vm.lists = resp.data;
                     }

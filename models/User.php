@@ -36,15 +36,18 @@ class FusionPM_User {
         return $formatted_date;
     }
 
-    public function get_project_users( $projectID, $avatar_size = NULL, $limit = NULL ) {
+    public function get_project_users( $projectID, $avatar_size = NULL, $limit = NULL, $offset = NULL ) {
 
         global $wpdb;
 
-        if (!$limit) {
-            $limit = 100;
+        if ( !$limit ) {
+            $limit = 20;
         }
-        if(!$avatar_size) {
+        if ( !$avatar_size ) {
             $avatar_size = 50;
+        }
+        if ( !$offset ) {
+            $offset = 0;
         }
         
         $result = $wpdb->get_results(
@@ -53,14 +56,23 @@ class FusionPM_User {
              INNER JOIN  {$this->relation_table_name} 
              ON {$this->table_name}.ID = {$this->relation_table_name}.userID 
              WHERE {$this->relation_table_name}.projectID = {$projectID}
-             LIMIT {$limit}"
+             LIMIT {$limit}
+             OFFSET {$offset}"
         );
+
+        if ( !$result ) {
+            return $result;
+        }
         
         foreach ($result as $userObject) {
             $userObject->avatar_url = get_avatar_url($userObject->ID, array('size'=>$avatar_size));
             $userObject->title = get_user_meta($userObject->ID, 'fpm_user_title', true);
         }
-
+        if ( !$offset ) {
+            $projectModel = FusionPM_Project::init();
+            $result[0]->user_count = $projectModel->get_project_user_count( $projectID );
+        }
+        
         return $result;
     }
 
