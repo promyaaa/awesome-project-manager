@@ -116,13 +116,7 @@
             //     };
             // },
 
-            somethingCool: function() { // @click.native test method
-                var vm = this,
-                    messageKey;
-                // messageKey = 'm' + vm.messageObject.ID + '-p' + vm.messageObject.projectID;
-                // localStorage.setItem(messageKey, JSON.stringify(vm.messageObject));
-                // console.log(JSON.parse(localStorage.getItem(messageKey)));
-            },
+
             fetchMessage: function() {
                 var vm = this,
                     projectID = vm.$route.params.projectid;

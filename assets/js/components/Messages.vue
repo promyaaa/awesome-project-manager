@@ -105,10 +105,14 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    console.log(resp);
+                    // console.log(resp);
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                         vm.messageCount = vm.project.message_count;
+                    } else {
+                        vm.$router.push({
+                            path: `/?type=project&info=notfound`
+                        });
                     }
                 });
             },
@@ -190,7 +194,7 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        console.log(resp);
+                        // console.log(resp);
                     if ( resp.success ) {
                         // resp.data.messageInfo.message = vm.message;
                         vm.messages.push(resp.data.messageInfo);

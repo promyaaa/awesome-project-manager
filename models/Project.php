@@ -141,6 +141,12 @@ class FusionPM_Project {
     public function get_project( $project_id, $summary = NULL ) {
         global $wpdb;
 
+        $isRelated = $this->checkRelation( $project_id, get_current_user_id() );
+
+        if ( !$isRelated ) {
+            return false;
+        }
+
         if ( $summary ) {
             $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );
             return $result[0];

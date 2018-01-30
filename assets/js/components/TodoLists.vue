@@ -177,6 +177,10 @@
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                         vm.listCount = vm.project.list_count;
+                    } else {
+                        vm.$router.push({
+                            path: `/?type=project&info=notfound`
+                        });
                     }
                 });
             },

@@ -169,7 +169,7 @@
                         vm.project = resp.data[0];
                     } else {
                         vm.$router.push({
-                            path: `/?type=todo&info=notfound`
+                            path: `/?type=project&info=notfound`
                         });
                     }
                 });

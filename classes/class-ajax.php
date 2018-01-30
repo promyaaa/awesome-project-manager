@@ -200,14 +200,22 @@ class FusionPM_Ajax {
 
             add_user_meta( $user_id, 'fpm_user_title', $title );
 
+            wp_send_new_user_notifications( $user_id, 'user' );
+
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( 'member' );
 
-            $related = $projectObject->updateRelation($projectID, $user_id);
+            $related = $projectObject->updateRelation( $projectID, $user_id );
+
+            $project_link = add_query_arg( array( 'page'=>'fusion-pm'), admin_url( 'admin.php' ) ) . '#/projects/' . $projectID;
 
             // Email the user
-            wp_mail( $email_address, 'Invitation!', 'You have been invited to '. $projectTitle .'. Your Password: ' . $password );
+            wp_mail( 
+                $email_address, 
+                'Invitation!', 
+                'You have been invited to project - '. $projectTitle .'. You can access the project via following link - ' . $project_link 
+            );
 
             $resp = array(
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
@@ -690,12 +698,20 @@ class FusionPM_Ajax {
             $insertID = $todosModel->create( $data );
         }
 
+        if ( $dueDate ) {
+            $overdue = false;
+            if ( current_time( 'mysql' ) > $due_date ) {
+                $overdue = true;
+            }
+        }
+
         $resp = array(
             'message' => __( 'Successfully inserted', 'fusion-pm' ),
             'todo' => array(
                 'ID' => $insertID ? $insertID : $todoID,
                 'formatted_due_date' => $dueDate ? $todosModel->get_formatted_date( $dueDate ) : '', 
                 'formatted_created' => $todosModel->get_formatted_date( $date ),
+                'is_overdue' => $overdue,
                 'created' => $date
             )
         );
