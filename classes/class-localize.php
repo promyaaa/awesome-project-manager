@@ -12,15 +12,16 @@ class FusionPM_Localize {
     */
     public function __construct() {
         add_action( 'wp_ajax_fpm-get-local-data', array( $this, 'get_localize_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-home-local-data', array( $this, 'home_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-myassignment-local-data', array( $this, 'myassignment_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-summary-local-data', array( $this, 'summary_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-todo-lists-local-data', array( $this, 'todolists_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-messages-local-data', array( $this, 'messages_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-single-message-local-data', array( $this, 'single_messages_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-new-message-local-data', array( $this, 'new_messages_localoze_data' ), 10 );
-        add_action( 'wp_ajax_fpm-get-edit-message-local-data', array( $this, 'edit_messages_localoze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-home-local-data', array( $this, 'home_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-myassignment-local-data', array( $this, 'myassignment_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-summary-local-data', array( $this, 'summary_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-todo-lists-local-data', array( $this, 'todolists_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-todo-local-data', array( $this, 'single_todo_licaloze_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-messages-local-data', array( $this, 'messages_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-message-local-data', array( $this, 'single_messages_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-new-message-local-data', array( $this, 'new_messages_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-edit-message-local-data', array( $this, 'edit_messages_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-users-local-data', array( $this, 'get_users_localize_data' ), 10 );
     }
 
     /* class common methods */
@@ -42,7 +43,7 @@ class FusionPM_Localize {
      *
      * @return void
      */
-    public function home_localoze_data() {
+    public function home_localize_data() {
         $localize_data = array(
             'my_assignments'                  => __( 'My Assignments', 'fusion-pm' ),
             'projects'                        => __( 'Projects', 'fusion-pm' ),
@@ -60,13 +61,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get myassignment_localoze_data
+     * Get myassignment_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function myassignment_localoze_data() {
+    public function myassignment_localize_data() {
         $localize_data = array(
             'my_assignments' => __( 'My Assignments', 'fusion-pm' ),
         );
@@ -75,13 +76,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get myassignment_localoze_data
+     * Get myassignment_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function summary_localoze_data() {
+    public function summary_localize_data() {
         $localize_data = array(
             'edit_info'                => __( 'Edit info', 'fusion-pm' ),
             'delete'                   => __( 'Delete', 'fusion-pm' ),
@@ -106,13 +107,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get todolists_localoze_data
+     * Get todolists_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function todolists_localoze_data() {
+    public function todolists_localize_data() {
         $localize_data = array(
             'make_list_btn'         => __( 'Make List', 'fusion-pm' ),
             'todos'                 => __( 'To-Dos', 'fusion-pm' ),
@@ -136,13 +137,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get single_todo_localoze_data
+     * Get single_todo_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function single_todo_localoze_data() {
+    public function single_todo_localize_data() {
         $localize_data = array(
             'assign_to_label'      => __( 'Assigned To :', 'fusion-pm' ),
             'due_date_label'       => __( 'Due Date :', 'fusion-pm' ),
@@ -168,13 +169,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get messages_localoze_data
+     * Get messages_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function messages_localoze_data() {
+    public function messages_localize_data() {
         $localize_data = array(
             'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
             'message_heading'      => __( 'Message Board', 'fusion-pm' ),
@@ -188,13 +189,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get single_messages_localoze_data
+     * Get single_messages_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function single_messages_localoze_data() {
+    public function single_messages_localize_data() {
         $localize_data = array(
             'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
             'message_heading'      => __( 'Message Board', 'fusion-pm' ),
@@ -216,13 +217,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get new_messages_localoze_data
+     * Get new_messages_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function new_messages_localoze_data() {
+    public function new_messages_localize_data() {
         $localize_data = array(
             'message_label'             => __( 'Messages', 'fusion-pm' ),
             'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
@@ -238,13 +239,13 @@ class FusionPM_Localize {
     }
 
     /**
-     * Get edit_messages_localoze_data
+     * Get edit_messages_localize_data
      *
      * @since 1.0.0
      *
      * @return void
      */
-    public function edit_messages_localoze_data() {
+    public function edit_messages_localize_data() {
         $localize_data = array(
             'message_label'             => __( 'Messages', 'fusion-pm' ),
             'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
@@ -277,6 +278,28 @@ class FusionPM_Localize {
                 )
             )
         );
+    }
+
+    public function get_users_localize_data() {
+        $localize_data = array(
+            'header_label'              => __( 'Set up who’s on ', 'fusion-pm' ),
+            'header_note'               => __( 
+                                                'Everyone below will be able to sign in to project manager and collaborate with you on this project (make to-dos, post messages, upload files, etc.).', 'fusion-pm' 
+                                                ),
+            'decorated_heading'         => __( 'People already on the project', 'fusion-pm' ),
+            'add_btn_text'              => __( 'Add more people to this project', 'fusion-pm' ),
+            'add_new'                   => __( 'Add new', 'fusion-pm' ),
+            'edit'                      => __( 'Edit', 'fusion-pm' ),
+            'remove'                    => __( 'Remove', 'fusion-pm' ),
+            'cancel'                    => __( 'Cancel', 'fusion-pm' ),
+            'update'                    => __( 'Update', 'fusion-pm' ),
+            'title_placeholder'                    => __( 'Title', 'fusion-pm' ),
+            'email_placeholder'                    => __( 'Email', 'fusion-pm' ),
+            'name_placeholder'                    => __( 'Name', 'fusion-pm' ),
+            'loading'                    => __( 'Loading . . .', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
     }
 
 }

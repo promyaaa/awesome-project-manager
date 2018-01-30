@@ -78,7 +78,6 @@ class FusionPM_Ajax {
 
     public function is_nonce_verified() {
         // returns false if nonce field is ok
-        // TODO: implement this method to all other functions where nonce check is required
         return isset( $_POST['nonce'] ) && ! wp_verify_nonce( $_POST['nonce'], 'fusion-pm-nonce' );
     }
 
@@ -173,6 +172,8 @@ class FusionPM_Ajax {
 
         $projectID = $this->get_validated_input('project_id');
 
+        $projectTitle = $this->get_validated_input('project_title');
+
         $title = $this->get_validated_input('title');
 
         if( ! $projectID ) {
@@ -189,32 +190,24 @@ class FusionPM_Ajax {
 
         $projectObject = FusionPM_Project::init();
 
-        $user_id = username_exists( $user_name );
+        $user_id = email_exists( $email_address );
 
-        if( !$user_id and email_exists($email_address) == false ) {
+        if( !$user_id ) {
 
             // Generate the password and create the user
             $password = wp_generate_password( 6, false );
             $user_id = wp_create_user( $user_name, $password, $email_address );
 
             add_user_meta( $user_id, 'fpm_user_title', $title );
-            // Set the nickname
-            // wp_update_user(
-            //     array(
-            //       'ID'          =>    $user_id,
-            //       'nickname'    =>    $email_address
-            //     )
-            // );
 
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( 'member' );
 
-            // $projectObject = FusionPM_Project::init();
             $related = $projectObject->updateRelation($projectID, $user_id);
 
             // Email the user
-            wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+            wp_mail( $email_address, 'Invitation!', 'You have been invited to '. $projectTitle .'. Your Password: ' . $password );
 
             $resp = array(
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
@@ -231,10 +224,15 @@ class FusionPM_Ajax {
         } 
         if( $user_id ) {
             $user = new WP_User( $user_id );
-
-            update_user_meta( $user_id, 'fpm_user_title', $title );
+            
+            if ( $title ) {
+                update_user_meta( $user_id, 'fpm_user_title', $title );
+            }
 
             $isRelated = $projectObject->checkRelation($projectID, $user_id);
+            
+            // Email the user
+            wp_mail( $email_address, 'Invitation!' , 'You have been invited to ' . $projectTitle );
 
             if ($isRelated) {
                 wp_send_json_success(
@@ -244,15 +242,13 @@ class FusionPM_Ajax {
                 );
             }
 
-            $makeRelation = $projectObject->updateRelation($projectID, $user_id);
-
-            // Email the user
-            // wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+            $makeRelation = $projectObject->updateRelation( $projectID, $user_id );
 
             $resp = array(
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
                 'user' => array(
                     'ID' => $user_id,
+                    'user_name' => $user->display_name,
                     'avatar_url' => get_avatar_url($user_id, array('size'=>50))
                 )
             );
@@ -276,9 +272,6 @@ class FusionPM_Ajax {
         $userModel = FusionPM_User::init();
 
         $users = $userModel->get_project_users( $projectID );
-
-        // var_dump(get_role('member'));
-        // die();
 
         if ( $users ) {
             wp_send_json_success( $users );
@@ -306,9 +299,6 @@ class FusionPM_Ajax {
         $messageModel = FusionPM_Message::init();
 
         $message = $messageModel->get_message_details( $projectID, $messageID );
-
-        // var_dump(get_role('member'));
-        // die();
 
         if ( $message ) {
             wp_send_json_success( $message );
@@ -344,13 +334,7 @@ class FusionPM_Ajax {
 
         $messageModel = FusionPM_Message::init();
 
-        // $projectClass = FusionPM_Project::init();
-
         $userObject = get_user_by( 'ID', get_current_user_id() );
-
-        // $projectObj = $projectClass->get_project( $projectID );
-
-        // $date = date("Y-m-d H:i:s");
 
         $date = current_time( 'mysql' );
 
@@ -360,7 +344,6 @@ class FusionPM_Ajax {
             'userID' => $userObject->ID,
             'projectID' => $projectID,
             'user_name' => $userObject->display_name,
-            // 'project_title' => $projectObj[0]->project_title,
             'project_title' => $projectTitle,
             'file_ids' => maybe_serialize( $fileIDs ),
             'created' => $date
@@ -466,7 +449,7 @@ class FusionPM_Ajax {
             wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
 
-        $commentID = $this->get_validated_input('comment_id'); // !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
+        $commentID = $this->get_validated_input('comment_id');
 
         if( ! $commentID ) {
             wp_send_json_error( __( 'commentid not provided', 'fusion-pm' ) );
@@ -492,7 +475,6 @@ class FusionPM_Ajax {
         $commentableType = $this->get_validated_input('commentable_type');
         $comment = $this->get_validated_input('comment');
         $commentID = $this->get_validated_input('comment_id');
-        // $userName = $this->get_validated_input('user_name');
 
         if( ! $projectID ) {
             wp_send_json_error( __( 'commentid not provided', 'fusion-pm' ) );
@@ -631,7 +613,6 @@ class FusionPM_Ajax {
         $isRelated = $listModel->checkRelation( $projectID, $listID );
         
         if ( $isRelated ) {
-            // $listObject = $listModel->get_lists_by_colum_info( 'ID', $listID );
             $listObject = $listModel->get_list_details( $listID );
             
             wp_send_json_success( $listObject );    
@@ -685,7 +666,6 @@ class FusionPM_Ajax {
 
         $todosModel = FusionPM_Todo::init();
         
-        // $date = date("Y-m-d H:i:s");
         $date = current_time( 'mysql' );
 
         $data = array(
@@ -763,7 +743,6 @@ class FusionPM_Ajax {
                 'userID' => $userObject->ID,
                 'user_name' => $userObject->display_name,
                 'projectID' => $projectID,
-                // 'listID' => $listID,
                 'activity_id' => $todoID,
                 'activity_type' => 'delete_todo',
                 'activity' => $todo,
@@ -854,14 +833,10 @@ class FusionPM_Ajax {
 
         if ( ! $userName ) {
             wp_send_json_error( __( 'User Name is required', 'fusion-pm' ) );
-            // $userObject = get_user_by( 'ID', get_current_user_id() );
-            // $userName = $userObject->display_name;
         }
 
-        // $table = $wpdb->prefix . 'fpm_lists';
-        // $date = date("Y-m-d H:i:s");
-
         $date = current_time( 'mysql' );
+
         $data = array(
             'list_title' => $list_title,
             'userID' => get_current_user_id(),
@@ -916,7 +891,7 @@ class FusionPM_Ajax {
     }
 
     public function fetch_lists() {
-        // global $wpdb;
+        
         if ( $this->is_nonce_verified() ) {
             wp_send_json_error( __( 'Nonce Verified failed.. Cheating uhhh?', 'fusion-pm' ) );
         }
@@ -929,7 +904,6 @@ class FusionPM_Ajax {
 
         $limit = !empty( $_POST['limit'] ) ? $_POST['limit'] : '';
         $listModel = FusionPM_List::init();
-        // $lists = $listModel->get_lists();
         $lists = $listModel->get_lists_by_column_info('projectID', $projectID, $limit);
 
         wp_send_json_success( $lists );
@@ -953,12 +927,6 @@ class FusionPM_Ajax {
         if ( ! $project_desc ) {
             wp_send_json_error( __( 'Description is required', 'fusion-pm' ) );
         }
-        
-        // $projectObject = FusionPM_Project::init();
-
-        // $table = $wpdb->prefix . 'fpm_projects';
-        
-        // $date = date("Y-m-d H:i:s");
         
         $date = current_time( 'mysql' );
 
@@ -1118,14 +1086,16 @@ class FusionPM_Ajax {
 
         $projectID = $this->get_validated_input('project_id');
 
-        if(!$projectID) {
+        $isSummary = !empty( $_POST['is_summary'] ) ? $_POST['is_summary'] : NULL;
+
+        if( !$projectID ) {
             wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
         }
 
         $projectModel = FusionPM_Project::init();
-        $project = $projectModel->get_project( $projectID );
+        $project = $projectModel->get_project( $projectID, $isSummary );
 
-        if ($project) {
+        if ( $project ) {
             wp_send_json_success( $project );
         }
         wp_send_json_error( __( 'something went wrong', 'fusion-pm' ) );

@@ -46,7 +46,7 @@ class FusionPM_User {
         if(!$avatar_size) {
             $avatar_size = 50;
         }
-        $final_result = array();
+        
         $result = $wpdb->get_results(
             "SELECT {$this->table_name}.ID, {$this->table_name}.display_name, {$this->table_name}.user_email
              FROM  {$this->table_name} 
@@ -59,10 +59,9 @@ class FusionPM_User {
         foreach ($result as $userObject) {
             $userObject->avatar_url = get_avatar_url($userObject->ID, array('size'=>$avatar_size));
             $userObject->title = get_user_meta($userObject->ID, 'fpm_user_title', true);
-            array_push($final_result, $userObject);
         }
 
-        return $final_result;
+        return $result;
     }
 
     public function remove_user( $user_id, $project_id ) {

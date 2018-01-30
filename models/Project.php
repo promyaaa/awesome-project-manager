@@ -50,7 +50,7 @@ class FusionPM_Project {
                 'projectID' => $projectID
             )
         );
-
+        
         if ( $insert ) {
             return true;
         }

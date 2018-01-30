@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 project-edit-content">
-                <h1 class="ellipsis-90">Edit <span class="text-highlight">{{project.project_title}}</span></h1>
+                <h1 class="ellipsis-90">Edit <i style="color:#6d6d6d;">{{project.project_title}}</i></h1>
                 <div class="project-edit-form">
                     <div>
                         <input type="text" v-model="projectTitle" class="form-control">
@@ -14,7 +14,7 @@
                     <br>
                     <button class="button button-primary" @click="updateProject">Update</button>
                 </div>
-                <router-link :to="'/projects/' + $route.params.projectid">Back to summary</router-link>
+                <router-link :to="'/projects/' + $route.params.projectid"><i class="fa fa-arrow-circle-left fa-lg" aria-hidden="true"></i>Back to summary</router-link>
             </div>
         </div>
     </div>

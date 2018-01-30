@@ -33,10 +33,10 @@
             <div class="col-2" style="margin-top: 0px; margin-bottom: 5px;">
                 <div class="actions text-center" v-if="isShowEdit">
                     <span @click="showEditForm( todo, tindex )" v-tooltip :title="i18n.edit">
-                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:12px;"></i></a>
+                        <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </span>
                     <span class="trash" @click="deleteTodo(todo, tindex)" v-tooltip :title="i18n.delete">|
-                        <a style="color: #D54E21;cursor: pointer;"><i class="fa fa-trash" aria-hidden="true" style="font-size:12px;"></i></a>
+                        <a style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                 </div>
             </div>
@@ -89,8 +89,14 @@
         padding-right: 6px;
         color: #e3e3e3;
     }
-     i.fa{
-        font-size: 12px;
+    .todo-item .fa{
+        font-size: 13px;
+        color: #b5b5b5;
+        position: relative;
+        top: -1px;
+    }
+    .actions .fa{
+        /*font-size: 16px;*/
         color: #b5b5b5;
         position: relative;
         top: -1px;

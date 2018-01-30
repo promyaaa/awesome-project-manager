@@ -9,10 +9,10 @@
             <div class="user-info" v-if="!isShowEdit">
                 <div style="float:right" v-if="isShowAction">
                     <span @click="showUserEdit(user)">
-                        <a style="cursor: pointer">Edit</a>
+                        <a style="cursor: pointer">{{ i18n.edit }}</a>
                     </span>
                     <span class="trash" @click="removeUser(index)">| 
-                        <a style="cursor: pointer;">Remove</a>
+                        <a style="cursor: pointer;">{{ i18n.remove }}</a>
                     </span>
                 </div>
                 <span class="info">{{userObj.display_name}}</span>
@@ -20,11 +20,11 @@
                 <span class="info">{{userObj.user_email}}</span>
             </div>
             <div v-if="isShowEdit" class="user-info">
-                <input type="text" v-model="editUserEmail" placeholder="Email">
-                <input type="text" v-model="editUserTitle" placeholder="Title">
+                <input type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
+                <input type="text" v-model="editUserTitle" :placeholder="i18n.title_placeholder">
                 <br>
-                <button class="button button-small button-primary" @click="updateUser" v-bind:disabled="isButtonDisabled">Update</button>
-                <button class="button button-small button-default" @click="cancelUserEdit">Cancel</button>
+                <button class="button button-small button-primary" @click="updateUser" v-bind:disabled="isButtonDisabled">{{ i18n.update }}</button>
+                <button class="button button-small button-default" @click="cancelUserEdit">{{ i18n.cancel }}</button>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                 editUserTitle: ''
             }
         },
-        props: ['user', 'index'],
+        props: ['user', 'index', 'i18n'],
         computed: {
             isButtonDisabled() {
                 return (this.userObj.user_email === this.editUserEmail) && 

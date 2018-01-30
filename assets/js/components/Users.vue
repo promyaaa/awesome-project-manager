@@ -1,46 +1,55 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center">
-                <router-link :to="'/projects/' + $route.params.projectid">Back to summary</router-link>
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div v-if="project" class="project-navigation">
+                    <router-link :to="'/projects/' + $route.params.projectid" tag="h3" class="link-style">
+                        <a>{{project.project_title}}</a>
+                    </router-link>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row box">
             <div class="col-12">
-                <div class="box">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>{{ i18n.header_label }}<i style="color:#6d6d6d">{{project.project_title}}</i></h3>
+                        <p>{{ i18n.header_note }}</p>
+                    </div>
+                </div>
+                <div>
                     <div class="text-center">
                         <button class="button button-large button-primary"
                                 @click="toggleAddForm"
-                                v-if="!isShowAddForm">Add People</button>
+                                v-if="!isShowAddForm">{{ i18n.add_btn_text }}</button>
                     </div>
                     <div class="add_form_style" v-if="isShowAddForm">
                         <div>
-                            <input type="text" class="form-control" placeholder="Name" v-model="username">
+                            <input type="text" class="form-control" :placeholder="i18n.name_placeholder" v-model="username" required>
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Email" v-model="email">
+                            <input type="text" class="form-control" :placeholder="i18n.email_placeholder" v-model="email" required>
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Title" v-model="usertitle">
+                            <input type="text" class="form-control" :placeholder="i18n.title_placeholder" v-model="usertitle">
                         </div>
                         <br>
                         <div>
                             <!-- <input type="submit" class="button button-primary" v-model="localString.add_new" @click="createUser"> -->
-                            <button class="button button-primary" @click="createUser">{{localString.add_new}}</button>
-                            <button class="button button-default" @click="toggleAddForm">{{localString.cancel}}</button>
+                            <button class="button button-primary" @click="createUser">{{i18n.add_new}}</button>
+                            <button class="button button-default" @click="toggleAddForm">{{ i18n.cancel }}</button>
                         </div>
                     </div>
                     <br>
-                    <h2 class="decorated"><span>People already on the project</span></h2>
-                    <!-- <pre>
-                        {{users}}
-                    </pre> -->
+                    <h2 class="decorated"><span>{{ i18n.decorated_heading }}</span></h2>
+                    
                     <div class="loading" v-if="loading">
-                        <p>Loading . . .</p>
+                        <p>{{ i18n.loading }}</p>
                     </div>
                     <div class="row">
                         <div class="col-6" v-for="(user, uindex) in users" v-if="!loading">
-                            <single-user :user="user" v-on:remove="removeUser" :index="uindex"></single-user>
+                            <single-user :user="user" v-on:remove="removeUser" :index="uindex" :i18n="i18n"></single-user>
                         </div>
                     </div>
                 </div>
@@ -67,7 +76,9 @@
         },
         data() {
             return {
+                i18n: {},
                 users: [],
+                project: '',
                 username: '',
                 email: '',
                 loading: false,
@@ -78,24 +89,6 @@
             }
         },
         methods: {
-            // fetchUsers: function() {
-            //     var vm = this,
-            //         todo,
-            //         data = {
-            //             action : 'fpm-get-users',
-            //             nonce : fpm.nonce,
-            //             project_id: vm.$route.params.projectid
-            //         };
-
-            //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-            //         console.log(resp)
-            //         if ( resp.success ) {
-            //             vm.users = resp.data;
-            //         } else {
-
-            //         }
-            //     });
-            // },
 
             removeUser( index ) {
                 if (confirm("Are you sure ??")) {
@@ -123,8 +116,27 @@
                     });
                 }
             },
+
             toggleAddForm: function() {
                 this.isShowAddForm = !this.isShowAddForm;
+            },
+
+            fetchProjectInfo: function() {
+                var vm = this;
+                // vm.loading = true;
+
+                var data = {
+                    action: 'fpm-get-project',
+                    project_id: vm.$route.params.projectid,
+                    is_summary: true,
+                    nonce: fpm.nonce,
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    if ( resp.success ) {
+                        vm.project = resp.data;
+                    }
+                });
             },
 
             createUser: function() {
@@ -137,6 +149,7 @@
                         user_name: vm.username,
                         email: vm.email,
                         project_id: projectid,
+                        project_title: vm.project.project_title,
                         title: vm.usertitle
                     };
 
@@ -154,7 +167,7 @@
                         var userObj = {};
                         userObj.ID = resp.data.user.ID;
                         userObj.avatar_url = resp.data.user.avatar_url;
-                        userObj.display_name = vm.username;
+                        userObj.display_name = resp.data.user.user_name;
                         userObj.user_email = vm.email;
                         userObj.title = vm.usertitle;
 
@@ -175,18 +188,23 @@
         created() {
             var vm = this,
                 projectid;
-            // vm.fetchUsers();
 
-            store.getLocalizeString().then(function(resp){
-                // console.log(resp);
-                vm.localString = resp.data.actions;
+            store.setLocalization( 'fpm-get-users-local-data' ).then( function( data ) {
+                console.log(data);
+                vm.i18n = data;
             });
+
+            // store.getLocalizeString().then(function(resp){
+            //     vm.localString = resp.data.actions;
+            // });
 
             projectid = vm.$route.params.projectid;
 
             store.fetchUsers( projectid ).then(function(resp){
                 vm.users = resp.data;
             });
+
+            vm.fetchProjectInfo();
 
         },
 

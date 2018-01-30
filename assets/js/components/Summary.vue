@@ -10,7 +10,7 @@
 
                         <span class="dropdown project-settings show-edit" v-if="isShowEdit">
                             <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
-                                <i class="fa fa-gear" aria-hidden="true"></i>
+                                <i class="fa fa-gear" aria-hidden="true" style="font-size:15px;"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <router-link :to="'/projects/' + $route.params.projectid + '/edit'"
