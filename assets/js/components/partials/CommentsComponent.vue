@@ -14,10 +14,12 @@
                     </div>
                     <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
-                            <a>{{i18n.edit}}</a> |
+                            <!-- <a>{{i18n.edit}}</a> | -->
+                            <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
                         </span>
                         <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
-                            <a>{{ i18n.delete }}</a>
+                            <!-- <a>{{ i18n.delete }}</a> -->
+                            <a><i class="fa fa-trash" aria-hidden="true"></a>
                         </span>
                     </div>
                 </div>
@@ -59,6 +61,9 @@
     </div>
 </template>
 <style>
+    .comment-action .fa {
+        color: #b5b5b5;
+    }
     .comment-content {
         padding: 20px 32px;
     }
