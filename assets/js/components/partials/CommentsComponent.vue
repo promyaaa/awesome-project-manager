@@ -243,7 +243,7 @@
                     } else if (vm.type === 'message') {
                         data.commentable_id = vm.$route.params.messageid;
                     }
-                    console.log(data);
+                    // console.log(data);
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // console.log(resp);
                     if ( resp.success ) {

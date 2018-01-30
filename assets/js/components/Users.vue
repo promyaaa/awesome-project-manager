@@ -105,12 +105,12 @@
                             user_id : vm.users[index].ID,
                             project_id : projectid
                         };
-
+                        
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        // console.log(resp);
+                        
                         if ( resp.success ) {
-
                             vm.users.splice(index, 1);
+                            // console.log(vm.users[index].display_name);
                             localStorage.removeItem(localUsersKey);
                             localStorage.setItem(localUsersKey, JSON.stringify(vm.users));
 

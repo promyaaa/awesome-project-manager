@@ -31,6 +31,7 @@
                 <div class="col-12">
                     <div class="users-summary">
                         <div style="display: inline-block">
+                        
                             <img :src="user.avatar_url" v-for="user in users" alt="" class="small-round-image">
                         </div>
                         <div v-if="project.user_count > 10" style="display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;">

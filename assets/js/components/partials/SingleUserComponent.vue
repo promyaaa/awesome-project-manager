@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-2">
             <div class="user-avatar">
-                <img class="avatar small-round-image" :src="userObj.avatar_url" alt="...">
+                <img class="avatar small-round-image" :src="user.avatar_url" alt="...">
             </div>
         </div>
         <div class="col-10">
@@ -15,9 +15,9 @@
                         <a style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                 </div>
-                <span class="info"><strong>{{userObj.display_name}}</strong></span>
-                <span class="info">{{userObj.title}}</span>
-                <span class="info"><i>{{userObj.user_email}}</i></span>
+                <span class="info"><strong>{{user.display_name}}</strong></span>
+                <span class="info">{{user.title}}</span>
+                <span class="info"><i>{{user.user_email}}</i></span>
             </div>
             <div v-if="isShowEdit" class="user-info">
                 <input type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
@@ -39,8 +39,7 @@
         },
         data() {
             return {
-                userObj:'',
-                userObjClone: '',
+                userClone: '',
                 isShowEdit: false,
                 editUserEmail: '',
                 editUserTitle: ''
@@ -49,31 +48,34 @@
         props: ['user', 'index', 'i18n'],
         computed: {
             isButtonDisabled() {
-                return (this.userObj.user_email === this.editUserEmail) && 
-                        (this.userObj.title === this.editUserTitle);  
+                return (this.user.user_email === this.editUserEmail) && 
+                        (this.user.title === this.editUserTitle);  
             },
             isShowAction: function() {
                 return this.currentUser.roles[0] === 'administrator';    
             }
         },
         methods: {
-            showUserEdit( userObject ) {
+            showUserEdit( userect ) {
                 var vm = this;
 
-                vm.userObjClone = JSON.parse(JSON.stringify(userObject));
+                vm.userClone = JSON.parse(JSON.stringify(userect));
                 vm.isShowEdit = true;
-                vm.editUserEmail = userObject.user_email;
-                vm.editUserTitle = userObject.title;
+                vm.editUserEmail = userect.user_email;
+                vm.editUserTitle = userect.title;
             },
 
             cancelUserEdit( ) {
                 var vm = this;
 
-                vm.userObj = vm.userObjClone;
+                vm.user = vm.userClone;
                 vm.isShowEdit = false;
                 vm.cloneObject = '';
             },
             removeUser( index ) {
+                var userIndex = +index;
+                // console.log(typeof(userIndex));
+                // return;
                 this.$emit('remove', index);
             },
             updateUser() {
@@ -83,7 +85,7 @@
                     data = {
                         action : 'fpm-update-user',
                         nonce : fpm.nonce,
-                        user_id: vm.userObj.ID,
+                        user_id: vm.user.ID,
                         email: vm.editUserEmail,
                         title: vm.editUserTitle
                     };
@@ -91,8 +93,8 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // console.log(resp);
                     if ( resp.success ) {
-                        vm.userObj.user_email = vm.editUserEmail;
-                        vm.userObj.title = vm.editUserTitle;
+                        vm.user.user_email = vm.editUserEmail;
+                        vm.user.title = vm.editUserTitle;
 
                         localStorage.removeItem(localUsersKey);
 
@@ -107,7 +109,7 @@
             }
         },
         created() {
-            this.userObj = this.user;
+            // this.user = this.user;
             this.currentUser = fpm.currentUserInfo;
         },
         mounted() {

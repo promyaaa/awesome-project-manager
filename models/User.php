@@ -41,7 +41,7 @@ class FusionPM_User {
         global $wpdb;
 
         if (!$limit) {
-            $limit = 10;
+            $limit = 100;
         }
         if(!$avatar_size) {
             $avatar_size = 50;
