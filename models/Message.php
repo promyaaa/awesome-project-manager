@@ -122,7 +122,7 @@ class FusionPM_Message {
                 $fileObject->extension = $filetype['ext'];
                 $fileObject->icon = wp_mime_type_icon( $filetype['type'] );
                 $fileObject->title = get_the_title($ID);
-                // $fileObject->attachment_meta = wp_get_attachment_metadata( $ID ); // have to talk to kukur
+                // $fileObject->attachment_meta = wp_get_attachment_metadata( $ID );
                 array_push( $files_array, $fileObject );
             }
             $result[0]->files = $files_array;

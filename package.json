@@ -17,6 +17,11 @@
     "style-loader": "^0.13.0",
     "vue-loader": "^7.3.0",
     "vue-html-loader": "^1.0.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compress": "^1.4.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-wp-i18n": "^1.0.0",
     "webpack": "^3.8.1"
   },
   "author": "promyaaa"

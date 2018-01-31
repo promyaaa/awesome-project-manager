@@ -511,7 +511,7 @@ class FusionPM_Ajax {
 
         $date = current_time( 'mysql' );
 
-        $current_user = wp_get_current_user(); // TODO: Discuss with kukur
+        $current_user = wp_get_current_user();
 
         $data = array(
             'comment' => wp_kses_post($comment),
