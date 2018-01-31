@@ -109,8 +109,9 @@ class FusionPM_Message {
 
         $files = $result[0]->file_ids;
         $fileIDs = maybe_unserialize( $files );
-        if($fileIDs) {
-            foreach ($fileIDs as $ID) {
+
+        if ( $fileIDs ) {
+            foreach ( $fileIDs as $ID ) {
                 $fileObject = new stdClass();
                 $fileObject->ID = $ID;
                 $fileObject->url = wp_get_attachment_url( $ID );
@@ -131,8 +132,6 @@ class FusionPM_Message {
             $result[0]->attachmentIDs = [];
         }
         
-
-
         $commentModel = FusionPM_Comment::init();
         $messageComments = $commentModel->get_comments_by_column_info( $messageid, 'message' );
 
@@ -158,7 +157,7 @@ class FusionPM_Message {
             "SELECT * FROM {$this->table_name} WHERE {$column} = {$param} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}"
         );
 
-        foreach ($result as $messageObject) {
+        foreach ( $result as $messageObject ) {
             $messageObject->avatar_url = get_avatar_url($messageObject->userID, array('size'=>70));
             $messageObject->formatted_created = $this->get_formatted_date( $messageObject->created );
 
