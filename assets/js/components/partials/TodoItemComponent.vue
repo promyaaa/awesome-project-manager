@@ -21,8 +21,8 @@
                         </span>
                         <span v-if="todo.assignee_name" style="position:relative;">
                             <span class="pipe">|</span> 
-                            <img :src="todo.avatar_url" class="small-round-image" style="position:absolute;top:2px;" alt="">
-                            <span style="padding-left:23px;color:#b5b5b5">
+                            <i class="fa fa-user p-r-5" aria-hidden="true"></i>
+                            <span style="color:#b5b5b5">
                                 <i>{{todo.assignee_name}}</i>
                             </span>
                         </span>
@@ -189,7 +189,7 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         todoObject.todo = vm.todoName;
-                        todoObject.formatted_due_date = resp.data.todo.formatted_duedate;
+                        todoObject.formatted_due_date = resp.data.todo.formatted_due_date;
                         todoObject.assigneeID = vm.selected.ID;
                         todoObject.assignee_name = vm.selected.assignee;
 
