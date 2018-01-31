@@ -5,21 +5,11 @@
 */
 class FusionPM_Install {
 
-    /**
-    * Autometically loaded when class initiate
-    *
-    * @since 1.0.0
-    */
-    // public function __construct() {
-
-    // }
-
     function do_install() {
-        // add role 'member' with cap 'manage_project'
-        add_role( 'member', 'Member', array( 'read' => true ) );
+        add_role( 'fpm_member', 'Project Member', array( 'read' => true ) );
         $administrator     = get_role('administrator');
         $administrator->add_cap( 'manage_project' );
-        $member     = get_role('member');
+        $member     = get_role('fpm_member');
         $member->add_cap( 'manage_project' );
         $member->add_cap( 'upload_files' );
         $this->create_table();
@@ -119,7 +109,6 @@ class FusionPM_Install {
 
         ];
 
-    
         include_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
         foreach ( $schema as $table ) {

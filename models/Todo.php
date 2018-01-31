@@ -164,10 +164,14 @@ class FusionPM_Todo {
             $todo->formatted_created = $this->get_formatted_date( $todo->created );
             $todo->avatar_url = get_avatar_url($todo->assigneeID, array('size'=>15));
             if ( $todo->due_date ) {
+                if ( current_time( 'mysql' ) > $todo->due_date ) {
+                    $todo->is_overdue = true;
+                }
                 $todo->formatted_due_date = $this->get_formatted_date( $todo->due_date );
             } else {
                 $todo->formatted_due_date = '';
                 $todo->due_date = '';
+                $todo->is_overdue = false;
             }
         }
         

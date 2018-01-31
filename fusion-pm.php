@@ -4,7 +4,7 @@ Plugin Name: Fusion project manager wordpress plugin
 Plugin URI: http://example.com/
 Description: Description
 Version: 1.0.0
-Author: Rokib
+Author: Promy
 Author URI: http://example.com/
 License: GPL2
 */
@@ -105,7 +105,6 @@ class Fusion_PM {
     public static function activate() {
         $installer = new FusionPM_Install();
         $installer->do_install();
-        add_role( 'member', 'Member', array( ) );
     }
 
     /**

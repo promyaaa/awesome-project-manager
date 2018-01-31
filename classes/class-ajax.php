@@ -207,7 +207,7 @@ class FusionPM_Ajax {
 
             // Set the role
             $user = new WP_User( $user_id );
-            $user->set_role( 'member' );
+            $user->set_role( 'fpm_member' );
 
             $related = $projectObject->updateRelation( $projectID, $user_id );
 

@@ -8,6 +8,9 @@
                 </div>
             </div>
         </div>
+        <!-- <pre>
+            {{todos}}
+        </pre> -->
         <div class="row">
             <div class="col-12">
                 <div class="row" v-for="todo in todos" style="padding-left:20px; padding-bottom:5px">
@@ -20,6 +23,11 @@
                     <div class="col-10">
                         <router-link :to="'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID" tag="div" class="my-todo">
                             <a>{{todo.todo}}</a>
+                            <span v-if="todo.formatted_due_date">
+                                <span class="pipe">|</span>
+                                <i class="fa fa-calendar p-r-5" aria-hidden="true"></i> 
+                                <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">{{todo.formatted_due_date}}</span>
+                            </span>
                         </router-link>
                     </div>
                 </div>

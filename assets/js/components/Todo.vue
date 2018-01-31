@@ -61,7 +61,10 @@
                                     <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
                                 </div>
                                 <div class="col-9">
-                                    <span v-bind:class="[is_overdue ? 'overdue' : 'due']"><i>{{todoObject.formatted_due_date}}</i></span>
+                                    <span v-if="todoObject.formatted_due_date"
+                                            v-bind:class="[is_overdue ? 'overdue' : 'due']">
+                                            <i>{{todoObject.formatted_due_date}}</i>
+                                    </span>
                                 </div>
                             </div>
 
