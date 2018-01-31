@@ -17,18 +17,18 @@
                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID" class="link-style" tag="span">
                         <span :class="{ completed: is_complete }">{{todo.todo}}</span>
                         <span v-if="todo.formatted_due_date">
-                            <span class="pipe">|</span><i class="fa fa-calendar p-r-5" aria-hidden="true"></i> <span>{{todo.formatted_due_date}}</span>
+                            <span class="pipe">|</span><i class="fa fa-calendar p-r-5" aria-hidden="true"></i> <span style="color:#b5b5b5"><i>{{todo.formatted_due_date}}</i></span>
                         </span>
                         <span v-if="todo.assignee_name" style="position:relative;">
                             <span class="pipe">|</span> 
                             <img :src="todo.avatar_url" class="small-round-image" style="position:absolute;top:2px;" alt="">
-                            <span style="padding-left:23px;">
-                                {{todo.assignee_name}}
+                            <span style="padding-left:23px;color:#b5b5b5">
+                                <i>{{todo.assignee_name}}</i>
                             </span>
                         </span>
                         <span v-if="fileCount > 0">
                             <span class="pipe">|</span><i class="fa fa-file p-r-5" aria-hidden="true"></i>
-                            <span style="font-size:11px;">{{fileCount}}</span>
+                            <span style="font-size:11px;color:#b5b5b5"><i>{{fileCount}}</i></span>
                         </span>
                     </router-link>
                 </div>
