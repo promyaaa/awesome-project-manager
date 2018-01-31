@@ -8,7 +8,7 @@
 **License:** GPLv2 or later
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
-The best project manager plugin in WordPress
+The best project manager plugin for WordPress
 
 ## Description ##
 
