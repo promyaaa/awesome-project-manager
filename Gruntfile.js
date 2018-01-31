@@ -2,19 +2,17 @@ module.exports = function(grunt) {
     var package = grunt.file.readJSON('package.json');
 
     grunt.initConfig({
-
-        // Generate POT files.
         makepot: {
             target: {
                 options: {
                     exclude: ['dists/.*', 'node_modules/*', 'assets/*', 'tests/*', 'bin/*'],
-                    mainFile: 'fusion-pm.php',
+                    mainFile: 'awesome-pm.php',
                     domainPath: '/languages/',
-                    potFilename: 'fusion-pm.pot',
+                    potFilename: 'awesome-pm.pot',
                     type: 'wp-plugin',
                     updateTimestamp: true,
                     potHeaders: {
-                        'report-msgid-bugs-to': 'https://wptarzan.com/',
+                        'report-msgid-bugs-to': 'https://github.com/promyaaa/awesome-project-manager/issues',
                         'language-team': 'LANGUAGE <EMAIL@ADDRESS>',
                         poedit: true,
                         'x-poedit-keywordslist': true
@@ -23,12 +21,10 @@ module.exports = function(grunt) {
             }
         },
 
-        // Clean up build directory
         clean: {
             main: ['dists/']
         },
 
-        // Copy the plugin into the build directory
         copy: {
             main: {
                 src: [
@@ -60,22 +56,20 @@ module.exports = function(grunt) {
             }
         },
 
-        //Compress build directory into <name>.zip and <name>-<version>.zip
         compress: {
             main: {
                 options: {
                     mode: 'zip',
-                    archive: './dists/fusion-pm-v' + package.version + '.zip'
+                    archive: './dists/awesome-pm-v' + package.version + '.zip'
                 },
                 expand: true,
                 cwd: 'dists/',
                 src: ['**/*'],
-                dest: 'fusion-pm'
+                dest: 'awesome-pm'
             }
         }
     });
 
-    // Load NPM tasks to be used here
     grunt.loadNpmTasks( 'grunt-wp-i18n' );
     grunt.loadNpmTasks( 'grunt-contrib-clean' );
     grunt.loadNpmTasks( 'grunt-contrib-copy' );

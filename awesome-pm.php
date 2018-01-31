@@ -1,16 +1,16 @@
 <?php
 /*
-Plugin Name: Fusion project manager wordpress plugin
+Plugin Name: Awesome project manager
 Plugin URI: http://example.com/
-Description: Description
+Description: A single page project manager plugin for wordpress.
 Version: 1.0.0
-Author: Promy
-Author URI: http://example.com/
+Author: M Abdur Rokib Promy
+Author URI: https://github.com/promyaaa
 License: GPL2
 */
 
 /**
- * Copyright (c) YEAR Your Name (email: Email). All rights reserved.
+ * Copyright (c) 2018 M Abdur Rokib Promy (email: promy89@gmail.com). All rights reserved.
  *
  * Released under the GPL license
  * http://www.opensource.org/licenses/gpl-license.php

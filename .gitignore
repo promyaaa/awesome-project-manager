@@ -1,6 +1,5 @@
 requirement.txt
 assets/.DS_Store
-assets/js/build.js
 node_modules
 build
 npm-debug.log
@@ -12,3 +11,4 @@ includes/.DS_Store
 secret.json
 debug.log
 package-lock.json
+dists
