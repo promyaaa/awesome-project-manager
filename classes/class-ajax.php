@@ -1094,19 +1094,6 @@ class FusionPM_Ajax {
         wp_send_json_success( $projectCount );
     }
 
-    // public function fetch_message_count() {
-    //     if ( $this->is_nonce_verified() ) {
-    //         wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
-    //     }
-
-    //     $projectID = $this->get_validated_input('project_id');
-
-    //     $messageModel = FusionPM_Message::init();
-    //     $messageCount = $messageModel->get_message_count( $projectID );
-
-    //     wp_send_json_success( $messageCount );
-    // }
-
     public function fetch_projects() {
         
         if ( $this->is_nonce_verified() ) {

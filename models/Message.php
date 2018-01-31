@@ -152,7 +152,6 @@ class FusionPM_Message {
             $offset = 0;
         }
 
-        // $final_result = array();
         $result = $wpdb->get_results( 
             "SELECT * FROM {$this->table_name} WHERE {$column} = {$param} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}"
         );
@@ -160,8 +159,6 @@ class FusionPM_Message {
         foreach ( $result as $messageObject ) {
             $messageObject->avatar_url = get_avatar_url($messageObject->userID, array('size'=>70));
             $messageObject->formatted_created = $this->get_formatted_date( $messageObject->created );
-
-            // array_push($final_result, $messageObject);
         }
 
         return $result;

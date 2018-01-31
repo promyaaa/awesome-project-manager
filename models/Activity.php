@@ -21,10 +21,6 @@ class FusionPM_Activity {
 
     public function get_formatted_date( $date ) {
         $date_format = get_option( 'date_format' );
-        // $time_format = get_option( 'time_format' );
-
-        // $datetime_format = $date_format.' '.$time_format;
-
         $given_date = date_create( $date );
         $formatted_date = date_format( $given_date, $date_format );
 
@@ -32,11 +28,7 @@ class FusionPM_Activity {
     }
 
     public function get_formatted_time( $date ) {
-        // $date_format = get_option( 'date_format' );
         $time_format = get_option( 'time_format' );
-
-        // $datetime_format = $date_format.' '.$time_format;
-
         $given_date = date_create( $date );
         $formatted_time = date_format( $given_date, $time_format );
 

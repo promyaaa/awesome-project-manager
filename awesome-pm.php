@@ -138,7 +138,7 @@ class Fusion_PM {
     * @return void
     **/
     private function includes() {
-        // require_once Fusion_PM_PATH . '/vendor/autoload.php';
+        
         if ( is_admin() ) {
             require_once FUSION_PM_PATH . '/classes/class-install.php';
 
@@ -154,11 +154,8 @@ class Fusion_PM {
             require_once FUSION_PM_PATH . '/classes/class-ajax.php';
             require_once FUSION_PM_PATH . '/classes/class-admin.php';
             require_once FUSION_PM_PATH . '/classes/class-localize.php';
-            // require_once Fusion_PM_PATH . '/classes/class-form-handler.php';
-            // require_once Fusion_PM_PATH . '/models/Todo.php';
-            // require_once Fusion_PM_PATH . '/models/Section.php';
         }
-        // require_once Fusion_PM_PATH . '/classes/class-todo.php';
+        
     }
 
     /**
@@ -172,7 +169,6 @@ class Fusion_PM {
         // Load all filters
         add_filter( 'posts_where', array( $this, 'hide_others_uploads' ) );
         add_filter( 'upload_mimes', array( $this, 'restrict_mime' ) );
-        // add_filter( 'wp_handle_upload_prefilter', array( $this, 'fpm_handle_upload_prefilter' ) );
     }
 
     public function hide_others_uploads( $where ) {
@@ -214,31 +210,6 @@ class Fusion_PM {
         ); 
         return $mimes;
     }
-
-    // public function fpm_handle_upload_prefilter( $file ) {
-    //     // This bit is for the flash uploader
-    //     if ( $file['type']=='application/octet-stream' && isset( $file['tmp_name'] ) ) {
-    //         $file_size = getimagesize( $file['tmp_name'] );
-    //         if ( isset( $file_size['error'] ) && $file_size['error']!=0 ) {
-    //             $file['error'] = "Unexpected Error: {$file_size['error']}";
-    //             return $file;
-    //         } else {
-    //             $file['type'] = $file_size['mime'];
-    //         }
-    //     }
-
-    //     list( $category, $type ) = explode( '/',$file['type'] );
-    //     // var_dump($category);
-    //     if ( 'image'!=$category || !in_array( $type, array( 'jpg','jpeg','gif','png', 'pdf' ) ) ) {
-    //         $file['error'] = "Sorry, you can only upload a .GIF, a .JPG, or a .PNG image file.";
-    //     } else if ( $post_id = ( isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : false ) ) {
-    //         if ( count( get_posts( "post_type=attachment&post_parent={ $post_id }" ) ) >0 )
-    //             $file['error'] = "Sorry, you cannot upload more than one (1) image.";
-    //     }
-    //     return $file;
-    // }
-
-
 
     /**
     * Init all actions
@@ -295,14 +266,6 @@ class Fusion_PM {
 
         wp_enqueue_style( 'fusion-pm-styles', FUSION_PM_ASSETS . '/css/style.css', false, date( 'Ymd' ) );
         wp_enqueue_script( 'fusion-pm-scripts', FUSION_PM_ASSETS . '/js/script.js', array( 'jquery' ), false, true );
-
-        /**
-         * Example for setting up text strings from Javascript files for localization
-         *
-         * Uncomment line below and replace with proper localization variables.
-         */
-        // $translation_array = array( 'some_string' => __( 'Some string to translate', 'baseplugin' ), 'a_value' => '10' );
-        // wp_localize_script( 'base-plugin-scripts', 'baseplugin', $translation_array ) );
     }
 
     /**
@@ -314,22 +277,15 @@ class Fusion_PM {
     **/
     public function admin_enqueue_scripts( $hooks ) {
         wp_enqueue_media();
-        $suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-        // wp_register_script( 'fusion-vue', FUSION_PM_ASSETS . '/js/vue'. $suffix .'.js', array( 'jquery' ), false, true );
-        // wp_register_script( 'fusion-vue-router', FUSION_PM_ASSETS . '/js/vue-router'. $suffix .'.js', array( 'jquery', 'fusion-vue' ), false, true );
-        // wp_register_style( 'simple_grid_css', FUSION_PM_ASSETS . '/css/simple-grid.css', false, '1.0.0' );
+        
         wp_register_style( 'style_css', FUSION_PM_ASSETS . '/css/style.css', false, time() );
         wp_register_style( 'jquery-ui-style', FUSION_PM_ASSETS . '/css/jquery-ui.css', false, time() );
         wp_register_style( 'fusion-fontawesome', FUSION_PM_ASSETS . '/css/font-awesome.min.css', false, time() );
         wp_register_script( 'fusion-timepicker', FUSION_PM_ASSETS . '/js/jquery-ui-timepicker.js', array( 'jquery' ), false, true );
         wp_register_script( 'fusion-dropdown', FUSION_PM_ASSETS . '/js/dropdown.js', array( 'jquery' ), time(), true ); // array( 'jquery', 'fusion-vue' )
-        wp_register_script( 'fusion-admin', FUSION_PM_ASSETS . '/js/build'. $suffix .'.js', array( 'jquery', 'fusion-dropdown' ), time(), true ); // array( 'jquery', 'fusion-vue' )
+        wp_register_script( 'fusion-admin', FUSION_PM_ASSETS . '/js/build.js', array( 'jquery', 'fusion-dropdown' ), time(), true ); 
 
         if ( 'toplevel_page_fusion-pm' == $hooks ) {
-            // wp_enqueue_script( 'fusion-vue' );
-            // wp_enqueue_script( 'fusion-vue-router' );
-            // wp_enqueue_style( 'simple_grid_css' );
-
             wp_enqueue_style( 'style_css' );
             wp_enqueue_style( 'jquery-ui-style' );
             wp_enqueue_style( 'fusion-fontawesome' );
@@ -339,7 +295,6 @@ class Fusion_PM {
             wp_enqueue_script( 'fusion-dropdown' );
             wp_enqueue_script( 'fusion-admin' );
 
-            // $currentuser = get_user_by( 'ID', get_current_user_id() );
             $currentuser = wp_get_current_user();
             $currentuser->avatar_url = get_avatar_url( $currentuser->ID );
 
@@ -354,7 +309,7 @@ class Fusion_PM {
         }
     }
 
-} // Fusion_PM
+}
 
 $fusion_pm = Fusion_PM::init();
 

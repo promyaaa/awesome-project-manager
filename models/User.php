@@ -77,11 +77,6 @@ class FusionPM_User {
     }
 
     public function remove_user( $user_id, $project_id ) {
-        // global $wpdb;
-
-        // $result = $wpdb->get_results( "DELETE FROM {$this->relation_table_name} WHERE `userID` = {$user_id} AND `projectID` = {$project_id}" );
-
-        // return $result;
         global $wpdb;
 
         $result = $wpdb->delete(

@@ -145,10 +145,6 @@ class FusionPM_Project {
 
         $isAdmin = current_user_can( 'manage_options' );
 
-        // if ( current_user_can( 'manage_options' ) ) {
-        //     $userIsAdministrator = true;
-        // }
-
         if ( !$isRelated && !$isAdmin ) {
             return false;
         }

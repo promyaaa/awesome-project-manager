@@ -57,18 +57,10 @@
                         <i class="fa fa-home" aria-hidden="true" style="font-size: 16px;"></i>
                         <a> Home </a>
                     </router-link>
-                    <!-- <router-link to="/projects/2/activities" tag="span" class="link-style common-nav">
-                        <i class="fa fa-rss" aria-hidden="true"></i>
-                        <a> Activity</a>
-                    </router-link> -->
-                    <!-- <router-link to="/" tag="span" class="link-style common-nav">
-                        <a>Reports</a>
-                    </router-link> -->
                 </div>
 
             </div>
         </div>
-        <!-- <h2 style="text-align: center;">Project Manager</h2> -->
         <div>
             <transition name="fade">
                 <router-view></router-view>
