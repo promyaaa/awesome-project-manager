@@ -34,7 +34,7 @@ class FusionPM_Admin {
     public function register_menu() {
         $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
 
-        add_menu_page( 'Fusion PM', 'FProject Manager', $capability, 'fusion-pm', array( $this, 'fusion_pm_page' ), 'dashicons-editor-table', 15 );
+        add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'fusion_pm_page' ), 'dashicons-editor-table', 15 );
 
         do_action( 'fusion_pm_menu', $capability );
     }

@@ -85,9 +85,14 @@
             return {
                 activities: [],
                 totalActivityCount: '',
-                noActivity: false,
                 activitiesObject : {},
                 currentCount: ''
+            }
+        },
+
+        computed: {
+            noActivity() {
+                return this.totalActivityCount < 1;
             }
         },
 
