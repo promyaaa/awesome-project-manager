@@ -247,7 +247,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
                         vm.is_complete = +vm.todoObject.is_complete;
@@ -316,7 +316,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.todoObject.todo = vm.todoName;
                         vm.todoObject.formatted_due_date = resp.data.todo.formatted_due_date;

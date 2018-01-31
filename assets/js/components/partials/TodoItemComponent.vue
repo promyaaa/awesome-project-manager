@@ -187,7 +187,6 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
                     if ( resp.success ) {
                         todoObject.todo = vm.todoName;
                         todoObject.formatted_due_date = resp.data.todo.formatted_duedate;

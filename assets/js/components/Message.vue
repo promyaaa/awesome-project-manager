@@ -131,7 +131,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.messageObject = resp.data[0];
                     } else {
@@ -154,7 +154,7 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp)
+                    
                     if ( resp.success ) {
                         if ( !resp.data.user.ID ) {
                             return;
@@ -210,14 +210,9 @@
 
             vm.fetchMessage();
             vm.currentUser = fpm.currentUserInfo;
-            store.getLocalizeString().then(function(resp){
-                // console.log(resp);
-                vm.localString = resp.data.actions;
-            });
+            // store.getLocalizeString().then(function(resp){
+            //     vm.localString = resp.data.actions;
+            // });
         },
-
-        mounted() {
-            // console.log('Component mounted.')
-        }
     }
 </script>

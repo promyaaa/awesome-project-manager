@@ -243,9 +243,9 @@
                     } else if (vm.type === 'message') {
                         data.commentable_id = vm.$route.params.messageid;
                     }
-                    // console.log(data);
+                    
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         commentObj.comment = vm.commentEditText;
                         vm.commentEditText = '';

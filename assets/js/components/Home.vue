@@ -247,7 +247,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.projects = resp.data;
                     }
@@ -263,7 +263,7 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.projectCount = resp.data;
                     }
@@ -282,7 +282,7 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         resp.data.project.project_title = vm.projectTitle;
                         resp.data.project.project_desc = vm.projectDesc;

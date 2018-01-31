@@ -174,9 +174,9 @@
                 projectid,
                 key;
 
-                vm.$on('input', function(data) {
-                    // console.log(data);
-                })
+                // vm.$on('input', function(data) {
+                    
+                // })
 
             vm.currentUser = fpm.currentUserInfo;
 

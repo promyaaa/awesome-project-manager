@@ -165,7 +165,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // vm.loading = false;
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                     } else {

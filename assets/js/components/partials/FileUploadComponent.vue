@@ -96,10 +96,10 @@
             },
         },
         created() {
-            // console.log(this.attachments);
+            
         },
         mounted() {
-            // console.log('Component mounted.')
+            
         }
     }
 </script>

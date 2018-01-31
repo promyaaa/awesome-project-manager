@@ -105,7 +105,7 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                         vm.messageCount = vm.project.message_count;
@@ -165,22 +165,14 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
+                    
                     if ( resp.success ) {
-                        // vm.projectTitle = resp.data[0].project_title;
                         for(var i = 0; i < resp.data.length; i++ ) {
                             vm.messages.push(resp.data[i]);
                         }
                     }
                 });
             },
-
-            // toggleMessageForm: function() {
-            //     var vm = this;
-            //     vm.messageTitle = '';
-            //     vm.message = '';
-            //     vm.isShowMessageForm = !vm.isShowMessageForm;
-            // },
 
             createMessage: function() {
                 var vm = this,
@@ -194,7 +186,6 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        // console.log(resp);
                     if ( resp.success ) {
                         // resp.data.messageInfo.message = vm.message;
                         vm.messages.push(resp.data.messageInfo);

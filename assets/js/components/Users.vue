@@ -115,7 +115,6 @@
                         if ( resp.success ) {
                             vm.users.splice(index, 1);
                             vm.totalUsers = vm.totalUsers - 1;
-                            // console.log(vm.users[index].display_name);
                             localStorage.removeItem(localUsersKey);
                             localStorage.setItem(localUsersKey, JSON.stringify(vm.users));
 
@@ -142,7 +141,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // vm.loadMore = false;
-                    console.log(resp);
                     if ( resp.success ) {
                         for(var i = 0; i < resp.data.length; i++ ) {
                             vm.users.push(resp.data[i]);
@@ -188,14 +186,13 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp)
+                    
                     if ( resp.success ) {
                         if ( !resp.data.user ) {
                             vm.username = '';
                             vm.email = '';
                             vm.usertitle = '';
-                            // show message
-                            // TODO: create message component
+                    
                             return;
                         }
                         var userObj = {};

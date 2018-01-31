@@ -129,37 +129,6 @@
                 vm.isShowMessageForm = !vm.isShowMessageForm;
             },
 
-
-            // imageUpload: function() {
-            //     var file_frame,
-            //         vm = this;
-            //         self = jQuery(this);
-            //     if ( file_frame ) {
-            //         file_frame.open();
-            //         return;
-            //     }
-            //   // Create the media frame.
-            //     file_frame = wpmedia.frames.file_frame = wpmedia({
-            //         title: jQuery( this ).data( 'uploader_title' ),
-            //         button: {
-            //             text: jQuery( this ).data( 'uploader_button_text' )
-            //         },
-            //         multiple: false
-            //     });
-            //     file_frame.on( 'select', function() {
-            //         var attachment = file_frame.state().get('selection').first().toJSON();
-            //         console.log(attachment);
-            //         vm.attachments.push(attachment);
-            //         vm.attachmentIDs.push(attachment.id);
-            //         // var wrap = self.closest('.dokan-banner');
-            //         // wrap.find('input.dokan-file-field').val(attachment.id);
-            //         // wrap.find('img.dokan-banner-img').attr('src', attachment.url);
-            //         // jQuery('.image-wrap', wrap).removeClass('dokan-hide');
-            //         // jQuery('.button-area').addClass('dokan-hide');
-            //     });
-            //     file_frame.open();
-            // },
-
             createMessage: function() {
                 var vm = this,
                 message,
@@ -176,17 +145,12 @@
                 };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        // console.log(vm.$route);
                     if ( resp.success ) {
                         messageID = resp.data.messageInfo.ID;
                         projectID = data.project_id;
                         vm.$router.push({
                             path: `/projects/${projectID}/messages/${messageID}`
                         });
-                        // resp.data.messageInfo.message = vm.message;
-                        // vm.messages.unshift(resp.data.messageInfo);
-                        // vm.message = '';
-                        // vm.messageTitle = '';
                     } else {
                         // vm.message = resp.data;
                     }
@@ -205,7 +169,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
-                    // console.log(resp);
                     if ( resp.success ) {
                         vm.project = resp.data[0];
                     }

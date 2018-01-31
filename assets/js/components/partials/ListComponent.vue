@@ -152,7 +152,7 @@
             }
         },
         mounted() {
-            // console.log('Component mounted.')
+            
         },
         created() {
             this.currentUser = fpm.currentUserInfo;

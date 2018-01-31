@@ -72,7 +72,7 @@
                         };
                         
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        // console.log(resp)
+                        
                         if ( resp.success ) {
                             vm.$router.push({ 
                                 path: `/projects?type=delete_project` 

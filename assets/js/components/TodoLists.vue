@@ -197,7 +197,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
-                        // console.log(resp);
                         resp.data.listInfo.list_title = vm.listTitle;
                         resp.data.listInfo.todos = [];
                         vm.lists.unshift(resp.data.listInfo);

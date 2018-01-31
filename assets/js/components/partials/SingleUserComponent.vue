@@ -73,9 +73,6 @@
                 vm.cloneObject = '';
             },
             removeUser( index ) {
-                var userIndex = +index;
-                // console.log(typeof(userIndex));
-                // return;
                 this.$emit('remove', index);
             },
             updateUser() {
@@ -91,7 +88,6 @@
                     };
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // console.log(resp);
                     if ( resp.success ) {
                         vm.user.user_email = vm.editUserEmail;
                         vm.user.title = vm.editUserTitle;
