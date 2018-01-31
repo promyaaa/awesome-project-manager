@@ -114,6 +114,7 @@
                         
                         if ( resp.success ) {
                             vm.users.splice(index, 1);
+                            vm.totalUsers = vm.totalUsers - 1;
                             // console.log(vm.users[index].display_name);
                             localStorage.removeItem(localUsersKey);
                             localStorage.setItem(localUsersKey, JSON.stringify(vm.users));
