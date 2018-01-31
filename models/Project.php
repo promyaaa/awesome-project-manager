@@ -143,7 +143,11 @@ class FusionPM_Project {
 
         $isRelated = $this->checkRelation( $project_id, get_current_user_id() );
 
-        if ( !$isRelated ) {
+        if ( current_user_can( 'manage_options' ) ) {
+            $userIsAdministrator = true;
+        }
+
+        if ( !$isRelated && !$userIsAdministrator ) {
             return false;
         }
 
