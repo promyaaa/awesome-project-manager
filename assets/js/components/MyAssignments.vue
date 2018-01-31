@@ -23,12 +23,12 @@
                     <div class="col-10">
                         <router-link :to="'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID" tag="div" class="my-todo">
                             <a>{{todo.todo}}</a>
-                            <span v-if="todo.formatted_due_date">
-                                <span class="pipe">|</span>
-                                <i class="fa fa-calendar p-r-5" aria-hidden="true"></i> 
-                                <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">{{todo.formatted_due_date}}</span>
-                            </span>
+
                         </router-link>
+                        <div v-if="todo.formatted_due_date" style="padding-top:12px">
+                            <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 
+                            <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">{{todo.formatted_due_date}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
