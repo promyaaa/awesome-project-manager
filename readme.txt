@@ -33,7 +33,14 @@ No FAQ's
 
 == Screenshots ==
 
-1. No screenshots for now
+1. Projects home
+2. Project summary
+3. All task lists
+4. Single task list
+5. Todo details
+6. Message board
+7. Message details
+8. Project users
 
 == Changelog ==
 
