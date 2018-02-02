@@ -1,4 +1,4 @@
-=== Awesome Project Manager ===
+=== Awesome Project Manager Plugin for WordPress ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
 Tags: project-manager, single-page-app, todo, todo-manager, task, task-management
