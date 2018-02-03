@@ -1,7 +1,7 @@
 === Awesome Project Manager Plugin for WordPress ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
-Tags: project-manager, single-page-app, todo, todo-manager, task, task-management
+Tags: manager, project, project management, project manager, single-page-app, todo
 Requires at least: 4.8
 Tested up to: 4.9.2
 Stable tag: trunk
