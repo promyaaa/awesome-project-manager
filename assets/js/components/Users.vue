@@ -51,7 +51,8 @@
                     <br>
                     <h2 class="decorated"><span>{{ i18n.decorated_heading }}</span></h2>
                     
-                    <div class="loading" v-if="loading">
+                    <div class="text-center" v-if="loading">
+                        <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                         <p>{{ i18n.loading }}</p>
                     </div>
                     <div class="row">
@@ -245,6 +246,7 @@
             var vm = this,
                 projectid;
 
+            vm.loading = true;
             store.setLocalization( 'fpm-get-users-local-data' ).then( function( data ) {
                 vm.i18n = data;
             });
@@ -252,6 +254,7 @@
             projectid = vm.$route.params.projectid;
 
             store.fetchUsers( projectid ).then(function(resp){
+                vm.loading = false;
                 vm.totalUsers = resp.data[0].user_count;
                 vm.users = resp.data;
             });
