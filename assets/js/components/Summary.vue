@@ -28,7 +28,11 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 text-center" v-if="loading">
+                    <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                    <p>Loading. . .</p>
+                </div>
+                <div class="col-12" v-if="!loading">
                     <div class="users-summary">
                         <div style="display: inline-block">
                         
@@ -117,7 +121,7 @@
         methods: {
             fetchTodoSummary() {
                 var vm = this;
-                vm.loading = true;
+                // vm.loading = true;
 
                 var data = {
                     action: 'fpm-get-lists',
@@ -136,7 +140,7 @@
 
             fetchMessageSummary() {
                 var vm = this;
-                vm.loading = true;
+                // vm.loading = true;
 
                 var data = {
                     action: 'fpm-get-messages',
@@ -162,9 +166,9 @@
                     project_id: vm.$route.params.projectid,
                     nonce: fpm.nonce
                 };
-
+                
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    // vm.loading = false;
+                    vm.loading = false;
                     
                     if ( resp.success ) {
                         vm.project = resp.data[0];
@@ -174,6 +178,7 @@
                         });
                     }
                 });
+                
             }
         },
 
@@ -187,7 +192,7 @@
             store.setLocalization( 'fpm-get-summary-local-data' ).then( function( data ) {
                 self.i18n = data;
             });
-
+            vm.loading = true;
             vm.fetchProject();
             vm.fetchTodoSummary();
             vm.fetchMessageSummary();
@@ -202,6 +207,7 @@
                 localStorage.setItem('pid', projectid);
 
                 store.fetchUsers( projectid ).then(function(resp){
+                    vm.loading = false;
                     vm.users = resp.data;
                     var key = projectid + '-users';
                     localStorage.setItem(key, JSON.stringify(vm.users));
@@ -211,6 +217,7 @@
                 vm.users = JSON.parse(localStorage.getItem(key));
                 if (!vm.users) {
                     store.fetchUsers( projectid ).then(function(resp){
+                        vm.loading = false;
                         vm.users = resp.data;
                         localStorage.setItem(key, JSON.stringify(vm.users));
                     });

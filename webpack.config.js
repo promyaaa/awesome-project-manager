@@ -1,7 +1,12 @@
 // const HtmlWebpackPlugin = require('transform-runtime');
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  plugins: [
+    new UglifyJsPlugin()
+  ],
   // This is the "main" file which should include all other modules
   entry: './assets/js/admin.js',
   // Where should the compiled file go?
@@ -15,22 +20,6 @@ module.exports = {
     filename: 'build.js'
     // filename: 'build.js'
   },
-  // module: {
-  //   // Special compilation rules
-  //   rules: [
-  //     {
-  //       // Ask webpack to check: If this file ends with .js, then apply some transforms
-  //       test: /\.js$/,
-  //       // use: 'raw-loader',
-  //       // Transform it with babel
-  //       loader: 'babel-loader',
-        
-  //       // don't transform node_modules folder (which don't need to be compiled)
-  //       exclude: /node_modules/
-  //     }
-  //   ]
-  // },
-// test code
     module: {
     rules: [
       {
@@ -44,6 +33,4 @@ module.exports = {
       }
     ]
   },
-
-  
 }

@@ -12,11 +12,12 @@
         </div>
         <div class="row lists">
             <div class="col-12">
-                <div class="loading" v-if="loading">
+                <div class="text-center" v-if="loading">
+                    <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                     <p>{{ i18n.loading }}</p>
                 </div>
 
-                <div v-if="messageObject">
+                <div v-if="messageObject && !loading">
                     <div v-if="isShowEdit">
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'" class="button button-default">
                             {{ i18n.edit }}
@@ -120,6 +121,8 @@
             fetchMessage: function() {
                 var vm = this,
                     projectID = vm.$route.params.projectid;
+
+
                 vm.loading = true;
 
                 var data = {

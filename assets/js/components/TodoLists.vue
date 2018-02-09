@@ -44,7 +44,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="loading" v-if="loading">
+                    <div class="text-center" v-if="loading">
+                        <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                         <p>{{ i18n.loading }}</p>
                     </div>
 

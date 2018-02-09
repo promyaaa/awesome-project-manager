@@ -12,6 +12,13 @@
         </div>
         <div class="row box">
             <div class="col-12">
+                <div class="row" v-if="message">
+                    <div class="col-12">
+                        <div class="m-default m-success">
+                            <p><strong>{{message}}</strong></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>{{ i18n.header_label }}<i style="color:#6d6d6d">{{project.project_title}}</i></h3>
@@ -44,7 +51,8 @@
                     <br>
                     <h2 class="decorated"><span>{{ i18n.decorated_heading }}</span></h2>
                     
-                    <div class="loading" v-if="loading">
+                    <div class="text-center" v-if="loading">
+                        <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                         <p>{{ i18n.loading }}</p>
                     </div>
                     <div class="row">
@@ -62,6 +70,23 @@
 </template>
 
 <style>
+    .m-default {
+        -webkit-box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+        box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+        padding: 1px 12px;
+    } 
+    .m-success {
+        border-left: 4px solid #46b450;
+    }
+    .m-danger {
+        border-left: 4px solid #D54E21;
+    }
+    .m-info {
+        border-left: 4px solid #00A0D2;
+    }
+    .m-warning {
+        border-left: 4px solid #FFBA00;
+    }
     .user-info {
         padding-left: 15px;
     }
@@ -93,7 +118,8 @@
                 localString: '',
                 selected: '',
                 usertitle: '',
-                isShowAddForm: false
+                isShowAddForm: false,
+                message: ''
             }
         },
         methods: {
@@ -192,7 +218,6 @@
                             vm.username = '';
                             vm.email = '';
                             vm.usertitle = '';
-                    
                             return;
                         }
                         var userObj = {};
@@ -201,6 +226,7 @@
                         userObj.display_name = resp.data.user.user_name;
                         userObj.user_email = vm.email;
                         userObj.title = vm.usertitle;
+                        vm.message = 'Credentials has been sent to '+ userObj.display_name +'\'s email address';
 
                         localStorage.removeItem(localUsersKey);
 
@@ -210,7 +236,7 @@
                         vm.usertitle = '';
 
                     } else {
-                        vm.message = resp.data;
+                        // vm.message = resp.data;
                     }
                 });
             }
@@ -220,6 +246,7 @@
             var vm = this,
                 projectid;
 
+            vm.loading = true;
             store.setLocalization( 'fpm-get-users-local-data' ).then( function( data ) {
                 vm.i18n = data;
             });
@@ -227,6 +254,7 @@
             projectid = vm.$route.params.projectid;
 
             store.fetchUsers( projectid ).then(function(resp){
+                vm.loading = false;
                 vm.totalUsers = resp.data[0].user_count;
                 vm.users = resp.data;
             });
