@@ -63,7 +63,12 @@ User with 'Project member' role can Edit, Delete Projects, Lists, Todos, Message
 
 == Changelog ==
 
-v0.0.1 -> Feb 1, 2018
+v1.0.1 -> Feb 9, 2018
+---------------------
+- [tweak] js file minified
+- [fix] updated translation
+
+v1.0.0 -> Feb 1, 2018
 ---------------------
 - [new]    Initial Release
 
