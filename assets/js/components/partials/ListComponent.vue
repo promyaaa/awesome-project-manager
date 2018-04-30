@@ -46,7 +46,7 @@
             <br>
             <div class="row" v-if="isSingle">
                 <div class="col-12">
-                    <span style="padding-left:4%;"><i>Started by <strong>Rokib</strong> on {{list.formatted_created}}</i></span>
+                    <span style="padding-left:4%;"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>
                 </div>
             </div>
         </li>

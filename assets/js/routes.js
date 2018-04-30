@@ -21,11 +21,14 @@ const NewMessage = require('./components/partials/NewMessage.vue');
 const EditMessage = require('./components/partials/EditMessage.vue');
 
 const MyAssignments = require('./components/MyAssignments.vue');
+const MyActivity = require('./components/MyActivity.vue');
 
 const routes = [
     { path: '/', component: Home },
 
     { path: '/my/assignments', component: MyAssignments },
+
+    { path: '/my/activity', component: MyActivity },
 
     { path: '/projects', component: Home },
 

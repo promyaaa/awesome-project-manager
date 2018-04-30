@@ -1,22 +1,25 @@
 <template>
     <div>
         <div class="container">
-
             <div id="pageparentdiv">
                 <div class="inside">
                     <div class="row">
-                        <div class="col-6 text-center user-info-sections">
+                        <div class="col-3"></div>
+                        <div class="col-3 user-info-sections">
                             <img :src="currentUser.data.avatar_url">
                             <div class="current-user-name">
                                 <h3>{{currentUser.data.display_name}}</h3>
                             </div>
                         </div>
 
-                        <div class="col-6 user-quick-link">
+                        <div class="col-3 user-quick-link">
                             <div>
                                 <ul>
                                     <router-link to="/my/assignments" tag="li" class="link-style">
                                         <a>{{ i18n.my_assignments }}</a>
+                                    </router-link>
+                                    <router-link to="/my/activity" tag="li" class="link-style">
+                                        <a>My Activity</a>
                                     </router-link>
                                 </ul>
                             </div>
@@ -81,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <br>
+            
             <div class="row" v-if="projects.length < projectCount">
                 <div class="col-12 text-center">
                     <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
@@ -95,14 +98,17 @@
 
 <style>
     .current-user-name h3{
-        margin: 5px 0px;
+        margin: 5px;
     }
 
     .user-info-sections {
         box-sizing: border-box;
         border-right: 1px solid #eee;
     }
-
+    .user-info-sections img {
+        border: 5px solid #fff;
+        border-radius: 2px;
+    }
     .user-quick-link div {
         padding-left: 30px;
     }

@@ -12080,8 +12080,9 @@ var NewMessage = __webpack_require__(209);
 var EditMessage = __webpack_require__(214);
 
 var MyAssignments = __webpack_require__(219);
+var MyActivity = __webpack_require__(224);
 
-var routes = [{ path: '/', component: Home }, { path: '/my/assignments', component: MyAssignments }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/activities', component: Activities }, { path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/status', component: ProjectStatus }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '*', redirect: '/' }];
+var routes = [{ path: '/', component: Home }, { path: '/my/assignments', component: MyAssignments }, { path: '/my/activity', component: MyActivity }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/activities', component: Activities }, { path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/status', component: ProjectStatus }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '*', redirect: '/' }];
 
 exports.default = new _vueRouter2.default({
     // mode: 'history',
@@ -15988,7 +15989,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n    .current-user-name h3{\n        margin: 5px 0px;\n    }\n\n    .user-info-sections {\n        box-sizing: border-box;\n        border-right: 1px solid #eee;\n    }\n\n    .user-quick-link div {\n        padding-left: 30px;\n    }\n\n    .user-quick-link div ul{\n        list-style-type: default;\n    }\n\n    .user-quick-link div ul li:before{\n        content: '\\F178';\n        color: #afafaf;\n        display: inline-block;\n        font: normal normal normal 14px/1 FontAwesome;\n        margin-right: 10px;\n    }\n    .project {\n        background-color: #fff;\n        margin:5px;\n        padding-bottom: 15px;\n        position: relative;\n    }\n\n    .project .project-settings{\n        position: absolute;\n        top:10px;\n        right: 10px;\n        cursor: pointer;\n    }\n\n    .project .project-settings a.setting-icon{\n        color: #afafaf;\n\n    }\n    .project h3{\n        padding: 10px 15px;\n        border-bottom: 1px solid #eee;\n    }\n\n    .project h3 a{\n        font-size: 15px;\n        color: #333;\n    }\n\n    .project p{\n        padding: 0 15px;\n    }\n    .project .user-avatars{\n        padding: 0px 15px;\n    }\n\n    .ellipsis-90 {\n        white-space: nowrap;\n        width: 90%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-80 {\n        white-space: nowrap;\n        width: 80%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-70 {\n        white-space: nowrap;\n        width: 70%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-99 {\n        white-space: nowrap;\n        width: 99%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .more-user {\n        float: right;\n        margin-top: 7px;\n    }\n", ""]);
+exports.push([module.i, "\n    .current-user-name h3{\n        margin: 5px;\n    }\n\n    .user-info-sections {\n        box-sizing: border-box;\n        border-right: 1px solid #eee;\n    }\n    .user-info-sections img {\n        border: 5px solid #fff;\n        border-radius: 2px;\n    }\n    .user-quick-link div {\n        padding-left: 30px;\n    }\n\n    .user-quick-link div ul{\n        list-style-type: default;\n    }\n\n    .user-quick-link div ul li:before{\n        content: '\\F178';\n        color: #afafaf;\n        display: inline-block;\n        font: normal normal normal 14px/1 FontAwesome;\n        margin-right: 10px;\n    }\n    .project {\n        background-color: #fff;\n        margin:5px;\n        padding-bottom: 15px;\n        position: relative;\n    }\n\n    .project .project-settings{\n        position: absolute;\n        top:10px;\n        right: 10px;\n        cursor: pointer;\n    }\n\n    .project .project-settings a.setting-icon{\n        color: #afafaf;\n\n    }\n    .project h3{\n        padding: 10px 15px;\n        border-bottom: 1px solid #eee;\n    }\n\n    .project h3 a{\n        font-size: 15px;\n        color: #333;\n    }\n\n    .project p{\n        padding: 0 15px;\n    }\n    .project .user-avatars{\n        padding: 0px 15px;\n    }\n\n    .ellipsis-90 {\n        white-space: nowrap;\n        width: 90%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-80 {\n        white-space: nowrap;\n        width: 80%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-70 {\n        white-space: nowrap;\n        width: 70%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .ellipsis-99 {\n        white-space: nowrap;\n        width: 99%;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n    .more-user {\n        float: right;\n        margin-top: 7px;\n    }\n", ""]);
 
 // exports
 
@@ -16140,22 +16141,25 @@ exports.default = {
 // <template>
 //     <div>
 //         <div class="container">
-//
 //             <div id="pageparentdiv">
 //                 <div class="inside">
 //                     <div class="row">
-//                         <div class="col-6 text-center user-info-sections">
+//                         <div class="col-3"></div>
+//                         <div class="col-3 user-info-sections">
 //                             <img :src="currentUser.data.avatar_url">
 //                             <div class="current-user-name">
 //                                 <h3>{{currentUser.data.display_name}}</h3>
 //                             </div>
 //                         </div>
 //
-//                         <div class="col-6 user-quick-link">
+//                         <div class="col-3 user-quick-link">
 //                             <div>
 //                                 <ul>
 //                                     <router-link to="/my/assignments" tag="li" class="link-style">
 //                                         <a>{{ i18n.my_assignments }}</a>
+//                                     </router-link>
+//                                     <router-link to="/my/activity" tag="li" class="link-style">
+//                                         <a>My Activity</a>
 //                                     </router-link>
 //                                 </ul>
 //                             </div>
@@ -16220,7 +16224,7 @@ exports.default = {
 //                     </div>
 //                 </div>
 //             </div>
-//             <br>
+//
 //             <div class="row" v-if="projects.length < projectCount">
 //                 <div class="col-12 text-center">
 //                     <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
@@ -16234,14 +16238,17 @@ exports.default = {
 //
 // <style>
 //     .current-user-name h3{
-//         margin: 5px 0px;
+//         margin: 5px;
 //     }
 //
 //     .user-info-sections {
 //         box-sizing: border-box;
 //         border-right: 1px solid #eee;
 //     }
-//
+//     .user-info-sections img {
+//         border: 5px solid #fff;
+//         border-radius: 2px;
+//     }
 //     .user-quick-link div {
 //         padding-left: 30px;
 //     }
@@ -16328,7 +16335,7 @@ exports.default = {
 /* 139 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <div class=\"container\">\n\n            <div id=\"pageparentdiv\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-6 text-center user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-6 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\n                                        <a>{{ i18n.my_assignments }}</a>\n                                    </router-link>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\n                </div>\n                <div class=\"col-6\">\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>{{ i18n.loading }}</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <br>\n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
+module.exports = "\n    <div>\n        <div class=\"container\">\n            <div id=\"pageparentdiv\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-3\"></div>\n                        <div class=\"col-3 user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-3 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\n                                        <a>{{ i18n.my_assignments }}</a>\n                                    </router-link>\n                                    <router-link to=\"/my/activity\" tag=\"li\" class=\"link-style\">\n                                        <a>My Activity</a>\n                                    </router-link>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\n                </div>\n                <div class=\"col-6\">\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>{{ i18n.loading }}</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            \n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
 
 /***/ }),
 /* 140 */
@@ -17934,7 +17941,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             <br>
 //             <div class="row" v-if="isSingle">
 //                 <div class="col-12">
-//                     <span style="padding-left:4%;"><i>Started by <strong>Rokib</strong> on {{list.formatted_created}}</i></span>
+//                     <span style="padding-left:4%;"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>
 //                 </div>
 //             </div>
 //         </li>
@@ -18722,7 +18729,7 @@ module.exports = "\n    <div>\n        <div class=\"row\">\n            <div cla
 /* 176 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <li>\n            <div v-if=\"isSingle\">\n                <div v-if=\"!isListEdit && isShowEdit\" style=\"margin-top: -10px\">\n                    <button class=\"button button-default\"\n                            @click=\"showListEditForm( list )\">{{ i18n.edit }}</button>\n                    <span style=\"float:right\" @click=\"deleteList(list)\">\n                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\n                    </span>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-12\">\n                        <h3 v-if=\"!isListEdit\" style=\"padding-left: 4%;padding-top:2%\">{{list.list_title}}</h3>\n                        <div v-if=\"isListEdit\" class=\"add_form_style\">\n                            <div>\n                                <input type=\"text\"\n                                    name=\"list_title\"\n                                    v-model=\"listTitle\"\n                                    class=\"form-control\"\n                                    :placeholder=\"i18n.name_list_placeholder\"\n                                    @keyup.enter=\"updateList(list)\"\n                                    @keyup.esc=\"cancelListEdit\"\n                                    v-focus>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\"\n                                        @click.prevent=\"updateList\"\n                                        >{{ i18n.update }}</button>\n                                <button class=\"button button-default\" @click=\"cancelListEdit\">{{ i18n.cancel }}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div v-else style=\"padding-left: 4%\">\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID\" tag=\"h3\" class=\"link-style\">\n                    <a>{{list.list_title}}</a>\n                </router-link>\n            </div>\n\n            <ul v-if=\"list.todos.length > 0\">\n                <todo-item :i18n=\"i18n\" v-for=\"(todo, tindex) in list.todos\" :todo=\"todo\" :tindex=\"tindex\" :list=\"list\" :key=\"todo.ID\"></todo-item>\n            </ul>\n            <add-todo :i18n=\"i18n\" :sindex=\"sindex\" :list=\"list\"></add-todo>\n            <br>\n            <div class=\"row\" v-if=\"isSingle\">\n                <div class=\"col-12\">\n                    <span style=\"padding-left:4%;\"><i>Started by <strong>Rokib</strong> on {{list.formatted_created}}</i></span>\n                </div>\n            </div>\n        </li>\n    </div>\n\n";
+module.exports = "\n    <div>\n        <li>\n            <div v-if=\"isSingle\">\n                <div v-if=\"!isListEdit && isShowEdit\" style=\"margin-top: -10px\">\n                    <button class=\"button button-default\"\n                            @click=\"showListEditForm( list )\">{{ i18n.edit }}</button>\n                    <span style=\"float:right\" @click=\"deleteList(list)\">\n                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\n                    </span>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-12\">\n                        <h3 v-if=\"!isListEdit\" style=\"padding-left: 4%;padding-top:2%\">{{list.list_title}}</h3>\n                        <div v-if=\"isListEdit\" class=\"add_form_style\">\n                            <div>\n                                <input type=\"text\"\n                                    name=\"list_title\"\n                                    v-model=\"listTitle\"\n                                    class=\"form-control\"\n                                    :placeholder=\"i18n.name_list_placeholder\"\n                                    @keyup.enter=\"updateList(list)\"\n                                    @keyup.esc=\"cancelListEdit\"\n                                    v-focus>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\"\n                                        @click.prevent=\"updateList\"\n                                        >{{ i18n.update }}</button>\n                                <button class=\"button button-default\" @click=\"cancelListEdit\">{{ i18n.cancel }}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div v-else style=\"padding-left: 4%\">\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID\" tag=\"h3\" class=\"link-style\">\n                    <a>{{list.list_title}}</a>\n                </router-link>\n            </div>\n\n            <ul v-if=\"list.todos.length > 0\">\n                <todo-item :i18n=\"i18n\" v-for=\"(todo, tindex) in list.todos\" :todo=\"todo\" :tindex=\"tindex\" :list=\"list\" :key=\"todo.ID\"></todo-item>\n            </ul>\n            <add-todo :i18n=\"i18n\" :sindex=\"sindex\" :list=\"list\"></add-todo>\n            <br>\n            <div class=\"row\" v-if=\"isSingle\">\n                <div class=\"col-12\">\n                    <span style=\"padding-left:4%;\"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>\n                </div>\n            </div>\n        </li>\n    </div>\n\n";
 
 /***/ }),
 /* 177 */
@@ -21014,6 +21021,110 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = "\n    <div class=\"container lists\">\n        <div class=\"row\">\n            <div class=\"col-2\"></div>\n            <div class=\"col-8\">\n                <div class=\"text-center assignment-heading\">\n                    <h1>{{ i18n.my_assignments }}</h1>\n                </div>\n            </div>\n        </div>\n        <!-- <pre>\n            {{todos}}\n        </pre> -->\n        <div class=\"row\">\n            <div class=\"col-12\">\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\n                    <div class=\"col-2 text-right\">\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span class=\"checkbox-style\" v-else></span>\n                    </div>\n                    <div class=\"col-10\">\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\n                            <a>{{todo.todo}}</a>\n\n                        </router-link>\n                        <div v-if=\"todo.formatted_due_date\" style=\"padding-top:12px\">\n                            <i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\" style=\"color: #b5b5b5\"></i> \n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">{{todo.formatted_due_date}}</span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n";
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(225)
+__vue_script__ = __webpack_require__(227)
+__vue_template__ = __webpack_require__(228)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/home/promy/www/wordpressfree/wp-content/plugins/awesome-project-manager/assets/js/components/MyActivity.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(226);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0ffb7828&file=MyActivity.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./MyActivity.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0ffb7828&file=MyActivity.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./MyActivity.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\n    \n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// <template>
+//     <div>
+//         My Activity Component
+//     </div>
+// </template>
+//
+// <script>
+exports.default = {
+    props: [],
+    components: {},
+    data: function data() {
+        return {};
+    },
+
+    directives: {},
+    methods: {},
+    created: function created() {},
+    mounted: function mounted() {}
+};
+// </script>
+//
+// <style>
+//
+// </style>
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div>\n        My Activity Component\n    </div>\n";
 
 /***/ })
 /******/ ]);
