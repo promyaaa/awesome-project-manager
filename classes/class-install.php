@@ -92,7 +92,7 @@ class FusionPM_Install {
                 `userID` int(11) unsigned,
                 `user_name` varchar(100),
                 `projectID` int(11) unsigned,
-                `listID` int(11) unsigned,
+                `parentID` int(11) unsigned,
                 `activity_id` int(11) unsigned,
                 `activity_type` varchar(50),
                 `activity` text,

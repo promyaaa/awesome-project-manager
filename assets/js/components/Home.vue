@@ -2,11 +2,11 @@
     <div>
         <div class="container">
 
-            <div id="pageparentdiv" class="postbox">
+            <div id="pageparentdiv">
                 <div class="inside">
                     <div class="row">
                         <div class="col-6 text-center user-info-sections">
-                            <img :src="currentUser.data.avatar_url" class="small-round-image">
+                            <img :src="currentUser.data.avatar_url">
                             <div class="current-user-name">
                                 <h3>{{currentUser.data.display_name}}</h3>
                             </div>

@@ -57,17 +57,20 @@ class FusionPM_Activity {
         return $result;
     }
 
-    public function delete_activities_by_column( $value, $column ) {
+    public function delete_activities_by_column( $activity_id, $activity_type, $project_id ) {
 
         global $wpdb;
 
-        $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
+        $result = $wpdb->delete( 
+            $this->table_name,
+            array( 
+                'activity_id'   => $activity_id,
+                'activity_type' => $activity_type,
+                'projectID'     => $project_id
+            )
+        );
 
-        foreach ($result as $activity) {
-            $isSuccess = $this->delete($activity->ID);
-        }
-
-        return $isSuccess;
+        return $result;
     }
 
     public function delete_activities_by_columns( $value1, $column1, $value2, $column2 ) {

@@ -10,38 +10,27 @@
                     </div>
                     
                     <ul class="timeline timeline-centered">
-                        <li class="timeline-item" v-for="(value, key, index) in activitiesObject">
+                        <li class="timeline-item animated fadeIn" v-for="(value, key, index) in activitiesObject">
                             <div>
                                 <h3>{{ key }}</h3>
                             </div>
                             <div class="timeline-marker"></div>
-                            <div class="timeline-content" v-for="activity in value">
+                            <div class="timeline-content animated fadeIn" v-for="activity in value">
                                 <div class="row" v-if="index % 2===0" style="margin-bottom: 10px;">
-                                    <div class="col-2">{{activity.formatted_time}}</div>
-                                    <div class="col-10">
+                                    <div class="col-3">{{activity.formatted_time}}</div>
+                                    <div class="col-9">
                                         <activity-info :activity="activity" :i18n="i18n"></activity-info>
                                     </div>
                                 </div>
                                 <div class="row" v-else style="margin-bottom: 10px;">
-                                    <div class="col-10 text-left">
+                                    <div class="col-9 text-left">
                                         <activity-info :activity="activity"></activity-info>
                                     </div>
-                                    <div class="col-2">{{activity.formatted_time}}</div>
+                                    <div class="col-3">{{activity.formatted_time}}</div>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <!-- <div class="row" v-for="(activity, index) in activities">
-                        <div class="col-2">
-                            <span>{{activity.formatted_date}}</span>
-                        </div>
-                        <div class="col-2">
-                            <span>{{activity.formatted_time}}</span>
-                        </div>
-                        <div class="col-8">
-                            <activity-info :activity="activity" :i18n="i18n"></activity-info>
-                        </div>
-                    </div> -->
                     
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
@@ -85,7 +74,6 @@
             return {
                 activities: [],
                 totalActivityCount: '',
-                activitiesObject : {},
                 currentCount: ''
             }
         },
@@ -93,62 +81,88 @@
         computed: {
             noActivity() {
                 return this.totalActivityCount < 1;
+            },
+            activitiesObject() {
+                return _.groupBy( this.activities, 'formatted_date' )
             }
         },
 
         methods: {
-            fetchActivities() {
+            fetchActivities( userid ) {
                 var vm = this,
-                    data,
-                    activities = [],
-                    current,
-                    next,
-                    i,
-                    length,
-                    keys;
+                    data;
 
                 data = {
                     action: 'fpm-get-activities',
                     project_id: vm.$route.params.projectid,
                     nonce: fpm.nonce,
                 };
+                if ( userid ) {
+                    data.user_id = userid;
+                }
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    if (resp.success) {
-                        length = resp.data.length;
-                        vm.currentCount = length;
-                        vm.totalActivityCount = resp.data[0].total_activity;
-                        for(i = 0; i < length; i++ ) {
-
-                            current = resp.data[i],
-                            next = resp.data[i+1]; 
-                            if(!next) {
-                                activities = [];
-                                if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
-                                    keys = Object.keys(vm.activitiesObject);
-                                    vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
-                                } else {
-                                    activities.push(resp.data[i]);
-                                    vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                }
-                                continue;
-                            };
-
-                            if(current.formatted_date === next.formatted_date) {
-                                activities.push(resp.data[i]);
-                                if((i+2) === length) {
-                                    vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                    activities = [];
-                                }
-                            } else {
-                                activities.push(resp.data[i]);
-                                vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                activities = [];
-                            }
+                    if(resp.success) {
+                        for(var i = 0; i < resp.data.length; i++) {
+                            vm.currentCount = resp.data.length;
+                            vm.activities.push(resp.data[i]);
+                            vm.totalActivityCount = resp.data[0].total_activity;
                         }
                     }
                 });
             },
+            // fetchActivities() {
+            //     var vm = this,
+            //         data,
+            //         activities = [],
+            //         current,
+            //         next,
+            //         i,
+            //         length,
+            //         keys;
+
+            //     data = {
+            //         action: 'fpm-get-activities',
+            //         project_id: vm.$route.params.projectid,
+            //         nonce: fpm.nonce,
+            //     };
+
+            //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
+            //         if (resp.success) {
+            //             length = resp.data.length;
+            //             vm.currentCount = length;
+            //             vm.totalActivityCount = resp.data[0].total_activity;
+            //             for(i = 0; i < length; i++ ) {
+
+            //                 current = resp.data[i],
+            //                 next = resp.data[i+1]; 
+            //                 if(!next) {
+            //                     activities = [];
+            //                     if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
+            //                         keys = Object.keys(vm.activitiesObject);
+            //                         vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
+            //                     } else {
+            //                         activities.push(resp.data[i]);
+            //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
+            //                     }
+            //                     continue;
+            //                 };
+
+            //                 if(current.formatted_date === next.formatted_date) {
+            //                     activities.push(resp.data[i]);
+            //                     if((i+2) === length) {
+            //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
+            //                         activities = [];
+            //                     }
+            //                 } else {
+            //                     activities.push(resp.data[i]);
+            //                     vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
+            //                     activities = [];
+            //                 }
+            //             }
+            //         }
+            //     });
+            // },
 
             loadMoreActivities() {
                 var vm = this,

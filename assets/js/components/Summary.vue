@@ -69,6 +69,13 @@
                                 </ul>
                             </div>
                         </div>
+                        <div v-if="listSummary.length < 1">
+                            <div style="margin-top:12%">
+                                <span class="summary-icon">
+                                    <i class="fa fa-check fa-3x"></i>
+                                </span>
+                            </div>
+                        </div>
                         <span class="preview-fade"></span>
                     </div>
                 </div>
@@ -81,9 +88,20 @@
                         <div style="position: absolute;margin-top:10px;" class="text-left">
                             <div v-for="messageObj in messages" class="messages">
                                 <div class="message-list">
-                                    <img class="small-round-image" :src="messageObj.avatar_url" alt="" width="20" height="20" style="float:left;margin-right:10px; width:7%;">
-                                    <div style="float:left; width:82%">{{messageObj.message_title}}</div>
+                                    <img class="inbox-user-img" 
+                                    :src="messageObj.avatar_url" width="20">
+                                    <span class="inline-block">
+                                        {{messageObj.message_title | truncate('38')}}
+                                    </span>
                                 </div>
+                            </div>
+                        </div>
+                        <div v-if="messages.length < 1">
+                            <div style="margin-top:12%">
+                                <!-- <img :src="assetsDistPath+messageIcon" width="80" height="80" alt=""> -->
+                                <span class="summary-icon">
+                                    <i class="fa fa-envelope fa-3x"></i>
+                                </span>
                             </div>
                         </div>
                         <span class="preview-fade"></span>
@@ -109,6 +127,17 @@
                 messages: [],
                 users: [],
                 project: ''
+            }
+        },
+        filters:{
+            truncate: function(string, value) {
+                var dotdot = '';
+                if(!string)
+                    string = '';
+                if (string.length > value) {
+                    dotdot = '...';
+                }
+                return string.substring(0, value) + dotdot;
             }
         },
         computed: {
@@ -223,10 +252,6 @@
                     });
                 }
             }
-        },
-
-        mounted() {
-
         }
     }
 </script>
@@ -281,7 +306,13 @@
         padding-bottom: 40px;
         border-radius: 5px;
     }
-
+    span.summary-icon i {
+        padding: 9px 12px 12px;
+        border-radius: 50px;
+        border: 1px solid #267cb5;
+        color: white;
+        background: #267cb5;
+    }
     .summary-card {
         position: relative;
         padding: 10px 25px;
@@ -332,5 +363,11 @@
     }
     .project-settings .fa {
         color: #b5b5b5;
+    }
+    .inbox-user-img {
+        display: inline-block;
+        vertical-align: top;
+        border-radius: 45px;
+        margin-right: 5px;
     }
 </style>

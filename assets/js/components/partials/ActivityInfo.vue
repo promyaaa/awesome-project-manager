@@ -6,27 +6,27 @@
             <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong> <br>
             <div class="m-t-5">
                 <span class="checkbox-style"></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity | truncate('28')}}</a>
                 </router-link>  
             </div>
         </div>
 
-        <div v-if="isUpdateTodo">
+        <!-- <div v-if="isUpdateTodo">
             <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>
             <div class="m-t-5" style="cursor:pointer">
                 <span class="checkbox-style"></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity | truncate('28')}}</a>
                 </router-link>
             </div>
-        </div>
+        </div> -->
 
         <div v-if="isCheckTodo">
             <strong>{{activity.user_name}}</strong> checked off a <strong>Todo</strong> <br>
             <div class="m-t-5" style="cursor:pointer">
                 <span class="checkbox-checked-style"><i class="fa fa-check" aria-hidden="true"></i></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity | truncate('28')}}</a>
                 </router-link>
             </div>
@@ -36,7 +36,7 @@
             <strong>{{activity.user_name}}</strong> re-open a <strong>Todo</strong> <br>
             <div class="m-t-5" style="cursor:pointer">
                 <span class="checkbox-style"></span>
-                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.listID + '/todos/' + activity.activity_id" tag="span">
+                <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
                     <a>{{activity.activity | truncate('28')}}</a>
                 </router-link>
             </div>
@@ -59,14 +59,14 @@
             </div>
         </div>
 
-        <div v-if="isUpdateMessage">
+        <!-- <div v-if="isUpdateMessage">
             <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called
             <div class="m-t-5">
                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
                     <a>{{activity.activity | truncate('28')}}</a>
                 </router-link>  
             </div>
-        </div>
+        </div> -->
 
         <div v-if="isDeleteMessage">
             <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>
