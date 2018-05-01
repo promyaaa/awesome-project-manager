@@ -15167,6 +15167,7 @@ exports.default = {
             dateFormat: "yy-mm-dd",
             changeMonth: vm.changeMonthYear,
             changeYear: vm.changeMonthYear,
+            showButtonPanel: false,
 
             beforeShow: function beforeShow() {
                 jQuery(this).datepicker('widget').addClass('fusion-pm-datepicker');
@@ -16144,8 +16145,8 @@ exports.default = {
 //             <div id="pageparentdiv">
 //                 <div class="inside">
 //                     <div class="row">
-//                         <div class="col-3"></div>
-//                         <div class="col-3 user-info-sections">
+//                         <div class="col-2"></div>
+//                         <div class="col-4 user-info-sections">
 //                             <img :src="currentUser.data.avatar_url">
 //                             <div class="current-user-name">
 //                                 <h3>{{currentUser.data.display_name}}</h3>
@@ -16335,7 +16336,7 @@ exports.default = {
 /* 139 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        <div class=\"container\">\n            <div id=\"pageparentdiv\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-3\"></div>\n                        <div class=\"col-3 user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-3 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\n                                        <a>{{ i18n.my_assignments }}</a>\n                                    </router-link>\n                                    <router-link to=\"/my/activity\" tag=\"li\" class=\"link-style\">\n                                        <a>My Activity</a>\n                                    </router-link>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\n                </div>\n                <div class=\"col-6\">\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>{{ i18n.loading }}</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            \n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
+module.exports = "\n    <div>\n        <div class=\"container\">\n            <div id=\"pageparentdiv\">\n                <div class=\"inside\">\n                    <div class=\"row\">\n                        <div class=\"col-2\"></div>\n                        <div class=\"col-4 user-info-sections\">\n                            <img :src=\"currentUser.data.avatar_url\">\n                            <div class=\"current-user-name\">\n                                <h3>{{currentUser.data.display_name}}</h3>\n                            </div>\n                        </div>\n\n                        <div class=\"col-3 user-quick-link\">\n                            <div>\n                                <ul>\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\n                                        <a>{{ i18n.my_assignments }}</a>\n                                    </router-link>\n                                    <router-link to=\"/my/activity\" tag=\"li\" class=\"link-style\">\n                                        <a>My Activity</a>\n                                    </router-link>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\n                </div>\n                <div class=\"col-6\">\n                </div>\n                <div class=\"col-6\">\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isNoProject\">\n                <div class=\"col-12\">\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\n                </div>\n            </div>\n            <div class=\"row\" v-if=\"isShowProjectForm\">\n                <div class=\"col-12\">\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\n                        <form>\n                            <div class='section'>\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\n                            </div>\n                            <div class=\"action\">\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\" v-if=\"loading\">\n                    <div class=\"loading\">\n                        <h2>{{ i18n.loading }}</h2>\n                    </div>\n                </div>\n\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\n                    <div class=\"project\">\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\" class=\"link-style\">\n                            <div class=\"ellipsis-80\">\n                                <a class=\"\">{{project.project_title}}</a>\n                            </div>\n                        </router-link>\n\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\n\n                        <div class=\"user-avatars\">\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\n                                <a>+{{project.user_count - 5}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            \n            <div class=\"row\" v-if=\"projects.length < projectCount\">\n                <div class=\"col-12 text-center\">\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n";
 
 /***/ }),
 /* 140 */
@@ -16395,7 +16396,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n    .p-r-10 {\n        padding-right: 10px;\n    }\n    .p-l-10 {\n        padding-left: 10px;\n    }\n    .checkbox-style {\n        padding: 0px 9px;\n        margin-right: 10px;\n        margin-left: 10px;\n        border: 1px solid #ccc;\n    }\n    .link-style a:link {\n        text-decoration: none;\n        cursor: pointer;\n    }\n\n    .link-style a:visited {\n        text-decoration: none;\n        cursor: pointer;\n    }\n\n    .link-style a:hover {\n        text-decoration: underline;\n        cursor: pointer;\n    }\n\n    .link-style a:active {\n        text-decoration: underline;\n        cursor: pointer;\n    }\n    .small-round-image {\n        border-radius: 40%;\n    }\n    .text-center {\n        text-align: center;\n    }\n    .text-left {\n        text-align: left;\n    }\n    .text-right {\n        text-align: right;\n    }\n\n    .summary-section {\n        background: #ffffff;\n        padding-bottom: 40px;\n        border-radius: 5px;\n    }\n    span.summary-icon i {\n        padding: 9px 12px 12px;\n        border-radius: 50px;\n        border: 1px solid #267cb5;\n        color: white;\n        background: #267cb5;\n    }\n    .summary-card {\n        position: relative;\n        padding: 10px 25px;\n        border-radius: 5px;\n        text-align: center;\n        position: relative;\n        border: 1px solid #e5e5e5;\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\n        background: #fff;\n        height: 200px;\n        overflow: hidden;\n    }\n\n    .summary-card ul li{\n        margin-bottom: 10px;\n    }\n\n    .summary-card h3,\n    .summary-card h4 {\n        margin: 15px 0px;\n        padding: 0px;\n    }\n\n    .users-summary {\n        padding: 0.7em 2em 1em;\n        border-radius: 3px;\n        text-align: center;\n        height: auto;\n    }\n    .project-info {\n        position: relative;\n        padding: 30px 40px 10px;\n    }\n\n    .messages .message-list {\n        overflow: hidden;\n        margin-bottom: 10px;\n    }\n\n    .show-edit {\n        padding-top: 7px;\n        padding-right: 7px;\n        position: absolute;\n        right: 0;\n        top: 0;\n        cursor: pointer;\n    }\n    .project-settings .fa {\n        color: #b5b5b5;\n    }\n    .inbox-user-img {\n        display: inline-block;\n        vertical-align: top;\n        border-radius: 45px;\n        margin-right: 5px;\n    }\n", ""]);
+exports.push([module.i, "\n    .p-r-10 {\n        padding-right: 10px;\n    }\n    .p-l-10 {\n        padding-left: 10px;\n    }\n    .checkbox-style {\n        padding: 0px 9px;\n        margin-right: 10px;\n        margin-left: 10px;\n        border: 1px solid #ccc;\n        border-radius: 3px;\n    }\n    .link-style a:link {\n        text-decoration: none;\n        cursor: pointer;\n    }\n\n    .link-style a:visited {\n        text-decoration: none;\n        cursor: pointer;\n    }\n\n    .link-style a:hover {\n        text-decoration: underline;\n        cursor: pointer;\n    }\n\n    .link-style a:active {\n        text-decoration: underline;\n        cursor: pointer;\n    }\n    .small-round-image {\n        border-radius: 40%;\n    }\n    .text-center {\n        text-align: center;\n    }\n    .text-left {\n        text-align: left;\n    }\n    .text-right {\n        text-align: right;\n    }\n\n    .summary-section {\n        background: #ffffff;\n        padding-bottom: 40px;\n        border-radius: 5px;\n    }\n    span.summary-icon i {\n        padding: 9px 12px 12px;\n        border-radius: 50px;\n        border: 1px solid #267cb5;\n        color: white;\n        background: #267cb5;\n    }\n    .summary-card {\n        position: relative;\n        padding: 10px 25px;\n        border-radius: 5px;\n        text-align: center;\n        position: relative;\n        border: 1px solid #e5e5e5;\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\n        background: #fff;\n        height: 200px;\n        overflow: hidden;\n    }\n\n    .summary-card ul li{\n        margin-bottom: 10px;\n    }\n\n    .summary-card h3,\n    .summary-card h4 {\n        margin: 15px 0px;\n        padding: 0px;\n    }\n\n    .users-summary {\n        padding: 0.7em 2em 1em;\n        border-radius: 3px;\n        text-align: center;\n        height: auto;\n    }\n    .project-info {\n        position: relative;\n        padding: 30px 40px 10px;\n    }\n\n    .messages .message-list {\n        overflow: hidden;\n        margin-bottom: 10px;\n    }\n\n    .show-edit {\n        padding-top: 7px;\n        padding-right: 7px;\n        position: absolute;\n        right: 0;\n        top: 0;\n        cursor: pointer;\n    }\n    .project-settings .fa {\n        color: #b5b5b5;\n    }\n    .inbox-user-img {\n        display: inline-block;\n        vertical-align: top;\n        border-radius: 45px;\n        margin-right: 5px;\n    }\n", ""]);
 
 // exports
 
@@ -16689,6 +16690,7 @@ exports.default = {
 //         margin-right: 10px;
 //         margin-left: 10px;
 //         border: 1px solid #ccc;
+//         border-radius: 3px;
 //     }
 //     .link-style a:link {
 //         text-decoration: none;
@@ -16844,10 +16846,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _keys = __webpack_require__(35);
-
-var _keys2 = _interopRequireDefault(_keys);
-
 var _ActivityInfo = __webpack_require__(147);
 
 var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
@@ -16903,60 +16901,6 @@ exports.default = {
                 }
             });
         },
-
-        // fetchActivities() {
-        //     var vm = this,
-        //         data,
-        //         activities = [],
-        //         current,
-        //         next,
-        //         i,
-        //         length,
-        //         keys;
-
-        //     data = {
-        //         action: 'fpm-get-activities',
-        //         project_id: vm.$route.params.projectid,
-        //         nonce: fpm.nonce,
-        //     };
-
-        //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-        //         if (resp.success) {
-        //             length = resp.data.length;
-        //             vm.currentCount = length;
-        //             vm.totalActivityCount = resp.data[0].total_activity;
-        //             for(i = 0; i < length; i++ ) {
-
-        //                 current = resp.data[i],
-        //                 next = resp.data[i+1]; 
-        //                 if(!next) {
-        //                     activities = [];
-        //                     if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
-        //                         keys = Object.keys(vm.activitiesObject);
-        //                         vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
-        //                     } else {
-        //                         activities.push(resp.data[i]);
-        //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-        //                     }
-        //                     continue;
-        //                 };
-
-        //                 if(current.formatted_date === next.formatted_date) {
-        //                     activities.push(resp.data[i]);
-        //                     if((i+2) === length) {
-        //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-        //                         activities = [];
-        //                     }
-        //                 } else {
-        //                     activities.push(resp.data[i]);
-        //                     vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-        //                     activities = [];
-        //                 }
-        //             }
-        //         }
-        //     });
-        // },
-
         loadMoreActivities: function loadMoreActivities() {
             var vm = this,
                 data = {
@@ -16964,14 +16908,7 @@ exports.default = {
                 nonce: fpm.nonce,
                 offset: vm.currentCount,
                 project_id: vm.$route.params.projectid
-            },
-                activities = [],
-                keys = (0, _keys2.default)(vm.activitiesObject),
-                previous = vm.activitiesObject[keys[keys.length - 1]],
-                i,
-                current,
-                next,
-                length;
+            };
 
             vm.loadMore = true;
 
@@ -16979,42 +16916,9 @@ exports.default = {
                 vm.loadMore = false;
 
                 if (resp.success) {
-                    length = resp.data.length;
-                    vm.currentCount += length;
-
-                    for (i = 0; i < length; i++) {
-
-                        current = resp.data[i];
-
-                        if (previous[0].formatted_date === current.formatted_date) {
-                            previous.push(current);
-                            continue;
-                        }
-
-                        next = resp.data[i + 1];
-                        if (!next) {
-                            activities = [];
-                            if (resp.data[i].formatted_date === resp.data[i - 1].formatted_date) {
-                                keys = (0, _keys2.default)(vm.activitiesObject);
-                                vm.activitiesObject[keys[keys.length - 1]].push(resp.data[i]);
-                            } else {
-                                activities.push(resp.data[i]);
-                                vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                            }
-                            continue;
-                        };
-
-                        if (current.formatted_date === next.formatted_date) {
-                            activities.push(resp.data[i]);
-                            if (i + 2 === length) {
-                                vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                activities = [];
-                            }
-                        } else {
-                            activities.push(resp.data[i]);
-                            vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                            activities = [];
-                        }
+                    for (var i = 0; i < resp.data.length; i++) {
+                        vm.currentCount += resp.data.length;
+                        vm.activities.push(resp.data[i]);
                     }
                 }
             });
@@ -17147,7 +17051,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n    .m-t-5 {\n        margin-top: 5px;\n    }\n    .checkbox-checked-style {\n        padding: 0px 2px;\n        margin-right: 10px;\n        margin-left: 10px;\n        border: 1px solid #ccc;\n    }\n", ""]);
+exports.push([module.i, "\n    .m-t-5 {\n        margin-top: 5px;\n    }\n    .checkbox-checked-style {\n        padding: 0px 2px;\n        margin-right: 10px;\n        margin-left: 10px;\n        border: 1px solid #ccc;\n        border-radius: 3px\n    }\n", ""]);
 
 // exports
 
@@ -17250,6 +17154,7 @@ Object.defineProperty(exports, "__esModule", {
 //         margin-right: 10px;
 //         margin-left: 10px;
 //         border: 1px solid #ccc;
+//         border-radius: 3px
 //     }
 // </style>
 //
@@ -20967,9 +20872,7 @@ exports.default = {
 //                 </div>
 //             </div>
 //         </div>
-//         <!-- <pre>
-//             {{todos}}
-//         </pre> -->
+//
 //         <div class="row">
 //             <div class="col-12">
 //                 <div class="row" v-for="todo in todos" style="padding-left:20px; padding-bottom:5px">
@@ -20979,10 +20882,9 @@ exports.default = {
 //                         </span>
 //                         <span class="checkbox-style" v-else></span>
 //                     </div>
-//                     <div class="col-10">
+//                     <div class="col-10" style="margin-left:0px">
 //                         <router-link :to="'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID" tag="div" class="my-todo">
 //                             <a>{{todo.todo}}</a>
-//
 //                         </router-link>
 //                         <div v-if="todo.formatted_due_date" style="padding-top:12px">
 //                             <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 
@@ -21020,7 +20922,7 @@ exports.default = {
 /* 223 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class=\"container lists\">\n        <div class=\"row\">\n            <div class=\"col-2\"></div>\n            <div class=\"col-8\">\n                <div class=\"text-center assignment-heading\">\n                    <h1>{{ i18n.my_assignments }}</h1>\n                </div>\n            </div>\n        </div>\n        <!-- <pre>\n            {{todos}}\n        </pre> -->\n        <div class=\"row\">\n            <div class=\"col-12\">\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\n                    <div class=\"col-2 text-right\">\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span class=\"checkbox-style\" v-else></span>\n                    </div>\n                    <div class=\"col-10\">\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\n                            <a>{{todo.todo}}</a>\n\n                        </router-link>\n                        <div v-if=\"todo.formatted_due_date\" style=\"padding-top:12px\">\n                            <i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\" style=\"color: #b5b5b5\"></i> \n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">{{todo.formatted_due_date}}</span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n";
+module.exports = "\n    <div class=\"container lists\">\n        <div class=\"row\">\n            <div class=\"col-2\"></div>\n            <div class=\"col-8\">\n                <div class=\"text-center assignment-heading\">\n                    <h1>{{ i18n.my_assignments }}</h1>\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"row\">\n            <div class=\"col-12\">\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\n                    <div class=\"col-2 text-right\">\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n                        </span>\n                        <span class=\"checkbox-style\" v-else></span>\n                    </div>\n                    <div class=\"col-10\" style=\"margin-left:0px\">\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\n                            <a>{{todo.todo}}</a>\n                        </router-link>\n                        <div v-if=\"todo.formatted_due_date\" style=\"padding-top:12px\">\n                            <i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\" style=\"color: #b5b5b5\"></i> \n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">{{todo.formatted_due_date}}</span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n";
 
 /***/ }),
 /* 224 */
@@ -21080,7 +20982,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n    \n", ""]);
+exports.push([module.i, "\n.activity-content {\n    padding: 35px 20px;\n    background: #fff;\n}\n.activity-avatar {\n    float: left;\n    margin-right: 10px;\n    margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -21095,36 +20997,160 @@ exports.push([module.i, "\n    \n", ""]);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _ActivityInfo = __webpack_require__(147);
+
+var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    components: {
+        ActivityInfo: _ActivityInfo2.default
+    },
+
+    props: ['i18n'],
+
+    data: function data() {
+        return {
+            activities: [],
+            totalActivityCount: '',
+            currentCount: ''
+        };
+    },
+
+
+    computed: {
+        noActivity: function noActivity() {
+            return this.totalActivityCount < 1;
+        },
+        activitiesObject: function activitiesObject() {
+            return _.groupBy(this.activities, 'formatted_date');
+        }
+    },
+
+    methods: {
+        fetchActivities: function fetchActivities(userid) {
+            var vm = this,
+                data;
+
+            data = {
+                action: 'fpm-get-activities',
+                project_id: vm.$route.params.projectid,
+                nonce: fpm.nonce
+            };
+            if (userid) {
+                data.user_id = userid;
+            }
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    for (var i = 0; i < resp.data.length; i++) {
+                        vm.currentCount = resp.data.length;
+                        vm.activities.push(resp.data[i]);
+                        vm.totalActivityCount = resp.data[0].total_activity;
+                    }
+                }
+            });
+        },
+        loadMoreActivities: function loadMoreActivities() {
+            var vm = this,
+                data = {
+                action: 'fpm-load-more-activities',
+                nonce: fpm.nonce,
+                offset: vm.currentCount,
+                project_id: vm.$route.params.projectid
+            };
+
+            vm.loadMore = true;
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loadMore = false;
+
+                if (resp.success) {
+                    for (var i = 0; i < resp.data.length; i++) {
+                        vm.currentCount += resp.data.length;
+                        vm.activities.push(resp.data[i]);
+                    }
+                }
+            });
+        }
+    },
+
+    created: function created() {
+        var userid = fpm.currentUserInfo.ID;
+        this.fetchActivities(userid);
+    }
+};
+// </script>
 // <template>
-//     <div>
-//         My Activity Component
+//     <div class="container lists">
+//         <div class="row">
+//             <div class="col-12 text-center">
+//                 <div class="activity-content">
+//                     <div class="row">
+//                         <div class="col-12">
+//                             <h2 class="decorated-center"><span>My Activity</span></h2>
+//                         </div>
+//                     </div>
+//
+//                     <ul class="timeline timeline-centered">
+//                         <li class="timeline-item animated fadeIn" v-for="(value, key, index) in activitiesObject">
+//                             <div>
+//                                 <h3>{{ key }}</h3>
+//                             </div>
+//                             <div class="timeline-marker"></div>
+//                             <div class="timeline-content animated fadeIn" v-for="activity in value">
+//                                 <div class="row" v-if="index % 2===0" style="margin-bottom: 10px;">
+//                                     <div class="col-3">{{activity.formatted_time}}</div>
+//                                     <div class="col-9">
+//                                         <activity-info :activity="activity" :i18n="i18n"></activity-info>
+//                                     </div>
+//                                 </div>
+//                                 <div class="row" v-else style="margin-bottom: 10px;">
+//                                     <div class="col-9 text-left">
+//                                         <activity-info :activity="activity"></activity-info>
+//                                     </div>
+//                                     <div class="col-3">{{activity.formatted_time}}</div>
+//                                 </div>
+//                             </div>
+//                         </li>
+//                     </ul>
+//
+//                     <div class="row" v-if="currentCount < totalActivityCount">
+//                         <div class="col-12">
+//                             <button class="button" @click="loadMoreActivities">Load More</button>
+//                         </div>
+//                     </div>
+//                     <div v-if="noActivity">
+//                         No activity yet
+//                     </div>
+//                 </div>
+//             </div>
+//             </div>
+//         </div>
 //     </div>
 // </template>
 //
-// <script>
-exports.default = {
-    props: [],
-    components: {},
-    data: function data() {
-        return {};
-    },
-
-    directives: {},
-    methods: {},
-    created: function created() {},
-    mounted: function mounted() {}
-};
-// </script>
-//
 // <style>
-//
+// .activity-content {
+//     padding: 35px 20px;
+//     background: #fff;
+// }
+// .activity-avatar {
+//     float: left;
+//     margin-right: 10px;
+//     margin-top: 5px;
+// }
 // </style>
+//
+// <script>
 
 /***/ }),
 /* 228 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div>\n        My Activity Component\n    </div>\n";
+module.exports = "\n    <div class=\"container lists\">\n        <div class=\"row\">\n            <div class=\"col-12 text-center\">\n                <div class=\"activity-content\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <h2 class=\"decorated-center\"><span>My Activity</span></h2>\n                        </div>\n                    </div>\n                    \n                    <ul class=\"timeline timeline-centered\">\n                        <li class=\"timeline-item animated fadeIn\" v-for=\"(value, key, index) in activitiesObject\">\n                            <div>\n                                <h3>{{ key }}</h3>\n                            </div>\n                            <div class=\"timeline-marker\"></div>\n                            <div class=\"timeline-content animated fadeIn\" v-for=\"activity in value\">\n                                <div class=\"row\" v-if=\"index % 2===0\" style=\"margin-bottom: 10px;\">\n                                    <div class=\"col-3\">{{activity.formatted_time}}</div>\n                                    <div class=\"col-9\">\n                                        <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\n                                    </div>\n                                </div>\n                                <div class=\"row\" v-else style=\"margin-bottom: 10px;\">\n                                    <div class=\"col-9 text-left\">\n                                        <activity-info :activity=\"activity\"></activity-info>\n                                    </div>\n                                    <div class=\"col-3\">{{activity.formatted_time}}</div>\n                                </div>\n                            </div>\n                        </li>\n                    </ul>\n                    \n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\n                        <div class=\"col-12\">\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\n                        </div>\n                    </div>\n                    <div v-if=\"noActivity\">\n                        No activity yet\n                    </div>\n                </div>\n            </div>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ })
 /******/ ]);

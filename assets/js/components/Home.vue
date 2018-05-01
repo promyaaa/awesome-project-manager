@@ -4,8 +4,8 @@
             <div id="pageparentdiv">
                 <div class="inside">
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-3 user-info-sections">
+                        <div class="col-2"></div>
+                        <div class="col-4 user-info-sections">
                             <img :src="currentUser.data.avatar_url">
                             <div class="current-user-name">
                                 <h3>{{currentUser.data.display_name}}</h3>

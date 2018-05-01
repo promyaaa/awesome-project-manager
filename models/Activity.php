@@ -89,7 +89,18 @@ class FusionPM_Activity {
     public function get_activity_count( $project_id ) {
         global $wpdb;
 
-        $activity_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$this->table_name} WHERE `projectID` = {$project_id}" );
+        if ( $project_id ) {
+            $activity_count = $wpdb->get_var( 
+                "SELECT COUNT(*) FROM {$this->table_name} 
+                WHERE `projectID` = {$project_id}" 
+            );
+        } else {
+            $userid = get_current_user_id();
+            $activity_count = $wpdb->get_var( 
+                "SELECT COUNT(*) FROM {$this->table_name} 
+                WHERE `userID` = {$userid}" 
+            );
+        }
 
         return $activity_count;
     }
@@ -99,14 +110,29 @@ class FusionPM_Activity {
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 20;
+            $limit = 10;
         }
 
         if ( !$offset ) {
             $offset = 0;
         }
 
-        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID` = {$project_id} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}" );
+        if ( $project_id ) {
+            $result = $wpdb->get_results( 
+                "SELECT * FROM {$this->table_name} 
+                WHERE `projectID` = {$project_id} 
+                ORDER BY `ID` DESC LIMIT {$limit} 
+                OFFSET {$offset}" 
+            );
+        } else {
+            $userid = get_current_user_id();
+            $result = $wpdb->get_results( 
+                "SELECT * FROM {$this->table_name} 
+                WHERE `userID` = {$userid} 
+                ORDER BY `ID` DESC LIMIT {$limit} 
+                OFFSET {$offset}" 
+            );
+        }
 
         if ( $result ) {
             foreach ($result as $activity) {

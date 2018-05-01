@@ -8,9 +8,7 @@
                 </div>
             </div>
         </div>
-        <!-- <pre>
-            {{todos}}
-        </pre> -->
+        
         <div class="row">
             <div class="col-12">
                 <div class="row" v-for="todo in todos" style="padding-left:20px; padding-bottom:5px">
@@ -20,10 +18,9 @@
                         </span>
                         <span class="checkbox-style" v-else></span>
                     </div>
-                    <div class="col-10">
+                    <div class="col-10" style="margin-left:0px">
                         <router-link :to="'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID" tag="div" class="my-todo">
                             <a>{{todo.todo}}</a>
-
                         </router-link>
                         <div v-if="todo.formatted_due_date" style="padding-top:12px">
                             <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 

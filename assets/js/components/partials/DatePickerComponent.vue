@@ -66,6 +66,7 @@
                 dateFormat: "yy-mm-dd",
                 changeMonth: vm.changeMonthYear,
                 changeYear: vm.changeMonthYear,
+                showButtonPanel: false,
 
                 beforeShow() {
                     jQuery(this).datepicker('widget').addClass('fusion-pm-datepicker');

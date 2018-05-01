@@ -66,9 +66,7 @@
             ActivityInfo
         },
 
-        props: [
-            'i18n'
-        ],
+        props: ['i18n'],
 
         data () {
             return {
@@ -111,59 +109,6 @@
                     }
                 });
             },
-            // fetchActivities() {
-            //     var vm = this,
-            //         data,
-            //         activities = [],
-            //         current,
-            //         next,
-            //         i,
-            //         length,
-            //         keys;
-
-            //     data = {
-            //         action: 'fpm-get-activities',
-            //         project_id: vm.$route.params.projectid,
-            //         nonce: fpm.nonce,
-            //     };
-
-            //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-            //         if (resp.success) {
-            //             length = resp.data.length;
-            //             vm.currentCount = length;
-            //             vm.totalActivityCount = resp.data[0].total_activity;
-            //             for(i = 0; i < length; i++ ) {
-
-            //                 current = resp.data[i],
-            //                 next = resp.data[i+1]; 
-            //                 if(!next) {
-            //                     activities = [];
-            //                     if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
-            //                         keys = Object.keys(vm.activitiesObject);
-            //                         vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
-            //                     } else {
-            //                         activities.push(resp.data[i]);
-            //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-            //                     }
-            //                     continue;
-            //                 };
-
-            //                 if(current.formatted_date === next.formatted_date) {
-            //                     activities.push(resp.data[i]);
-            //                     if((i+2) === length) {
-            //                         vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-            //                         activities = [];
-            //                     }
-            //                 } else {
-            //                     activities.push(resp.data[i]);
-            //                     vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-            //                     activities = [];
-            //                 }
-            //             }
-            //         }
-            //     });
-            // },
-
             loadMoreActivities() {
                 var vm = this,
                     data = {
@@ -171,59 +116,20 @@
                         nonce: fpm.nonce,
                         offset: vm.currentCount,
                         project_id: vm.$route.params.projectid
-                    },
-                    activities = [],
-                    keys = Object.keys(vm.activitiesObject),
-                    previous = vm.activitiesObject[keys[keys.length-1]],
-                    i,
-                    current,
-                    next,
-                    length;
+                    };
 
                 vm.loadMore = true;
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loadMore = false;
-                    
-                    if (resp.success) {
-                        length = resp.data.length;
-                        vm.currentCount += length;
 
-                        for(i = 0; i < length; i++ ) {
-
-                            current = resp.data[i];
-
-                            if(previous[0].formatted_date === current.formatted_date) {
-                                previous.push(current);
-                                continue;
-                            }
-
-                            next = resp.data[i+1]; 
-                            if(!next) {
-                                activities = [];
-                                if(resp.data[i].formatted_date === resp.data[i-1].formatted_date) {
-                                    keys = Object.keys(vm.activitiesObject);
-                                    vm.activitiesObject[keys[keys.length-1]].push(resp.data[i]);
-                                } else {
-                                    activities.push(resp.data[i]);
-                                    vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                }
-                                continue;
-                            };
-
-                            if(current.formatted_date === next.formatted_date) {
-                                activities.push(resp.data[i]);
-                                if((i+2) === length) {
-                                    vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                    activities = [];
-                                }
-                            } else {
-                                activities.push(resp.data[i]);
-                                vm.$set(vm.activitiesObject, resp.data[i].formatted_date, activities);
-                                activities = [];
-                            }
+                    if(resp.success) {
+                        for(var i = 0; i < resp.data.length; i++) {
+                            vm.currentCount += resp.data.length;
+                            vm.activities.push(resp.data[i]);
                         }
                     }
+                   
                 });
             },
         },

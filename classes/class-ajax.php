@@ -1149,10 +1149,6 @@ class FusionPM_Ajax {
 
         $projectID = $this->get_validated_input('project_id');
 
-        if(!$projectID) {
-            wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
-        }
-
         $activityModel = FusionPM_Activity::init();
         $activites = $activityModel->get_project_activities( $projectID );
 
