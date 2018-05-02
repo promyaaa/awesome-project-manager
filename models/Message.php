@@ -160,6 +160,7 @@ class FusionPM_Message {
             $messageObject->avatar_url = get_avatar_url($messageObject->userID, array('size'=>70));
             $messageObject->formatted_created = $this->get_formatted_date( $messageObject->created );
         }
+            $result[0]->message_count = $this->get_message_count( $messageObject->projectID );
 
         return $result;
     }

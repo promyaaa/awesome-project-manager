@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
                 <div v-if="project" class="project-navigation">
@@ -9,58 +9,61 @@
                     </router-link>
                 </div>
             </div>
-        </div>
-        <div class="row box">
-            <div class="col-12">
-                <div class="row" v-if="message">
-                    <div class="col-12">
-                        <div class="m-default m-success">
-                            <p><strong>{{message}}</strong></p>
+        </div> -->
+        <project-nav v-on:get-project="setProject"></project-nav>
+        <div class="lists border-for-nav">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row" v-if="message">
+                        <div class="col-12">
+                            <div class="m-default m-success">
+                                <p><strong>{{message}}</strong></p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h3>{{ i18n.header_label }}<i style="color:#6d6d6d">{{project.project_title}}</i></h3>
-                        <p style="font-size: 14px;">{{ i18n.header_note }}</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="text-center">
-                        <button class="button button-large button-primary"
-                                @click="toggleAddForm"
-                                v-if="!isShowAddForm">{{ i18n.add_btn_text }}</button>
-                    </div>
-                    <div class="add_form_style" v-if="isShowAddForm">
-                        <div>
-                            <input type="text" class="form-control" :placeholder="i18n.name_placeholder" v-model="username" required>
-                        </div>
-                        <div>
-                            <input type="text" class="form-control" :placeholder="i18n.email_placeholder" v-model="email" required>
-                        </div>
-                        <div>
-                            <input type="text" class="form-control" :placeholder="i18n.title_placeholder" v-model="usertitle">
-                        </div>
-                        <br>
-                        <div>
-                            <!-- <input type="submit" class="button button-primary" v-model="localString.add_new" @click="createUser"> -->
-                            <button class="button button-primary" @click="createUser">{{i18n.add_new}}</button>
-                            <button class="button button-default" @click="toggleAddForm">{{ i18n.cancel }}</button>
-                        </div>
-                    </div>
-                    <br>
-                    <h2 class="decorated"><span>{{ i18n.decorated_heading }}</span></h2>
-                    
-                    <div class="text-center" v-if="loading">
-                        <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                        <p>{{ i18n.loading }}</p>
                     </div>
                     <div class="row">
-                        <div class="col-6" v-for="(user, uindex) in users" v-if="!loading">
-                            <single-user :user="user" v-on:remove="removeUser" :index="uindex" :i18n="i18n"></single-user>
+                        <div class="col-12 text-center">
+                            <h3>{{ i18n.header_label }}<i style="color:#6d6d6d">{{project.project_title}}</i></h3>
+                            <p style="font-size: 14px;">{{ i18n.header_note }}</p>
                         </div>
-                        <div class="col-12 text-center" v-if="users.length < totalUsers">
-                            <button class="button" style="margin-top: 30px;" @click="loadMoreUsers">Load More</button>
+                    </div>
+                    <div>
+                        <div class="text-center">
+                            <button class="button button-large button-primary"
+                                    @click="toggleAddForm"
+                                    v-if="!isShowAddForm">{{ i18n.add_btn_text }}</button>
+                        </div>
+                        <div class="add_form_style" v-if="isShowAddForm">
+                            <div>
+                                <input type="text" class="form-control" :placeholder="i18n.name_placeholder" v-model="username" required>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" :placeholder="i18n.email_placeholder" v-model="email" required>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" :placeholder="i18n.title_placeholder" v-model="usertitle">
+                            </div>
+                            <br>
+                            <div>
+                                <!-- <input type="submit" class="button button-primary" v-model="localString.add_new" @click="createUser"> -->
+                                <button class="button button-primary" @click="createUser">{{i18n.add_new}}</button>
+                                <button class="button button-default" @click="toggleAddForm">{{ i18n.cancel }}</button>
+                            </div>
+                        </div>
+                        <br>
+                        <h2 class="decorated"><span>{{ i18n.decorated_heading }}</span></h2>
+                        
+                        <div class="text-center" v-if="loading">
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                            <p>{{ i18n.loading }}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-6" v-for="(user, uindex) in users" v-if="!loading">
+                                <single-user :user="user" v-on:remove="removeUser" :index="uindex" :i18n="i18n"></single-user>
+                            </div>
+                            <div class="col-12 text-center" v-if="users.length < totalUsers">
+                                <button class="button" style="margin-top: 30px;" @click="loadMoreUsers">Load More</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,11 +103,13 @@
 </style>
 
 <script>
-    import SingleUser from './partials/SingleUserComponent.vue';
     import store from '../store';
+    import SingleUser from './partials/SingleUserComponent.vue';
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
-            SingleUser
+            SingleUser,
+            ProjectNav
         },
         data() {
             return {
@@ -123,7 +128,9 @@
             }
         },
         methods: {
-
+            setProject( project ) {
+                this.project = project;
+            },
             removeUser( index ) {
                 if (confirm("Are you sure ??")) {
                     var vm = this,
@@ -171,28 +178,6 @@
                         for(var i = 0; i < resp.data.length; i++ ) {
                             vm.users.push(resp.data[i]);
                         }
-                    }
-                });
-            },
-
-            fetchProjectInfo: function() {
-                var vm = this;
-                // vm.loading = true;
-
-                var data = {
-                    action: 'fpm-get-project',
-                    project_id: vm.$route.params.projectid,
-                    is_summary: true,
-                    nonce: fpm.nonce,
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    if ( resp.success ) {
-                        vm.project = resp.data;
-                    } else {
-                        vm.$router.push({
-                            path: `/?type=project&info=notfound`
-                        });
                     }
                 });
             },
@@ -259,7 +244,7 @@
                 vm.users = resp.data;
             });
 
-            vm.fetchProjectInfo();
+            // vm.fetchProjectInfo();
 
         },
 

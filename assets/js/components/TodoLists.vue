@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <div class="row">
+        <project-nav v-on:get-project="setProject"></project-nav>
+        <!-- <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
                 <div v-if="project" class="project-navigation">
@@ -9,9 +10,9 @@
                     </router-link>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="lists">
+        <div class="lists border-for-nav">
             <div class="row">
                 <div class="col-4">
                     <button class="button button-default" @click.prevent="toggleListForm" v-if="!isShowListForm">{{ i18n.make_list_btn }}</button>
@@ -92,10 +93,11 @@
 <script>
     import store from '../store';
     import List from './partials/ListComponent.vue';
-
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
-            'list': List
+            'list': List,
+            ProjectNav
         },
 
         directives: {
@@ -120,6 +122,10 @@
         },
 
         methods: {
+            setProject( project ) {
+                this.project = project;
+            },
+
             toggleListForm: function() {
                 var vm = this;
                 vm.isShowListForm = !vm.isShowListForm;

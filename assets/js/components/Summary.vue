@@ -5,7 +5,6 @@
                 <div class="col-12">
                     <div class="text-center project-info">
                         <h1><strong>{{project.project_title}}</strong></h1>
-                        <br>
                         <span>{{project.project_desc}}</span>
 
                         <span class="dropdown project-settings show-edit" v-if="isShowEdit">
@@ -143,7 +142,7 @@
         computed: {
             isShowEdit: function() {
                 var vm = this;
-                return (vm.currentUser.roles[0] === 'administrator') ||
+                return (vm.currentUser.roles.includes('administrator')) ||
                         (vm.currentUser.data.ID === vm.project.userID);
             }
         },

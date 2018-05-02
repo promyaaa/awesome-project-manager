@@ -26,8 +26,10 @@ new Vue({
         store: store
     },
 
-    compluted: {
-
+    watch: {
+        '$route' (to, from) {
+            console.log(to);
+        }
     },
 
     methods: {

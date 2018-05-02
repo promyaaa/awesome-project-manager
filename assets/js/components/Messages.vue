@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
                 <div v-if="project" class="project-navigation">
@@ -9,9 +9,9 @@
                     </router-link>
                 </div>
             </div>
-        </div>
-
-        <div class="lists">
+        </div> -->
+        <project-nav v-on:get-project="setProject"></project-nav>
+        <div class="lists border-for-nav">
             <div class="row">
                 <div class="col-4">
                     <router-link :to="'/projects/' + $route.params.projectid + '/messages/new'" class="button button-default">
@@ -51,7 +51,7 @@
                             </li>
                         </ul>
                     </div>
-                    <br>
+                    
                     <div class="row" v-if="messages.length < messageCount">
                         <div class="col-12 text-center">
                             <button class="button button-default" @click="loadMoreMessages">{{ i18n.load_more_btn }}{{messageCount}}</button>
@@ -75,10 +75,10 @@
 
 <script>
     import store from '../store';
-
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
-
+            ProjectNav
         },
 
         data() {
@@ -88,7 +88,7 @@
                 loading: false,
                 mindex: 0,
                 message: '',
-                project: {},
+                project: '',
                 messageTitle: '',
                 messageCount: '',
                 loadMore: false
@@ -96,26 +96,8 @@
         },
 
         methods: {
-            fetchProjectInfo: function() {
-                var vm = this;
-
-                var data = {
-                    action: 'fpm-get-project',
-                    project_id: vm.$route.params.projectid,
-                    nonce: fpm.nonce,
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
-                    if ( resp.success ) {
-                        vm.project = resp.data[0];
-                        vm.messageCount = vm.project.message_count;
-                    } else {
-                        vm.$router.push({
-                            path: `/?type=project&info=notfound`
-                        });
-                    }
-                });
+            setProject( project ) {
+                this.project = project;
             },
 
             loadMoreMessages() {
@@ -138,22 +120,6 @@
                 });
             },
 
-            // fetchMessageCount: function() {
-            //     var vm = this,
-            //         data = {
-            //         action: 'fpm-get-message-count',
-            //         nonce: fpm.nonce,
-            //     };
-
-            //     jQuery.post( fpm.ajaxurl, data, function( resp ) {
-            //         console.log(resp);
-
-            //         if ( resp.success ) {
-            //             vm.messageCount = resp.data;
-            //         }
-            //     });
-            // },
-
             fetchMessages: function() {
                 var vm = this;
                 vm.loading = true;
@@ -171,6 +137,7 @@
                         for(var i = 0; i < resp.data.length; i++ ) {
                             vm.messages.push(resp.data[i]);
                         }
+                        vm.messageCount = resp.data[0].message_count;
                     }
                 });
             },
@@ -206,7 +173,6 @@
                 vm.i18n = data;
             });
 
-            vm.fetchProjectInfo();
             vm.fetchMessages();
         },
 

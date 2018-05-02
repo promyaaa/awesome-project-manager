@@ -302,6 +302,7 @@ class Fusion_PM {
             $localvar = array(
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'currentUserInfo' => $currentuser,
+                'topLevelPage' => $hooks,
                 'nonce' => wp_create_nonce( 'fusion-pm-nonce' )
             );
 

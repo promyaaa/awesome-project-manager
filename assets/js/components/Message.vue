@@ -1,55 +1,53 @@
 <template>
     <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
-                    <a>{{messageObject.project_title}}</a>
-                </router-link>
-                <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style inline-block" tag="h4">
-                    <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{ i18n.message_heading }}</a>
-                </router-link>
-            </div>
-        </div>
-        <div class="row lists">
-            <div class="col-12">
-                <div class="text-center" v-if="loading">
-                    <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-                    <p>{{ i18n.loading }}</p>
-                </div>
-
-                <div v-if="messageObject && !loading">
-                    <div v-if="isShowEdit">
-                        <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'" class="button button-default">
-                            {{ i18n.edit }}
-                        </router-link>
-                        <span style="float:right" @click="deleteMessage(messageObject)">
-                            <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
-                        </span>
+        <project-nav>
+            <span><i class="fa fa-angle-right"></i></span>
+            <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style t-d-none">
+                {{ i18n.message_heading }}
+            </router-link>
+        </project-nav>
+        <div class="lists border-for-nav">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center" v-if="loading">
+                        <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+                        <p>{{ i18n.loading }}</p>
                     </div>
-                    <br>
-                    <div class="message-content">
-                        <div class="text-center message-by">
-                            <img :src="messageObject.avatar_url" class="small-round-image" alt="">
-                            <p>
-                                <i>{{ i18n.posted_by }} <strong>{{messageObject.user_name}}</strong>
-                                at {{messageObject.formatted_created}}</i>
-                            </p>
+
+                    <div v-if="messageObject && !loading">
+                        <div v-if="isShowEdit">
+                            <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'" class="button button-default">
+                                {{ i18n.edit }}
+                            </router-link>
+                            <span style="float:right" @click="deleteMessage(messageObject)">
+                                <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
+                            </span>
                         </div>
+                        <br>
+                        <div class="message-content">
+                            <div class="text-center message-by">
+                                <img :src="messageObject.avatar_url" class="small-round-image" alt="">
+                                <p>
+                                    <i>{{ i18n.posted_by }} <strong>{{messageObject.user_name}}</strong>
+                                    at {{messageObject.formatted_created}}</i>
+                                </p>
+                            </div>
 
-                        <h1><strong>{{messageObject.message_title}}</strong></h1>
+                            <h1><strong>{{messageObject.message_title}}</strong></h1>
 
-                        <div class="message-desc" v-html="messageObject.message"></div>
+                            <div class="message-desc" v-html="messageObject.message"></div>
 
-                        <div v-if="messageObject.files.length > 0">
-                            <div v-for="file in messageObject.files" class="image-common">
-                                <files-type-display :file="file" type="normal"></files-type-display>
-                                <!-- <a :href="file.url" target="_blank"><img :src="file.url" alt="" class="image-resize"></a> -->
+                            <div v-if="messageObject.files.length > 0">
+                                <div v-for="file in messageObject.files" class="image-common">
+                                    <files-type-display :file="file" type="normal"></files-type-display>
+                                    <!-- <a :href="file.url" target="_blank"><img :src="file.url" alt="" class="image-resize"></a> -->
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <comments :i18n="i18n" :comments="messageObject.comments" type="message"></comments>
                 </div>
-                <br>
-                <comments :i18n="i18n" :comments="messageObject.comments" type="message"></comments>
             </div>
         </div>
     </div>
@@ -84,10 +82,12 @@
     import store from '../store';
     import Comments from './partials/CommentsComponent.vue';
     import FilesTypeDisplay from './partials/FilesTypeDisplay.vue';
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
             Comments,
-            FilesTypeDisplay
+            FilesTypeDisplay,
+            ProjectNav
         },
         data() {
             return {
@@ -105,19 +105,6 @@
             }
         },
         methods: {
-            // getScaledImageSize: function(srcWidth, srcHeight, maxWidth, maxHeight) {
-            //     var ratio = 1;
-            //     if (srcWidth > maxWidth || srcHeight > maxHeight) {
-            //         ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-            //     }
-
-            //     return {
-            //         width: srcWidth * ratio,
-            //         height: srcHeight * ratio,
-            //     };
-            // },
-
-
             fetchMessage: function() {
                 var vm = this,
                     projectID = vm.$route.params.projectid;

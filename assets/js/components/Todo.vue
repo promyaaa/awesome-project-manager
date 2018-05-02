@@ -1,7 +1,17 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
+            <project-nav>
+                <span><i class="fa fa-angle-right"></i></span>
+                <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style t-d-none">
+                    {{ i18n.todos }}
+                </router-link>
+                <span><i class="fa fa-angle-right"></i></span>
+                <router-link :to="'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid" class="link-style t-d-none">
+                    {{list.list_title | truncate('15')}}
+                </router-link>
+            </project-nav>
+            <!-- <div class="row">
                 <div class="col-12 text-center">
                     <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
                         <a>{{project.project_title}}</a>
@@ -13,120 +23,123 @@
                         <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>{{list.list_title}}</a>
                     </router-link>
                 </div>
-            </div>
-            <div class="row lists">
-                <div class="col-12">
-                    <div class="loading" v-if="loading">
-                        <p>{{ i18n.loading }}</p>
-                    </div>
-                    <div v-if="todoObject && !loading" class="single-todo">
-                        <div>
-                            <div v-if="isShowEdit && !editTodo">
-                                <button class="button button-default"
-                                        @click="showTodoEdit(todoObject)">{{ i18n.edit }}</button>
-                                <span style="float:right" @click="deleteTodo(todoObject)">
-                                    <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
-                                </span>
-                            </div>
+            </div> -->
+            <div class="lists border-for-nav">
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="loading" v-if="loading">
+                            <p>{{ i18n.loading }}</p>
                         </div>
-                        <br>
-                        <div v-if="!editTodo" class="todo-details-div">
+                        <div v-if="todoObject && !loading" class="single-todo">
                             <div>
-                                <h1>
-                                    <input type="checkbox"
-                                    @click="toggleCheckbox(todoObject)"
-                                    v-model="todoObject.is_complete"
-                                    v-bind:true-value="1"
-                                    v-bind:false-value="0">
-                                    <span :class="{ completed: is_complete }">{{todoObject.todo}}</span>
-                                </h1>
-                            </div>
-                            <div class="row todo-info">
-                                <div class="col-3 text-right">
-                                    <strong style="padding-right: 15%">{{ i18n.assign_to_label }}</strong>
-                                </div>
-                                <div class="col-9">
-                                    <div>
-                                        <img :src="todoObject.avatar_url"
-                                            alt=""
-                                            class="small-round-image"
-                                            style="margin-right: 7px; margin-bottom: -3px;">
-                                            {{todoObject.assignee_name}}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row todo-info">
-                                <div class="col-3 text-right todo-info-title">
-                                    <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
-                                </div>
-                                <div class="col-9">
-                                    <span v-if="todoObject.formatted_due_date"
-                                            v-bind:class="[is_overdue ? 'overdue' : 'due']">
-                                            <i>{{todoObject.formatted_due_date}}</i>
+                                <div v-if="isShowEdit && !editTodo">
+                                    <button class="button button-default"
+                                            @click="showTodoEdit(todoObject)">{{ i18n.edit }}</button>
+                                    <span style="float:right" @click="deleteTodo(todoObject)">
+                                        <a style="color: #d54e21;cursor:pointer;">{{ i18n.delete }}</a>
                                     </span>
                                 </div>
                             </div>
-
-                            <div class="row todo-info">
-                                <div class="col-3 text-right todo-info-title">
-                                    <strong style="padding-right: 15%">{{ i18n.attachment_label }}</strong>
+                            <br>
+                            <div v-if="!editTodo" class="todo-details-div">
+                                <div>
+                                    <h1>
+                                        <input type="checkbox"
+                                        @click="toggleCheckbox(todoObject)"
+                                        v-model="todoObject.is_complete"
+                                        v-bind:true-value="1"
+                                        v-bind:false-value="0">
+                                        <span :class="{ completed: is_complete }">{{todoObject.todo}}</span>
+                                    </h1>
                                 </div>
-                                <div class="col-9">
-                                    <div v-if="todoObject.files.length > 0">
-                                        <div v-for="file in todoObject.files" class="image-common">
-                                            <files-type-display :file="file" type="normal"></files-type-display>
-                                            <!-- <img :src="file.url" alt="" class="image-resize"> -->
+                                <div class="row todo-info">
+                                    <div class="col-3 text-right">
+                                        <strong style="padding-right: 15%">{{ i18n.assign_to_label }}</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <div>
+                                            <img :src="todoObject.avatar_url"
+                                                alt=""
+                                                class="small-round-image"
+                                                style="margin-right: 7px; margin-bottom: -3px;">
+                                                {{todoObject.assignee_name}}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <i>{{ i18n.added_by }} <strong>{{todoObject.user_name}}</strong> {{ i18n.on }} {{todoObject.formatted_created}}</i>
+                                <div class="row todo-info">
+                                    <div class="col-3 text-right todo-info-title">
+                                        <strong style="padding-right: 15%">{{ i18n.due_date_label}}</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <span v-if="todoObject.formatted_due_date"
+                                                v-bind:class="[is_overdue ? 'overdue' : 'due']">
+                                                <i>{{todoObject.formatted_due_date}}</i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row todo-info">
+                                    <div class="col-3 text-right todo-info-title">
+                                        <strong style="padding-right: 15%">{{ i18n.attachment_label }}</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <div v-if="todoObject.files.length > 0">
+                                            <div v-for="file in todoObject.files" class="image-common">
+                                                <files-type-display :file="file" type="normal"></files-type-display>
+                                                <!-- <img :src="file.url" alt="" class="image-resize"> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <i>{{ i18n.added_by }} <strong>{{todoObject.user_name}}</strong> {{ i18n.on }} {{todoObject.formatted_created}}</i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add_form_style" v-if="editTodo">
+                                <div class="todo_name inline">
+                                    <input type="text"
+                                        v-model="todoName"
+                                        class="form-control"
+                                        :placeholder="i18n.add_todo_placeholder"
+                                        v-focus
+                                        required 
+                                        @keyup.esc="hideTodoForm">
+                                </div>
+                                <div>
+                                    <select v-model="selected" class="form-control">
+                                        <option disabled value="">{{ i18n.select_user }}</option>
+                                        <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
+                                        {{ option.display_name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
+                                <file-upload
+                                    :i18n="i18n"
+                                    v-on:attach="updateEditAttachments"
+                                    v-on:remove="removeEditAttachment"
+                                    :attachments="attachmentsToEdit"></file-upload>
+                                <br>
+
+                                <div class="inline">
+                                    <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" :value="i18n.update">
+                                    <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" :value="i18n.cancel">
                                 </div>
                             </div>
                         </div>
-
-                        <div class="add_form_style" v-if="editTodo">
-                            <div class="todo_name inline">
-                                <input type="text"
-                                    v-model="todoName"
-                                    class="form-control"
-                                    :placeholder="i18n.add_todo_placeholder"
-                                    v-focus
-                                    required 
-                                    @keyup.esc="hideTodoForm">
-                            </div>
-                            <div>
-                                <select v-model="selected" class="form-control">
-                                    <option disabled value="">{{ i18n.select_user }}</option>
-                                    <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
-                                    {{ option.display_name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
-                            <file-upload
-                                :i18n="i18n"
-                                v-on:attach="updateEditAttachments"
-                                v-on:remove="removeEditAttachment"
-                                :attachments="attachmentsToEdit"></file-upload>
-                            <br>
-
-                            <div class="inline">
-                                <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo" name="add_todo" class="button button-primary" :value="i18n.update">
-                                <input style="vertical-align: middle;" type="submit" @click.prevent="cancelTodoEdit" class="button button-default" :value="i18n.cancel">
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-12">
+                        <comments :i18n="i18n" :comments="todoObject.comments" type="todo"></comments>
                     </div>
                 </div>
-                <div class="col-12">
-                    <comments :i18n="i18n" :comments="todoObject.comments" type="todo"></comments>
-                </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -161,12 +174,14 @@
     import Comments from './partials/CommentsComponent.vue';
     import FilesTypeDisplay from './partials/FilesTypeDisplay.vue';
     import FileUpload from './partials/FileUploadComponent.vue';
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
             Comments,
             FileUpload,
             DatePicker,
-            FilesTypeDisplay
+            FilesTypeDisplay,
+            ProjectNav
         },
         data() {
             return {
@@ -186,7 +201,17 @@
                 users: ''
             }
         },
-
+        filters: {
+            truncate: function(string, value) {
+                var dotdot = '';
+                if(!string)
+                    string = '';
+                if (string.length > value) {
+                    dotdot = '...';
+                }
+                return string.substring(0, value) + dotdot;
+            },
+        },
         directives: {
             focus: {
                 inserted: function (el) {

@@ -1,7 +1,13 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
+            <project-nav>
+                <span><i class="fa fa-angle-right"></i></span>
+                <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style t-d-none">
+                    To-Dos
+                </router-link>
+            </project-nav>
+            <!-- <div class="row">
                 <div class="col-12 text-center">
                     <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
                         <a>{{project.project_title}}</a>
@@ -10,10 +16,10 @@
                         <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>To-dos</a>
                     </router-link>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="lists">
+            </div> -->
+            <div class="lists border-for-nav">
+                <div class="row">
+                    <div class="col-12">
 
                         <div class="loading" v-if="loading">
                             <p>Loading . . .</p>
@@ -40,16 +46,21 @@
     .inline-block {
         display: inline-block;
     }
+    .t-d-none {
+        text-decoration: none;
+    }
 </style>
 
 <script>
     import store from '../store';
     import List from './partials/ListComponent.vue';
     import Comments from './partials/CommentsComponent.vue';
+    import ProjectNav from './partials/ProjectNavComponent.vue';
     export default {
         components: {
             'list': List,
-            'comments': Comments
+            'comments': Comments,
+            ProjectNav
         },
 
         data() {
