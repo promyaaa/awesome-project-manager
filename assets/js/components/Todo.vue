@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div v-if="todoObject.files.length > 0">
-                                            <div v-for="file in todoObject.files" class="image-common">
+                                            <div v-for="file in todoObject.files">
                                                 <files-type-display :file="file" type="normal"></files-type-display>
                                                 <!-- <img :src="file.url" alt="" class="image-resize"> -->
                                             </div>
