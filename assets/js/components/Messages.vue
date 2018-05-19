@@ -129,7 +129,7 @@
                     project_id: vm.$route.params.projectid,
                     nonce: fpm.nonce,
                 };
-
+                
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loading = false;
                     
@@ -174,10 +174,6 @@
             });
 
             vm.fetchMessages();
-        },
-
-        mounted() {
-
         }
     }
 </script>

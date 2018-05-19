@@ -38,6 +38,7 @@ module.exports = function(grunt) {
                     '!npm-debug.log',
                     '!.babelrc',
                     '!deploy.sh',
+                    '!assets/js/**',
                     '!assets/js/components/**',
                     '!assets/css/style.css.map',
                     '!Gruntfile.js',

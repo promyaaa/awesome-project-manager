@@ -10506,11 +10506,11 @@ new _vue2.default({
         store: _store2.default
     },
 
-    watch: {
-        '$route': function $route(to, from) {
-            console.log(to);
-        }
-    },
+    // watch: {
+    //     '$route' (to, from) {
+    //         console.log(to);
+    //     }
+    // },
 
     methods: {
         getLocalizeString: function getLocalizeString() {
@@ -10531,7 +10531,8 @@ new _vue2.default({
 
     created: function created() {
         // this.getLocalizeString();
-        // jQuery(document).on('heartbeat-send', function(e, data) {
+        // jQuery(document).on('heartbeat-tick', function(e, data) {
+        //      Math.floor(Math.random() * 6) * 1000
         //     console.log('test heartbeat-send');
         // });
     }
@@ -20103,8 +20104,7 @@ exports.default = {
         });
 
         vm.fetchMessages();
-    },
-    mounted: function mounted() {}
+    }
 };
 // </script>
 

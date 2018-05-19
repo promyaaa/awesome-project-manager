@@ -12,7 +12,7 @@ module.exports = {
   // Where should the compiled file go?
   output: {
     // To the `dist` folder
-    path: path.resolve(__dirname, './assets/js'),
+    path: path.resolve(__dirname, './assets/dist'),
     // With the filename `build.js` so it's dist/build.js
 
     // path: './dist',

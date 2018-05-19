@@ -26,11 +26,11 @@ new Vue({
         store: store
     },
 
-    watch: {
-        '$route' (to, from) {
-            console.log(to);
-        }
-    },
+    // watch: {
+    //     '$route' (to, from) {
+    //         console.log(to);
+    //     }
+    // },
 
     methods: {
         getLocalizeString: function() {
@@ -53,7 +53,8 @@ new Vue({
 
     created: function() {
         // this.getLocalizeString();
-        // jQuery(document).on('heartbeat-send', function(e, data) {
+        // jQuery(document).on('heartbeat-tick', function(e, data) {
+        //      Math.floor(Math.random() * 6) * 1000
         //     console.log('test heartbeat-send');
         // });
     }
