@@ -6,13 +6,13 @@ module.exports = function(grunt) {
             target: {
                 options: {
                     exclude: ['dists/.*', 'node_modules/*', 'assets/*', 'tests/*', 'bin/*'],
-                    mainFile: 'awesome-pm.php',
+                    mainFile: 'advanced-pm.php',
                     domainPath: '/languages/',
-                    potFilename: 'awesome-pm.pot',
+                    potFilename: 'advanced-pm.pot',
                     type: 'wp-plugin',
                     updateTimestamp: true,
                     potHeaders: {
-                        'report-msgid-bugs-to': 'https://github.com/promyaaa/awesome-project-manager/issues',
+                        'report-msgid-bugs-to': 'https://github.com/promyaaa/advanced-project-manager/issues',
                         'language-team': 'LANGUAGE <EMAIL@ADDRESS>',
                         poedit: true,
                         'x-poedit-keywordslist': true
@@ -59,12 +59,12 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     mode: 'zip',
-                    archive: './dists/awesome-pm-v' + package.version + '.zip'
+                    archive: './dists/advanced-pm-v' + package.version + '.zip'
                 },
                 expand: true,
                 cwd: 'dists/',
                 src: ['**/*'],
-                dest: 'awesome-pm'
+                dest: 'advanced-pm'
             }
         }
     });

@@ -1,4 +1,4 @@
-# Awesome Project Manager WordPress Plugin #
+# Advanced Project Manager WordPress Plugin #
 **Contributors:** [promy](https://profiles.wordpress.org/promy89)
 **Tags:** Project, Project Manager, Single page app, Management, Single page, Todo, Todo Manager, Task, Task Management, Task Manager
 **Requires at least:** 4.4
