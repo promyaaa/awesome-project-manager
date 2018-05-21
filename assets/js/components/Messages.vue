@@ -58,6 +58,9 @@
                         </div>
                     </div>
                 </div>
+                <help-text>
+                    <p><i><strong>Note : </strong>Discussion boards keep the entire conversation about a specific topic together on a single page.No more digging through your inbox, trying to reassemble a story from a series of fragmented replies.</i></p>
+                </help-text>
             </div>
         </div>
     </div>
@@ -76,9 +79,11 @@
 <script>
     import store from '../store';
     import ProjectNav from './partials/ProjectNavComponent.vue';
+    import HelpText from './partials/HelpComponent.vue';
     export default {
         components: {
-            ProjectNav
+            ProjectNav,
+            HelpText
         },
 
         data() {

@@ -281,8 +281,8 @@ class Fusion_PM {
         wp_register_style( 'style_css', FUSION_PM_ASSETS . '/css/style.css', false, time() );
         wp_register_style( 'jquery-ui-style', FUSION_PM_ASSETS . '/css/jquery-ui.css', false, time() );
         wp_register_style( 'fusion-fontawesome', FUSION_PM_ASSETS . '/css/font-awesome.min.css', false, time() );
-        wp_register_script( 'fusion-timepicker', FUSION_PM_ASSETS . '/js/vendor/jquery-ui-timepicker.js', array( 'jquery' ), false, true );
-        wp_register_script( 'fusion-dropdown', FUSION_PM_ASSETS . '/js/vendor/dropdown.js', array( 'jquery' ), time(), true ); // array( 'jquery', 'fusion-vue' )
+        wp_register_script( 'fusion-timepicker', FUSION_PM_ASSETS . '/vendor/jquery-ui-timepicker.js', array( 'jquery' ), false, true );
+        wp_register_script( 'fusion-dropdown', FUSION_PM_ASSETS . '/vendor/dropdown.js', array( 'jquery' ), time(), true ); // array( 'jquery', 'fusion-vue' )
         wp_register_script( 'fusion-admin', FUSION_PM_ASSETS . '/dist/build.js', array( 'jquery', 'fusion-dropdown' ), time(), true ); 
 
         if ( 'toplevel_page_fusion-pm' == $hooks ) {

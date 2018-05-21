@@ -7,22 +7,13 @@
                     To-Dos
                 </router-link>
             </project-nav>
-            <!-- <div class="row">
-                <div class="col-12 text-center">
-                    <router-link :to="'/projects/' + $route.params.projectid " class="link-style inline-block" tag="h3">
-                        <a>{{project.project_title}}</a>
-                    </router-link>
-                    <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style inline-block" tag="h4">
-                        <a><i class="fa fa-long-arrow-right p-l-10 p-r-10" aria-hidden="true"></i>To-dos</a>
-                    </router-link>
-                </div>
-            </div> -->
+            
             <div class="lists border-for-nav">
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="loading" v-if="loading">
-                            <p>Loading . . .</p>
+                        <div class="text-center" v-if="loading">
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                         </div>
 
                         <div v-if="list && !loading">
@@ -106,10 +97,6 @@
                 vm.i18n = data;
             });
             vm.fetchListDetails();
-        },
-
-        mounted() {
-
         }
     }
 </script>

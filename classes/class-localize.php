@@ -90,7 +90,7 @@ class FusionPM_Localize {
             'people'                   => __( 'People', 'fusion-pm' ),
             'add_remove_people'        => __( 'Add/Remove People...', 'fusion-pm' ),
             'todos'                    => __( 'To-dos', 'fusion-pm' ),
-            'message_board'            => __( 'Message Board', 'fusion-pm' ),
+            'message_board'            => __( 'Discussion', 'fusion-pm' ),
             'project_activity'         => __( 'Project Activity', 'fusion-pm' ),
             'create_a_todo'            => __( 'created a Todo', 'fusion-pm' ),
             'updated_a_todo'           => __( 'updated a Todo', 'fusion-pm' ),
@@ -98,9 +98,9 @@ class FusionPM_Localize {
             'deleted_a_todo'           => __( 'deleted a Todo', 'fusion-pm' ),
             'checked_off_todo'         => __( 'checked off a Todo', 'fusion-pm' ),
             'reopen_a_todo'            => __( 're-open a Todo', 'fusion-pm' ),
-            'created_a_message_called' => __( 'created a Message, called', 'fusion-pm' ),
-            'udpated_a_message_called' => __( 'updated a Message, called', 'fusion-pm' ),
-            'deleted_a_message_called' => __( 'deleted a Message, called', 'fusion-pm' ),
+            'created_a_message_called' => __( 'created a Topic, called', 'fusion-pm' ),
+            'udpated_a_message_called' => __( 'updated a Topic, called', 'fusion-pm' ),
+            'deleted_a_message_called' => __( 'deleted a Topic, called', 'fusion-pm' ),
             'no_activity_yet'          => __( 'No activiy yet.', 'fusion-pm' ),
         );
 
@@ -179,9 +179,9 @@ class FusionPM_Localize {
      */
     public function messages_localize_data() {
         $localize_data = array(
-            'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
-            'message_heading'      => __( 'Message Board', 'fusion-pm' ),
-            'no_message_yet'      => __( 'No Message Added Yet', 'fusion-pm' ),
+            'add_new_msg_btn'      => __( 'Add New Topic', 'fusion-pm' ),
+            'message_heading'      => __( 'Discussion Board', 'fusion-pm' ),
+            'no_message_yet'      => __( 'No Topic Added Yet', 'fusion-pm' ),
             'posted_by'      => __( 'posted by', 'fusion-pm' ),
             'loading'              => __( 'Loading ...', 'fusion-pm' ),
             'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
@@ -199,9 +199,9 @@ class FusionPM_Localize {
      */
     public function single_messages_localize_data() {
         $localize_data = array(
-            'add_new_msg_btn'      => __( 'Add New Message', 'fusion-pm' ),
-            'message_heading'      => __( 'Message Board', 'fusion-pm' ),
-            'no_message_yet'      => __( 'No Message Added Yet', 'fusion-pm' ),
+            'add_new_msg_btn'      => __( 'Add New Topic', 'fusion-pm' ),
+            'message_heading'      => __( 'Discussion Board', 'fusion-pm' ),
+            'no_message_yet'      => __( 'No Topic Added Yet', 'fusion-pm' ),
             'posted_by'      => __( 'posted by', 'fusion-pm' ),
             'loading'              => __( 'Loading ...', 'fusion-pm' ),
             'load_more_btn'         => __( 'Load More...', 'fusion-pm' ),
@@ -227,9 +227,9 @@ class FusionPM_Localize {
      */
     public function new_messages_localize_data() {
         $localize_data = array(
-            'message_label'             => __( 'Messages', 'fusion-pm' ),
-            'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
-            'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
+            'message_label'             => __( 'Discussions', 'fusion-pm' ),
+            'message_title_placeholder' => __( 'Enter topic title...', 'fusion-pm' ),
+            'post_new_msg_btn'          => __( 'Post', 'fusion-pm' ),
             'edit'                      => __( 'Edit', 'fusion-pm' ),
             'delete'                    => __( 'Delete', 'fusion-pm' ),
             'cancel'                    => __( 'Cancel', 'fusion-pm' ),
@@ -249,9 +249,9 @@ class FusionPM_Localize {
      */
     public function edit_messages_localize_data() {
         $localize_data = array(
-            'message_label'             => __( 'Messages', 'fusion-pm' ),
-            'message_title_placeholder' => __( 'Enter your message title...', 'fusion-pm' ),
-            'post_new_msg_btn'          => __( 'Post Message', 'fusion-pm' ),
+            'message_label'             => __( 'Discussions', 'fusion-pm' ),
+            'message_title_placeholder' => __( 'Enter topic title...', 'fusion-pm' ),
+            'post_new_msg_btn'          => __( 'Post', 'fusion-pm' ),
             'edit'                      => __( 'Edit', 'fusion-pm' ),
             'delete'                    => __( 'Delete', 'fusion-pm' ),
             'cancel'                    => __( 'Cancel', 'fusion-pm' ),
@@ -286,7 +286,7 @@ class FusionPM_Localize {
         $localize_data = array(
             'header_label'              => __( 'Set up who’s on ', 'fusion-pm' ),
             'header_note'               => __( 
-                                                'Everyone below will be able to sign in to project manager and collaborate with you on this project (make to-dos, post messages, upload files, etc.).', 'fusion-pm' 
+                                                'Everyone below will be able to sign in to project manager and collaborate with you on this project (make to-dos, post discussion topics, upload files, etc.).', 'fusion-pm' 
                                                 ),
             'decorated_heading'         => __( 'People already on the project', 'fusion-pm' ),
             'add_btn_text'              => __( 'Add more people to this project', 'fusion-pm' ),

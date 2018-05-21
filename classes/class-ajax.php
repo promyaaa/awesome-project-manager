@@ -232,7 +232,7 @@ class FusionPM_Ajax {
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
                 'user' => array(
                     'ID' => $user_id,
-                    'user_name' => $user->display_name,
+                    'user_name' => $user->user_login,
                     'avatar_url' => get_avatar_url($user_id, array('size'=>50))
                 )
             );
@@ -272,7 +272,7 @@ class FusionPM_Ajax {
                 'message' => __( 'Successfully added to this project', 'fusion-pm' ),
                 'user' => array(
                     'ID' => $user_id,
-                    'user_name' => $user->display_name,
+                    'user_name' => $user->user_login,
                     'avatar_url' => get_avatar_url($user_id, array('size'=>50))
                 )
             );
@@ -358,7 +358,7 @@ class FusionPM_Ajax {
 
         $messageModel = FusionPM_Message::init();
 
-        $userObject = get_user_by( 'ID', get_current_user_id() );
+        $userObject = wp_get_current_user();
 
         $date = current_time( 'mysql' );
 
@@ -367,7 +367,7 @@ class FusionPM_Ajax {
             'message_title' => $messageTitle,
             'userID' => $userObject->ID,
             'projectID' => $projectID,
-            'user_name' => $userObject->display_name,
+            'user_name' => $userObject->user_login,
             'project_title' => $projectTitle,
             'file_ids' => maybe_serialize( $fileIDs )
         );
@@ -393,7 +393,7 @@ class FusionPM_Ajax {
         if ( $insertID ) {
             $activities = array(
                 'userID'        => $userObject->ID,
-                'user_name'     => $userObject->display_name,
+                'user_name'     => $userObject->user_login,
                 'projectID'     => $projectID,
                 'activity_id'   => $insertID,
                 'activity_type' => 'create_message',
@@ -425,14 +425,14 @@ class FusionPM_Ajax {
         if( ! $messageID ) {
             wp_send_json_error( __( 'messageid not provided', 'fusion-pm' ) );
         }
-
+        $userObject = wp_get_current_user();
         $messageModel = FusionPM_Message::init();
         $delete = $messageModel->delete( $messageID );
         $date = current_time( 'mysql' );
         if( $delete ) {
             $activities = array(
-                'userID' => $userID,
-                'user_name' => $userName,
+                'userID' => $userObject->ID,
+                'user_name' => $userObject->user_login,
                 'projectID' => $projectID,
                 'activity_id' => $messageID,
                 'activity_type' => 'delete_message',
@@ -528,7 +528,7 @@ class FusionPM_Ajax {
             'commentable_type' => $commentableType,
             'projectID' => $projectID,
             'userID' =>  $current_user->ID,
-            'user_name' =>  $current_user->display_name
+            'user_name' =>  $current_user->user_login
         );
 
         if ( $commentID ) {
@@ -561,6 +561,8 @@ class FusionPM_Ajax {
         }
 
         $assigneeID = get_current_user_id();
+
+        $orderBy = $this->get_validated_input('order_by');
 
         $todoModel = FusionPM_Todo::init();
 
@@ -697,10 +699,9 @@ class FusionPM_Ajax {
         $data = array(
             'todo' => $todo,
             'listID' => $listID,
-            'userID' => get_current_user_id(),
             'projectID' => $projectID,
-            'userID' => $userID,
-            'user_name' => $userName,
+            'userID' => $userObject->ID,
+            'user_name' => $userObject->user_login,
             'assignee_name' => $assigneeName,
             'assigneeID' => $assigneeID,
             'file_ids' => maybe_serialize( $fileIDs ),
@@ -737,9 +738,9 @@ class FusionPM_Ajax {
         if ( $insertID ) {
             $activities = array(
                 'userID'        => $userObject->ID,
-                'user_name'     => $userObject->display_name,
+                'user_name'     => $userObject->user_login,
                 'projectID'     => $projectID,
-                'parentID'     => $listID,
+                'parentID'      => $listID,
                 'activity_id'   => $insertID,
                 'activity_type' => 'create_todo',
                 'activity'      => $todo,
@@ -777,7 +778,7 @@ class FusionPM_Ajax {
         if( $delete ) {
             $activities = array(
                 'userID' => $userObject->ID,
-                'user_name' => $userObject->display_name,
+                'user_name' => $userObject->user_login,
                 'projectID' => $projectID,
                 'activity_id' => $todoID,
                 'activity_type' => 'delete_todo',
@@ -801,10 +802,10 @@ class FusionPM_Ajax {
         $todoID = !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
         $listID = !empty( $_POST['list_id'] ) ? $_POST['list_id'] : '';
         $projectID = !empty( $_POST['project_id'] ) ? $_POST['project_id'] : '';
-        $userID = !empty( $_POST['user_id'] ) ? $_POST['user_id'] : '';
-        $userName = !empty( $_POST['user_name'] ) ? $_POST['user_name'] : '';
+        // $userID = !empty( $_POST['user_id'] ) ? $_POST['user_id'] : '';
+        // $userName = !empty( $_POST['user_name'] ) ? $_POST['user_name'] : '';
         $todo = !empty( $_POST['todo'] ) ? $_POST['todo'] : '';
-
+        $currentUser = wp_get_current_user();
         if( ! $todoID ) {
             wp_send_json_error( __( 'todoid not provided', 'fusion-pm' ) );
         }
@@ -817,13 +818,13 @@ class FusionPM_Ajax {
         $date = current_time( 'mysql' );
 
         $activities = array(
-            'userID' => $userID,
-            'user_name' => $userName,
-            'projectID' => $projectID,
-            'parentID' => $listID,
+            'userID'      => $currentUser->ID,
+            'user_name'   => $currentUser->user_login,
+            'projectID'   => $projectID,
+            'parentID'    => $listID,
             'activity_id' => $todoID,
-            'activity' => $todo,
-            'created' => $date
+            'activity'    => $todo,
+            'created'     => $date
         );
 
         if ( $is_complete ) {
@@ -872,11 +873,12 @@ class FusionPM_Ajax {
         }
 
         $date = current_time( 'mysql' );
+        $userObject = wp_get_current_user();
 
         $data = array(
             'list_title' => $list_title,
-            'userID' => get_current_user_id(),
-            'user_name' => $userName,
+            'userID' => $userObject->ID,
+            'user_name' => $userObject->user_login,
             'projectID' => $projectID
         );
 

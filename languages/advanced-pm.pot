@@ -1,0 +1,503 @@
+# Copyright (C) 2018 M Abdur Rokib Promy
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Awesome project manager 1.0.1\n"
+"Report-Msgid-Bugs-To: "
+"https://github.com/promyaaa/advanced-project-manager/issues\n"
+"POT-Creation-Date: 2018-05-19 07:38:56+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
+
+#: classes/class-ajax.php:112 classes/class-ajax.php:147
+#: classes/class-ajax.php:175 classes/class-ajax.php:287
+#: classes/class-ajax.php:308 classes/class-ajax.php:336
+#: classes/class-ajax.php:416 classes/class-ajax.php:452
+#: classes/class-ajax.php:474 classes/class-ajax.php:495
+#: classes/class-ajax.php:560 classes/class-ajax.php:580
+#: classes/class-ajax.php:621 classes/class-ajax.php:653
+#: classes/class-ajax.php:761 classes/class-ajax.php:798
+#: classes/class-ajax.php:851 classes/class-ajax.php:910
+#: classes/class-ajax.php:932 classes/class-ajax.php:952
+#: classes/class-ajax.php:1003 classes/class-ajax.php:1024
+#: classes/class-ajax.php:1038 classes/class-ajax.php:1053
+#: classes/class-ajax.php:1068 classes/class-ajax.php:1084
+#: classes/class-ajax.php:1099 classes/class-ajax.php:1111
+#: classes/class-ajax.php:1123 classes/class-ajax.php:1147
+msgid "Nonce Verification failed.. Cheating uhhh?"
+msgstr ""
+
+#: classes/class-ajax.php:122 classes/class-ajax.php:193
+msgid "email is required"
+msgstr ""
+
+#: classes/class-ajax.php:133
+msgid "Successfully updated"
+msgstr ""
+
+#: classes/class-ajax.php:141 classes/class-ajax.php:169
+msgid "Something went wrong!!"
+msgstr ""
+
+#: classes/class-ajax.php:155 classes/class-ajax.php:189
+#: classes/class-ajax.php:293 classes/class-ajax.php:316
+#: classes/class-ajax.php:458 classes/class-ajax.php:863
+#: classes/class-ajax.php:938 classes/class-ajax.php:1009
+#: classes/class-ajax.php:1131
+msgid "projectid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:159
+msgid "userid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:167
+msgid "Successfully removed from project"
+msgstr ""
+
+#: classes/class-ajax.php:197
+msgid "username is required"
+msgstr ""
+
+#: classes/class-ajax.php:232 classes/class-ajax.php:272
+msgid "Successfully added to this project"
+msgstr ""
+
+#: classes/class-ajax.php:264
+msgid "Already added to this project"
+msgstr ""
+
+#: classes/class-ajax.php:303 classes/class-ajax.php:330
+#: classes/class-ajax.php:411 classes/class-ajax.php:446
+#: classes/class-ajax.php:469 classes/class-ajax.php:489
+#: classes/class-ajax.php:554 classes/class-ajax.php:573
+#: classes/class-ajax.php:646 classes/class-ajax.php:756
+#: classes/class-ajax.php:792 classes/class-ajax.php:905
+#: classes/class-ajax.php:925 classes/class-ajax.php:997
+#: classes/class-ajax.php:1018
+msgid "Something wrong, try again"
+msgstr ""
+
+#: classes/class-ajax.php:320
+msgid "message id not provided"
+msgstr ""
+
+#: classes/class-ajax.php:352
+msgid "project id not provided"
+msgstr ""
+
+#: classes/class-ajax.php:356
+msgid "message Title is required"
+msgstr ""
+
+#: classes/class-ajax.php:384 classes/class-ajax.php:543
+#: classes/class-ajax.php:894 classes/class-ajax.php:986
+msgid "Successfully inserted"
+msgstr ""
+
+#: classes/class-ajax.php:426
+msgid "messageid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:444 classes/class-ajax.php:1016
+msgid "message successfully deleted"
+msgstr ""
+
+#: classes/class-ajax.php:480 classes/class-ajax.php:505
+msgid "commentid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:487 classes/class-ajax.php:790
+#: classes/class-ajax.php:923
+msgid "Successfully deleted"
+msgstr ""
+
+#: classes/class-ajax.php:508
+msgid "commentable id not provided"
+msgstr ""
+
+#: classes/class-ajax.php:511
+msgid "comment type not provided"
+msgstr ""
+
+#: classes/class-ajax.php:514
+msgid "comment not provided"
+msgstr ""
+
+#: classes/class-ajax.php:590 classes/class-ajax.php:629
+#: classes/class-ajax.php:681
+msgid "listID is required"
+msgstr ""
+
+#: classes/class-ajax.php:594 classes/class-ajax.php:633
+#: classes/class-ajax.php:685
+msgid "projectID is required"
+msgstr ""
+
+#: classes/class-ajax.php:598
+msgid "todoID is required"
+msgstr ""
+
+#: classes/class-ajax.php:613
+msgid "Not related models, what are you upto??"
+msgstr ""
+
+#: classes/class-ajax.php:677
+msgid "Todo is required"
+msgstr ""
+
+#: classes/class-ajax.php:689
+msgid "user name is required"
+msgstr ""
+
+#: classes/class-ajax.php:726
+msgid "operation successful"
+msgstr ""
+
+#: classes/class-ajax.php:769 classes/class-ajax.php:809
+msgid "todoid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:839
+msgid "Successfully Updated"
+msgstr ""
+
+#: classes/class-ajax.php:867 classes/class-ajax.php:960
+msgid "Title is required"
+msgstr ""
+
+#: classes/class-ajax.php:871
+msgid "User Name is required"
+msgstr ""
+
+#: classes/class-ajax.php:916
+msgid "listid not provided"
+msgstr ""
+
+#: classes/class-ajax.php:964
+msgid "Description is required"
+msgstr ""
+
+#: classes/class-ajax.php:1140 classes/class-ajax.php:1158
+msgid "something went wrong"
+msgstr ""
+
+#: classes/class-localize.php:49 classes/class-localize.php:73
+msgid "My Assignments"
+msgstr ""
+
+#: classes/class-localize.php:50
+msgid "Projects"
+msgstr ""
+
+#: classes/class-localize.php:51
+msgid "Add New Project"
+msgstr ""
+
+#: classes/class-localize.php:52
+msgid "No Project added yet. Hit the +Add button to add one."
+msgstr ""
+
+#: classes/class-localize.php:53
+msgid "Enter your project title ..."
+msgstr ""
+
+#: classes/class-localize.php:54
+msgid "Write some details about your project ..."
+msgstr ""
+
+#: classes/class-localize.php:55
+msgid "Create Project"
+msgstr ""
+
+#: classes/class-localize.php:56 classes/class-localize.php:123
+#: classes/class-localize.php:155 classes/class-localize.php:210
+#: classes/class-localize.php:235 classes/class-localize.php:257
+#: classes/class-localize.php:276 classes/class-localize.php:296
+#: classes/class-localize.php:310
+msgid "Cancel"
+msgstr ""
+
+#: classes/class-localize.php:57 classes/class-localize.php:124
+#: classes/class-localize.php:156 classes/class-localize.php:186
+#: classes/class-localize.php:206
+msgid "Loading ..."
+msgstr ""
+
+#: classes/class-localize.php:58 classes/class-localize.php:126
+#: classes/class-localize.php:187 classes/class-localize.php:207
+msgid "Load More..."
+msgstr ""
+
+#: classes/class-localize.php:88
+msgid "Edit info"
+msgstr ""
+
+#: classes/class-localize.php:89 classes/class-localize.php:128
+#: classes/class-localize.php:158 classes/class-localize.php:209
+#: classes/class-localize.php:234 classes/class-localize.php:256
+msgid "Delete"
+msgstr ""
+
+#: classes/class-localize.php:90
+msgid "People"
+msgstr ""
+
+#: classes/class-localize.php:91
+msgid "Add/Remove People..."
+msgstr ""
+
+#: classes/class-localize.php:92
+msgid "To-dos"
+msgstr ""
+
+#: classes/class-localize.php:93 classes/class-localize.php:183
+#: classes/class-localize.php:203
+msgid "Message Board"
+msgstr ""
+
+#: classes/class-localize.php:94
+msgid "Project Activity"
+msgstr ""
+
+#: classes/class-localize.php:95
+msgid "created a Todo"
+msgstr ""
+
+#: classes/class-localize.php:96
+msgid "updated a Todo"
+msgstr ""
+
+#: classes/class-localize.php:97 classes/class-localize.php:98
+msgid "deleted a Todo"
+msgstr ""
+
+#: classes/class-localize.php:99
+msgid "checked off a Todo"
+msgstr ""
+
+#: classes/class-localize.php:100
+msgid "re-open a Todo"
+msgstr ""
+
+#: classes/class-localize.php:101
+msgid "created a Message, called"
+msgstr ""
+
+#: classes/class-localize.php:102
+msgid "updated a Message, called"
+msgstr ""
+
+#: classes/class-localize.php:103
+msgid "deleted a Message, called"
+msgstr ""
+
+#: classes/class-localize.php:104
+msgid "No activiy yet."
+msgstr ""
+
+#: classes/class-localize.php:119
+msgid "Make List"
+msgstr ""
+
+#: classes/class-localize.php:120 classes/class-localize.php:154
+msgid "To-Dos"
+msgstr ""
+
+#: classes/class-localize.php:121
+msgid "Enter the name of the list..."
+msgstr ""
+
+#: classes/class-localize.php:122
+msgid "Create List"
+msgstr ""
+
+#: classes/class-localize.php:125
+msgid "No Lists Added Yet"
+msgstr ""
+
+#: classes/class-localize.php:127 classes/class-localize.php:157
+#: classes/class-localize.php:208 classes/class-localize.php:233
+#: classes/class-localize.php:255 classes/class-localize.php:294
+#: classes/class-localize.php:309
+msgid "Edit"
+msgstr ""
+
+#: classes/class-localize.php:129 classes/class-localize.php:159
+#: classes/class-localize.php:211 classes/class-localize.php:236
+#: classes/class-localize.php:258 classes/class-localize.php:297
+#: classes/class-localize.php:311
+msgid "Update"
+msgstr ""
+
+#: classes/class-localize.php:130
+msgid "Add New Todo"
+msgstr ""
+
+#: classes/class-localize.php:131 classes/class-localize.php:160
+msgid "Add todo"
+msgstr ""
+
+#: classes/class-localize.php:132 classes/class-localize.php:161
+msgid "Enter your todo..."
+msgstr ""
+
+#: classes/class-localize.php:133 classes/class-localize.php:162
+msgid "--select user--"
+msgstr ""
+
+#: classes/class-localize.php:134 classes/class-localize.php:163
+#: classes/class-localize.php:212 classes/class-localize.php:237
+#: classes/class-localize.php:259
+msgid "Add files"
+msgstr ""
+
+#: classes/class-localize.php:149
+msgid "Assigned To :"
+msgstr ""
+
+#: classes/class-localize.php:150
+msgid "Due Date :"
+msgstr ""
+
+#: classes/class-localize.php:151
+msgid "Attachments :"
+msgstr ""
+
+#: classes/class-localize.php:152
+msgid "Added by"
+msgstr ""
+
+#: classes/class-localize.php:153
+msgid "on"
+msgstr ""
+
+#: classes/class-localize.php:164 classes/class-localize.php:213
+msgid "Comments"
+msgstr ""
+
+#: classes/class-localize.php:165 classes/class-localize.php:214
+msgid "commented by"
+msgstr ""
+
+#: classes/class-localize.php:166 classes/class-localize.php:215
+msgid "Add Comment"
+msgstr ""
+
+#: classes/class-localize.php:167
+msgid "overdue"
+msgstr ""
+
+#: classes/class-localize.php:182 classes/class-localize.php:202
+msgid "Add New Message"
+msgstr ""
+
+#: classes/class-localize.php:184 classes/class-localize.php:204
+msgid "No Message Added Yet"
+msgstr ""
+
+#: classes/class-localize.php:185 classes/class-localize.php:205
+msgid "posted by"
+msgstr ""
+
+#: classes/class-localize.php:230 classes/class-localize.php:252
+msgid "Messages"
+msgstr ""
+
+#: classes/class-localize.php:231 classes/class-localize.php:253
+msgid "Enter your message title..."
+msgstr ""
+
+#: classes/class-localize.php:232 classes/class-localize.php:254
+msgid "Post Message"
+msgstr ""
+
+#: classes/class-localize.php:274
+msgid "Save"
+msgstr ""
+
+#: classes/class-localize.php:275
+msgid "Add New"
+msgstr ""
+
+#: classes/class-localize.php:279
+msgid "Test"
+msgstr ""
+
+#: classes/class-localize.php:287
+msgid "Set up who’s on "
+msgstr ""
+
+#: classes/class-localize.php:288
+msgid ""
+"Everyone below will be able to sign in to project manager and collaborate "
+"with you on this project (make to-dos, post messages, upload files, etc.)."
+msgstr ""
+
+#: classes/class-localize.php:291
+msgid "People already on the project"
+msgstr ""
+
+#: classes/class-localize.php:292
+msgid "Add more people to this project"
+msgstr ""
+
+#: classes/class-localize.php:293
+msgid "Add new"
+msgstr ""
+
+#: classes/class-localize.php:295
+msgid "Remove"
+msgstr ""
+
+#: classes/class-localize.php:298
+msgid "Title"
+msgstr ""
+
+#: classes/class-localize.php:299
+msgid "Email"
+msgstr ""
+
+#: classes/class-localize.php:300
+msgid "Name"
+msgstr ""
+
+#: classes/class-localize.php:301
+msgid "Loading . . ."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Awesome project manager"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://example.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A single page project manager plugin for wordpress."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "M Abdur Rokib Promy"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/promyaaa"
+msgstr ""

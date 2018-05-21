@@ -155,12 +155,14 @@ class FusionPM_Message {
         $result = $wpdb->get_results( 
             "SELECT * FROM {$this->table_name} WHERE {$column} = {$param} ORDER BY `ID` DESC LIMIT {$limit} OFFSET {$offset}"
         );
-
+        if ( !$result ) {
+            return false;
+        }
         foreach ( $result as $messageObject ) {
             $messageObject->avatar_url = get_avatar_url($messageObject->userID, array('size'=>70));
             $messageObject->formatted_created = $this->get_formatted_date( $messageObject->created );
         }
-            $result[0]->message_count = $this->get_message_count( $messageObject->projectID );
+        $result[0]->message_count = $this->get_message_count( $messageObject->projectID );
 
         return $result;
     }

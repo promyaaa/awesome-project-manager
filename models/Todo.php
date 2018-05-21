@@ -146,18 +146,22 @@ class FusionPM_Todo {
         return $result;
     }
 
-    public function get_todos_by_column_info( $column , $param ) {
+    public function get_todos_by_column_info( $column , $param, $orderBy = NULL ) {
         global $wpdb;
 
         if( !$column ) {
             return [];
         }
 
-        if(!$param) {
+        if( !$param ) {
             return [];
         }
 
-        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE {$column} = {$param}" );
+        if ( !$orderBy ) {
+            $orderBy = 'ASC';
+        }
+
+        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE {$column} = {$param} ORDER BY `ID` {$orderBy}" );
 
         foreach ($result as $todo) {
             $todo->attachmentIDs = maybe_unserialize( $todo->file_ids );

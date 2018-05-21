@@ -4,9 +4,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  // plugins: [
-  //   new UglifyJsPlugin()
-  // ],
+  plugins: [
+    new UglifyJsPlugin()
+  ],
   // This is the "main" file which should include all other modules
   entry: './assets/js/admin.js',
   // Where should the compiled file go?

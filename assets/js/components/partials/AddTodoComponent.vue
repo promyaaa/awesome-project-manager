@@ -152,6 +152,18 @@
                         vm.todoName = '';
                         vm.attachments = [];
                         vm.attachmentIDs = [];
+
+                        // var text = "A new todo ' " + todo.todo + " ' has been created to ' " + vm.list.list_title + " ' list item";
+                        // var postUrl = 'https://hooks.slack.com/services/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';
+                        // jQuery.ajax({
+                        //     data: 'payload=' + JSON.stringify({
+                        //         "text": text
+                        //     }),
+                        //     dataType: 'json',
+                        //     processData: false,
+                        //     type: 'POST',
+                        //     url: postUrl
+                        // });
                     } else {
                         vm.message = resp.data;
                     }
