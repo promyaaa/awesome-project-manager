@@ -1,9 +1,9 @@
 === Project Manager Plugin for WordPress ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
-Tags: manager, project, project management, project manager, todo list
-Requires at least: 4.8
-Tested up to: 4.9.2
+Tags: manager, project, project management, single page app, todo list
+Requires at least: 4.6
+Tested up to: 4.9.5
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -62,6 +62,13 @@ User with 'Project member' role can Edit, Delete Projects, Lists, Todos, Message
 8. Project users
 
 == Changelog ==
+
+v1.0.2 -> May 23, 2018
+---------------------
+- [tweak] libraries moved to vendors directory
+- [tweak] code refactor 
+- [fix] css issue fix
+- [new] navigation redesigned
 
 v1.0.1 -> Feb 9, 2018
 ---------------------

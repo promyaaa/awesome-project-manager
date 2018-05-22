@@ -2,10 +2,10 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Awesome project manager 1.0.1\n"
+"Project-Id-Version: Awesome project manager 1.0.2\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/promyaaa/advanced-project-manager/issues\n"
-"POT-Creation-Date: 2018-05-19 07:38:56+00:00\n"
+"POT-Creation-Date: 2018-05-22 18:51:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,16 +30,16 @@ msgstr ""
 #: classes/class-ajax.php:308 classes/class-ajax.php:336
 #: classes/class-ajax.php:416 classes/class-ajax.php:452
 #: classes/class-ajax.php:474 classes/class-ajax.php:495
-#: classes/class-ajax.php:560 classes/class-ajax.php:580
-#: classes/class-ajax.php:621 classes/class-ajax.php:653
-#: classes/class-ajax.php:761 classes/class-ajax.php:798
-#: classes/class-ajax.php:851 classes/class-ajax.php:910
-#: classes/class-ajax.php:932 classes/class-ajax.php:952
-#: classes/class-ajax.php:1003 classes/class-ajax.php:1024
-#: classes/class-ajax.php:1038 classes/class-ajax.php:1053
-#: classes/class-ajax.php:1068 classes/class-ajax.php:1084
-#: classes/class-ajax.php:1099 classes/class-ajax.php:1111
-#: classes/class-ajax.php:1123 classes/class-ajax.php:1147
+#: classes/class-ajax.php:560 classes/class-ajax.php:582
+#: classes/class-ajax.php:623 classes/class-ajax.php:655
+#: classes/class-ajax.php:762 classes/class-ajax.php:799
+#: classes/class-ajax.php:852 classes/class-ajax.php:912
+#: classes/class-ajax.php:934 classes/class-ajax.php:954
+#: classes/class-ajax.php:1005 classes/class-ajax.php:1026
+#: classes/class-ajax.php:1040 classes/class-ajax.php:1055
+#: classes/class-ajax.php:1070 classes/class-ajax.php:1086
+#: classes/class-ajax.php:1101 classes/class-ajax.php:1113
+#: classes/class-ajax.php:1125 classes/class-ajax.php:1149
 msgid "Nonce Verification failed.. Cheating uhhh?"
 msgstr ""
 
@@ -57,9 +57,9 @@ msgstr ""
 
 #: classes/class-ajax.php:155 classes/class-ajax.php:189
 #: classes/class-ajax.php:293 classes/class-ajax.php:316
-#: classes/class-ajax.php:458 classes/class-ajax.php:863
-#: classes/class-ajax.php:938 classes/class-ajax.php:1009
-#: classes/class-ajax.php:1131
+#: classes/class-ajax.php:458 classes/class-ajax.php:864
+#: classes/class-ajax.php:940 classes/class-ajax.php:1011
+#: classes/class-ajax.php:1133
 msgid "projectid not provided"
 msgstr ""
 
@@ -86,11 +86,11 @@ msgstr ""
 #: classes/class-ajax.php:303 classes/class-ajax.php:330
 #: classes/class-ajax.php:411 classes/class-ajax.php:446
 #: classes/class-ajax.php:469 classes/class-ajax.php:489
-#: classes/class-ajax.php:554 classes/class-ajax.php:573
-#: classes/class-ajax.php:646 classes/class-ajax.php:756
-#: classes/class-ajax.php:792 classes/class-ajax.php:905
-#: classes/class-ajax.php:925 classes/class-ajax.php:997
-#: classes/class-ajax.php:1018
+#: classes/class-ajax.php:554 classes/class-ajax.php:575
+#: classes/class-ajax.php:648 classes/class-ajax.php:757
+#: classes/class-ajax.php:793 classes/class-ajax.php:907
+#: classes/class-ajax.php:927 classes/class-ajax.php:999
+#: classes/class-ajax.php:1020
 msgid "Something wrong, try again"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "message Title is required"
 msgstr ""
 
 #: classes/class-ajax.php:384 classes/class-ajax.php:543
-#: classes/class-ajax.php:894 classes/class-ajax.php:986
+#: classes/class-ajax.php:896 classes/class-ajax.php:988
 msgid "Successfully inserted"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "messageid not provided"
 msgstr ""
 
-#: classes/class-ajax.php:444 classes/class-ajax.php:1016
+#: classes/class-ajax.php:444 classes/class-ajax.php:1018
 msgid "message successfully deleted"
 msgstr ""
 
@@ -123,8 +123,8 @@ msgstr ""
 msgid "commentid not provided"
 msgstr ""
 
-#: classes/class-ajax.php:487 classes/class-ajax.php:790
-#: classes/class-ajax.php:923
+#: classes/class-ajax.php:487 classes/class-ajax.php:791
+#: classes/class-ajax.php:925
 msgid "Successfully deleted"
 msgstr ""
 
@@ -140,61 +140,61 @@ msgstr ""
 msgid "comment not provided"
 msgstr ""
 
-#: classes/class-ajax.php:590 classes/class-ajax.php:629
-#: classes/class-ajax.php:681
+#: classes/class-ajax.php:592 classes/class-ajax.php:631
+#: classes/class-ajax.php:683
 msgid "listID is required"
 msgstr ""
 
-#: classes/class-ajax.php:594 classes/class-ajax.php:633
-#: classes/class-ajax.php:685
+#: classes/class-ajax.php:596 classes/class-ajax.php:635
+#: classes/class-ajax.php:687
 msgid "projectID is required"
 msgstr ""
 
-#: classes/class-ajax.php:598
+#: classes/class-ajax.php:600
 msgid "todoID is required"
 msgstr ""
 
-#: classes/class-ajax.php:613
+#: classes/class-ajax.php:615
 msgid "Not related models, what are you upto??"
 msgstr ""
 
-#: classes/class-ajax.php:677
+#: classes/class-ajax.php:679
 msgid "Todo is required"
 msgstr ""
 
-#: classes/class-ajax.php:689
+#: classes/class-ajax.php:691
 msgid "user name is required"
 msgstr ""
 
-#: classes/class-ajax.php:726
+#: classes/class-ajax.php:727
 msgid "operation successful"
 msgstr ""
 
-#: classes/class-ajax.php:769 classes/class-ajax.php:809
+#: classes/class-ajax.php:770 classes/class-ajax.php:810
 msgid "todoid not provided"
 msgstr ""
 
-#: classes/class-ajax.php:839
+#: classes/class-ajax.php:840
 msgid "Successfully Updated"
 msgstr ""
 
-#: classes/class-ajax.php:867 classes/class-ajax.php:960
+#: classes/class-ajax.php:868 classes/class-ajax.php:962
 msgid "Title is required"
 msgstr ""
 
-#: classes/class-ajax.php:871
+#: classes/class-ajax.php:872
 msgid "User Name is required"
 msgstr ""
 
-#: classes/class-ajax.php:916
+#: classes/class-ajax.php:918
 msgid "listid not provided"
 msgstr ""
 
-#: classes/class-ajax.php:964
+#: classes/class-ajax.php:966
 msgid "Description is required"
 msgstr ""
 
-#: classes/class-ajax.php:1140 classes/class-ajax.php:1158
+#: classes/class-ajax.php:1142 classes/class-ajax.php:1160
 msgid "something went wrong"
 msgstr ""
 
@@ -267,9 +267,8 @@ msgstr ""
 msgid "To-dos"
 msgstr ""
 
-#: classes/class-localize.php:93 classes/class-localize.php:183
-#: classes/class-localize.php:203
-msgid "Message Board"
+#: classes/class-localize.php:93
+msgid "Discussion"
 msgstr ""
 
 #: classes/class-localize.php:94
@@ -297,15 +296,15 @@ msgid "re-open a Todo"
 msgstr ""
 
 #: classes/class-localize.php:101
-msgid "created a Message, called"
+msgid "created a Topic, called"
 msgstr ""
 
 #: classes/class-localize.php:102
-msgid "updated a Message, called"
+msgid "updated a Topic, called"
 msgstr ""
 
 #: classes/class-localize.php:103
-msgid "deleted a Message, called"
+msgid "deleted a Topic, called"
 msgstr ""
 
 #: classes/class-localize.php:104
@@ -405,11 +404,15 @@ msgid "overdue"
 msgstr ""
 
 #: classes/class-localize.php:182 classes/class-localize.php:202
-msgid "Add New Message"
+msgid "Add New Topic"
+msgstr ""
+
+#: classes/class-localize.php:183 classes/class-localize.php:203
+msgid "Discussion Board"
 msgstr ""
 
 #: classes/class-localize.php:184 classes/class-localize.php:204
-msgid "No Message Added Yet"
+msgid "No Topic Added Yet"
 msgstr ""
 
 #: classes/class-localize.php:185 classes/class-localize.php:205
@@ -417,15 +420,15 @@ msgid "posted by"
 msgstr ""
 
 #: classes/class-localize.php:230 classes/class-localize.php:252
-msgid "Messages"
+msgid "Discussions"
 msgstr ""
 
 #: classes/class-localize.php:231 classes/class-localize.php:253
-msgid "Enter your message title..."
+msgid "Enter topic title..."
 msgstr ""
 
 #: classes/class-localize.php:232 classes/class-localize.php:254
-msgid "Post Message"
+msgid "Post"
 msgstr ""
 
 #: classes/class-localize.php:274
@@ -447,7 +450,8 @@ msgstr ""
 #: classes/class-localize.php:288
 msgid ""
 "Everyone below will be able to sign in to project manager and collaborate "
-"with you on this project (make to-dos, post messages, upload files, etc.)."
+"with you on this project (make to-dos, post discussion topics, upload "
+"files, etc.)."
 msgstr ""
 
 #: classes/class-localize.php:291
