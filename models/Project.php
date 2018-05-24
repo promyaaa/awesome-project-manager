@@ -134,6 +134,13 @@ class FusionPM_Project {
             $this->table_name,
             array( 'ID' => $project_id )
         );
+
+        if ( $result ) {
+            $wpdb->delete(
+                $this->relation_table_name,
+                array( 'projectID' => $project_id )
+            );
+        }
         return $result;
     
     }

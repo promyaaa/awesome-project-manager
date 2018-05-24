@@ -226,6 +226,17 @@ textarea.form-control {
 .small-round-image {
   border-radius: 55px !important;
 }
+/* message section */
+
+.message-desc p {
+  font-size: 15px;
+}
+
+/* comment section */
+
+.comment-body p{
+  font-size: 15px;
+}
 /*decorated left*/
 .decorated{
     overflow: hidden;

@@ -127,6 +127,10 @@
                         due_date: vm.todoDueDate
                     };
 
+                if ( !vm.todoName ) {
+                    return;
+                }
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         todo = resp.data.todo;

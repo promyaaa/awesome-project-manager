@@ -157,6 +157,10 @@
                     attachments: vm.attachmentIDs
                 };
 
+                if ( !vm.messageTitle ) {
+                    return;
+                }
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         messageID = resp.data.messageInfo.ID;
