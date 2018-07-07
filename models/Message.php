@@ -79,6 +79,10 @@ class FusionPM_Message {
 
         $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
 
+        if ( !$result ) {
+            return $result;
+        }
+         
         foreach ($result as $message) {
             $isSuccess = $this->delete($message->ID);
         }

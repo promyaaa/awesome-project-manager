@@ -82,7 +82,10 @@ class FusionPM_List {
         global $wpdb;
 
         $result = $wpdb->get_results( "SELECT `ID` FROM {$this->table_name} WHERE {$column} = {$value}" );
-
+        
+        if ( !$result ) {
+            return $result;
+        } 
         foreach ($result as $list) {
             $isSuccess = $this->delete($list->ID);
         }

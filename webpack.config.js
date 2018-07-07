@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   plugins: [
-    new UglifyJsPlugin()
+    // new UglifyJsPlugin()
   ],
   // This is the "main" file which should include all other modules
   entry: './assets/js/admin.js',

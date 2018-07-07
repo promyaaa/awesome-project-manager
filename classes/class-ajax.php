@@ -1010,7 +1010,7 @@ class FusionPM_Ajax {
         if( ! $projectID ) {
             wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
         }
-
+        
         $projectModel = FusionPM_Project::init();
         $delete = $projectModel->delete( $projectID );
 

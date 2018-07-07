@@ -50,12 +50,14 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     // vm.loading = false;
                     if ( resp.success ) {
-                        if( (vm.currentUser.data.ID === resp.data[0].userID) || 
-                            (vm.currentUser.roles[0] === 'administrator') ) {
+                        if( ( vm.currentUser.data.ID === resp.data[0].userID) || 
+                            ( vm.currentUser.roles.includes('administrator') ) ) {
                             
                         } else {
                             vm.$router.push({ path: `/projects/${projectID}?type=unauthorized` });
                         }
+                    } else {
+                        vm.$router.push({ path: `/projects/${projectID}?type=unauthorized` });
                     }
                 });
             },

@@ -126,14 +126,15 @@ class FusionPM_Project {
         $messageModel = FusionPM_Message::init();
         $activityModel = FusionPM_Activity::init();
 
-        $listModel->delete_lists_by_column( $project_id, 'projectID' );
-        $messageModel->delete_messages_by_column( $project_id, 'projectID' );
-        $activityModel->delete_activities_by_column( $project_id, 'projectID' );
+        $lists = $listModel->delete_lists_by_column( $project_id, 'projectID' );
+        $messages = $messageModel->delete_messages_by_column( $project_id, 'projectID' );
+        $activities = $activityModel->delete_activities_by_project( $project_id );
 
         $result = $wpdb->delete(
             $this->table_name,
             array( 'ID' => $project_id )
         );
+        
 
         if ( $result ) {
             $wpdb->delete(
@@ -142,7 +143,6 @@ class FusionPM_Project {
             );
         }
         return $result;
-    
     }
 
     public function get_project( $project_id, $summary = NULL ) {
@@ -177,7 +177,7 @@ class FusionPM_Project {
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 15;
+            $limit = 5;
         }
 
         if ( !$offset ) {
@@ -188,7 +188,11 @@ class FusionPM_Project {
         $userModel = FusionPM_User::init();
         $current_user_id = get_current_user_id();
         if (current_user_can('manage_options')) {
-            $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} LIMIT {$limit} OFFSET {$offset}" );
+            $result = $wpdb->get_results( 
+                "SELECT * FROM {$this->table_name} 
+                ORDER BY `ID` DESC
+                LIMIT {$limit} OFFSET {$offset}"
+            );
 
             foreach ($result as $project) {
                 $project->user_count = $this->get_project_user_count( $project->ID );
@@ -206,6 +210,7 @@ class FusionPM_Project {
                  LEFT JOIN  {$this->relation_table_name} 
                  ON {$this->table_name}.ID = {$this->relation_table_name}.projectID 
                  WHERE {$this->relation_table_name}.userID = {$current_user_id}
+                 ORDER BY `ID` DESC
                  LIMIT {$limit}
                  OFFSET {$offset}"
             );

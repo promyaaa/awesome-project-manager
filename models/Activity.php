@@ -57,6 +57,20 @@ class FusionPM_Activity {
         return $result;
     }
 
+    public function delete_activities_by_project( $project_id ) {
+
+        global $wpdb;
+
+        $result = $wpdb->delete( 
+            $this->table_name,
+            array( 
+                'projectID'     => $project_id
+            )
+        );
+
+        return $result;
+    }
+
     public function delete_activities_by_column( $activity_id, $activity_type, $project_id ) {
 
         global $wpdb;

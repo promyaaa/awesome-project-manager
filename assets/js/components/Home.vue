@@ -96,6 +96,144 @@
 
 </template>
 
+<script>
+    import store from '../store';
+    export default {
+        data() {
+            return {
+                i18n: {},
+                projects: [],
+                isShowProjectForm: false,
+                projectTitle: '',
+                projectDesc: '',
+                loading: false,
+                projectCount: '',
+                loadMore: false
+            }
+        },
+
+        directives: {
+            focus: {
+                inserted: function (el) {
+                    el.focus()
+                }
+            }
+        },
+
+        computed: {
+            isNoProject: function() {
+                return this.projects.length < 1 && !this.isShowProjectForm && !this.loading;
+            }
+        },
+
+        methods: {
+            toggleProjectForm: function() {
+                this.isShowProjectForm = !this.isShowProjectForm;
+            },
+
+            loadMoreProjects() {
+                var vm = this,
+                    projectIDs,
+                    data = {
+                    action: 'fpm-load-more-projects',
+                    nonce: fpm.nonce,
+                    offset: vm.projects.length
+                };
+                vm.loadMore = true;
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    vm.loadMore = false;
+                    // projectIDs = vm.projects.map(project => +project.ID);
+                    if ( resp.success ) {
+                        for( var i = 0; i < resp.data.length; i++ ) {
+                            vm.projects.push(resp.data[i]);
+                        }
+                    }
+                });
+            },
+
+            fetchProjects() {
+                var vm = this,
+                    i,
+                    data = {
+                        action: 'fpm-get-projects',
+                        nonce: fpm.nonce,
+                    };
+
+                vm.loading = true;
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    vm.loading = false;
+                    
+                    if ( resp.success ) {
+                        for( i = 0; i < resp.data.length; i++ ) {
+                            vm.projects.push(resp.data[i]);
+                        }
+                    }
+                });
+            },
+
+            fetchProjectCount: function() {
+                var vm = this;
+                vm.loading = true;
+                var data = {
+                    action: 'fpm-get-project-count',
+                    nonce: fpm.nonce,
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    
+                    if ( resp.success ) {
+                        vm.projectCount = resp.data;
+                    }
+                });
+            },
+
+            createProject: function() {
+                var vm = this,
+                project,
+                user,
+                data = {
+                    action : 'fpm-insert-project',
+                    nonce : fpm.nonce,
+                    title: vm.projectTitle,
+                    description: vm.projectDesc
+                };
+
+                if( !vm.projectTitle.trim() ) {
+                    return;
+                }
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    
+                    if ( resp.success ) {
+                        resp.data.project.project_title = vm.projectTitle;
+                        resp.data.project.project_desc = vm.projectDesc;
+                        user = {
+                            avatar_url: vm.currentUser.data.avatar_url
+                        }
+                        resp.data.project.users = [user];
+                        vm.projects.unshift(resp.data.project);
+                        vm.projectTitle = '';
+                        vm.projectDesc = '';
+                    }
+                });
+            }
+        },
+
+        created() {
+            var self = this;
+            store.setLocalization( 'fpm-get-home-local-data' ).then( function( data ) {
+                self.i18n = data;
+            });
+
+            this.fetchProjects();
+            this.fetchProjectCount();
+            this.currentUser = fpm.currentUserInfo;
+        }
+    }
+</script>
+
 <style>
     .current-user-name h3{
         margin: 5px;
@@ -188,131 +326,3 @@
         margin-top: 7px;
     }
 </style>
-
-<script>
-    import store from '../store';
-    export default {
-        data() {
-            return {
-                i18n: {},
-                projects: [],
-                isShowProjectForm: false,
-                projectTitle: '',
-                projectDesc: '',
-                loading: false,
-                projectCount: '',
-                loadMore: false
-            }
-        },
-
-        directives: {
-            focus: {
-                inserted: function (el) {
-                    el.focus()
-                }
-            }
-        },
-
-        computed: {
-            isNoProject: function() {
-                return this.projects.length < 1 && !this.isShowProjectForm && !this.loading;
-            }
-        },
-
-        methods: {
-            toggleProjectForm: function() {
-                this.isShowProjectForm = !this.isShowProjectForm;
-            },
-
-            loadMoreProjects() {
-                var vm = this;
-                vm.loadMore = true;
-                var data = {
-                    action: 'fpm-load-more-projects',
-                    nonce: fpm.nonce,
-                    offset: vm.projects.length
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    vm.loadMore = false;
-                    if ( resp.success ) {
-                        for(var i = 0; i < resp.data.length; i++ ) {
-                            vm.projects.push(resp.data[i]);
-                        }
-                    }
-                });
-            },
-
-            fetchProjects: function() {
-                var vm = this;
-                vm.loading = true;
-                var data = {
-                    action: 'fpm-get-projects',
-                    nonce: fpm.nonce,
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    vm.loading = false;
-                    
-                    if ( resp.success ) {
-                        vm.projects = resp.data;
-                    }
-                });
-            },
-
-            fetchProjectCount: function() {
-                var vm = this;
-                vm.loading = true;
-                var data = {
-                    action: 'fpm-get-project-count',
-                    nonce: fpm.nonce,
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
-                    if ( resp.success ) {
-                        vm.projectCount = resp.data;
-                    }
-                });
-            },
-
-            createProject: function() {
-                var vm = this,
-                project,
-                user,
-                data = {
-                    action : 'fpm-insert-project',
-                    nonce : fpm.nonce,
-                    title: vm.projectTitle,
-                    description: vm.projectDesc
-                };
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
-                    if ( resp.success ) {
-                        resp.data.project.project_title = vm.projectTitle;
-                        resp.data.project.project_desc = vm.projectDesc;
-                        user = {
-                            avatar_url: vm.currentUser.data.avatar_url
-                        }
-                        resp.data.project.users = [user];
-                        vm.projects.push(resp.data.project);
-                        vm.projectTitle = '';
-                        vm.projectDesc = '';
-                    }
-                });
-            }
-        },
-
-        created() {
-            var self = this;
-            store.setLocalization( 'fpm-get-home-local-data' ).then( function( data ) {
-                self.i18n = data;
-            });
-
-            this.fetchProjects();
-            this.fetchProjectCount();
-            this.currentUser = fpm.currentUserInfo;
-        }
-    }
-</script>
