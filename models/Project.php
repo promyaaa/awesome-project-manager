@@ -177,7 +177,7 @@ class FusionPM_Project {
         global $wpdb;
 
         if ( !$limit ) {
-            $limit = 5;
+            $limit = 15;
         }
 
         if ( !$offset ) {
