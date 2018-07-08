@@ -1,6 +1,6 @@
 {
   "name": "awesome-project-manager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "project manager",
   "dependencies": {
     "vue2-editor": "^2.3.11"
