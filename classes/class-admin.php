@@ -38,8 +38,29 @@ class FusionPM_Admin {
 
         do_action( 'fusion_pm_menu', $capability );
     }
-
-
+    
+    /** sabbir kukur
+    function register_menu() {
+      global $submenu;
+      
+      // add_menu_page( __( 'Project Manager', 'text-domain' ), __( 'Project Manager', 'text-domain' ), 'manage_options', 'awesome-pm', 'pm_dashboard_cb' );
+      
+      $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
+        add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
+      
+      $submenu[ 'fusion-pm' ][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
+      $submenu[ 'fusion-pm' ][] = array( __( 'Message', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/messages' );
+      $submenu[ 'fusion-pm' ][] = array( __( 'Settings', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/settings' );
+    }
+    // For line number 8 callback function. where main single page div loaded
+    function pm_dashboard_cb() {
+      ?>
+        <div class="wrap">
+          <div id="app"><div>
+        </div>
+      <?php
+    }
+    **/
     /**
     * Show menu content
     *
