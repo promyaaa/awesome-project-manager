@@ -31,36 +31,33 @@ class FusionPM_Admin {
     *
     * @return void
     **/
-    public function register_menu() {
-        $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
+    // public function register_menu() {
+    //     $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
 
-        add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'fusion_pm_page' ), 'dashicons-editor-table', 15 );
+    //     add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'fusion_pm_page' ), 'dashicons-editor-table', 15 );
 
-        do_action( 'fusion_pm_menu', $capability );
-    }
-    
-    /** sabbir kukur
+        // do_action( 'fusion_pm_menu', $capability );
+    // }
+
+    // * sabbir kukur
     function register_menu() {
       global $submenu;
-      
+
       // add_menu_page( __( 'Project Manager', 'text-domain' ), __( 'Project Manager', 'text-domain' ), 'manage_options', 'awesome-pm', 'pm_dashboard_cb' );
-      
-      $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
-        add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
-      
-      $submenu[ 'fusion-pm' ][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
-      $submenu[ 'fusion-pm' ][] = array( __( 'Message', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/messages' );
-      $submenu[ 'fusion-pm' ][] = array( __( 'Settings', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/settings' );
+
+    $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
+    add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
+
+      $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
+      $submenu['fusion-pm'][] = array( __( 'Message', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/messages' );
+      $submenu['fusion-pm'][] = array( __( 'Settings', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/settings' );
+    do_action( 'fusion_pm_menu', $capability );
     }
     // For line number 8 callback function. where main single page div loaded
     function pm_dashboard_cb() {
-      ?>
-        <div class="wrap">
-          <div id="app"><div>
-        </div>
-      <?php
+      include_once FUSION_PM_PATH . '/views/admin.php';
     }
-    **/
+
     /**
     * Show menu content
     *
@@ -68,23 +65,7 @@ class FusionPM_Admin {
     *
     * @return void
     **/
-    public function fusion_pm_page() {
-        include_once FUSION_PM_PATH . '/views/admin.php';
-    }
+    // public function fusion_pm_page() {
+    //     include_once FUSION_PM_PATH . '/views/admin.php';
+    // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
