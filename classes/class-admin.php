@@ -49,8 +49,7 @@ class FusionPM_Admin {
     add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
 
       $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
-      $submenu['fusion-pm'][] = array( __( 'Message', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/messages' );
-      $submenu['fusion-pm'][] = array( __( 'Settings', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/settings' );
+      $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/activity' );
     do_action( 'fusion_pm_menu', $capability );
     }
     // For line number 8 callback function. where main single page div loaded

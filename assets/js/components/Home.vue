@@ -3,7 +3,7 @@
         <div class="container">
             <div id="pageparentdiv">
                 <div class="inside">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-2"></div>
                         <div class="col-4 user-info-sections">
                             <img :src="currentUser.data.avatar_url">
@@ -24,7 +24,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row">
