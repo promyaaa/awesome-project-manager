@@ -150,16 +150,23 @@
     padding: 15px 50px 10px;
 }
 .overdue {
-    background: #D54E21;
+    color: #D54E21;
+    font-size: 12px;
+    font-style: italic;
+    /*background: #D54E21;
     color: white;
     padding: 2px;
-    border-radius: 5px;
+    border-radius: 5px;*/
 }
 .due {
-    background: #46B450;
+    color: #46B450;
+    font-size: 12px;
+    font-style: italic;
+    
+    /*background: #46B450;
     color: white;
     padding: 2px;
-    border-radius: 5px;
+    border-radius: 5px;*/
 }
 .todo-info {
     border-bottom: 1px solid #eee;

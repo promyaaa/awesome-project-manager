@@ -50,7 +50,7 @@
 
 <div class="wrap" id="fusion-pm">
     <div id="app">
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-12 text-center home-nav">
                     <router-link to="/" exact tag="span" class="link-style common-nav">
@@ -58,9 +58,8 @@
                         <a> Home </a>
                     </router-link>
                 </div>
-
             </div>
-        </div>
+        </div> -->
         <div>
             <transition name="fade">
                 <router-view></router-view>

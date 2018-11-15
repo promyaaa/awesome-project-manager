@@ -20,12 +20,16 @@
                     </div>
                     <div class="col-10" style="margin-left:0px">
                         <router-link :to="'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID" tag="div" class="my-todo">
-                            <a>{{todo.todo}}</a>
+                            <a>{{todo.todo}}</a>, <span><i style="font-size:12px">Created at {{todo.formatted_created}}</i></span>,
+                            <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">
+                                <span v-if="todo.formatted_due_date">Due on</span>
+                                {{todo.formatted_due_date}}
+                            </span>
                         </router-link>
-                        <div v-if="todo.formatted_due_date" style="padding-top:12px">
+                        <!-- <div v-if="todo.formatted_due_date" style="padding-top:12px">
                             <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 
-                            <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">{{todo.formatted_due_date}}</span>
-                        </div>
+                            <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">Due on {{todo.formatted_due_date}}</span>
+                        </div> -->
                     </div>
                 </div>
             </div>
