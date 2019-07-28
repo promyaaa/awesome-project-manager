@@ -67,7 +67,7 @@
 
                 <div class="col-4" v-for="project in projects" v-if="projects.length > 0 && !loading">
                     <div class="project">
-                        <router-link :to="'/projects/' + project.ID" tag="h3" class="link-style">
+                        <router-link :to="'/projects/' + project.ID" tag="h3">
                             <div class="ellipsis-80">
                                 <a class="">{{project.project_title}}</a>
                             </div>
@@ -267,6 +267,8 @@
         margin:5px;
         padding-bottom: 15px;
         position: relative;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
     }
 
     .project .project-settings{
@@ -281,7 +283,9 @@
 
     }
     .project h3{
-        padding: 10px 15px;
+        /*padding: 10px 15px;*/
+        padding-bottom: 10px;
+        padding-left: 10px;
         border-bottom: 1px solid #eee;
     }
 

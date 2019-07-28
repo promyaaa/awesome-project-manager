@@ -95,7 +95,7 @@
         margin-left: 30px;
         margin-right: 30px;
         padding: 8px;
-        border-radius: 5px 5px 0px 0px;
+        /*border-radius: 5px 5px 0px 0px;*/
 
     }
     .border-for-nav {

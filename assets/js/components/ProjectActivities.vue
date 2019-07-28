@@ -1,72 +1,32 @@
 <template>
-    <!-- <div class="container"> -->
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="activity-content">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="decorated-center">
-                                <!-- <span>{{ i18n.project_activity }}</span> -->
-                                <span>Activity</span>
-                            </h2>
-                        </div>
-                    </div>
-                    <ul>
-                        <li class="left" v-for="(value, key, index) in activitiesObject">
-                            <h3>{{ key }}</h3>
-                            <div class="animated fadeIn" v-for="activity in value">
-                                <activity-info :activity="activity" :i18n="i18n"></activity-info>
-                            </div>
-                        </li>
-                    </ul>
-                    
-                    
-                    <div class="row" v-if="currentCount < totalActivityCount">
-                        <div class="col-12">
-                            <button class="button" @click="loadMoreActivities">Load More</button>
-                        </div>
-                    </div>
-                    <div v-if="noActivity && !loading">
-                        <!-- {{ i18n.no_activity_yet }} -->
-                        No activity Yet
-                    </div>
-                    <div v-if="loading">
-                        <h3>Loading! Please wait...<i class="fa fa-refresh fa-spin"></i></h3>
-                    </div>
-                </div>
-            </div>
-            </div>
+    <div class="container">
+        <project-nav></project-nav>
+        <div class="lists border-for-nav">
+            <activity></activity>    
         </div>
-    <!-- </div> -->
+    </div>
 </template>
 
-<style>
-.activity-content {
-    padding: 0px 20px 35px;
-    background: #fff;
-}
-.activity-avatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-</style>
-
 <script>
+    import store from '../store';
     import ActivityInfo from './partials/ActivityInfo.vue';
+    import ProjectNav from './partials/ProjectNavComponent.vue';
+    import Activity from './Activities.vue';
     export default {
         components: {
-            ActivityInfo
+            ActivityInfo,
+            ProjectNav,
+            Activity
         },
-
-        props: ['i18n'],
 
         data () {
             return {
                 activities: [],
                 totalActivityCount: '',
                 currentCount: '',
-                loading: false,
+                i18n: {},
+                project: {},
+                activityTitle: ''
             }
         },
 
@@ -84,8 +44,6 @@
                 var vm = this,
                     data;
 
-                vm.loading = true;
-
                 data = {
                     action: 'fpm-get-activities',
                     project_id: vm.$route.params.projectid,
@@ -97,7 +55,6 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if(resp.success) {
-                        vm.loading = false;
                         for(var i = 0; i < resp.data.length; i++) {
                             vm.currentCount = resp.data.length;
                             vm.activities.push(resp.data[i]);
@@ -106,6 +63,27 @@
                     }
                 });
             },
+            fetchProjectInfo: function() {
+                var vm = this;
+
+                var data = {
+                    action: 'fpm-get-project',
+                    project_id: vm.$route.params.projectid,
+                    nonce: fpm.nonce,
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    
+                    if ( resp.success ) {
+                        vm.project = resp.data[0];
+                    } else {
+                        vm.$router.push({
+                            path: `/?item=Project&op=rf`
+                        });
+                    }
+                });
+            },
+
             loadMoreActivities() {
                 var vm = this,
                     data = {
@@ -126,13 +104,38 @@
                             vm.activities.push(resp.data[i]);
                         }
                     }
-                   
                 });
             },
         },
 
         created() {
-            this.fetchActivities();
+            var vm = this;
+            store.setLocalization( 'fpm-get-activities-local-data' ).then( function( data ) {
+                vm.i18n = data;
+            });
+
+            if ( vm.$route.params.userid ) {
+                vm.fetchActivities( vm.$route.params.userid );
+
+            } else {
+                vm.fetchActivities();
+                vm.activityTitle = 'Project Activity';
+            }
+            
+            vm.fetchProjectInfo();
         }
     }
 </script>
+
+<style>
+.activity-content {
+    /*padding: 20px;*/
+    background: #fff;
+}
+.activity-avatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+</style>

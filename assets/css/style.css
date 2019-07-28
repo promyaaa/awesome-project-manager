@@ -9,6 +9,13 @@
   clear: both;
 }
 
+.ml-5 {
+  margin-left: 5px;
+}
+.mr-5 {
+  margin-right: 5px;
+}
+
 /*grid section start*/
 .font-light {
   font-weight: 300;
@@ -761,16 +768,79 @@ span.preview-fade {
   }
 }
 
-/*----------------------------------------------
-    MOD: MARKER OUTLINE
-----------------------------------------------*/
-/*.marker-outline .timeline-marker:before {
-  background: transparent;
-  border-color: #FF6B6B;
-}
-.marker-outline .timeline-item:hover .timeline-marker:before {
-  background: #FF6B6B;
-}*/
+/*animation css start*/
+    .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+    .animated-fast {
+        animation-duration: .2s;
+        animation-fill-mode: both;
+    }
+    /*slideInRight*/
+    @-webkit-keyframes slideInRight {
+      from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .slideInRight {
+      -webkit-animation-name: slideInRight;
+      animation-name: slideInRight;
+    }
+
+    /*slideOutRight*/
+    @-webkit-keyframes slideOutRight {
+      from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        visibility: hidden;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+      }
+    }
+
+    @keyframes slideOutRight {
+      from {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        visibility: hidden;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+      }
+    }
+
+    .slideOutRight {
+      -webkit-animation-name: slideOutRight;
+      animation-name: slideOutRight;
+    }
+
 
 
 

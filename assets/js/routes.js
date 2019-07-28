@@ -7,6 +7,8 @@ const Todo = require('./components/Todo.vue');
 const Home = require('./components/Home.vue');
 const Summary = require('./components/Summary.vue');
 const EditProject = require('./components/partials/EditProject.vue');
+const ProjectActivities = require('./components/ProjectActivities.vue');
+
 
 const TodoLists = require('./components/TodoLists.vue');
 const TodoList = require('./components/TodoList.vue');
@@ -34,7 +36,10 @@ const routes = [
 
     { path: '/projects/:projectid', component: Summary },
 
-    { path: '/projects/:projectid/activities', component: Activities },
+    { path: '/projects/:projectid/reports', component: ProjectActivities },
+
+
+    // { path: '/projects/:projectid/activities', component: Activities },
 
     { path: '/projects/:projectid/edit', component: EditProject },
 

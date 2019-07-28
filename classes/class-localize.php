@@ -86,6 +86,7 @@ class FusionPM_Localize {
     public function summary_localize_data() {
         $localize_data = array(
             'edit_info'                => __( 'Edit info', 'fusion-pm' ),
+            'activities'                => __( 'Activities', 'fusion-pm' ),
             'delete'                   => __( 'Delete', 'fusion-pm' ),
             'people'                   => __( 'People', 'fusion-pm' ),
             'add_remove_people'        => __( 'Add/Remove People...', 'fusion-pm' ),

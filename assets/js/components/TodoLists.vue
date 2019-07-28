@@ -84,7 +84,8 @@
     .add_form_style {
         padding: 20px;
         border: 1px dotted #ccc;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
+        background: #f3f4f5;
     }
 
 

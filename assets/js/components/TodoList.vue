@@ -32,7 +32,9 @@
     .lists {
         background: #fff;
         padding: 15px 25px;
-        border-radius: 5px;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        /*border-radius: 5px;*/
     }
     .inline-block {
         display: inline-block;

@@ -7,7 +7,7 @@
                         <h1><strong>{{project.project_title}}</strong></h1>
                         <span>{{project.project_desc}}</span>
 
-                        <span class="dropdown project-settings show-edit" v-if="isShowEdit">
+                        <!-- <span class="dropdown project-settings show-edit" v-if="isShowEdit">
                             <a data-target="#" class="setting-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Settings">
                                 <i class="fa fa-gear" aria-hidden="true" style="font-size:15px;"></i>
                             </a>
@@ -24,7 +24,7 @@
                                     <a><i class="fa fa-trash p-r-10" aria-hidden="true"></i>{{ i18n.delete }}</a>
                                 </router-link>
                             </ul>
-                        </span>
+                        </span> -->
                     </div>
                 </div>
                 <div class="col-12 text-center" v-if="loading">
@@ -48,7 +48,27 @@
                         </div>
                     </div>
                 </div>
+                <component-actions>
+                    <router-link :to="'/projects/' + $route.params.projectid + '/edit'"
+                                    tag="li" class="action-item" 
+                                    v-if="isShowEdit">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                        {{i18n.edit_info}}
+                    </router-link>
 
+                    <router-link :to="'/projects/' + $route.params.projectid + '/status'"
+                                    tag="li" class="action-item" 
+                                    v-if="isShowEdit">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        {{i18n.delete}}
+                    </router-link>
+
+                    <router-link :to="'/projects/' + $route.params.projectid + '/reports'"
+                                    tag="li" class="action-item">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        {{i18n.activities}}
+                    </router-link>
+                </component-actions>
             </div>
             <div class="row">
                 <div class="col-1"></div>
@@ -107,17 +127,19 @@
                     </div>
                 </div>
             </div>
-            <activities :i18n="i18n"></activities>
+            <!-- <activities :i18n="i18n"></activities> -->
         </div>
     </div>
 </template>
 
 <script>
     import store from '../store';
+    import ComponentActions from './partials/ComponentActions.vue';
     import Activities from './Activities.vue';
     export default {
         components: {
-            Activities
+            Activities,
+            ComponentActions
         },
         data() {
             return {
@@ -304,7 +326,10 @@
     .summary-section {
         background: #ffffff;
         padding-bottom: 40px;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        overflow: hidden;
     }
     span.summary-icon i {
         padding: 9px 12px 12px;
