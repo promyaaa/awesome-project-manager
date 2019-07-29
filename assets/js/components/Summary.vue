@@ -289,7 +289,7 @@
         margin-right: 10px;
         margin-left: 10px;
         border: 1px solid #ccc;
-        border-radius: 3px;
+        /*border-radius: 3px;*/
     }
     .link-style a:link {
         text-decoration: none;

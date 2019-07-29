@@ -11,6 +11,9 @@
         
         <div class="row">
             <div class="col-12">
+                <div v-if="loading" class="text-center">
+                    Loading... <i class="fa fa-refresh fa-spin"></i>
+                </div>
                 <div class="row" v-for="todo in todos" style="padding-left:20px; padding-bottom:5px">
                     <div class="col-2 text-right">
                         <span class="checkbox-checked-style" v-if="+todo.is_complete">
@@ -26,10 +29,6 @@
                                 {{todo.formatted_due_date}}
                             </span>
                         </router-link>
-                        <!-- <div v-if="todo.formatted_due_date" style="padding-top:12px">
-                            <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 
-                            <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">Due on {{todo.formatted_due_date}}</span>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -62,7 +61,8 @@
         data() {
             return {
                 i18n: {},
-                todos:[]
+                todos: [],
+                loading: false,
             }
         },
         methods: {
@@ -73,8 +73,11 @@
                     nonce: fpm.nonce,
                 };
 
+                vm.loading = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.loading = false;
                         vm.todos = resp.data;
                     }
                 });

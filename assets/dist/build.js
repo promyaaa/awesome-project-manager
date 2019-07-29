@@ -30569,7 +30569,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .project-navigation {\r\n        text-align: center;\r\n        background: #fff;\r\n        margin-left: 30px;\r\n        margin-right: 30px;\r\n        padding: 8px;\r\n        /*border-radius: 5px 5px 0px 0px;*/\r\n\r\n    }\r\n    .border-for-nav {\r\n        border-top: 1px solid #eee;\r\n    }\r\n    .nav-section {\r\n        padding: 5px;\r\n        border: 1px solid #eee;\r\n        border-radius: 4px;\r\n        min-width: 84px;\r\n        display: inline-block;\r\n        margin: 10px;\r\n    }\r\n    .nav-link {\r\n        margin-top: 5px;\r\n        margin-bottom: 5px;\r\n    }\r\n    .archive-label {\r\n        display: inline-block;\r\n        color: #72777c;\r\n        background: #fdda58;\r\n        border-radius: 4px;\r\n        padding: 2px 4px;\r\n        float: right;\r\n        font-weight: 600;\r\n        margin-top: -30px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .project-navigation {\r\n        text-align: center;\r\n        background: #fff;\r\n        margin-left: 30px;\r\n        margin-right: 30px;\r\n        padding: 8px;\r\n        border-top: 1px solid #e5e5e5;\r\n        border-right: 1px solid #e5e5e5;\r\n        border-left: 1px solid #e5e5e5;\r\n\r\n    }\r\n    .border-for-nav {\r\n        border-top: 1px solid #eee;\r\n    }\r\n    .nav-section {\r\n        padding: 5px;\r\n        border: 1px solid #eee;\r\n        border-radius: 4px;\r\n        min-width: 84px;\r\n        display: inline-block;\r\n        margin: 10px;\r\n    }\r\n    .nav-link {\r\n        margin-top: 5px;\r\n        margin-bottom: 5px;\r\n    }\r\n    .archive-label {\r\n        display: inline-block;\r\n        color: #72777c;\r\n        background: #fdda58;\r\n        border-radius: 4px;\r\n        padding: 2px 4px;\r\n        float: right;\r\n        font-weight: 600;\r\n        margin-top: -30px;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -30588,7 +30588,7 @@ Object.defineProperty(exports, "__esModule", {
 //     <div v-if="!isClient">
 //         <div class="project-navigation">
 //             <div class="nav-link">
-//                 <span style="display:inline-block" @click="toggleNavSection">
+//                 <span style="display:inline-block; cursor: pointer;" @click="toggleNavSection">
 //                     <i class="fa fa-bars" aria-hidden="true"></i>
 //                 </span>
 //                 <router-link :to="'/projects/' + $route.params.projectid" tag="div" class="link-style" style="display:inline-block">
@@ -30597,9 +30597,26 @@ Object.defineProperty(exports, "__esModule", {
 //                     </a>
 //                 </router-link>
 //                 <slot></slot>
-//                 <!-- <div v-if="+project.is_archive" class="archive-label">
-//                     Archived Project
-//                 </div> -->
+//             </div>
+//             <div v-if="isShowNavSection">
+//                 <div class="nav-section">
+//                     <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" class="link-style" tag="div">
+//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">To-Dos</strong>
+//                         <i class="fa fa-check"></i>
+//                     </router-link>   
+//                 </div>
+//                 <div class="nav-section">
+//                     <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="link-style" tag="div">
+//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">Messages</strong>
+//                         <i class="fa fa-envelope"></i>
+//                     </router-link>
+//                 </div>
+//                 <div class="nav-section">
+//                     <router-link :to="'/projects/' + $route.params.projectid + '/folders'" class="link-style" tag="div">
+//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">Docs&Files</strong>
+//                         <i class="fa fa-folder"></i>
+//                     </router-link>   
+//                 </div>
 //             </div>
 //         </div>
 //     </div>
@@ -30682,7 +30699,9 @@ exports.default = {
 //         margin-left: 30px;
 //         margin-right: 30px;
 //         padding: 8px;
-//         /*border-radius: 5px 5px 0px 0px;*/
+//         border-top: 1px solid #e5e5e5;
+//         border-right: 1px solid #e5e5e5;
+//         border-left: 1px solid #e5e5e5;
 //
 //     }
 //     .border-for-nav {
@@ -30716,7 +30735,7 @@ exports.default = {
 /* 144 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div v-if=\"!isClient\">\r\n        <div class=\"project-navigation\">\r\n            <div class=\"nav-link\">\r\n                <span style=\"display:inline-block\" @click=\"toggleNavSection\">\r\n                    <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\r\n                </span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"div\" class=\"link-style\" style=\"display:inline-block\">\r\n                    <a style=\"font-weight:bold;font-size:16px;padding-left:5px;\">\r\n                        {{project.project_title | truncate('20')}}\r\n                    </a>\r\n                </router-link>\r\n                <slot></slot>\r\n                <!-- <div v-if=\"+project.is_archive\" class=\"archive-label\">\r\n                    Archived Project\r\n                </div> -->\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div v-if=\"!isClient\">\r\n        <div class=\"project-navigation\">\r\n            <div class=\"nav-link\">\r\n                <span style=\"display:inline-block; cursor: pointer;\" @click=\"toggleNavSection\">\r\n                    <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\r\n                </span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"div\" class=\"link-style\" style=\"display:inline-block\">\r\n                    <a style=\"font-weight:bold;font-size:16px;padding-left:5px;\">\r\n                        {{project.project_title | truncate('20')}}\r\n                    </a>\r\n                </router-link>\r\n                <slot></slot>\r\n            </div>\r\n            <div v-if=\"isShowNavSection\">\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">To-Dos</strong>\r\n                        <i class=\"fa fa-check\"></i>\r\n                    </router-link>   \r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Messages</strong>\r\n                        <i class=\"fa fa-envelope\"></i>\r\n                    </router-link>\r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Docs&Files</strong>\r\n                        <i class=\"fa fa-folder\"></i>\r\n                    </router-link>   \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 145 */
@@ -31100,7 +31119,7 @@ exports.default = {
 //             <div class="row">
 //                 <div class="col-12" v-if="loading">
 //                     <div class="loading">
-//                         <h2>{{ i18n.loading }}</h2>
+//                         <h2><i class="fa fa-refresh fa-spin fa-2x"></i></h2>
 //                     </div>
 //                 </div>
 //
@@ -31124,7 +31143,7 @@ exports.default = {
 //                 </div>
 //             </div>
 //
-//             <div class="row" v-if="projects.length < projectCount">
+//             <div class="row" v-if="projects.length < projectCount && !loading">
 //                 <div class="col-12 text-center">
 //                     <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
 //                 </div>
@@ -31141,7 +31160,7 @@ exports.default = {
 /* 150 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <div id=\"pageparentdiv\">\r\n                <div class=\"inside\">\r\n                    <!-- <div class=\"row\">\r\n                        <div class=\"col-2\"></div>\r\n                        <div class=\"col-4 user-info-sections\">\r\n                            <img :src=\"currentUser.data.avatar_url\">\r\n                            <div class=\"current-user-name\">\r\n                                <h3>{{currentUser.data.display_name}}</h3>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"col-3 user-quick-link\">\r\n                            <div>\r\n                                <ul>\r\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\r\n                                        <a>{{ i18n.my_assignments }}</a>\r\n                                    </router-link>\r\n                                    <router-link to=\"/my/activity\" tag=\"li\" class=\"link-style\">\r\n                                        <a>My Activity</a>\r\n                                    </router-link>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                </div>\r\n                <div class=\"col-6\">\r\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\" v-if=\"isNoProject\">\r\n                <div class=\"col-12\">\r\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\" v-if=\"isShowProjectForm\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\r\n                        <form>\r\n                            <div class='section'>\r\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\r\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\r\n                            </div>\r\n                            <div class=\"action\">\r\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\r\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\" v-if=\"loading\">\r\n                    <div class=\"loading\">\r\n                        <h2>{{ i18n.loading }}</h2>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\r\n                    <div class=\"project\">\r\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\">\r\n                            <div class=\"ellipsis-80\">\r\n                                <a class=\"\">{{project.project_title}}</a>\r\n                            </div>\r\n                        </router-link>\r\n\r\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\r\n\r\n                        <div class=\"user-avatars\">\r\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\r\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\r\n                                <a>+{{project.user_count - 5}}</a>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n            <div class=\"row\" v-if=\"projects.length < projectCount\">\r\n                <div class=\"col-12 text-center\">\r\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <div id=\"pageparentdiv\">\r\n                <div class=\"inside\">\r\n                    <!-- <div class=\"row\">\r\n                        <div class=\"col-2\"></div>\r\n                        <div class=\"col-4 user-info-sections\">\r\n                            <img :src=\"currentUser.data.avatar_url\">\r\n                            <div class=\"current-user-name\">\r\n                                <h3>{{currentUser.data.display_name}}</h3>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"col-3 user-quick-link\">\r\n                            <div>\r\n                                <ul>\r\n                                    <router-link to=\"/my/assignments\" tag=\"li\" class=\"link-style\">\r\n                                        <a>{{ i18n.my_assignments }}</a>\r\n                                    </router-link>\r\n                                    <router-link to=\"/my/activity\" tag=\"li\" class=\"link-style\">\r\n                                        <a>My Activity</a>\r\n                                    </router-link>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                    </div> -->\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <h2 class=\"decorated\"><span>{{ i18n.projects }}</span></h2>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                </div>\r\n                <div class=\"col-6\">\r\n                    <a class=\"button button-primary right\" @click.prevent=\"toggleProjectForm\" v-if=\"!isShowProjectForm\">+ {{ i18n.add_new_project }}</a>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\" v-if=\"isNoProject\">\r\n                <div class=\"col-12\">\r\n                    <p><strong>{{ i18n.no_prject_found_message }}</strong></p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\" v-if=\"isShowProjectForm\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"add_form_style\" style=\"margin: 5px;\">\r\n                        <form>\r\n                            <div class='section'>\r\n                                <input type=\"text\" name=\"project_title\" v-model=\"projectTitle\" class=\"form-control\" :placeholder=\"i18n.project_title_placeholder\" v-focus @keyup.esc=\"toggleProjectForm\">\r\n                                <textarea class=\"form-control\" name=\"project_desc\" v-model=\"projectDesc\" rows=\"3\" :placeholder=\"i18n.project_description_placeholder\"></textarea>\r\n                            </div>\r\n                            <div class=\"action\">\r\n                                <button class=\"button button-primary\" @click.prevent=\"createProject\">{{ i18n.create_project_label }}</button>\r\n                                <button class=\"button button-default\" @click=\"toggleProjectForm\">{{ i18n.cancel_project_label }}</button>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\" v-if=\"loading\">\r\n                    <div class=\"loading\">\r\n                        <h2><i class=\"fa fa-refresh fa-spin fa-2x\"></i></h2>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"col-4\" v-for=\"project in projects\" v-if=\"projects.length > 0 && !loading\">\r\n                    <div class=\"project\">\r\n                        <router-link :to=\"'/projects/' + project.ID\" tag=\"h3\">\r\n                            <div class=\"ellipsis-80\">\r\n                                <a class=\"\">{{project.project_title}}</a>\r\n                            </div>\r\n                        </router-link>\r\n\r\n                        <p class=\"ellipsis-90\">{{project.project_desc}}</p>\r\n\r\n                        <div class=\"user-avatars\">\r\n                            <img :src=\"user.avatar_url\" v-for=\"user in project.users\" class=\"small-round-image\" width=\"32\" height=\"32\">\r\n                            <span v-if=\"project.user_count > 5\" class=\"more-user\">\r\n                                <a>+{{project.user_count - 5}}</a>\r\n                            </span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n            <div class=\"row\" v-if=\"projects.length < projectCount && !loading\">\r\n                <div class=\"col-12 text-center\">\r\n                    <button class=\"button button-default\" @click=\"loadMoreProjects\">{{ i18n.load_more }}</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n";
 
 /***/ }),
 /* 151 */
@@ -31201,7 +31220,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 3px;\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        border-radius: 5px;\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px;*/\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        border-radius: 5px;\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -31384,7 +31403,7 @@ exports.default = {
 //         margin-right: 10px;
 //         margin-left: 10px;
 //         border: 1px solid #ccc;
-//         border-radius: 3px;
+//         /*border-radius: 3px;*/
 //     }
 //     .link-style a:link {
 //         text-decoration: none;
@@ -31847,7 +31866,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n.activity-content {\r\n    padding: 0px 20px 35px;\r\n    background: #fff;\r\n}\r\n.activity-avatar {\r\n    float: left;\r\n    margin-right: 10px;\r\n    margin-top: 5px;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n\r\n@media (min-width: 992px) {\r\n    .activity-content {\r\n        padding: 0px 20px 35px;\r\n        background: #fff;\r\n    }\r\n    .activity-content ul {\r\n        padding-left: 25px;\r\n    }    \r\n}\r\n.activity-avatar {\r\n    float: left;\r\n    margin-right: 10px;\r\n    margin-top: 5px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -31965,8 +31984,8 @@ exports.default = {
 //                         </div>
 //                     </div>
 //                     <ul>
-//                         <li class="left" v-for="(value, key, index) in activitiesObject">
-//                             <h3>{{ key }}</h3>
+//                         <li v-for="(value, key, index) in activitiesObject">
+//                             <h3 class="left">{{ key }}</h3>
 //                             <div class="animated fadeIn" v-for="activity in value">
 //                                 <activity-info :activity="activity" :i18n="i18n"></activity-info>
 //                             </div>
@@ -31994,9 +32013,15 @@ exports.default = {
 // </template>
 //
 // <style>
-// .activity-content {
-//     padding: 0px 20px 35px;
-//     background: #fff;
+//
+// @media (min-width: 992px) {
+//     .activity-content {
+//         padding: 0px 20px 35px;
+//         background: #fff;
+//     }
+//     .activity-content ul {
+//         padding-left: 25px;
+//     }    
 // }
 // .activity-avatar {
 //     float: left;
@@ -32042,7 +32067,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .m-t-5 {\r\n        margin-top: 5px;\r\n    }\r\n    .checkbox-checked-style {\r\n        padding: 0px 2px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        border-radius: 3px\r\n    }\r\n    .activity-time {\r\n        font-style: italic;\r\n        margin-left: 5px;\r\n        color: #72777c;\r\n    }\r\n    .activity-info-block {\r\n        display: -ms-flexbox;\r\n        display: flex; \r\n        padding-bottom: 10px; \r\n        padding-left: 10px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .m-t-5 {\r\n        margin-top: 5px;\r\n    }\r\n    .checkbox-checked-style {\r\n        padding: 0px 2px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px*/\r\n    }\r\n    .activity-time {\r\n        font-style: italic;\r\n        margin-left: 5px;\r\n        color: #72777c;\r\n    }\r\n    .activity-info-block {\r\n        /*display: flex; */\r\n        padding-bottom: 15px; \r\n        padding-left: 10px;\r\n        text-align: left;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -32059,18 +32084,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 // <template>
 //     <div>
-//         <!-- {{ activity | json}} -->
 //         <img :src="activity.avatar_url" alt="" class="small-round-image activity-avatar" style="margin-right:15px; margin-top: 0px;">
 //
 //         <div v-if="isCreateTodo" class="activity-info-block">
-//             <strong class="mr-5">{{activity.user_name}}</strong> created a <strong class="ml-5">Todo</strong>
-//             <div>
-//                 <span class="checkbox-style"></span>
-//                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
-//                     <a>{{activity.activity}}</a>
-//                 </router-link>  
-//             </div>
-//             <div class="activity-time">at {{ activity.formatted_time }}</div>
+//             <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong>
+//             <span class="checkbox-style"></span>
+//             <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity}}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
 //         </div>
 //
 //         <!-- <div v-if="isUpdateTodo">
@@ -32085,39 +32107,34 @@ Object.defineProperty(exports, "__esModule", {
 //
 //         <div v-if="isCheckTodo" class="activity-info-block">
 //             <strong class="mr-5">{{activity.user_name}}</strong> checked off a <strong class="ml-5">Todo</strong>
-//             <div style="cursor:pointer">
-//                 <span class="checkbox-checked-style"><i class="fa fa-check" aria-hidden="true"></i></span>
-//                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
-//                     <a>{{activity.activity}}</a>
-//                 </router-link>
-//             </div>
+//             <span class="checkbox-checked-style"><i class="fa fa-check" aria-hidden="true"></i></span>
+//             <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity}}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
 //         </div>
 //
 //         <div v-if="isUncheckTodo" class="activity-info-block">
-//             <strong class="mr-5">{{activity.user_name}}</strong> re-open a <strong class="ml-5">Todo</strong>
-//             <div style="cursor:pointer">
-//                 <span class="checkbox-style"></span>
-//                 <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
-//                     <a>{{activity.activity}}</a>
-//                 </router-link>
-//             </div>
+//             <strong>{{activity.user_name}}</strong> re-opened a <strong>Todo</strong>
+//             <span class="checkbox-style"></span>
+//             <router-link :to="'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity}}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
 //         </div>
 //
 //         <div v-if="isDeleteTodo" class="activity-info-block">
-//             <strong class="mr-5">{{activity.user_name}}</strong> deleted a <strong class="ml-5">Todo</strong>
-//             <div style="cursor:default">
-//                 <span class="checkbox-style"></span>
-//                 <span style="color:a2a2a2;">{{activity.activity}}</span>
-//             </div>
+//             <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong>
+//             <i style="color: #D54E21;">"{{activity.activity}}"</i>
+//             at {{ activity.formatted_time }}
 //         </div>
 //
 //         <div v-if="isCreateMessage" class="activity-info-block">
-//             <strong class="mr-5">{{activity.user_name}}</strong> added a new <strong class="ml-5 mr-5">Message</strong> called
-//             <div class="ml-5">
-//                 <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
-//                     <a>{{activity.activity}}</a>
-//                 </router-link>  
-//             </div>
+//             <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called 
+//             <router-link :to="'/projects/' + activity.projectID + '/messages/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity}}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
 //         </div>
 //
 //         <!-- <div v-if="isUpdateMessage">
@@ -32129,11 +32146,10 @@ Object.defineProperty(exports, "__esModule", {
 //             </div>
 //         </div> -->
 //
-//         <div v-if="isDeleteMessage">
-//             <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>
-//             <div class="m-t-5" style="cursor:default">
-//                 <span style="color:a2a2a2;">{{activity.activity}}</span>
-//             </div>
+//         <div v-if="isDeleteMessage" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called
+//             <i style="color: #D54E21">"{{activity.activity}}"</i>
+//             at {{ activity.formatted_time }}
 //         </div>
 //     </div>
 // </template>
@@ -32147,7 +32163,7 @@ Object.defineProperty(exports, "__esModule", {
 //         margin-right: 10px;
 //         margin-left: 10px;
 //         border: 1px solid #ccc;
-//         border-radius: 3px
+//         /*border-radius: 3px*/
 //     }
 //     .activity-time {
 //         font-style: italic;
@@ -32155,9 +32171,10 @@ Object.defineProperty(exports, "__esModule", {
 //         color: #72777c;
 //     }
 //     .activity-info-block {
-//         display: flex; 
-//         padding-bottom: 10px; 
+//         /*display: flex; */
+//         padding-bottom: 15px; 
 //         padding-left: 10px;
+//         text-align: left;
 //     }
 // </style>
 //
@@ -32208,13 +32225,13 @@ exports.default = {
 /* 166 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <!-- {{ activity | json}} -->\r\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\" style=\"margin-right:15px; margin-top: 0px;\">\r\n\r\n        <div v-if=\"isCreateTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> created a <strong class=\"ml-5\">Todo</strong>\r\n            <div>\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>  \r\n            </div>\r\n            <div class=\"activity-time\">at {{ activity.formatted_time }}</div>\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateTodo\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>\r\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isCheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> checked off a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:pointer\">\r\n                <span class=\"checkbox-checked-style\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isUncheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> re-open a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> deleted a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:default\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <span style=\"color:a2a2a2;\">{{activity.activity}}</span>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isCreateMessage\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> added a new <strong class=\"ml-5 mr-5\">Message</strong> called\r\n            <div class=\"ml-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateMessage\">\r\n            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called\r\n            <div class=\"m-t-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isDeleteMessage\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>\r\n            <div class=\"m-t-5\" style=\"cursor:default\">\r\n                <span style=\"color:a2a2a2;\">{{activity.activity}}</span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\" style=\"margin-right:15px; margin-top: 0px;\">\r\n\r\n        <div v-if=\"isCreateTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateTodo\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>\r\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isCheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> checked off a <strong class=\"ml-5\">Todo</strong>\r\n            <span class=\"checkbox-checked-style\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isUncheckTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> re-opened a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong>\r\n            <i style=\"color: #D54E21;\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isCreateMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called \r\n            <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateMessage\">\r\n            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called\r\n            <div class=\"m-t-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isDeleteMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called\r\n            <i style=\"color: #D54E21\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 167 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <!-- <div class=\"container\"> -->\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\">\r\n                                <!-- <span>{{ i18n.project_activity }}</span> -->\r\n                                <span>Activity</span>\r\n                            </h2>\r\n                        </div>\r\n                    </div>\r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        <!-- {{ i18n.no_activity_yet }} -->\r\n                        No activity Yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        <h3>Loading! Please wait...<i class=\"fa fa-refresh fa-spin\"></i></h3>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    <!-- </div> -->\r\n";
+module.exports = "\r\n    <!-- <div class=\"container\"> -->\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\">\r\n                                <!-- <span>{{ i18n.project_activity }}</span> -->\r\n                                <span>Activity</span>\r\n                            </h2>\r\n                        </div>\r\n                    </div>\r\n                    <ul>\r\n                        <li v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3 class=\"left\">{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        <!-- {{ i18n.no_activity_yet }} -->\r\n                        No activity Yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        <h3>Loading! Please wait...<i class=\"fa fa-refresh fa-spin\"></i></h3>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    <!-- </div> -->\r\n";
 
 /***/ }),
 /* 168 */
@@ -36209,7 +36226,8 @@ exports.default = {
     data: function data() {
         return {
             i18n: {},
-            todos: []
+            todos: [],
+            loading: false
         };
     },
 
@@ -36221,8 +36239,11 @@ exports.default = {
                 nonce: fpm.nonce
             };
 
+            vm.loading = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.loading = false;
                     vm.todos = resp.data;
                 }
             });
@@ -36252,6 +36273,9 @@ exports.default = {
 //
 //         <div class="row">
 //             <div class="col-12">
+//                 <div v-if="loading" class="text-center">
+//                     Loading... <i class="fa fa-refresh fa-spin"></i>
+//                 </div>
 //                 <div class="row" v-for="todo in todos" style="padding-left:20px; padding-bottom:5px">
 //                     <div class="col-2 text-right">
 //                         <span class="checkbox-checked-style" v-if="+todo.is_complete">
@@ -36267,10 +36291,6 @@ exports.default = {
 //                                 {{todo.formatted_due_date}}
 //                             </span>
 //                         </router-link>
-//                         <!-- <div v-if="todo.formatted_due_date" style="padding-top:12px">
-//                             <i class="fa fa-calendar p-r-5" aria-hidden="true" style="color: #b5b5b5"></i> 
-//                             <span v-bind:class="[todo.is_overdue ? 'overdue' : 'due']">Due on {{todo.formatted_due_date}}</span>
-//                         </div> -->
 //                     </div>
 //                 </div>
 //             </div>
@@ -36303,7 +36323,7 @@ exports.default = {
 /* 248 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-2\"></div>\r\n            <div class=\"col-8\">\r\n                <div class=\"text-center assignment-heading\">\r\n                    <h1>{{ i18n.my_assignments }}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\r\n                    <div class=\"col-2 text-right\">\r\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\r\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <span class=\"checkbox-style\" v-else></span>\r\n                    </div>\r\n                    <div class=\"col-10\" style=\"margin-left:0px\">\r\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\r\n                            <a>{{todo.todo}}</a>, <span><i style=\"font-size:12px\">Created at {{todo.formatted_created}}</i></span>,\r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">\r\n                                <span v-if=\"todo.formatted_due_date\">Due on</span>\r\n                                {{todo.formatted_due_date}}\r\n                            </span>\r\n                        </router-link>\r\n                        <!-- <div v-if=\"todo.formatted_due_date\" style=\"padding-top:12px\">\r\n                            <i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\" style=\"color: #b5b5b5\"></i> \r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">Due on {{todo.formatted_due_date}}</span>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
+module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-2\"></div>\r\n            <div class=\"col-8\">\r\n                <div class=\"text-center assignment-heading\">\r\n                    <h1>{{ i18n.my_assignments }}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div v-if=\"loading\" class=\"text-center\">\r\n                    Loading... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                </div>\r\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\r\n                    <div class=\"col-2 text-right\">\r\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\r\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <span class=\"checkbox-style\" v-else></span>\r\n                    </div>\r\n                    <div class=\"col-10\" style=\"margin-left:0px\">\r\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\r\n                            <a>{{todo.todo}}</a>, <span><i style=\"font-size:12px\">Created at {{todo.formatted_created}}</i></span>,\r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">\r\n                                <span v-if=\"todo.formatted_due_date\">Due on</span>\r\n                                {{todo.formatted_due_date}}\r\n                            </span>\r\n                        </router-link>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
 /* 249 */

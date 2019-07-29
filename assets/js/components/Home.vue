@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-12" v-if="loading">
                     <div class="loading">
-                        <h2>{{ i18n.loading }}</h2>
+                        <h2><i class="fa fa-refresh fa-spin fa-2x"></i></h2>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                 </div>
             </div>
             
-            <div class="row" v-if="projects.length < projectCount">
+            <div class="row" v-if="projects.length < projectCount && !loading">
                 <div class="col-12 text-center">
                     <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
                 </div>

@@ -12,8 +12,8 @@
                         </div>
                     </div>
                     <ul>
-                        <li class="left" v-for="(value, key, index) in activitiesObject">
-                            <h3>{{ key }}</h3>
+                        <li v-for="(value, key, index) in activitiesObject">
+                            <h3 class="left">{{ key }}</h3>
                             <div class="animated fadeIn" v-for="activity in value">
                                 <activity-info :activity="activity" :i18n="i18n"></activity-info>
                             </div>
@@ -41,9 +41,15 @@
 </template>
 
 <style>
-.activity-content {
-    padding: 0px 20px 35px;
-    background: #fff;
+
+@media (min-width: 992px) {
+    .activity-content {
+        padding: 0px 20px 35px;
+        background: #fff;
+    }
+    .activity-content ul {
+        padding-left: 25px;
+    }    
 }
 .activity-avatar {
     float: left;
