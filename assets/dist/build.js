@@ -400,7 +400,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _promise = __webpack_require__(50);
+var _promise = __webpack_require__(52);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -472,7 +472,7 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store  = __webpack_require__(46)('wks')
+var store  = __webpack_require__(48)('wks')
   , uid    = __webpack_require__(32)
   , Symbol = __webpack_require__(6).Symbol;
 module.exports = function(name){
@@ -497,14 +497,6 @@ module.exports = { "default": __webpack_require__(114), __esModule: true };
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
@@ -525,6 +517,14 @@ if (false) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, __vue_template__)
   }
 })()}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = function(it){
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
 
 /***/ }),
 /* 10 */
@@ -581,7 +581,7 @@ module.exports = $export;
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(8);
+var isObject = __webpack_require__(9);
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
@@ -1014,7 +1014,7 @@ if (false) {(function () {  module.hot.accept()
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VueEditor", function() { return VueEditor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_quill__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_quill__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_quill___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_quill__);
 /* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "Quill", function() { return __WEBPACK_IMPORTED_MODULE_0_quill___default.a; });
 /*!
@@ -1965,10 +1965,56 @@ if (false) {(function () {  module.hot.accept()
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __vue_script__, __vue_template__
+__webpack_require__(160)
+__vue_script__ = __webpack_require__(162)
+__vue_template__ = __webpack_require__(167)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\Activities.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(163)
+__vue_script__ = __webpack_require__(165)
+__vue_template__ = __webpack_require__(166)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\partials\\ActivityInfo.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-var _defineProperties = __webpack_require__(42);
+var _defineProperties = __webpack_require__(44);
 
 var _defineProperties2 = _interopRequireDefault(_defineProperties);
 
@@ -1988,7 +2034,7 @@ var _set = __webpack_require__(72);
 
 var _set2 = _interopRequireDefault(_set);
 
-var _promise = __webpack_require__(50);
+var _promise = __webpack_require__(52);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -2000,19 +2046,19 @@ var _symbol = __webpack_require__(36);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _defineProperty = __webpack_require__(51);
+var _defineProperty = __webpack_require__(53);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
-var _freeze = __webpack_require__(52);
+var _freeze = __webpack_require__(54);
 
 var _freeze2 = _interopRequireDefault(_freeze);
 
-var _keys = __webpack_require__(53);
+var _keys = __webpack_require__(55);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _create = __webpack_require__(54);
+var _create = __webpack_require__(56);
 
 var _create2 = _interopRequireDefault(_create);
 
@@ -2020,7 +2066,7 @@ var _stringify = __webpack_require__(7);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _typeof2 = __webpack_require__(55);
+var _typeof2 = __webpack_require__(57);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -11193,13 +11239,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)))
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(61), __esModule: true };
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -11224,7 +11270,7 @@ module.exports.get = function getOwnPropertyNames(it){
 };
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11247,7 +11293,7 @@ __webpack_require__(28)(String, 'String', function(iterated){
 });
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports) {
 
 // 7.1.4 ToInteger
@@ -11258,7 +11304,7 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(6)
@@ -11269,7 +11315,7 @@ module.exports = function(key){
 };
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(76);
@@ -11277,7 +11323,7 @@ var Iterators = __webpack_require__(18);
 Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = function(done, value){
@@ -11285,7 +11331,7 @@ module.exports = function(done, value){
 };
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11304,37 +11350,37 @@ module.exports = function(KEY){
 };
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(87), __esModule: true };
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(107), __esModule: true };
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(108), __esModule: true };
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(110), __esModule: true };
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = { "default": __webpack_require__(113), __esModule: true };
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11349,7 +11395,7 @@ exports["default"] = function (obj) {
 exports.__esModule = true;
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -22844,59 +22890,13 @@ module.exports = __webpack_require__(63);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(128).Buffer))
 
 /***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_script__, __vue_template__
-__webpack_require__(155)
-__vue_script__ = __webpack_require__(157)
-__vue_template__ = __webpack_require__(162)
-module.exports = __vue_script__ || {}
-if (module.exports.__esModule) module.exports = module.exports.default
-if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-if (false) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\Activities.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, __vue_template__)
-  }
-})()}
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_script__, __vue_template__
-__webpack_require__(158)
-__vue_script__ = __webpack_require__(160)
-__vue_template__ = __webpack_require__(161)
-module.exports = __vue_script__ || {}
-if (module.exports.__esModule) module.exports = module.exports.default
-if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-if (false) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\partials\\ActivityInfo.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, __vue_template__)
-  }
-})()}
-
-/***/ }),
 /* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(173)
-__vue_script__ = __webpack_require__(175)
-__vue_template__ = __webpack_require__(186)
+__webpack_require__(183)
+__vue_script__ = __webpack_require__(185)
+__vue_template__ = __webpack_require__(196)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -22923,7 +22923,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _vue = __webpack_require__(41);
+var _vue = __webpack_require__(43);
 
 var _vue2 = _interopRequireDefault(_vue);
 
@@ -23118,7 +23118,7 @@ module.exports = __webpack_require__(4).Object.isExtensible;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.11 Object.isExtensible(O)
-var isObject = __webpack_require__(8);
+var isObject = __webpack_require__(9);
 
 __webpack_require__(16)('isExtensible', function($isExtensible){
   return function isExtensible(it){
@@ -23148,7 +23148,7 @@ module.exports = function getOwnPropertyNames(it){
 
 // 19.1.2.7 Object.getOwnPropertyNames(O)
 __webpack_require__(16)('getOwnPropertyNames', function(){
-  return __webpack_require__(43).get;
+  return __webpack_require__(45).get;
 });
 
 /***/ }),
@@ -23162,8 +23162,8 @@ module.exports = { "default": __webpack_require__(73), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(22);
-__webpack_require__(44);
-__webpack_require__(47);
+__webpack_require__(46);
+__webpack_require__(49);
 __webpack_require__(78);
 __webpack_require__(85);
 module.exports = __webpack_require__(4).Set;
@@ -23172,7 +23172,7 @@ module.exports = __webpack_require__(4).Set;
 /* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(45)
+var toInteger = __webpack_require__(47)
   , defined   = __webpack_require__(20);
 // true  -> String#at
 // false -> String#codePointAt
@@ -23216,7 +23216,7 @@ module.exports = function(Constructor, NAME, next){
 "use strict";
 
 var addToUnscopables = __webpack_require__(77)
-  , step             = __webpack_require__(48)
+  , step             = __webpack_require__(50)
   , Iterators        = __webpack_require__(18)
   , toIObject        = __webpack_require__(14);
 
@@ -23287,11 +23287,11 @@ var $            = __webpack_require__(2)
   , defined      = __webpack_require__(20)
   , forOf        = __webpack_require__(24)
   , $iterDefine  = __webpack_require__(28)
-  , step         = __webpack_require__(48)
+  , step         = __webpack_require__(50)
   , ID           = __webpack_require__(32)('id')
   , $has         = __webpack_require__(23)
-  , isObject     = __webpack_require__(8)
-  , setSpecies   = __webpack_require__(49)
+  , isObject     = __webpack_require__(9)
+  , setSpecies   = __webpack_require__(51)
   , DESCRIPTORS  = __webpack_require__(13)
   , isExtensible = Object.isExtensible || isObject
   , SIZE         = DESCRIPTORS ? '_s' : 'size'
@@ -23473,7 +23473,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(45)
+var toInteger = __webpack_require__(47)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -23506,7 +23506,7 @@ var $              = __webpack_require__(2)
   , redefineAll    = __webpack_require__(33)
   , forOf          = __webpack_require__(24)
   , strictNew      = __webpack_require__(34)
-  , isObject       = __webpack_require__(8)
+  , isObject       = __webpack_require__(9)
   , setToStringTag = __webpack_require__(19)
   , DESCRIPTORS    = __webpack_require__(13);
 
@@ -23583,8 +23583,8 @@ module.exports = function(NAME){
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(22);
-__webpack_require__(44);
-__webpack_require__(47);
+__webpack_require__(46);
+__webpack_require__(49);
 __webpack_require__(88);
 module.exports = __webpack_require__(4).Promise;
 
@@ -23600,7 +23600,7 @@ var $          = __webpack_require__(2)
   , ctx        = __webpack_require__(12)
   , classof    = __webpack_require__(35)
   , $export    = __webpack_require__(10)
-  , isObject   = __webpack_require__(8)
+  , isObject   = __webpack_require__(9)
   , anObject   = __webpack_require__(11)
   , aFunction  = __webpack_require__(27)
   , strictNew  = __webpack_require__(34)
@@ -23820,7 +23820,7 @@ if(!USE_NATIVE){
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
 __webpack_require__(19)(P, PROMISE);
-__webpack_require__(49)(PROMISE);
+__webpack_require__(51)(PROMISE);
 Wrapper = __webpack_require__(4)[PROMISE];
 
 // statics
@@ -23894,7 +23894,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(97)(function
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var getDesc  = __webpack_require__(2).getDesc
-  , isObject = __webpack_require__(8)
+  , isObject = __webpack_require__(9)
   , anObject = __webpack_require__(11);
 var check = function(O, proto){
   anObject(O);
@@ -24120,7 +24120,7 @@ module.exports = __webpack_require__(6).document && document.documentElement;
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(8)
+var isObject = __webpack_require__(9)
   , document = __webpack_require__(6).document
   // in old IE typeof document.createElement is 'object'
   , is = isObject(document) && isObject(document.createElement);
@@ -24212,12 +24212,12 @@ var $              = __webpack_require__(2)
   , $export        = __webpack_require__(10)
   , redefine       = __webpack_require__(30)
   , $fails         = __webpack_require__(21)
-  , shared         = __webpack_require__(46)
+  , shared         = __webpack_require__(48)
   , setToStringTag = __webpack_require__(19)
   , uid            = __webpack_require__(32)
   , wks            = __webpack_require__(5)
   , keyOf          = __webpack_require__(104)
-  , $names         = __webpack_require__(43)
+  , $names         = __webpack_require__(45)
   , enumKeys       = __webpack_require__(105)
   , isArray        = __webpack_require__(106)
   , anObject       = __webpack_require__(11)
@@ -24496,7 +24496,7 @@ module.exports = __webpack_require__(4).Object.freeze;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.5 Object.freeze(O)
-var isObject = __webpack_require__(8);
+var isObject = __webpack_require__(9);
 
 __webpack_require__(16)('freeze', function($freeze){
   return function freeze(it){
@@ -24563,7 +24563,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _vue = __webpack_require__(41);
+var _vue = __webpack_require__(43);
 
 var _vue2 = _interopRequireDefault(_vue);
 
@@ -24578,23 +24578,23 @@ _vue2.default.use(_vueRouter2.default);
 var Todo = __webpack_require__(119);
 var Home = __webpack_require__(146);
 var Summary = __webpack_require__(151);
-var EditProject = __webpack_require__(164);
-var ProjectActivities = __webpack_require__(249);
+var EditProject = __webpack_require__(169);
+var ProjectActivities = __webpack_require__(174);
 
-var TodoLists = __webpack_require__(169);
-var TodoList = __webpack_require__(188);
-var Users = __webpack_require__(193);
+var TodoLists = __webpack_require__(179);
+var TodoList = __webpack_require__(198);
+var Users = __webpack_require__(203);
 
-var Activities = __webpack_require__(57);
-var ProjectStatus = __webpack_require__(203);
+var Activities = __webpack_require__(41);
+var ProjectStatus = __webpack_require__(213);
 
-var Messages = __webpack_require__(209);
-var Message = __webpack_require__(219);
-var NewMessage = __webpack_require__(224);
-var EditMessage = __webpack_require__(229);
+var Messages = __webpack_require__(219);
+var Message = __webpack_require__(229);
+var NewMessage = __webpack_require__(234);
+var EditMessage = __webpack_require__(239);
 
-var MyAssignments = __webpack_require__(234);
-var MyActivity = __webpack_require__(239);
+var MyAssignments = __webpack_require__(244);
+var MyActivity = __webpack_require__(249);
 
 var routes = [{ path: '/', component: Home }, { path: '/my/assignments', component: MyAssignments }, { path: '/my/activity', component: MyActivity }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/reports', component: ProjectActivities },
 
@@ -24615,7 +24615,7 @@ exports.default = new _vueRouter2.default({
 "use strict";
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-var _defineProperties = __webpack_require__(42);
+var _defineProperties = __webpack_require__(44);
 
 var _defineProperties2 = _interopRequireDefault(_defineProperties);
 
@@ -24627,7 +24627,7 @@ var _symbol = __webpack_require__(36);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _create = __webpack_require__(54);
+var _create = __webpack_require__(56);
 
 var _create2 = _interopRequireDefault(_create);
 
@@ -24635,15 +24635,15 @@ var _stringify = __webpack_require__(7);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _freeze = __webpack_require__(52);
+var _freeze = __webpack_require__(54);
 
 var _freeze2 = _interopRequireDefault(_freeze);
 
-var _keys = __webpack_require__(53);
+var _keys = __webpack_require__(55);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _typeof2 = __webpack_require__(55);
+var _typeof2 = __webpack_require__(57);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
@@ -27218,7 +27218,7 @@ var _FileUploadComponent = __webpack_require__(25);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -31150,7 +31150,7 @@ module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n        
 var __vue_script__, __vue_template__
 __webpack_require__(152)
 __vue_script__ = __webpack_require__(154)
-__vue_template__ = __webpack_require__(163)
+__vue_template__ = __webpack_require__(168)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -31225,11 +31225,11 @@ var _store = __webpack_require__(3);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _ComponentActions = __webpack_require__(244);
+var _ComponentActions = __webpack_require__(155);
 
 var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
 
-var _Activities = __webpack_require__(57);
+var _Activities = __webpack_require__(41);
 
 var _Activities2 = _interopRequireDefault(_Activities);
 
@@ -31631,10 +31631,195 @@ exports.default = {
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __vue_script__, __vue_template__
+__webpack_require__(156)
+__vue_script__ = __webpack_require__(158)
+__vue_template__ = __webpack_require__(159)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\partials\\ComponentActions.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(156);
+var content = __webpack_require__(157);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-23de6214&file=ComponentActions.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ComponentActions.vue", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-23de6214&file=ComponentActions.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ComponentActions.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\r\n    li.action-item {\r\n        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);\r\n        padding: 5px;\r\n        transition: background-color 0.2s;\r\n        color: #fff;\r\n        cursor: pointer;\r\n    }\r\n    /*li.action-item a {\r\n        color: #fff;\r\n        cursor: pointer;\r\n        text-decoration: none;\r\n    }*/\r\n    li.action-item i {\r\n        padding-right: 5px;\r\n    }\r\n    li.action-item:hover {\r\n        background-color: rgba(0,0,0,0.25);\r\n    }\r\n    .action-close {\r\n        float: right;\r\n        margin-top: 10px;\r\n        margin-right: 10px;\r\n        padding:5px 9px;\r\n        border: 1px solid #fff;\r\n        border-radius: 40px;\r\n        display: block;\r\n        cursor: pointer;\r\n    }\r\n    .action-icon {\r\n        position:absolute;\r\n        top: 10px;\r\n        right: 10px;\r\n        padding:5px 9px;\r\n        border:1px solid #eee;\r\n        border-radius:40px;\r\n        cursor: pointer;\r\n    }\r\n    .div-to-slide {\r\n        position: absolute;\r\n        top: 0px;\r\n        right: 0px;\r\n        background: #0073AA;\r\n        overflow: hidden;\r\n        color: #fff;\r\n        width: 30%;\r\n        z-index: 999;\r\n    }\r\n    .hide-action-div {\r\n        /*display: block;*/\r\n        color:#fff;\r\n        text-align: right;\r\n        /*width:100%*/\r\n    }\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// <template>
+//     <div>
+//         <div class="action-icon" v-if="!isShowActions" @click="showAction">
+//             <i class="fa fa-ellipsis-h"></i>
+//         </div>
+//         <transition
+//             name="custom-transition"
+//             enter-active-class="animated-fast slideInRight"
+//             leave-active-class="animated-fast slideOutRight"
+//         >
+//             <div class="div-to-slide" v-if="isShowActions">
+//                 <div>
+//                     <div @click="showAction" class="hide-action-div">
+//                         <i class="fa fa-remove action-close"></i>
+//                     </div>
+//                     <div style="clear:right;">
+//                         <ul style="padding:10px 10px 0px">
+//
+//                             <slot></slot>
+//
+//                         </ul>
+//                     </div>
+//                 </div>
+//             </div>
+//         </transition>
+//     </div>
+// </template>
+//
+// <script>
+exports.default = {
+    data: function data() {
+        return {
+            isShowActions: false
+        };
+    },
+
+    methods: {
+        showAction: function showAction() {
+            this.isShowActions = !this.isShowActions;
+        }
+    },
+    created: function created() {
+        var vm = this;
+        Event.$on('toggle-actions', function () {
+            vm.showAction();
+        });
+    }
+};
+// </script>
+//
+// <style>
+//     li.action-item {
+//         border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+//         padding: 5px;
+//         transition: background-color 0.2s;
+//         color: #fff;
+//         cursor: pointer;
+//     }
+//     /*li.action-item a {
+//         color: #fff;
+//         cursor: pointer;
+//         text-decoration: none;
+//     }*/
+//     li.action-item i {
+//         padding-right: 5px;
+//     }
+//     li.action-item:hover {
+//         background-color: rgba(0,0,0,0.25);
+//     }
+//     .action-close {
+//         float: right;
+//         margin-top: 10px;
+//         margin-right: 10px;
+//         padding:5px 9px;
+//         border: 1px solid #fff;
+//         border-radius: 40px;
+//         display: block;
+//         cursor: pointer;
+//     }
+//     .action-icon {
+//         position:absolute;
+//         top: 10px;
+//         right: 10px;
+//         padding:5px 9px;
+//         border:1px solid #eee;
+//         border-radius:40px;
+//         cursor: pointer;
+//     }
+//     .div-to-slide {
+//         position: absolute;
+//         top: 0px;
+//         right: 0px;
+//         background: #0073AA;
+//         overflow: hidden;
+//         color: #fff;
+//         width: 30%;
+//         z-index: 999;
+//     }
+//     .hide-action-div {
+//         /*display: block;*/
+//         color:#fff;
+//         text-align: right;
+//         /*width:100%*/
+//     }
+// </style>
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n    <div>\r\n        <div class=\"action-icon\" v-if=\"!isShowActions\" @click=\"showAction\">\r\n            <i class=\"fa fa-ellipsis-h\"></i>\r\n        </div>\r\n        <transition\r\n            name=\"custom-transition\"\r\n            enter-active-class=\"animated-fast slideInRight\"\r\n            leave-active-class=\"animated-fast slideOutRight\"\r\n        >\r\n            <div class=\"div-to-slide\" v-if=\"isShowActions\">\r\n                <div>\r\n                    <div @click=\"showAction\" class=\"hide-action-div\">\r\n                        <i class=\"fa fa-remove action-close\"></i>\r\n                    </div>\r\n                    <div style=\"clear:right;\">\r\n                        <ul style=\"padding:10px 10px 0px\">\r\n\r\n                            <slot></slot>\r\n\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </transition>\r\n    </div>\r\n";
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(161);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -31654,7 +31839,7 @@ if(false) {
 }
 
 /***/ }),
-/* 156 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -31668,7 +31853,7 @@ exports.push([module.i, "\r\n.activity-content {\r\n    padding: 0px 20px 35px;\
 
 
 /***/ }),
-/* 157 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31678,7 +31863,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _ActivityInfo = __webpack_require__(58);
+var _ActivityInfo = __webpack_require__(42);
 
 var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
 
@@ -31823,13 +32008,13 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 158 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(159);
+var content = __webpack_require__(164);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -31849,7 +32034,7 @@ if(false) {
 }
 
 /***/ }),
-/* 159 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -31863,7 +32048,7 @@ exports.push([module.i, "\r\n    .m-t-5 {\r\n        margin-top: 5px;\r\n    }\r
 
 
 /***/ }),
-/* 160 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32020,31 +32205,31 @@ exports.default = {
 };
 
 /***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <!-- {{ activity | json}} -->\r\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\" style=\"margin-right:15px; margin-top: 0px;\">\r\n\r\n        <div v-if=\"isCreateTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> created a <strong class=\"ml-5\">Todo</strong>\r\n            <div>\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>  \r\n            </div>\r\n            <div class=\"activity-time\">at {{ activity.formatted_time }}</div>\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateTodo\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>\r\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isCheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> checked off a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:pointer\">\r\n                <span class=\"checkbox-checked-style\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isUncheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> re-open a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> deleted a <strong class=\"ml-5\">Todo</strong>\r\n            <div style=\"cursor:default\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <span style=\"color:a2a2a2;\">{{activity.activity}}</span>\r\n            </div>\r\n        </div>\r\n\r\n        <div v-if=\"isCreateMessage\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> added a new <strong class=\"ml-5 mr-5\">Message</strong> called\r\n            <div class=\"ml-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateMessage\">\r\n            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called\r\n            <div class=\"m-t-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isDeleteMessage\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called<br>\r\n            <div class=\"m-t-5\" style=\"cursor:default\">\r\n                <span style=\"color:a2a2a2;\">{{activity.activity}}</span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 162 */
+/* 167 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <!-- <div class=\"container\"> -->\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\">\r\n                                <!-- <span>{{ i18n.project_activity }}</span> -->\r\n                                <span>Activity</span>\r\n                            </h2>\r\n                        </div>\r\n                    </div>\r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        <!-- {{ i18n.no_activity_yet }} -->\r\n                        No activity Yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        <h3>Loading! Please wait...<i class=\"fa fa-refresh fa-spin\"></i></h3>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    <!-- </div> -->\r\n";
 
 /***/ }),
-/* 163 */
+/* 168 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"container summary-section\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center project-info\">\r\n                        <h1><strong>{{project.project_title}}</strong></h1>\r\n                        <span>{{project.project_desc}}</span>\r\n\r\n                        <!-- <span class=\"dropdown project-settings show-edit\" v-if=\"isShowEdit\">\r\n                            <a data-target=\"#\" class=\"setting-icon dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" title=\"Settings\">\r\n                                <i class=\"fa fa-gear\" aria-hidden=\"true\" style=\"font-size:15px;\"></i>\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-edit p-r-10\" aria-hidden=\"true\"></i>{{ i18n.edit_info }}</a>\r\n                                </router-link>\r\n                                <li role=\"separator\" class=\"divider\"></li>\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-trash p-r-10\" aria-hidden=\"true\"></i>{{ i18n.delete }}</a>\r\n                                </router-link>\r\n                            </ul>\r\n                        </span> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 text-center\" v-if=\"loading\">\r\n                    <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                    <p>Loading. . .</p>\r\n                </div>\r\n                <div class=\"col-12\" v-if=\"!loading\">\r\n                    <div class=\"users-summary\">\r\n                        <div style=\"display: inline-block\">\r\n                        \r\n                            <img :src=\"user.avatar_url\" v-for=\"user in users\" alt=\"\" class=\"small-round-image\">\r\n                        </div>\r\n                        <div v-if=\"project.user_count > 10\" style=\"display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;\">\r\n                            <a>+{{project.user_count - 10}} {{ i18n.people }}</a>\r\n                        </div>\r\n\r\n                        <div style=\"margin-top: 15px;\">\r\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/users'\" class=\"link-style button button-default\">\r\n                                {{ i18n.add_remove_people }}\r\n                            </router-link>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <component-actions>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-edit\" aria-hidden=\"true\"></i>\r\n                        {{i18n.edit_info}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n                        {{i18n.delete}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/reports'\"\r\n                                    tag=\"li\" class=\"action-item\">\r\n                        <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\r\n                        {{i18n.activities}}\r\n                    </router-link>\r\n                </component-actions>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-1\"></div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.todos }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"\" class=\"text-left\">\r\n                            <div v-for=\"list in listSummary\">\r\n                                <h4>{{list.list_title}}</h4>\r\n                                <ul>\r\n                                    <li v-for=\"todo in list.todos\">\r\n                                        <span class=\"checkbox-style ellipsis-90\"></span>{{todo.todo}}\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"listSummary.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-check fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.message_board }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"position: absolute;margin-top:10px;\" class=\"text-left\">\r\n                            <div v-for=\"messageObj in messages\" class=\"messages\">\r\n                                <div class=\"message-list\">\r\n                                    <img class=\"inbox-user-img\" \r\n                                    :src=\"messageObj.avatar_url\" width=\"20\">\r\n                                    <span class=\"inline-block\">\r\n                                        {{messageObj.message_title | truncate('38')}}\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"messages.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <!-- <img :src=\"assetsDistPath+messageIcon\" width=\"80\" height=\"80\" alt=\"\"> -->\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-envelope fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <activities :i18n=\"i18n\"></activities> -->\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 164 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(165)
-__vue_script__ = __webpack_require__(167)
-__vue_template__ = __webpack_require__(168)
+__webpack_require__(170)
+__vue_script__ = __webpack_require__(172)
+__vue_template__ = __webpack_require__(173)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -32061,13 +32246,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 165 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(166);
+var content = __webpack_require__(171);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -32087,7 +32272,7 @@ if(false) {
 }
 
 /***/ }),
-/* 166 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -32101,7 +32286,7 @@ exports.push([module.i, "\r\n    .project-edit-content {\r\n        padding: 40p
 
 
 /***/ }),
-/* 167 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32238,19 +32423,256 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 168 */
+/* 173 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-2\"></div>\r\n            <div class=\"col-8 project-edit-content\">\r\n                <h1 class=\"ellipsis-90\">{{i18n.edit}} <i style=\"color:#6d6d6d;\">{{project.project_title}}</i></h1>\r\n                <div class=\"project-edit-form\">\r\n                    <div>\r\n                        <input type=\"text\" v-model=\"projectTitle\" class=\"form-control\">\r\n                    </div>\r\n                    <div>\r\n                        <textarea  v-model=\"projectDesc\" class=\"form-control\" rows=\"5\"></textarea>\r\n                    </div>\r\n                    <br>\r\n                    <button class=\"button button-primary\" @click=\"updateProject\">{{i18n.update}}</button>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" class=\"button\">\r\n                        {{i18n.cancel}}\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 169 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(170)
-__vue_script__ = __webpack_require__(172)
-__vue_template__ = __webpack_require__(187)
+__webpack_require__(175)
+__vue_script__ = __webpack_require__(177)
+__vue_template__ = __webpack_require__(178)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\ProjectActivities.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(176);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d3dad620&file=ProjectActivities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ProjectActivities.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d3dad620&file=ProjectActivities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ProjectActivities.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\r\n.activity-content {\r\n    /*padding: 20px;*/\r\n    background: #fff;\r\n}\r\n.activity-avatar {\r\n    float: left;\r\n    margin-right: 10px;\r\n    margin-top: 5px;\r\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _store = __webpack_require__(3);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _ActivityInfo = __webpack_require__(42);
+
+var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
+
+var _ProjectNavComponent = __webpack_require__(8);
+
+var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
+
+var _Activities = __webpack_require__(41);
+
+var _Activities2 = _interopRequireDefault(_Activities);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// <template>
+//     <div class="container">
+//         <project-nav></project-nav>
+//         <div class="lists border-for-nav">
+//             <activity></activity>    
+//         </div>
+//     </div>
+// </template>
+//
+// <script>
+exports.default = {
+    components: {
+        ActivityInfo: _ActivityInfo2.default,
+        ProjectNav: _ProjectNavComponent2.default,
+        Activity: _Activities2.default
+    },
+
+    data: function data() {
+        return {
+            activities: [],
+            totalActivityCount: '',
+            currentCount: '',
+            i18n: {},
+            project: {},
+            activityTitle: ''
+        };
+    },
+
+
+    computed: {
+        noActivity: function noActivity() {
+            return this.totalActivityCount < 1;
+        },
+        activitiesObject: function activitiesObject() {
+            return _.groupBy(this.activities, 'formatted_date');
+        }
+    },
+
+    methods: {
+        fetchActivities: function fetchActivities(userid) {
+            var vm = this,
+                data;
+
+            data = {
+                action: 'fpm-get-activities',
+                project_id: vm.$route.params.projectid,
+                nonce: fpm.nonce
+            };
+            if (userid) {
+                data.user_id = userid;
+            }
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    for (var i = 0; i < resp.data.length; i++) {
+                        vm.currentCount = resp.data.length;
+                        vm.activities.push(resp.data[i]);
+                        vm.totalActivityCount = resp.data[0].total_activity;
+                    }
+                }
+            });
+        },
+
+        fetchProjectInfo: function fetchProjectInfo() {
+            var vm = this;
+
+            var data = {
+                action: 'fpm-get-project',
+                project_id: vm.$route.params.projectid,
+                nonce: fpm.nonce
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+
+                if (resp.success) {
+                    vm.project = resp.data[0];
+                } else {
+                    vm.$router.push({
+                        path: '/?item=Project&op=rf'
+                    });
+                }
+            });
+        },
+
+        loadMoreActivities: function loadMoreActivities() {
+            var vm = this,
+                data = {
+                action: 'fpm-load-more-activities',
+                nonce: fpm.nonce,
+                offset: vm.currentCount,
+                project_id: vm.$route.params.projectid
+            };
+
+            vm.loadMore = true;
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loadMore = false;
+
+                if (resp.success) {
+                    for (var i = 0; i < resp.data.length; i++) {
+                        vm.currentCount += resp.data.length;
+                        vm.activities.push(resp.data[i]);
+                    }
+                }
+            });
+        }
+    },
+
+    created: function created() {
+        var vm = this;
+        _store2.default.setLocalization('fpm-get-activities-local-data').then(function (data) {
+            vm.i18n = data;
+        });
+
+        if (vm.$route.params.userid) {
+            vm.fetchActivities(vm.$route.params.userid);
+        } else {
+            vm.fetchActivities();
+            vm.activityTitle = 'Project Activity';
+        }
+
+        vm.fetchProjectInfo();
+    }
+};
+// </script>
+//
+// <style>
+// .activity-content {
+//     /*padding: 20px;*/
+//     background: #fff;
+// }
+// .activity-avatar {
+//     float: left;
+//     margin-right: 10px;
+//     margin-top: 5px;
+// }
+//
+// </style>
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <activity></activity>    \r\n        </div>\r\n    </div>\r\n";
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(180)
+__vue_script__ = __webpack_require__(182)
+__vue_template__ = __webpack_require__(197)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -32267,13 +32689,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 170 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(171);
+var content = __webpack_require__(181);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -32293,7 +32715,7 @@ if(false) {
 }
 
 /***/ }),
-/* 171 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -32307,7 +32729,7 @@ exports.push([module.i, "\r\n    .box {\r\n        position: relative;\r\n      
 
 
 /***/ }),
-/* 172 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32325,7 +32747,7 @@ var _ListComponent = __webpack_require__(59);
 
 var _ListComponent2 = _interopRequireDefault(_ListComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -32564,13 +32986,13 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 173 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(174);
+var content = __webpack_require__(184);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -32590,7 +33012,7 @@ if(false) {
 }
 
 /***/ }),
-/* 174 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -32604,7 +33026,7 @@ exports.push([module.i, "\r\n    .list-li {\r\n        padding: 20px 30px 5px;\r
 
 
 /***/ }),
-/* 175 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32618,11 +33040,11 @@ var _stringify = __webpack_require__(7);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _TodoItemComponent = __webpack_require__(176);
+var _TodoItemComponent = __webpack_require__(186);
 
 var _TodoItemComponent2 = _interopRequireDefault(_TodoItemComponent);
 
-var _AddTodoComponent = __webpack_require__(181);
+var _AddTodoComponent = __webpack_require__(191);
 
 var _AddTodoComponent2 = _interopRequireDefault(_AddTodoComponent);
 
@@ -32784,13 +33206,13 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 176 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(177)
-__vue_script__ = __webpack_require__(179)
-__vue_template__ = __webpack_require__(180)
+__webpack_require__(187)
+__vue_script__ = __webpack_require__(189)
+__vue_template__ = __webpack_require__(190)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -32807,13 +33229,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 177 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(178);
+var content = __webpack_require__(188);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -32833,7 +33255,7 @@ if(false) {
 }
 
 /***/ }),
-/* 178 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -32847,7 +33269,7 @@ exports.push([module.i, "\r\n    .completed {\r\n        text-decoration: line-t
 
 
 /***/ }),
-/* 179 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33160,19 +33582,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 180 */
+/* 190 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n\r\n    <li style=\"margin-bottom: 0px; cursor: pointer;\">\r\n        <div class=\"row\" v-if=\"editindex !== tindex\" style=\"margin-bottom: 7px;\">\r\n            <div class=\"col-1 text-right\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div style=\"margin-bottom: 6px; margin-top: 2px;\">\r\n                    <input type=\"checkbox\"\r\n                        @click=\"toggleCheckbox(todo, tindex)\"\r\n                        v-model=\"todo.is_complete\"\r\n                        v-bind:true-value=\"1\"\r\n                        v-bind:false-value=\"0\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-9\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div class=\"todo-item\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID\" class=\"link-style\" tag=\"span\">\r\n                        <span :class=\"{ completed: is_complete }\">{{todo.todo}}</span>\r\n                        <span v-if=\"todo.formatted_due_date\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\"></i> <span style=\"color:#b5b5b5\"><i>{{todo.formatted_due_date}}</i></span>\r\n                        </span>\r\n                        <span v-if=\"todo.assignee_name\" style=\"position:relative;\">\r\n                            <span class=\"pipe\">|</span> \r\n                            <i class=\"fa fa-user p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"color:#b5b5b5\">\r\n                                <i>{{todo.assignee_name}}</i>\r\n                            </span>\r\n                        </span>\r\n                        <span v-if=\"fileCount > 0\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-file p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"font-size:11px;color:#b5b5b5\"><i>{{fileCount}}</i></span>\r\n                        </span>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-2\" style=\"margin-top: 0px; margin-bottom: 5px;\">\r\n                <div class=\"actions text-center\" v-if=\"isShowEdit\">\r\n                    <span @click=\"showEditForm( todo, tindex )\" v-tooltip :title=\"i18n.edit\">\r\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                    <span class=\"trash\" @click=\"deleteTodo(todo, tindex)\" v-tooltip :title=\"i18n.delete\">|\r\n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"row\" v-if=\"editindex === tindex\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\">\r\n\r\n                    <div class=\"todo_name inline\">\r\n                        <input type=\"text\"\r\n                            name=\"todo_text\"\r\n                            v-model=\"todoName\"\r\n                            class=\"form-control\"\r\n                            :placeholder=\"i18n.add_todo_placeholder\"\r\n                            v-focus\r\n                            required\r\n                            @keyup.esc=\"hideTodoForm\">\r\n                    </div>\r\n                    <div>\r\n                        <select v-model=\"selected\" class=\"form-control\">\r\n                            <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                            <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                {{ option.display_name }}\r\n                            </option>\r\n                        </select>\r\n                    </div>\r\n                    <date-picker id=\"update-duedate\" v-model=\"updateDueDate\"></date-picker>\r\n\r\n                    <div class=\"inline\">\r\n                        <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"updateTodo(todo)\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.update\">\r\n                        <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"cancelEdit\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </li>\r\n";
 
 /***/ }),
-/* 181 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(182)
-__vue_script__ = __webpack_require__(184)
-__vue_template__ = __webpack_require__(185)
+__webpack_require__(192)
+__vue_script__ = __webpack_require__(194)
+__vue_template__ = __webpack_require__(195)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -33189,13 +33611,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 182 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(183);
+var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -33215,7 +33637,7 @@ if(false) {
 }
 
 /***/ }),
-/* 183 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -33229,7 +33651,7 @@ exports.push([module.i, "\r\n\r\n", ""]);
 
 
 /***/ }),
-/* 184 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33471,31 +33893,31 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 185 */
+/* 195 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <a href=\"#\"\r\n                    @click.prevent=\"showTodoForm(sindex, list)\"\r\n                    v-if=\"sectionIndex !== sindex\"\r\n                    style=\"margin-left: 63px;\">+ {{ i18n.add_new_todo }}</a>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\" v-if=\"sectionIndex === sindex\">\r\n\r\n                        <div class=\"todo_name inline\">\r\n                            <input type=\"text\"\r\n                                v-model=\"todoName\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.add_todo_placeholder\"\r\n                                v-focus\r\n                                required\r\n                                @keyup.esc=\"hideTodoForm\">\r\n                        </div>\r\n                        <div>\r\n                            <select v-model=\"selected\" class=\"form-control\">\r\n                                <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                                <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                    {{ option.display_name }}\r\n                                </option>\r\n                            </select>\r\n                        </div>\r\n                        <div>\r\n                            <date-picker id=\"add-duedate\" v-model=\"todoDueDate\"></date-picker>\r\n                        </div>\r\n                        <file-upload\r\n                            :i18n=\"i18n\"\r\n                            v-on:attach=\"updateAttachments\"\r\n                            v-on:remove=\"removeAttachment\"\r\n                            :attachments=\"attachments\"></file-upload>\r\n                        <br>\r\n\r\n                        <div class=\"inline\">\r\n                            <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"createTodo\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.add_todo\">\r\n                            <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"hideTodoForm\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                        </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
-/* 186 */
+/* 196 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <li>\r\n            <div v-if=\"isSingle\">\r\n                <div v-if=\"!isListEdit && isShowEdit\" style=\"margin-top: -10px\">\r\n                    <button class=\"button button-default\"\r\n                            @click=\"showListEditForm( list )\">{{ i18n.edit }}</button>\r\n                    <span style=\"float:right\" @click=\"deleteList(list)\">\r\n                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                    </span>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 v-if=\"!isListEdit\" style=\"padding-left: 4%;padding-top:2%\">{{list.list_title}}</h3>\r\n                        <div v-if=\"isListEdit\" class=\"add_form_style\">\r\n                            <div>\r\n                                <input type=\"text\"\r\n                                    name=\"list_title\"\r\n                                    v-model=\"listTitle\"\r\n                                    class=\"form-control\"\r\n                                    :placeholder=\"i18n.name_list_placeholder\"\r\n                                    @keyup.enter=\"updateList(list)\"\r\n                                    @keyup.esc=\"cancelListEdit\"\r\n                                    v-focus>\r\n                            </div>\r\n                            <div class=\"action\">\r\n                                <button class=\"button button-primary\"\r\n                                        @click.prevent=\"updateList\"\r\n                                        >{{ i18n.update }}</button>\r\n                                <button class=\"button button-default\" @click=\"cancelListEdit\">{{ i18n.cancel }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div v-else style=\"padding-left: 4%\">\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID\" tag=\"h3\" class=\"link-style\">\r\n                    <a>{{list.list_title}}</a>\r\n                </router-link>\r\n            </div>\r\n\r\n            <ul v-if=\"list.todos.length > 0\">\r\n                <todo-item :i18n=\"i18n\" v-for=\"(todo, tindex) in list.todos\" :todo=\"todo\" :tindex=\"tindex\" :list=\"list\" :key=\"todo.ID\"></todo-item>\r\n            </ul>\r\n            <add-todo :i18n=\"i18n\" :sindex=\"sindex\" :list=\"list\"></add-todo>\r\n            <br>\r\n            <div class=\"row\" v-if=\"isSingle\">\r\n                <div class=\"col-12\">\r\n                    <span style=\"padding-left:4%;\"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>\r\n                </div>\r\n            </div>\r\n        </li>\r\n    </div>\r\n\r\n";
 
 /***/ }),
-/* 187 */
+/* 197 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <!-- <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div v-if=\"project\" class=\"project-navigation\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"h3\" class=\"link-style\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-4\">\r\n                    <button class=\"button button-default\" @click.prevent=\"toggleListForm\" v-if=\"!isShowListForm\">{{ i18n.make_list_btn }}</button>\r\n                </div>\r\n                <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;margin-bottom:35px;\">\r\n                    <h3>{{ i18n.todos }}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div v-if=\"isShowListForm\" class=\"add_form_style\">\r\n                        <div>\r\n                            <input type=\"text\"\r\n                                name=\"list_title\"\r\n                                v-model=\"listTitle\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.name_list_placeholder\"\r\n                                @keyup.enter=\"createList\"\r\n                                @keyup.esc=\"toggleListForm\"\r\n                                v-focus>\r\n                        </div>\r\n                        <div class=\"action\">\r\n                            <button class=\"button button-primary\"\r\n                                    @click.prevent=\"createList\"\r\n                                    >{{ i18n.create_list }}</button>\r\n                            <button class=\"button button-default\" @click=\"toggleListForm\">{{ i18n.cancel }}</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center\" v-if=\"loading\">\r\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        <p>{{ i18n.loading }}</p>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length < 1 && !loading\">\r\n                        <h4>{{ i18n.no_list_added_yet }}</h4>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length > 0 && !loading\">\r\n                        <ul>\r\n                            <list :i18n=\"i18n\" v-for=\"(list, sindex) in lists\" :list=\"list\" :sindex=\"sindex\" :key=\"list.ID\"></list>\r\n                        </ul>\r\n                        <div class=\"row\" v-if=\"lists.length < listCount\">\r\n                            <div class=\"col-12 text-center\">\r\n                                <button class=\"button button-default\" @click=\"loadMoreLists\">{{ i18n.load_more_btn }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 188 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(189)
-__vue_script__ = __webpack_require__(191)
-__vue_template__ = __webpack_require__(192)
+__webpack_require__(199)
+__vue_script__ = __webpack_require__(201)
+__vue_template__ = __webpack_require__(202)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -33512,13 +33934,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 189 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(190);
+var content = __webpack_require__(200);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -33538,7 +33960,7 @@ if(false) {
 }
 
 /***/ }),
-/* 190 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -33552,7 +33974,7 @@ exports.push([module.i, "\r\n    .lists {\r\n        background: #fff;\r\n      
 
 
 /***/ }),
-/* 191 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33574,7 +33996,7 @@ var _CommentsComponent = __webpack_require__(38);
 
 var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -33683,19 +34105,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 192 */
+/* 202 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style t-d-none\">\r\n                    To-Dos\r\n                </router-link>\r\n            </project-nav>\r\n            \r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n\r\n                        <div class=\"text-center\" v-if=\"loading\">\r\n                            <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        </div>\r\n\r\n                        <div v-if=\"list && !loading\">\r\n                            <ul>\r\n                                <list :i18n=\"i18n\" is-single=\"true\" :list=\"list\" :sindex=\"0\"></list>\r\n                            </ul>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 193 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(194)
-__vue_script__ = __webpack_require__(196)
-__vue_template__ = __webpack_require__(202)
+__webpack_require__(204)
+__vue_script__ = __webpack_require__(206)
+__vue_template__ = __webpack_require__(212)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -33712,13 +34134,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 194 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(195);
+var content = __webpack_require__(205);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -33738,7 +34160,7 @@ if(false) {
 }
 
 /***/ }),
-/* 195 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -33752,7 +34174,7 @@ exports.push([module.i, "\r\n    .m-default {\r\n        box-shadow: 0 1px 1px 0
 
 
 /***/ }),
-/* 196 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33770,11 +34192,11 @@ var _store = __webpack_require__(3);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _SingleUserComponent = __webpack_require__(197);
+var _SingleUserComponent = __webpack_require__(207);
 
 var _SingleUserComponent2 = _interopRequireDefault(_SingleUserComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -34031,13 +34453,13 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 197 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(198)
-__vue_script__ = __webpack_require__(200)
-__vue_template__ = __webpack_require__(201)
+__webpack_require__(208)
+__vue_script__ = __webpack_require__(210)
+__vue_template__ = __webpack_require__(211)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -34054,13 +34476,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 198 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(199);
+var content = __webpack_require__(209);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -34080,7 +34502,7 @@ if(false) {
 }
 
 /***/ }),
-/* 199 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -34094,7 +34516,7 @@ exports.push([module.i, "\r\n\r\n", ""]);
 
 
 /***/ }),
-/* 200 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34222,25 +34644,25 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 201 */
+/* 211 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"row\">\r\n        <div class=\"col-2\">\r\n            <div class=\"user-avatar\">\r\n                <img class=\"avatar small-round-image\" :src=\"user.avatar_url\" alt=\"...\">\r\n            </div>\r\n        </div>\r\n        <div class=\"col-10\">\r\n            <div class=\"user-info\" v-if=\"!isShowEdit\">\r\n                <div style=\"float:right\" v-if=\"isShowAction\">\r\n                    <span @click=\"showUserEdit(user)\">\r\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                    <span class=\"trash\" @click=\"removeUser(index)\">| \r\n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                </div>\r\n                <span class=\"info\"><strong>{{user.display_name}}</strong></span>\r\n                <span class=\"info\">{{user.title}}</span>\r\n                <span class=\"info\"><i>{{user.user_email}}</i></span>\r\n            </div>\r\n            <div v-if=\"isShowEdit\" class=\"user-info\">\r\n                <input type=\"text\" v-model=\"editUserEmail\" :placeholder=\"i18n.email_placeholder\">\r\n                <input type=\"text\" v-model=\"editUserTitle\" :placeholder=\"i18n.title_placeholder\">\r\n                <br>\r\n                <button class=\"button button-small button-primary\" @click=\"updateUser\" v-bind:disabled=\"isButtonDisabled\">{{ i18n.update }}</button>\r\n                <button class=\"button button-small button-default\" @click=\"cancelUserEdit\">{{ i18n.cancel }}</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 202 */
+/* 212 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <!-- <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div v-if=\"project\" class=\"project-navigation\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"h3\" class=\"link-style\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div> -->\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"row\" v-if=\"message\">\r\n                        <div class=\"col-12\">\r\n                            <div class=\"m-default m-success\">\r\n                                <p><strong>{{message}}</strong></p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12 text-center\">\r\n                            <h3>{{ i18n.header_label }}<i style=\"color:#6d6d6d\">{{project.project_title}}</i></h3>\r\n                            <p style=\"font-size: 14px;\">{{ i18n.header_note }}</p>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-center\">\r\n                            <button class=\"button button-large button-primary\"\r\n                                    @click=\"toggleAddForm\"\r\n                                    v-if=\"!isShowAddForm\">{{ i18n.add_btn_text }}</button>\r\n                        </div>\r\n                        <div class=\"add_form_style\" v-if=\"isShowAddForm\">\r\n                            <div>\r\n                                <input type=\"text\" class=\"form-control\" :placeholder=\"i18n.name_placeholder\" v-model=\"username\" required>\r\n                            </div>\r\n                            <div>\r\n                                <input type=\"text\" class=\"form-control\" :placeholder=\"i18n.email_placeholder\" v-model=\"email\" required>\r\n                            </div>\r\n                            <div>\r\n                                <input type=\"text\" class=\"form-control\" :placeholder=\"i18n.title_placeholder\" v-model=\"usertitle\">\r\n                            </div>\r\n                            <br>\r\n                            <div>\r\n                                <!-- <input type=\"submit\" class=\"button button-primary\" v-model=\"localString.add_new\" @click=\"createUser\"> -->\r\n                                <button class=\"button button-primary\" @click=\"createUser\">{{i18n.add_new}}</button>\r\n                                <button class=\"button button-default\" @click=\"toggleAddForm\">{{ i18n.cancel }}</button>\r\n                            </div>\r\n                        </div>\r\n                        <br>\r\n                        <h2 class=\"decorated\"><span>{{ i18n.decorated_heading }}</span></h2>\r\n                        \r\n                        <div class=\"text-center\" v-if=\"loading\">\r\n                            <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                            <p>{{ i18n.loading }}</p>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-6\" v-for=\"(user, uindex) in users\" v-if=\"!loading\">\r\n                                <single-user :user=\"user\" v-on:remove=\"removeUser\" :index=\"uindex\" :i18n=\"i18n\"></single-user>\r\n                            </div>\r\n                            <div class=\"col-12 text-center\" v-if=\"users.length < totalUsers\">\r\n                                <button class=\"button\" style=\"margin-top: 30px;\" @click=\"loadMoreUsers\">Load More</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 203 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(204)
-__vue_script__ = __webpack_require__(206)
-__vue_template__ = __webpack_require__(208)
+__webpack_require__(214)
+__vue_script__ = __webpack_require__(216)
+__vue_template__ = __webpack_require__(218)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -34257,13 +34679,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 204 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(205);
+var content = __webpack_require__(215);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -34283,7 +34705,7 @@ if(false) {
 }
 
 /***/ }),
-/* 205 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -34297,7 +34719,7 @@ exports.push([module.i, "\r\n    \r\n", ""]);
 
 
 /***/ }),
-/* 206 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34307,7 +34729,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _defineProperty2 = __webpack_require__(207);
+var _defineProperty2 = __webpack_require__(217);
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -34401,7 +34823,7 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 207 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34409,7 +34831,7 @@ exports.default = {
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(51);
+var _defineProperty = __webpack_require__(53);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -34431,19 +34853,19 @@ exports.default = function (obj, key, value) {
 };
 
 /***/ }),
-/* 208 */
+/* 218 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center postbox\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-2\"></div>\r\n                    <div class=\"col-8\">\r\n                        <h1 style=\"border-bottom: 2px solid grey;\"><strong>Delete this project?</strong></h1>\r\n                        <p style=\"font-size: 15px\"><strong>Delete it if you want it gone for good. All the information of this project will be lost forever. It cannot be undone !!</strong></p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <button @click=\"deleteProject\" class=\"button\" style=\"background:#d54e21; color: white;margin-bottom:15px;\">\r\n                            Delete ? Are you sure ??\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 209 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(210)
-__vue_script__ = __webpack_require__(212)
-__vue_template__ = __webpack_require__(218)
+__webpack_require__(220)
+__vue_script__ = __webpack_require__(222)
+__vue_template__ = __webpack_require__(228)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -34460,13 +34882,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 210 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(211);
+var content = __webpack_require__(221);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -34486,7 +34908,7 @@ if(false) {
 }
 
 /***/ }),
-/* 211 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -34500,7 +34922,7 @@ exports.push([module.i, "\r\n    .message-list-item a {\r\n        color: #44444
 
 
 /***/ }),
-/* 212 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34514,11 +34936,11 @@ var _store = __webpack_require__(3);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
-var _HelpComponent = __webpack_require__(213);
+var _HelpComponent = __webpack_require__(223);
 
 var _HelpComponent2 = _interopRequireDefault(_HelpComponent);
 
@@ -34708,13 +35130,13 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 213 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(214)
-__vue_script__ = __webpack_require__(216)
-__vue_template__ = __webpack_require__(217)
+__webpack_require__(224)
+__vue_script__ = __webpack_require__(226)
+__vue_template__ = __webpack_require__(227)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -34731,13 +35153,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 214 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(215);
+var content = __webpack_require__(225);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -34757,7 +35179,7 @@ if(false) {
 }
 
 /***/ }),
-/* 215 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -34771,7 +35193,7 @@ exports.push([module.i, "\r\n    .help-section {\r\n        color: #6b6b6b;\r\n 
 
 
 /***/ }),
-/* 216 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34816,25 +35238,25 @@ exports.default = {
 // </style>
 
 /***/ }),
-/* 217 */
+/* 227 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"col-12\">\r\n            <div class=\"help-section\">\r\n                <slot></slot>    \r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 218 */
+/* 228 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <!-- <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div v-if=\"project\" class=\"project-navigation\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"h3\" class=\"link-style\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div> -->\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-4\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/new'\" class=\"button button-default\">\r\n                        +{{ i18n.add_new_msg_btn }}\r\n                    </router-link>\r\n                </div>\r\n                <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;margin-bottom:35px;\">\r\n                    <h3>{{ i18n.message_heading }}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center\" v-if=\"loading\">\r\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        <p>{{ i18n.loading }}</p>\r\n                    </div>\r\n\r\n                    <div v-if=\"messages.length < 1 && !loading\">\r\n                        <h4>{{ i18n.no_message_yet }}</h4>\r\n                    </div>\r\n                    <div v-if=\"messages.length > 0 && !loading\">\r\n                        <ul>\r\n                            <li v-for=\"(messageObj, mindex) in messages\" style=\"border-bottom: 1px solid #f2f2f2\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-2 text-center\">\r\n                                        <img :src=\"messageObj.avatar_url\" class=\"small-round-image\" style=\"margin-top: 10px\">\r\n                                    </div>\r\n                                    <div class=\"col-10\">\r\n                                        <div class=\"message-list-item\">\r\n                                            <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObj.ID\" tag=\"h3\" class=\"ellipsis-90 link-style\">\r\n                                                <a>{{messageObj.message_title}}</a>\r\n                                            </router-link>\r\n                                            <p>{{ i18n.posted_by}} <strong>{{messageObj.user_name}}</strong> , <span>{{messageObj.formatted_created}}</span></p>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                    \r\n                    <div class=\"row\" v-if=\"messages.length < messageCount\">\r\n                        <div class=\"col-12 text-center\">\r\n                            <button class=\"button button-default\" @click=\"loadMoreMessages\">{{ i18n.load_more_btn }}{{messageCount}}</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <help-text>\r\n                    <p><i><strong>Note : </strong>Discussion boards keep the entire conversation about a specific topic together on a single page.No more digging through your inbox, trying to reassemble a story from a series of fragmented replies.</i></p>\r\n                </help-text>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 219 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(220)
-__vue_script__ = __webpack_require__(222)
-__vue_template__ = __webpack_require__(223)
+__webpack_require__(230)
+__vue_script__ = __webpack_require__(232)
+__vue_template__ = __webpack_require__(233)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -34851,13 +35273,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 220 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(221);
+var content = __webpack_require__(231);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -34877,7 +35299,7 @@ if(false) {
 }
 
 /***/ }),
-/* 221 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -34885,13 +35307,13 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .image-common {\r\n        padding:10px;\r\n        margin-bottom:20px;\r\n        text-align:center;\r\n        padding-left: 30px;\r\n        box-sizing: border-box;\r\n    }\r\n    .image-resize {\r\n        max-width:100%;\r\n        max-height:100%;\r\n    }\r\n    .message-content {\r\n        padding: 20px 60px;\r\n    }\r\n    .message-desc {\r\n        padding-left: 30px;\r\n        border-left: 3px solid #eaeaea;\r\n    }\r\n    .message-by {\r\n        margin-top: -40px;\r\n        margin-bottom: 30px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .image-common {\r\n        padding:10px;\r\n        margin-bottom:20px;\r\n        text-align:center;\r\n        padding-left: 30px;\r\n        box-sizing: border-box;\r\n    }\r\n    .image-resize {\r\n        max-width:100%;\r\n        max-height:100%;\r\n    }\r\n    .message-content {\r\n        padding: 20px 60px;\r\n    }\r\n    .message-desc {\r\n        padding-left: 30px;\r\n        border-left: 3px solid #eaeaea;\r\n    }\r\n    .message-desc pre.ql-syntax {\r\n        font-size: 14px;\r\n        padding: .8em 1em;\r\n        border: 1px solid #e2e4e7;\r\n    }\r\n    .message-desc blockquote {\r\n        border-left: 2px solid #0073aa;\r\n        padding-left: 10px;\r\n        font-size: 1em;\r\n        font-style: italic;\r\n        line-height: 1.8;\r\n    }\r\n    .message-by {\r\n        margin-top: -40px;\r\n        margin-bottom: 30px;\r\n    }\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 222 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34913,7 +35335,7 @@ var _FilesTypeDisplay = __webpack_require__(40);
 
 var _FilesTypeDisplay2 = _interopRequireDefault(_FilesTypeDisplay);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -34992,6 +35414,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //     .message-desc {
 //         padding-left: 30px;
 //         border-left: 3px solid #eaeaea;
+//     }
+//     .message-desc pre.ql-syntax {
+//         font-size: 14px;
+//         padding: .8em 1em;
+//         border: 1px solid #e2e4e7;
+//     }
+//     .message-desc blockquote {
+//         border-left: 2px solid #0073aa;
+//         padding-left: 10px;
+//         font-size: 1em;
+//         font-style: italic;
+//         line-height: 1.8;
 //     }
 //     .message-by {
 //         margin-top: -40px;
@@ -35120,19 +35554,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 223 */
+/* 233 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav>\r\n            <span><i class=\"fa fa-angle-right\"></i></span>\r\n            <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                {{ i18n.message_heading }}\r\n            </router-link>\r\n        </project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center\" v-if=\"loading\">\r\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        <p>{{ i18n.loading }}</p>\r\n                    </div>\r\n\r\n                    <div v-if=\"messageObject && !loading\">\r\n                        <div v-if=\"isShowEdit\">\r\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID + '/edit'\" class=\"button button-default\">\r\n                                {{ i18n.edit }}\r\n                            </router-link>\r\n                            <span style=\"float:right\" @click=\"deleteMessage(messageObject)\">\r\n                                <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                            </span>\r\n                        </div>\r\n                        <br>\r\n                        <div class=\"message-content\">\r\n                            <div class=\"text-center message-by\">\r\n                                <img :src=\"messageObject.avatar_url\" class=\"small-round-image\" alt=\"\">\r\n                                <p>\r\n                                    <i>{{ i18n.posted_by }} <strong>{{messageObject.user_name}}</strong>\r\n                                    at {{messageObject.formatted_created}}</i>\r\n                                </p>\r\n                            </div>\r\n\r\n                            <h1><strong>{{messageObject.message_title}}</strong></h1>\r\n\r\n                            <div class=\"message-desc\" v-html=\"messageObject.message\"></div>\r\n\r\n                            <div v-if=\"messageObject.files.length > 0\">\r\n                                <div v-for=\"file in messageObject.files\" class=\"image-common\">\r\n                                    <files-type-display :file=\"file\" type=\"normal\"></files-type-display>\r\n                                    <!-- <a :href=\"file.url\" target=\"_blank\"><img :src=\"file.url\" alt=\"\" class=\"image-resize\"></a> -->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <br>\r\n                    <comments :i18n=\"i18n\" :comments=\"messageObject.comments\" type=\"message\"></comments>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 224 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(225)
-__vue_script__ = __webpack_require__(227)
-__vue_template__ = __webpack_require__(228)
+__webpack_require__(235)
+__vue_script__ = __webpack_require__(237)
+__vue_template__ = __webpack_require__(238)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35149,13 +35583,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 225 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(226);
+var content = __webpack_require__(236);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -35175,7 +35609,7 @@ if(false) {
 }
 
 /***/ }),
-/* 226 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -35189,7 +35623,7 @@ exports.push([module.i, "\r\n    .ql-container {\r\n        background: #ffffff;
 
 
 /***/ }),
-/* 227 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35209,7 +35643,7 @@ var _FileUploadComponent = __webpack_require__(25);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -35394,19 +35828,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 228 */
+/* 238 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav v-on:get-project=\"setProject\">\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                \r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                \r\n                                <div class=\"new-message-action\">\r\n                                    <button class=\"button button-primary\" @click.prevent=\"createMessage\">\r\n                                        {{ i18n.post_new_msg_btn }}\r\n                                    </button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 229 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(230)
-__vue_script__ = __webpack_require__(232)
-__vue_template__ = __webpack_require__(233)
+__webpack_require__(240)
+__vue_script__ = __webpack_require__(242)
+__vue_template__ = __webpack_require__(243)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35423,13 +35857,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 230 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(231);
+var content = __webpack_require__(241);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -35449,7 +35883,7 @@ if(false) {
 }
 
 /***/ }),
-/* 231 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -35463,7 +35897,7 @@ exports.push([module.i, "\r\n    .messages-section {\r\n        background-color
 
 
 /***/ }),
-/* 232 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35483,7 +35917,7 @@ var _FileUploadComponent = __webpack_require__(25);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(9);
+var _ProjectNavComponent = __webpack_require__(8);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -35686,19 +36120,19 @@ exports.default = {
 // </script>
 
 /***/ }),
-/* 233 */
+/* 243 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{messageObject.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{messageObject.message_title}} </a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style t-d-none\">\r\n                    {{messageObject.message_title}}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           required\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                <br>\r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                <br>\r\n                                <div class=\"action\">\r\n                                    <button class=\"button button-primary\"\r\n                                            @click.prevent=\"updateMessage\"\r\n                                            >{{ i18n.update }}</button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"row\"></div> -->\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 234 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(235)
-__vue_script__ = __webpack_require__(237)
-__vue_template__ = __webpack_require__(238)
+__webpack_require__(245)
+__vue_script__ = __webpack_require__(247)
+__vue_template__ = __webpack_require__(248)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35715,13 +36149,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 235 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(236);
+var content = __webpack_require__(246);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -35741,7 +36175,7 @@ if(false) {
 }
 
 /***/ }),
-/* 236 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -35755,7 +36189,7 @@ exports.push([module.i, "\r\n    .assignment-heading {\r\n        border-bottom:
 
 
 /***/ }),
-/* 237 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35866,19 +36300,19 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 238 */
+/* 248 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-2\"></div>\r\n            <div class=\"col-8\">\r\n                <div class=\"text-center assignment-heading\">\r\n                    <h1>{{ i18n.my_assignments }}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\r\n                    <div class=\"col-2 text-right\">\r\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\r\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <span class=\"checkbox-style\" v-else></span>\r\n                    </div>\r\n                    <div class=\"col-10\" style=\"margin-left:0px\">\r\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\r\n                            <a>{{todo.todo}}</a>, <span><i style=\"font-size:12px\">Created at {{todo.formatted_created}}</i></span>,\r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">\r\n                                <span v-if=\"todo.formatted_due_date\">Due on</span>\r\n                                {{todo.formatted_due_date}}\r\n                            </span>\r\n                        </router-link>\r\n                        <!-- <div v-if=\"todo.formatted_due_date\" style=\"padding-top:12px\">\r\n                            <i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\" style=\"color: #b5b5b5\"></i> \r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">Due on {{todo.formatted_due_date}}</span>\r\n                        </div> -->\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
-/* 239 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(240)
-__vue_script__ = __webpack_require__(242)
-__vue_template__ = __webpack_require__(243)
+__webpack_require__(250)
+__vue_script__ = __webpack_require__(252)
+__vue_template__ = __webpack_require__(253)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -35895,13 +36329,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 240 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(241);
+var content = __webpack_require__(251);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -35921,7 +36355,7 @@ if(false) {
 }
 
 /***/ }),
-/* 241 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -35935,7 +36369,7 @@ exports.push([module.i, "\r\n.activity-content {\r\n    padding: 35px 20px;\r\n 
 
 
 /***/ }),
-/* 242 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35945,7 +36379,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _ActivityInfo = __webpack_require__(58);
+var _ActivityInfo = __webpack_require__(42);
 
 var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
 
@@ -36087,432 +36521,10 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 243 */
-/***/ (function(module, exports) {
-
-module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\"><span>My Activity</span></h2>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        No activity yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        Loading! Please wait... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
-
-/***/ }),
-/* 244 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_script__, __vue_template__
-__webpack_require__(245)
-__vue_script__ = __webpack_require__(247)
-__vue_template__ = __webpack_require__(248)
-module.exports = __vue_script__ || {}
-if (module.exports.__esModule) module.exports = module.exports.default
-if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-if (false) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\partials\\ComponentActions.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, __vue_template__)
-  }
-})()}
-
-/***/ }),
-/* 245 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(246);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-23de6214&file=ComponentActions.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ComponentActions.vue", function() {
-			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-23de6214&file=ComponentActions.vue!../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ComponentActions.vue");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 246 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, "\r\n    li.action-item {\r\n        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);\r\n        padding: 5px;\r\n        transition: background-color 0.2s;\r\n        color: #fff;\r\n        cursor: pointer;\r\n    }\r\n    /*li.action-item a {\r\n        color: #fff;\r\n        cursor: pointer;\r\n        text-decoration: none;\r\n    }*/\r\n    li.action-item i {\r\n        padding-right: 5px;\r\n    }\r\n    li.action-item:hover {\r\n        background-color: rgba(0,0,0,0.25);\r\n    }\r\n    .action-close {\r\n        float: right;\r\n        margin-top: 10px;\r\n        margin-right: 10px;\r\n        padding:5px 9px;\r\n        border: 1px solid #fff;\r\n        border-radius: 40px;\r\n        display: block;\r\n        cursor: pointer;\r\n    }\r\n    .action-icon {\r\n        position:absolute;\r\n        top: 10px;\r\n        right: 10px;\r\n        padding:5px 9px;\r\n        border:1px solid #eee;\r\n        border-radius:40px;\r\n        cursor: pointer;\r\n    }\r\n    .div-to-slide {\r\n        position: absolute;\r\n        top: 0px;\r\n        right: 0px;\r\n        background: #0073AA;\r\n        overflow: hidden;\r\n        color: #fff;\r\n        width: 30%;\r\n        z-index: 999;\r\n    }\r\n    .hide-action-div {\r\n        /*display: block;*/\r\n        color:#fff;\r\n        text-align: right;\r\n        /*width:100%*/\r\n    }\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 247 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-// <template>
-//     <div>
-//         <div class="action-icon" v-if="!isShowActions" @click="showAction">
-//             <i class="fa fa-ellipsis-h"></i>
-//         </div>
-//         <transition
-//             name="custom-transition"
-//             enter-active-class="animated-fast slideInRight"
-//             leave-active-class="animated-fast slideOutRight"
-//         >
-//             <div class="div-to-slide" v-if="isShowActions">
-//                 <div>
-//                     <div @click="showAction" class="hide-action-div">
-//                         <i class="fa fa-remove action-close"></i>
-//                     </div>
-//                     <div style="clear:right;">
-//                         <ul style="padding:10px 10px 0px">
-//
-//                             <slot></slot>
-//
-//                         </ul>
-//                     </div>
-//                 </div>
-//             </div>
-//         </transition>
-//     </div>
-// </template>
-//
-// <script>
-exports.default = {
-    data: function data() {
-        return {
-            isShowActions: false
-        };
-    },
-
-    methods: {
-        showAction: function showAction() {
-            this.isShowActions = !this.isShowActions;
-        }
-    },
-    created: function created() {
-        var vm = this;
-        Event.$on('toggle-actions', function () {
-            vm.showAction();
-        });
-    }
-};
-// </script>
-//
-// <style>
-//     li.action-item {
-//         border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
-//         padding: 5px;
-//         transition: background-color 0.2s;
-//         color: #fff;
-//         cursor: pointer;
-//     }
-//     /*li.action-item a {
-//         color: #fff;
-//         cursor: pointer;
-//         text-decoration: none;
-//     }*/
-//     li.action-item i {
-//         padding-right: 5px;
-//     }
-//     li.action-item:hover {
-//         background-color: rgba(0,0,0,0.25);
-//     }
-//     .action-close {
-//         float: right;
-//         margin-top: 10px;
-//         margin-right: 10px;
-//         padding:5px 9px;
-//         border: 1px solid #fff;
-//         border-radius: 40px;
-//         display: block;
-//         cursor: pointer;
-//     }
-//     .action-icon {
-//         position:absolute;
-//         top: 10px;
-//         right: 10px;
-//         padding:5px 9px;
-//         border:1px solid #eee;
-//         border-radius:40px;
-//         cursor: pointer;
-//     }
-//     .div-to-slide {
-//         position: absolute;
-//         top: 0px;
-//         right: 0px;
-//         background: #0073AA;
-//         overflow: hidden;
-//         color: #fff;
-//         width: 30%;
-//         z-index: 999;
-//     }
-//     .hide-action-div {
-//         /*display: block;*/
-//         color:#fff;
-//         text-align: right;
-//         /*width:100%*/
-//     }
-// </style>
-
-/***/ }),
-/* 248 */
-/***/ (function(module, exports) {
-
-module.exports = "\r\n    <div>\r\n        <div class=\"action-icon\" v-if=\"!isShowActions\" @click=\"showAction\">\r\n            <i class=\"fa fa-ellipsis-h\"></i>\r\n        </div>\r\n        <transition\r\n            name=\"custom-transition\"\r\n            enter-active-class=\"animated-fast slideInRight\"\r\n            leave-active-class=\"animated-fast slideOutRight\"\r\n        >\r\n            <div class=\"div-to-slide\" v-if=\"isShowActions\">\r\n                <div>\r\n                    <div @click=\"showAction\" class=\"hide-action-div\">\r\n                        <i class=\"fa fa-remove action-close\"></i>\r\n                    </div>\r\n                    <div style=\"clear:right;\">\r\n                        <ul style=\"padding:10px 10px 0px\">\r\n\r\n                            <slot></slot>\r\n\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </transition>\r\n    </div>\r\n";
-
-/***/ }),
-/* 249 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_script__, __vue_template__
-__webpack_require__(250)
-__vue_script__ = __webpack_require__(252)
-__vue_template__ = __webpack_require__(253)
-module.exports = __vue_script__ || {}
-if (module.exports.__esModule) module.exports = module.exports.default
-if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-if (false) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\ProjectActivities.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, __vue_template__)
-  }
-})()}
-
-/***/ }),
-/* 250 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(251);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(1)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d3dad620&file=ProjectActivities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ProjectActivities.vue", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d3dad620&file=ProjectActivities.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./ProjectActivities.vue");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 251 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, "\r\n.activity-content {\r\n    /*padding: 20px;*/\r\n    background: #fff;\r\n}\r\n.activity-avatar {\r\n    float: left;\r\n    margin-right: 10px;\r\n    margin-top: 5px;\r\n}\r\n\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 252 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _store = __webpack_require__(3);
-
-var _store2 = _interopRequireDefault(_store);
-
-var _ActivityInfo = __webpack_require__(58);
-
-var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
-
-var _ProjectNavComponent = __webpack_require__(9);
-
-var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
-
-var _Activities = __webpack_require__(57);
-
-var _Activities2 = _interopRequireDefault(_Activities);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// <template>
-//     <div class="container">
-//         <project-nav></project-nav>
-//         <div class="lists border-for-nav">
-//             <activity></activity>    
-//         </div>
-//     </div>
-// </template>
-//
-// <script>
-exports.default = {
-    components: {
-        ActivityInfo: _ActivityInfo2.default,
-        ProjectNav: _ProjectNavComponent2.default,
-        Activity: _Activities2.default
-    },
-
-    data: function data() {
-        return {
-            activities: [],
-            totalActivityCount: '',
-            currentCount: '',
-            i18n: {},
-            project: {},
-            activityTitle: ''
-        };
-    },
-
-
-    computed: {
-        noActivity: function noActivity() {
-            return this.totalActivityCount < 1;
-        },
-        activitiesObject: function activitiesObject() {
-            return _.groupBy(this.activities, 'formatted_date');
-        }
-    },
-
-    methods: {
-        fetchActivities: function fetchActivities(userid) {
-            var vm = this,
-                data;
-
-            data = {
-                action: 'fpm-get-activities',
-                project_id: vm.$route.params.projectid,
-                nonce: fpm.nonce
-            };
-            if (userid) {
-                data.user_id = userid;
-            }
-
-            jQuery.post(fpm.ajaxurl, data, function (resp) {
-                if (resp.success) {
-                    for (var i = 0; i < resp.data.length; i++) {
-                        vm.currentCount = resp.data.length;
-                        vm.activities.push(resp.data[i]);
-                        vm.totalActivityCount = resp.data[0].total_activity;
-                    }
-                }
-            });
-        },
-
-        fetchProjectInfo: function fetchProjectInfo() {
-            var vm = this;
-
-            var data = {
-                action: 'fpm-get-project',
-                project_id: vm.$route.params.projectid,
-                nonce: fpm.nonce
-            };
-
-            jQuery.post(fpm.ajaxurl, data, function (resp) {
-
-                if (resp.success) {
-                    vm.project = resp.data[0];
-                } else {
-                    vm.$router.push({
-                        path: '/?item=Project&op=rf'
-                    });
-                }
-            });
-        },
-
-        loadMoreActivities: function loadMoreActivities() {
-            var vm = this,
-                data = {
-                action: 'fpm-load-more-activities',
-                nonce: fpm.nonce,
-                offset: vm.currentCount,
-                project_id: vm.$route.params.projectid
-            };
-
-            vm.loadMore = true;
-
-            jQuery.post(fpm.ajaxurl, data, function (resp) {
-                vm.loadMore = false;
-
-                if (resp.success) {
-                    for (var i = 0; i < resp.data.length; i++) {
-                        vm.currentCount += resp.data.length;
-                        vm.activities.push(resp.data[i]);
-                    }
-                }
-            });
-        }
-    },
-
-    created: function created() {
-        var vm = this;
-        _store2.default.setLocalization('fpm-get-activities-local-data').then(function (data) {
-            vm.i18n = data;
-        });
-
-        if (vm.$route.params.userid) {
-            vm.fetchActivities(vm.$route.params.userid);
-        } else {
-            vm.fetchActivities();
-            vm.activityTitle = 'Project Activity';
-        }
-
-        vm.fetchProjectInfo();
-    }
-};
-// </script>
-//
-// <style>
-// .activity-content {
-//     /*padding: 20px;*/
-//     background: #fff;
-// }
-// .activity-avatar {
-//     float: left;
-//     margin-right: 10px;
-//     margin-top: 5px;
-// }
-//
-// </style>
-
-/***/ }),
 /* 253 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <activity></activity>    \r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\"><span>My Activity</span></h2>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        No activity yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        Loading! Please wait... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ })
 /******/ ]);
