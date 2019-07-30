@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container summary-section">
+        <div class="container lists">
             <div class="row">
                 <div class="col-12">
                     <div class="text-center project-info">
@@ -127,6 +127,42 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <div class="summary-card">
+                        <router-link :to="'/projects/' + $route.params.projectid + '/folders'" tag="h3" class="link-style">
+                            <a>{{i18n.docs_and_files}}</a>
+                        </router-link>
+                        <hr>
+                        <div style="row text-center">
+                            <div class="col-12">
+                                <ul class="folders">
+                                    <li class="folder-list" v-for="folder in folders">
+                                        <div class="summary-doc-title">
+                                            <strong>{{folder.folder_title | truncate('8')}}</strong>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-folder-open" style="color: #267cb5"></i>
+                                        </div>
+                                        <div style="margin-top:5px;font-size:12px">
+                                            by {{folder.user_name}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div v-if="folders.length < 1">
+                            <div style="margin-top:12%">
+                                <span class="summary-icon">
+                                    <i class="fa fa-folder fa-3x"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="preview-fade"></span>
+                    </div>
+                </div>
+            </div>
             <!-- <activities :i18n="i18n"></activities> -->
         </div>
     </div>
@@ -147,6 +183,7 @@
                 listSummary : [],
                 messages: [],
                 users: [],
+                folders: [],
                 project: ''
             }
         },
@@ -184,6 +221,25 @@
                     vm.loading = false;
                     if ( resp.success ) {
                         vm.listSummary = resp.data;
+                    }
+                });
+            },
+
+            fetchFolderSummary() {
+                var vm = this,
+                    data;
+                // vm.loading = true;
+
+                data = {
+                    action: 'fpm-get-folders',
+                    project_id: vm.$route.params.projectid,
+                    nonce: fpm.nonce,
+                    limit: 4
+                };
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    if ( resp.success ) {
+                        vm.folders = resp.data;
                     }
                 });
             },
@@ -245,6 +301,7 @@
             vm.loading = true;
             vm.fetchProject();
             vm.fetchTodoSummary();
+            vm.fetchFolderSummary();
             vm.fetchMessageSummary();
             vm.currentUser = fpm.currentUserInfo;
 
@@ -394,5 +451,11 @@
         vertical-align: top;
         border-radius: 45px;
         margin-right: 5px;
+    }
+    li.folder-list {
+        display: inline-block;
+        border: 1px solid #eee;
+        padding: 5px;
+        margin: 5px;
     }
 </style>

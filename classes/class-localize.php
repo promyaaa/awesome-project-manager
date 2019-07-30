@@ -23,6 +23,10 @@ class FusionPM_Localize {
         add_action( 'wp_ajax_fpm-get-edit-message-local-data', array( $this, 'edit_messages_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-users-local-data', array( $this, 'get_users_localize_data' ), 10 );
         add_action( 'wp_ajax_fpm-get-project-edit-local-data', array( $this, 'get_project_edit_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-comments-local-data', array( $this, 'comments_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-single-file-local-data', array( $this, 'single_file_localize_data' ), 10 );
+        add_action( 'wp_ajax_fpm-get-folder-local-data', array( $this, 'folder_localize_data' ), 10 );
+
     }
 
     /* class common methods */
@@ -91,6 +95,7 @@ class FusionPM_Localize {
             'people'                   => __( 'People', 'fusion-pm' ),
             'add_remove_people'        => __( 'Add/Remove People...', 'fusion-pm' ),
             'todos'                    => __( 'To-dos', 'fusion-pm' ),
+            'docs_and_files'           => __( 'Docs & Files', 'fusion-pm' ),
             'message_board'            => __( 'Discussion', 'fusion-pm' ),
             'project_activity'         => __( 'Project Activity', 'fusion-pm' ),
             'create_a_todo'            => __( 'created a Todo', 'fusion-pm' ),
@@ -283,6 +288,44 @@ class FusionPM_Localize {
         );
     }
 
+    public function folder_localize_data() {
+        $localize_data = array(
+            'add_new_file'   => __( 'Add File', 'fusion-pm' ),
+            'edit'   => __( 'Edit', 'fusion-pm' ),
+            'update'   => __( 'Update', 'fusion-pm' ),
+            'delete'   => __( 'Delete', 'fusion-pm' ),
+            'cancel'         => __( 'Cancel', 'fusion-pm' ),
+            'load_more_btn'  => __( 'Load More...', 'fusion-pm' ),
+            'add_files'      => __( 'Add files', 'fusion-pm' ),
+            'make_folder'    => __( 'Make Folder', 'fusion-pm' ),
+            'docs_and_files' => __( 'Docs & Files', 'fusion-pm' ),
+            'create' => __( 'Create', 'fusion-pm' ),
+            'no_folder_message' => __( 'No folder added yet', 'fusion-pm' ),
+            'created_by' => __( 'Created by', 'fusion-pm' ),
+            'archived_folders' => __( 'Archived Folders', 'fusion-pm' ),
+            'folder_title' => __( 'folder title', 'fusion-pm' ),
+            'add_files_to_folder' => __( 'Add files to folder', 'fusion-pm' ),
+            'this_folder_is' => __( 'This folder is', 'fusion-pm' ),
+            'archived' => __( 'Archived', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    public function comments_localize_data() {
+        $localize_data = array(
+            'add_new_file'         => __( 'Add File', 'fusion-pm' ),
+            'update'               => __( 'Update', 'fusion-pm' ),
+            'cancel'               => __( 'Cancel', 'fusion-pm' ),
+            'add_files'            => __( 'Add files', 'fusion-pm' ),
+            'comment_label'        => __( 'Comments', 'fusion-pm' ),
+            'comment_by'           => __( 'commented by', 'fusion-pm' ),
+            'add_comment'          => __( 'Add Comment', 'fusion-pm' ),
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
     public function get_users_localize_data() {
         $localize_data = array(
             'header_label'              => __( 'Set up who’s on ', 'fusion-pm' ),
@@ -310,6 +353,21 @@ class FusionPM_Localize {
             'edit'                      => __( 'Edit', 'fusion-pm' ),
             'cancel'                    => __( 'Cancel', 'fusion-pm' ),
             'update'                    => __( 'Update', 'fusion-pm' )
+        );
+
+        wp_send_json_success( $localize_data );
+    }
+
+    public function single_file_localize_data() {
+        $localize_data = array(
+            'posted_by'       => __( 'posted by', 'fusion-pm' ),
+            'loading'         => __( 'Loading ...', 'fusion-pm' ),
+            'edit'            => __( 'Edit', 'fusion-pm' ),
+            'delete'          => __( 'Delete', 'fusion-pm' ),
+            'cancel'          => __( 'Cancel', 'fusion-pm' ),
+            'update'          => __( 'Update', 'fusion-pm' ),
+            'docs_and_files'  => __( 'Docs & Files', 'fusion-pm' ),
+            'download'        => __( 'Download', 'fusion-pm' ),
         );
 
         wp_send_json_success( $localize_data );

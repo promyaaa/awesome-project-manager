@@ -71,10 +71,18 @@
                     <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
 
                     <div class="inline">
-                        <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo(todo)" name="add_todo" class="button button-primary" :value="i18n.update">
-                        <input style="vertical-align: middle;" type="submit" @click.prevent="cancelEdit" class="button button-default" :value="i18n.cancel">
+                        <button class="button button-primary"
+                                @click.prevent="updateTodo(todo)"
+                                :disabled="updatingTodo" 
+                            >
+                            <i v-if="updatingTodo" class="fa fa-refresh fa-spin mr-5"></i>
+                            {{ i18n.update }}
+                        </button>
+                        <button class="button button-default"
+                            @click.prevent="cancelEdit">
+                            {{ i18n.cancel }}
+                        </button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -136,7 +144,8 @@
                 currentUser: '',
                 fileCount: 0,
                 selected: '',
-                updateDueDate: ''
+                updateDueDate: '',
+                updatingTodo: false,
             }
         },
         directives: {
@@ -186,8 +195,11 @@
                         due_date: vm.updateDueDate ? vm.updateDueDate : ''
                     };
 
+                vm.updatingTodo = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.updatingTodo = false;
                         todoObject.todo = vm.todoName;
                         todoObject.formatted_due_date = resp.data.todo.formatted_due_date;
                         todoObject.assigneeID = vm.selected.ID;
@@ -196,7 +208,8 @@
                         vm.todoName = '';
                         vm.editindex = -1;
                     } else {
-                        vm.message = resp.data;
+                        vm.updatingTodo = false;
+                        // TODO: Show message "There is no change to update"
                     }
                 });
             },

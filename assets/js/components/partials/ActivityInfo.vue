@@ -67,32 +67,46 @@
             <i style="color: #D54E21">"{{activity.activity}}"</i>
             at {{ activity.formatted_time }}
         </div>
+
+        <div v-if="isCreateFolder" class="activity-info-block">
+            <strong>{{activity.user_name}}</strong> added a new <strong>Folder</strong> called
+            <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.activity_id" tag="span">
+                <a>{{activity.activity }}</a>
+            </router-link>
+            at {{ activity.formatted_time }}
+        </div>
+
+        <div v-if="isUpdateFolder" class="activity-info-block">
+            <strong>{{activity.user_name}}</strong> updated a <strong>Folder</strong> called
+            <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.activity_id" tag="span">
+                <a>{{activity.activity }}</a>
+            </router-link>
+            at {{ activity.formatted_time }}
+        </div>
+
+        <div v-if="isDeleteFolder" class="activity-info-block">
+            <strong>{{activity.user_name}}</strong> deleted <strong>a Folder</strong> called
+            <i style="color:#d54e21;">"{{activity.activity }}"</i>
+            at {{ activity.formatted_time }}
+        </div>
+
+        <div v-if="isAddFile" class="activity-info-block">
+            <strong>{{activity.user_name}}</strong> added a <strong>File</strong> to
+            
+            <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.parentID + '/files/' + activity.activity_id" tag="span">
+                <a>{{activity.activity }}</a> folder
+            </router-link>
+            at {{ activity.formatted_time }}  
+            
+        </div>
+
+        <div v-if="isDeleteFile" class="activity-info-block">
+            <strong>{{activity.user_name}}</strong> deleted a <strong>File, </strong>
+            <i style="color: #d54e21;">"{{activity.activity }}"</i> folder
+            at {{ activity.formatted_time }}
+        </div>
     </div>
 </template>
-
-<style>
-    .m-t-5 {
-        margin-top: 5px;
-    }
-    .checkbox-checked-style {
-        padding: 0px 2px;
-        margin-right: 10px;
-        margin-left: 10px;
-        border: 1px solid #ccc;
-        /*border-radius: 3px*/
-    }
-    .activity-time {
-        font-style: italic;
-        margin-left: 5px;
-        color: #72777c;
-    }
-    .activity-info-block {
-        /*display: flex; */
-        padding-bottom: 15px; 
-        padding-left: 10px;
-        text-align: left;
-    }
-</style>
 
 <script>
     export default {
@@ -131,7 +145,45 @@
             },
             isDeleteMessage() {
                 return this.activity.activity_type === 'delete_message';
-            }
+            },
+            isCreateFolder() {
+                return this.activity.activity_type === 'create_folder';
+            },
+            isUpdateFolder() {
+                return this.activity.activity_type === 'update_folder';
+            },
+            isDeleteFolder() {
+                return this.activity.activity_type === 'delete_folder';
+            },
+            isAddFile() {
+                return this.activity.activity_type === 'add_file';
+            },
+            isDeleteFile() {
+                return this.activity.activity_type === 'delete_file';
+            },
         },
     }
 </script>
+
+<style>
+    .m-t-5 {
+        margin-top: 5px;
+    }
+    .checkbox-checked-style {
+        padding: 0px 2px;
+        margin-right: 10px;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+    }
+    .activity-time {
+        font-style: italic;
+        margin-left: 5px;
+        color: #72777c;
+    }
+    .activity-info-block {
+        padding-bottom: 15px;
+        padding-left: 10px;
+        text-align: left;
+        line-height: 1.5;
+    }
+</style>

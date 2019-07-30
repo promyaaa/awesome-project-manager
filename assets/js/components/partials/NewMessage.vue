@@ -40,7 +40,10 @@
                                     :attachments="attachments"></file-upload>
                                 
                                 <div class="new-message-action">
-                                    <button class="button button-primary" @click.prevent="createMessage">
+                                    <button class="button button-primary" 
+                                            @click.prevent="createMessage"
+                                            :disabled="postingMessage">
+                                        <i v-if="postingMessage" class="fa fa-refresh fa-spin"></i>
                                         {{ i18n.post_new_msg_btn }}
                                     </button>
                                     <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="button button-default">
@@ -105,6 +108,7 @@
                 attachments: [],
                 attachmentIDs: [],
                 project: '',
+                postingMessage: false,
                 // content: '',
                 customToolbar : [
                   ['bold', 'italic', 'underline', 'strike'],
@@ -161,8 +165,11 @@
                     return;
                 }
 
+                vm.postingMessage = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.postingMessage = false;
                         messageID = resp.data.messageInfo.ID;
                         projectID = data.project_id;
                         vm.$router.push({

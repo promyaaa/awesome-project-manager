@@ -40,9 +40,9 @@
         },
         created() {
             var vm = this;
-            Event.$on('toggle-actions', function() {
-                vm.showAction();
-            });
+            // Event.$on('toggle-actions', function() {
+            //     vm.showAction();
+            // });
         }
     }
 </script>
@@ -78,8 +78,8 @@
     }
     .action-icon {
         position:absolute;
-        top: 10px;
-        right: 10px;
+        top: -5px;
+        right: -15px;
         padding:5px 9px;
         border:1px solid #eee;
         border-radius:40px;
@@ -87,8 +87,8 @@
     }
     .div-to-slide {
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: -15px;
+        right: -25px;
         background: #0073AA;
         overflow: hidden;
         color: #fff;

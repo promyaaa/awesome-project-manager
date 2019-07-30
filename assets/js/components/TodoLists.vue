@@ -37,7 +37,11 @@
                         <div class="action">
                             <button class="button button-primary"
                                     @click.prevent="createList"
-                                    >{{ i18n.create_list }}</button>
+                                    :disabled="creatingList" 
+                                    >
+                                <i v-if="creatingList" class="fa fa-refresh fa-spin mr-5"></i>
+                                {{ i18n.create_list }}
+                            </button>
                             <button class="button button-default" @click="toggleListForm">{{ i18n.cancel }}</button>
                         </div>
                     </div>
@@ -118,7 +122,8 @@
                 loading: false,
                 currentUser: '',
                 listCount: '',
-                project: ''
+                project: '',
+                creatingList: false,
             }
         },
 
@@ -203,8 +208,11 @@
                     user_name: vm.currentUser.data.display_name
                 };
 
+                vm.creatingList = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.creatingList = false;
                         resp.data.listInfo.list_title = vm.listTitle;
                         resp.data.listInfo.todos = [];
                         vm.lists.unshift(resp.data.listInfo);

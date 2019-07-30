@@ -31,40 +31,63 @@
                 </div>
             </div>
             <div v-if="isTextFile">
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
             </div>
             <div v-if="isPdfFile" >
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
             </div>
             <div v-if="isJavascriptFile">
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
             </div>
             <div v-if="isCompressedFile">
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
             </div>
             <div v-if="isDocumentFile">
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
             </div>
             <div v-if="isPresentationFile" >
-                <img :src="file.icon" width="68" height="90" class="common-file-style">
+                <img :src="file.icon"  class="common-file-style">
                 <div class="file-action">
                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
                 </div>
+            </div>
+        </div>
+        <div class="text-center" v-if="isFolderView">
+            <div v-if="isImageFile">
+                <img :src="file.url" alt="" class="image-resize common-file-style">
+            </div>
+            <div v-if="isTextFile">
+                <img :src="file.icon" class="common-file-style">
+            </div>
+            <div v-if="isPdfFile" >
+                <img :src="file.icon" class="common-file-style">
+            </div>
+            <div v-if="isJavascriptFile">
+                <img :src="file.icon" class="common-file-style">
+            </div>
+            <div v-if="isCompressedFile">
+                <img :src="file.icon" class="common-file-style">
+            </div>
+            <div v-if="isDocumentFile">
+                <img :src="file.icon" class="common-file-style">
+            </div>
+            <div v-if="isPresentationFile">
+                <img :src="file.icon" class="common-file-style">
             </div>
         </div>
     </div>
@@ -98,6 +121,9 @@
             },
             isNormalView() {
                 return this.type === 'normal';
+            },
+            isFolderView() {
+                return this.type === 'folder';
             },
             isImageFile() {
                 var mime = this.file.mime;

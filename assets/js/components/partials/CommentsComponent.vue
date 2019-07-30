@@ -35,7 +35,11 @@
                     <br>
                     <button class="button button-primary"
                         @click.prevent="updateComment(commentObject)"
-                        >{{ i18n.update }}</button>
+                        :disabled="updatingComment"
+                        >
+                        <i v-if="updatingComment" class="fa fa-refresh fa-spin"></i>
+                        {{ i18n.update }}
+                    </button>
                     <button class="button button-default" @click="cancelCommentEdit(cindex)">{{ i18n.cancel }}</button>
                 </div>
             </div>
@@ -52,7 +56,11 @@
                 <div class="action">
                     <button class="button button-primary"
                         @click.prevent="addComment()"
-                        >{{ i18n.add_comment }}</button>
+                        :disabled="commenting"
+                        >
+                        <i v-if="commenting" class="fa fa-refresh fa-spin"></i>
+                        {{ i18n.add_comment }}
+                    </button>
                 </div>
             </div>
             <div class="pm-clearfix"></div>
@@ -60,6 +68,174 @@
 
     </div>
 </template>
+
+<script>
+    import store from '../../store';
+    import { VueEditor } from 'vue2-editor'
+    export default {
+        props: ['comments', 'type'],
+        components: {
+            VueEditor
+        },
+        data() {
+            return {
+                i18n: {},
+                currentUserInfo:{},
+                cloneObject: '',
+                loading: false,
+                commenting: false,
+                updatingComment: false,
+                comment: '',
+                commentEditText: '',
+                editindex: -1,
+                customToolbar : [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'header': [3, 4, 5, 6, false] }],
+                    [{ 'align': [] }],
+                ]
+            }
+        },
+
+        methods: {
+            addComment: function() {
+                var vm = this,
+                    data;
+                if (!vm.comment.trim()) {
+                    return;
+                }
+
+                data = {
+                    action : 'fpm-insert-comment',
+                    nonce : fpm.nonce,
+                    comment: vm.comment,
+                    project_id: vm.$route.params.projectid,
+                    user_name: fpm.currentUserInfo.display_name,
+                    commentable_type: vm.type,
+                };
+
+                if (vm.type === 'list') {
+                    data.commentable_id = vm.$route.params.listid;
+                } else if (vm.type === 'todo') {
+                    data.commentable_id = vm.$route.params.todoid;
+                } else if (vm.type === 'message') {
+                    data.commentable_id = vm.$route.params.messageid;
+                }
+                vm.commenting = true;
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    if ( resp.success ) {
+                        vm.commenting = false;
+                        vm.comments.push({
+                            comment: vm.comment,
+                            user_name: vm.currentUserInfo.data.display_name,
+                            userID: vm.currentUserInfo.data.ID,
+                            ID: resp.data.comment.ID,
+                            avatar_url: resp.data.comment.avatar_url
+                        });
+                        vm.comment = '';
+                    } else {
+                        vm.commenting = false;
+                    }
+                });
+            },
+
+            showCommentEditForm: function( commentObject, cindex ) {
+                var vm = this;
+
+                vm.cloneObject = JSON.parse(JSON.stringify(commentObject));
+                vm.editindex = cindex;
+                vm.commentEditText = commentObject.comment;
+            },
+
+            cancelCommentEdit: function( index ) {
+                var vm = this;
+                vm.editindex = -1;
+                vm.comments[index] = vm.cloneObject;
+                vm.cloneObject = '';
+            },
+
+            updateComment: function( commentObj ) {
+
+                var vm = this,
+                    data;
+
+                // if (!vm.comment.trim()) {
+                //     return;
+                // }
+
+                    data = {
+                        action : 'fpm-insert-comment',
+                        nonce : fpm.nonce,
+                        comment: vm.commentEditText,
+                        project_id: vm.$route.params.projectid,
+                        user_name: fpm.currentUserInfo.data.display_name,
+                        commentable_type: vm.type,
+                        comment_id: commentObj.ID
+                    };
+
+                    if (vm.type === 'list') {
+                        data.commentable_id = vm.$route.params.listid;
+                    } else if (vm.type === 'todo') {
+                        data.commentable_id = vm.$route.params.todoid;
+                    } else if (vm.type === 'message') {
+                        data.commentable_id = vm.$route.params.messageid;
+                    }
+                
+                vm.updatingComment = true;    
+
+                jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    
+                    if ( resp.success ) {
+                        vm.updatingComment = false;
+                        commentObj.comment = vm.commentEditText;
+                        vm.commentEditText = '';
+                        // vm.attachments = [];
+                        vm.editindex = -1;
+                    } else {
+                        vm.updatingComment = false;
+                    }
+                });
+            },
+
+            deleteComment: function(comment, cindex) {
+
+                if (confirm("Are you sure, you want to delete this comment ??")) {
+                    var vm = this,
+                        todoInfo,
+                        data = {
+                            action : 'fpm-delete-comment',
+                            nonce : fpm.nonce,
+                            comment_id: comment.ID
+                        };
+
+                    jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                        if ( resp.success ) {
+
+                            vm.comments.splice( cindex, 1 );
+
+                        } else {
+
+                        }
+                    });
+                }
+            },
+        },
+
+        created() {
+            var vm = this;
+            this.currentUserInfo = fpm.currentUserInfo;
+
+            store.setLocalization( 'fpm-get-comments-local-data' ).then( function( data ) {
+                console.log(data);
+                vm.i18n = data;
+            });
+        }
+    }
+</script>
+
 <style>
     .comment-action .fa {
         color: #b5b5b5;
@@ -136,153 +312,3 @@
         font-size: 14px;
     }
 </style>
-<script>
-    import { VueEditor } from 'vue2-editor'
-    export default {
-        props: ['comments', 'type', 'i18n'],
-        components: {
-            VueEditor
-        },
-        data() {
-            return {
-                currentUserInfo:{},
-                cloneObject: '',
-                loading: false,
-                comment: '',
-                commentEditText: '',
-                editindex: -1,
-                customToolbar : [
-                    ['bold', 'italic', 'underline', 'strike'],
-                    ['blockquote', 'code-block'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    [{ 'indent': '-1'}, { 'indent': '+1' }],
-                    [{ 'header': [3, 4, 5, 6, false] }],
-                    [{ 'align': [] }],
-                ]
-            }
-        },
-
-        methods: {
-            addComment: function() {
-                var vm = this,
-                    data;
-                if (!vm.comment.trim()) {
-                    return;
-                }
-                    data = {
-                        action : 'fpm-insert-comment',
-                        nonce : fpm.nonce,
-                        comment: vm.comment,
-                        project_id: vm.$route.params.projectid,
-                        user_name: fpm.currentUserInfo.display_name,
-                        commentable_type: vm.type,
-                    };
-
-                    if (vm.type === 'list') {
-                        data.commentable_id = vm.$route.params.listid;
-                    } else if (vm.type === 'todo') {
-                        data.commentable_id = vm.$route.params.todoid;
-                    } else if (vm.type === 'message') {
-                        data.commentable_id = vm.$route.params.messageid;
-                    }
-
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    if ( resp.success ) {
-                        vm.comments.push({
-                            comment: vm.comment,
-                            user_name: vm.currentUserInfo.data.display_name,
-                            userID: vm.currentUserInfo.data.ID,
-                            ID: resp.data.comment.ID,
-                            avatar_url: resp.data.comment.avatar_url
-                        });
-                        vm.comment = '';
-                    } else {
-                        vm.message = resp.data;
-                    }
-                });
-            },
-
-            showCommentEditForm: function( commentObject, cindex ) {
-                var vm = this;
-
-                vm.cloneObject = JSON.parse(JSON.stringify(commentObject));
-                vm.editindex = cindex;
-                vm.commentEditText = commentObject.comment;
-            },
-
-            cancelCommentEdit: function( index ) {
-                var vm = this;
-                vm.editindex = -1;
-                vm.comments[index] = vm.cloneObject;
-                vm.cloneObject = '';
-            },
-
-            updateComment: function( commentObj ) {
-
-                var vm = this,
-                    data;
-
-                // if (!vm.comment.trim()) {
-                //     return;
-                // }
-
-                    data = {
-                        action : 'fpm-insert-comment',
-                        nonce : fpm.nonce,
-                        comment: vm.commentEditText,
-                        project_id: vm.$route.params.projectid,
-                        user_name: fpm.currentUserInfo.data.display_name,
-                        commentable_type: vm.type,
-                        comment_id: commentObj.ID
-                    };
-
-                    if (vm.type === 'list') {
-                        data.commentable_id = vm.$route.params.listid;
-                    } else if (vm.type === 'todo') {
-                        data.commentable_id = vm.$route.params.todoid;
-                    } else if (vm.type === 'message') {
-                        data.commentable_id = vm.$route.params.messageid;
-                    }
-                    
-                jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
-                    if ( resp.success ) {
-                        commentObj.comment = vm.commentEditText;
-                        vm.commentEditText = '';
-                        // vm.attachments = [];
-                        vm.editindex = -1;
-                    } else {
-                        vm.message = resp.data;
-                    }
-                });
-            },
-
-            deleteComment: function(comment, cindex) {
-
-                if (confirm("Are you sure, you want to delete this comment ??")) {
-                    var vm = this,
-                        todoInfo,
-                        data = {
-                            action : 'fpm-delete-comment',
-                            nonce : fpm.nonce,
-                            comment_id: comment.ID
-                        };
-
-                    jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                        if ( resp.success ) {
-
-                            vm.comments.splice( cindex, 1 );
-
-                        } else {
-
-                        }
-                    });
-                }
-            },
-        },
-
-        created() {
-            this.currentUserInfo = fpm.currentUserInfo;
-        }
-    }
-</script>

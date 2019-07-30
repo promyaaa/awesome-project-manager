@@ -39,19 +39,19 @@ class FusionPM_Admin {
         // do_action( 'fusion_pm_menu', $capability );
     // }
 
-    // * sabbir kukur
+    
     function register_menu() {
-      global $submenu;
+        global $submenu;
 
       // add_menu_page( __( 'Project Manager', 'text-domain' ), __( 'Project Manager', 'text-domain' ), 'manage_options', 'awesome-pm', 'pm_dashboard_cb' );
 
-    $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
-    add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
+        $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
+        add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
 
-    $submenu['fusion-pm'][] = array( __( 'Projects', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/' );
-    $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
-    $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/activity' );
-    do_action( 'fusion_pm_menu', $capability );
+        $submenu['fusion-pm'][] = array( __( 'Projects', 'text-domain' ), 'manage_project', 'admin.php?page=fusion-pm#/' );
+        $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), 'manage_project', 'admin.php?page=fusion-pm#/my/assignments' );
+        $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), 'manage_project', 'admin.php?page=fusion-pm#/my/activity' );
+        do_action( 'fusion_pm_menu', $capability );
     }
     // For line number 8 callback function. where main single page div loaded
     function pm_dashboard_cb() {

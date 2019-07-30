@@ -42,8 +42,17 @@
                         <br>
 
                         <div class="inline">
-                            <input style="vertical-align: middle;" type="submit" @click.prevent="createTodo" name="add_todo" class="button button-primary" :value="i18n.add_todo">
-                            <input style="vertical-align: middle;" type="submit" @click.prevent="hideTodoForm" class="button button-default" :value="i18n.cancel">
+                            <button class="button button-primary"
+                                    @click.prevent="createTodo"
+                                    :disabled="creatingTodo" 
+                            >
+                                <i v-if="creatingTodo" class="fa fa-refresh fa-spin mr-5"></i>
+                                {{ i18n.add_todo }}
+                            </button>
+                            <button class="button button-default"
+                                @click.prevent="hideTodoForm">
+                                {{ i18n.cancel }}
+                            </button>
                         </div>
                 </div>
             </div>
@@ -76,6 +85,7 @@
                 todoDueDate: '',
                 attachments: [],
                 attachmentIDs: [],
+                creatingTodo: false,
             }
         },
 
@@ -127,12 +137,15 @@
                         due_date: vm.todoDueDate
                     };
 
+
                 if ( !vm.todoName ) {
                     return;
                 }
+                vm.creatingTodo = true;
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.creatingTodo = false;
                         todo = resp.data.todo;
                         todo.todo = vm.todoName;
                         todo.is_complete = '0';

@@ -34,6 +34,8 @@
         padding: 15px 25px;
         border: 1px solid #e5e5e5;
         box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        overflow: hidden;
+        position: relative;
         /*border-radius: 5px;*/
     }
     .inline-block {

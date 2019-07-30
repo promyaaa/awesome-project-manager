@@ -24593,6 +24593,10 @@ var Message = __webpack_require__(229);
 var NewMessage = __webpack_require__(234);
 var EditMessage = __webpack_require__(239);
 
+var Folders = __webpack_require__(254);
+var Folder = __webpack_require__(259);
+var SingleFile = __webpack_require__(264);
+
 var MyAssignments = __webpack_require__(244);
 var MyActivity = __webpack_require__(249);
 
@@ -24600,7 +24604,7 @@ var routes = [{ path: '/', component: Home }, { path: '/my/assignments', compone
 
 // { path: '/projects/:projectid/activities', component: Activities },
 
-{ path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/status', component: ProjectStatus }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '*', redirect: '/' }];
+{ path: '/projects/:projectid/edit', component: EditProject }, { path: '/projects/:projectid/status', component: ProjectStatus }, { path: '/projects/:projectid/todolists', component: TodoLists }, { path: '/projects/:projectid/todolists/:listid', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos', component: TodoList }, { path: '/projects/:projectid/todolists/:listid/todos/:todoid', component: Todo }, { path: '/projects/:projectid/users', component: Users }, { path: '/projects/:projectid/messages', component: Messages }, { path: '/projects/:projectid/messages/new', component: NewMessage }, { path: '/projects/:projectid/messages/:messageid', component: Message }, { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage }, { path: '/projects/:projectid/folders', component: Folders }, { path: '/projects/:projectid/folders/:folderid', component: Folder }, { path: '/projects/:projectid/folders/:folderid/files', component: Folder }, { path: '/projects/:projectid/folders/:folderid/files/:fileid', component: SingleFile }, { path: '*', redirect: '/' }];
 
 exports.default = new _vueRouter2.default({
     // mode: 'history',
@@ -27253,8 +27257,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             <div class="lists border-for-nav">
 //                 <div class="row ">
 //                     <div class="col-12">
-//                         <div class="loading" v-if="loading">
-//                             <p>{{ i18n.loading }}</p>
+//                         <div class="text-center" v-if="loading">
+//                             <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
 //                         </div>
 //                         <div v-if="todoObject && !loading" class="single-todo">
 //                             <div>
@@ -27805,20 +27809,99 @@ var _stringify = __webpack_require__(7);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
+var _store = __webpack_require__(3);
+
+var _store2 = _interopRequireDefault(_store);
+
 var _vue2Editor = __webpack_require__(39);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// <template>
+//     <div class="comment-content">
+//         <h3 class="decorated"><span>{{ i18n.comment_label }}</span></h3>
+//
+//         <div v-for="(commentObject, cindex) in comments" class="comment-item">
+//             <div v-if="editindex !== cindex" class="comment">
+//                 <div class="comment-avatar">
+//                     <img :src="commentObject.avatar_url" alt="">
+//                 </div>
+//                 <div class="comment-data">
+//                     <div v-html="commentObject.comment" class="comment-body"></div>
+//                     <div class="commented-by">
+//                         -- {{ i18n.comment_by}} {{commentObject.user_name}}
+//                     </div>
+//                     <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
+//                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
+//                             <!-- <a>{{i18n.edit}}</a> | -->
+//                             <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
+//                         </span>
+//                         <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
+//                             <!-- <a>{{ i18n.delete }}</a> -->
+//                             <a><i class="fa fa-trash" aria-hidden="true"></i></a>
+//                         </span>
+//                     </div>
+//                 </div>
+//             </div>
+//
+//             <!-- edit section -->
+//             <div v-if="editindex === cindex" class="comment-form">
+//                 <div class="current-user-avatar">
+//                     <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
+//                 </div>
+//                 <div class="add_form_style">
+//                     <vue-editor id="edit-comment" v-model="commentEditText" :editorToolbar="customToolbar"></vue-editor>
+//                     <br>
+//                     <button class="button button-primary"
+//                         @click.prevent="updateComment(commentObject)"
+//                         :disabled="updatingComment"
+//                         >
+//                         <i v-if="updatingComment" class="fa fa-refresh fa-spin"></i>
+//                         {{ i18n.update }}
+//                     </button>
+//                     <button class="button button-default" @click="cancelCommentEdit(cindex)">{{ i18n.cancel }}</button>
+//                 </div>
+//             </div>
+//         </div>
+//
+//         <div style="margin-top: 15px;" class="comment-form">
+//             <div class="current-user-avatar">
+//                 <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
+//             </div>
+//             <div class="add_form_style">
+//                 <vue-editor id="add-comment" v-model="comment" :editorToolbar="customToolbar"></vue-editor>
+//                 <br>
+//
+//                 <div class="action">
+//                     <button class="button button-primary"
+//                         @click.prevent="addComment()"
+//                         :disabled="commenting"
+//                         >
+//                         <i v-if="commenting" class="fa fa-refresh fa-spin"></i>
+//                         {{ i18n.add_comment }}
+//                     </button>
+//                 </div>
+//             </div>
+//             <div class="pm-clearfix"></div>
+//         </div>
+//
+//     </div>
+// </template>
+//
+// <script>
 exports.default = {
-    props: ['comments', 'type', 'i18n'],
+    props: ['comments', 'type'],
     components: {
         VueEditor: _vue2Editor.VueEditor
     },
     data: function data() {
         return {
+            i18n: {},
             currentUserInfo: {},
             cloneObject: '',
             loading: false,
+            commenting: false,
+            updatingComment: false,
             comment: '',
             commentEditText: '',
             editindex: -1,
@@ -27834,6 +27917,7 @@ exports.default = {
             if (!vm.comment.trim()) {
                 return;
             }
+
             data = {
                 action: 'fpm-insert-comment',
                 nonce: fpm.nonce,
@@ -27850,9 +27934,11 @@ exports.default = {
             } else if (vm.type === 'message') {
                 data.commentable_id = vm.$route.params.messageid;
             }
+            vm.commenting = true;
 
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.commenting = false;
                     vm.comments.push({
                         comment: vm.comment,
                         user_name: vm.currentUserInfo.data.display_name,
@@ -27862,7 +27948,7 @@ exports.default = {
                     });
                     vm.comment = '';
                 } else {
-                    vm.message = resp.data;
+                    vm.commenting = false;
                 }
             });
         },
@@ -27909,15 +27995,18 @@ exports.default = {
                 data.commentable_id = vm.$route.params.messageid;
             }
 
+            vm.updatingComment = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
 
                 if (resp.success) {
+                    vm.updatingComment = false;
                     commentObj.comment = vm.commentEditText;
                     vm.commentEditText = '';
                     // vm.attachments = [];
                     vm.editindex = -1;
                 } else {
-                    vm.message = resp.data;
+                    vm.updatingComment = false;
                 }
             });
         },
@@ -27944,72 +28033,17 @@ exports.default = {
     },
 
     created: function created() {
+        var vm = this;
         this.currentUserInfo = fpm.currentUserInfo;
+
+        _store2.default.setLocalization('fpm-get-comments-local-data').then(function (data) {
+            console.log(data);
+            vm.i18n = data;
+        });
     }
 };
 // </script>
-// <template>
-//     <div class="comment-content">
-//         <h3 class="decorated"><span>{{ i18n.comment_label }}</span></h3>
 //
-//         <div v-for="(commentObject, cindex) in comments" class="comment-item">
-//             <div v-if="editindex !== cindex" class="comment">
-//                 <div class="comment-avatar">
-//                     <img :src="commentObject.avatar_url" alt="">
-//                 </div>
-//                 <div class="comment-data">
-//                     <div v-html="commentObject.comment" class="comment-body"></div>
-//                     <div class="commented-by">
-//                         -- {{ i18n.comment_by}} {{commentObject.user_name}}
-//                     </div>
-//                     <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
-//                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
-//                             <!-- <a>{{i18n.edit}}</a> | -->
-//                             <a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
-//                         </span>
-//                         <span style="cursor: pointer;" @click="deleteComment(commentObject, cindex)">
-//                             <!-- <a>{{ i18n.delete }}</a> -->
-//                             <a><i class="fa fa-trash" aria-hidden="true"></i></a>
-//                         </span>
-//                     </div>
-//                 </div>
-//             </div>
-//
-//             <!-- edit section -->
-//             <div v-if="editindex === cindex" class="comment-form">
-//                 <div class="current-user-avatar">
-//                     <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
-//                 </div>
-//                 <div class="add_form_style">
-//                     <vue-editor id="edit-comment" v-model="commentEditText" :editorToolbar="customToolbar"></vue-editor>
-//                     <br>
-//                     <button class="button button-primary"
-//                         @click.prevent="updateComment(commentObject)"
-//                         >{{ i18n.update }}</button>
-//                     <button class="button button-default" @click="cancelCommentEdit(cindex)">{{ i18n.cancel }}</button>
-//                 </div>
-//             </div>
-//         </div>
-//
-//         <div style="margin-top: 15px;" class="comment-form">
-//             <div class="current-user-avatar">
-//                 <img :src="currentUserInfo.data.avatar_url" :alt="currentUserInfo.data.display_name" width="50px" height="50px">
-//             </div>
-//             <div class="add_form_style">
-//                 <vue-editor id="add-comment" v-model="comment" :editorToolbar="customToolbar"></vue-editor>
-//                 <br>
-//
-//                 <div class="action">
-//                     <button class="button button-primary"
-//                         @click.prevent="addComment()"
-//                         >{{ i18n.add_comment }}</button>
-//                 </div>
-//             </div>
-//             <div class="pm-clearfix"></div>
-//         </div>
-//
-//     </div>
-// </template>
 // <style>
 //     .comment-action .fa {
 //         color: #b5b5b5;
@@ -28086,7 +28120,6 @@ exports.default = {
 //         font-size: 14px;
 //     }
 // </style>
-// <script>
 
 /***/ }),
 /* 128 */
@@ -30148,7 +30181,7 @@ module.exports = Array.isArray || function (arr) {
 /* 132 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"comment-content\">\r\n        <h3 class=\"decorated\"><span>{{ i18n.comment_label }}</span></h3>\r\n\r\n        <div v-for=\"(commentObject, cindex) in comments\" class=\"comment-item\">\r\n            <div v-if=\"editindex !== cindex\" class=\"comment\">\r\n                <div class=\"comment-avatar\">\r\n                    <img :src=\"commentObject.avatar_url\" alt=\"\">\r\n                </div>\r\n                <div class=\"comment-data\">\r\n                    <div v-html=\"commentObject.comment\" class=\"comment-body\"></div>\r\n                    <div class=\"commented-by\">\r\n                        -- {{ i18n.comment_by}} {{commentObject.user_name}}\r\n                    </div>\r\n                    <div class=\"comment-action\" v-if=\"currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID\">\r\n                        <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\r\n                            <!-- <a>{{i18n.edit}}</a> | -->\r\n                            <a><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a> |\r\n                        </span>\r\n                        <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\r\n                            <!-- <a>{{ i18n.delete }}</a> -->\r\n                            <a><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- edit section -->\r\n            <div v-if=\"editindex === cindex\" class=\"comment-form\">\r\n                <div class=\"current-user-avatar\">\r\n                    <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\r\n                </div>\r\n                <div class=\"add_form_style\">\r\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                    <br>\r\n                    <button class=\"button button-primary\"\r\n                        @click.prevent=\"updateComment(commentObject)\"\r\n                        >{{ i18n.update }}</button>\r\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">{{ i18n.cancel }}</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div style=\"margin-top: 15px;\" class=\"comment-form\">\r\n            <div class=\"current-user-avatar\">\r\n                <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\r\n            </div>\r\n            <div class=\"add_form_style\">\r\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                <br>\r\n\r\n                <div class=\"action\">\r\n                    <button class=\"button button-primary\"\r\n                        @click.prevent=\"addComment()\"\r\n                        >{{ i18n.add_comment }}</button>\r\n                </div>\r\n            </div>\r\n            <div class=\"pm-clearfix\"></div>\r\n        </div>\r\n\r\n    </div>\r\n";
+module.exports = "\r\n    <div class=\"comment-content\">\r\n        <h3 class=\"decorated\"><span>{{ i18n.comment_label }}</span></h3>\r\n\r\n        <div v-for=\"(commentObject, cindex) in comments\" class=\"comment-item\">\r\n            <div v-if=\"editindex !== cindex\" class=\"comment\">\r\n                <div class=\"comment-avatar\">\r\n                    <img :src=\"commentObject.avatar_url\" alt=\"\">\r\n                </div>\r\n                <div class=\"comment-data\">\r\n                    <div v-html=\"commentObject.comment\" class=\"comment-body\"></div>\r\n                    <div class=\"commented-by\">\r\n                        -- {{ i18n.comment_by}} {{commentObject.user_name}}\r\n                    </div>\r\n                    <div class=\"comment-action\" v-if=\"currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID\">\r\n                        <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\r\n                            <!-- <a>{{i18n.edit}}</a> | -->\r\n                            <a><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a> |\r\n                        </span>\r\n                        <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\r\n                            <!-- <a>{{ i18n.delete }}</a> -->\r\n                            <a><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- edit section -->\r\n            <div v-if=\"editindex === cindex\" class=\"comment-form\">\r\n                <div class=\"current-user-avatar\">\r\n                    <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\r\n                </div>\r\n                <div class=\"add_form_style\">\r\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                    <br>\r\n                    <button class=\"button button-primary\"\r\n                        @click.prevent=\"updateComment(commentObject)\"\r\n                        :disabled=\"updatingComment\"\r\n                        >\r\n                        <i v-if=\"updatingComment\" class=\"fa fa-refresh fa-spin\"></i>\r\n                        {{ i18n.update }}\r\n                    </button>\r\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">{{ i18n.cancel }}</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div style=\"margin-top: 15px;\" class=\"comment-form\">\r\n            <div class=\"current-user-avatar\">\r\n                <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\r\n            </div>\r\n            <div class=\"add_form_style\">\r\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                <br>\r\n\r\n                <div class=\"action\">\r\n                    <button class=\"button button-primary\"\r\n                        @click.prevent=\"addComment()\"\r\n                        :disabled=\"commenting\"\r\n                        >\r\n                        <i v-if=\"commenting\" class=\"fa fa-refresh fa-spin\"></i>\r\n                        {{ i18n.add_comment }}\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"pm-clearfix\"></div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
 /* 133 */
@@ -30233,40 +30266,63 @@ Object.defineProperty(exports, "__esModule", {
 //                 </div>
 //             </div>
 //             <div v-if="isTextFile">
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
 //             </div>
 //             <div v-if="isPdfFile" >
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
 //             </div>
 //             <div v-if="isJavascriptFile">
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
 //             </div>
 //             <div v-if="isCompressedFile">
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
 //             </div>
 //             <div v-if="isDocumentFile">
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
 //             </div>
 //             <div v-if="isPresentationFile" >
-//                 <img :src="file.icon" width="68" height="90" class="common-file-style">
+//                 <img :src="file.icon"  class="common-file-style">
 //                 <div class="file-action">
 //                     {{file.title}}.{{file.extension}} - <a :href="file.url" download>Download</a>
 //                 </div>
+//             </div>
+//         </div>
+//         <div class="text-center" v-if="isFolderView">
+//             <div v-if="isImageFile">
+//                 <img :src="file.url" alt="" class="image-resize common-file-style">
+//             </div>
+//             <div v-if="isTextFile">
+//                 <img :src="file.icon" class="common-file-style">
+//             </div>
+//             <div v-if="isPdfFile" >
+//                 <img :src="file.icon" class="common-file-style">
+//             </div>
+//             <div v-if="isJavascriptFile">
+//                 <img :src="file.icon" class="common-file-style">
+//             </div>
+//             <div v-if="isCompressedFile">
+//                 <img :src="file.icon" class="common-file-style">
+//             </div>
+//             <div v-if="isDocumentFile">
+//                 <img :src="file.icon" class="common-file-style">
+//             </div>
+//             <div v-if="isPresentationFile">
+//                 <img :src="file.icon" class="common-file-style">
 //             </div>
 //         </div>
 //     </div>
@@ -30300,6 +30356,9 @@ exports.default = {
         },
         isNormalView: function isNormalView() {
             return this.type === 'normal';
+        },
+        isFolderView: function isFolderView() {
+            return this.type === 'folder';
         },
         isImageFile: function isImageFile() {
             var mime = this.file.mime;
@@ -30387,7 +30446,7 @@ exports.default = {
 /* 136 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div v-if =\"isSmallView\">\r\n            <div v-if=\"isImageFile\">\r\n                <img :src=\"file.url\" width=\"90\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isTextFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isPdfFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isJavascriptFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isCompressedFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isDocumentFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isPresentationFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n        </div>\r\n        <div v-if=\"isNormalView\" class=\"text-center\">\r\n            <div v-if=\"isImageFile\">\r\n                <img :src=\"file.url\" alt=\"\" class=\"image-resize common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" target=\"_blank\">View full-size</a> - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isTextFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isPdfFile\" >\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isJavascriptFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isCompressedFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isDocumentFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isPresentationFile\" >\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div v-if =\"isSmallView\">\r\n            <div v-if=\"isImageFile\">\r\n                <img :src=\"file.url\" width=\"90\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isTextFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isPdfFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isJavascriptFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isCompressedFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isDocumentFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n            <div v-if=\"isPresentationFile\">\r\n                <img :src=\"file.icon\" width=\"68\" height=\"90\" class=\"display-small-image\">\r\n            </div>\r\n        </div>\r\n        <div v-if=\"isNormalView\" class=\"text-center\">\r\n            <div v-if=\"isImageFile\">\r\n                <img :src=\"file.url\" alt=\"\" class=\"image-resize common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" target=\"_blank\">View full-size</a> - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isTextFile\">\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isPdfFile\" >\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isJavascriptFile\">\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isCompressedFile\">\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isDocumentFile\">\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n            <div v-if=\"isPresentationFile\" >\r\n                <img :src=\"file.icon\"  class=\"common-file-style\">\r\n                <div class=\"file-action\">\r\n                    {{file.title}}.{{file.extension}} - <a :href=\"file.url\" download>Download</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"text-center\" v-if=\"isFolderView\">\r\n            <div v-if=\"isImageFile\">\r\n                <img :src=\"file.url\" alt=\"\" class=\"image-resize common-file-style\">\r\n            </div>\r\n            <div v-if=\"isTextFile\">\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n            <div v-if=\"isPdfFile\" >\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n            <div v-if=\"isJavascriptFile\">\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n            <div v-if=\"isCompressedFile\">\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n            <div v-if=\"isDocumentFile\">\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n            <div v-if=\"isPresentationFile\">\r\n                <img :src=\"file.icon\" class=\"common-file-style\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 137 */
@@ -30741,7 +30800,7 @@ module.exports = "\r\n    <div v-if=\"!isClient\">\r\n        <div class=\"proje
 /* 145 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.todos }}\r\n                </router-link>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid\" class=\"link-style t-d-none\">\r\n                    {{list.list_title | truncate('15')}}\r\n                </router-link>\r\n            </project-nav>\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.todos }}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{list.list_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row \">\r\n                    <div class=\"col-12\">\r\n                        <div class=\"loading\" v-if=\"loading\">\r\n                            <p>{{ i18n.loading }}</p>\r\n                        </div>\r\n                        <div v-if=\"todoObject && !loading\" class=\"single-todo\">\r\n                            <div>\r\n                                <div v-if=\"isShowEdit && !editTodo\">\r\n                                    <button class=\"button button-default\"\r\n                                            @click=\"showTodoEdit(todoObject)\">{{ i18n.edit }}</button>\r\n                                    <span style=\"float:right\" @click=\"deleteTodo(todoObject)\">\r\n                                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                            <br>\r\n                            <div v-if=\"!editTodo\" class=\"todo-details-div\">\r\n                                <div>\r\n                                    <h1>\r\n                                        <input type=\"checkbox\"\r\n                                        @click=\"toggleCheckbox(todoObject)\"\r\n                                        v-model=\"todoObject.is_complete\"\r\n                                        v-bind:true-value=\"1\"\r\n                                        v-bind:false-value=\"0\">\r\n                                        <span :class=\"{ completed: is_complete }\">{{todoObject.todo}}</span>\r\n                                    </h1>\r\n                                </div>\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.assign_to_label }}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <div>\r\n                                            <img :src=\"todoObject.avatar_url\"\r\n                                                alt=\"\"\r\n                                                class=\"small-round-image\"\r\n                                                style=\"margin-right: 7px; margin-bottom: -3px;\">\r\n                                                {{todoObject.assignee_name}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right todo-info-title\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.due_date_label}}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <span v-if=\"todoObject.formatted_due_date\"\r\n                                                v-bind:class=\"[is_overdue ? 'overdue' : 'due']\">\r\n                                                <i>{{todoObject.formatted_due_date}}</i>\r\n                                        </span>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right todo-info-title\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.attachment_label }}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <div v-if=\"todoObject.files.length > 0\">\r\n                                            <div v-for=\"file in todoObject.files\">\r\n                                                <files-type-display :file=\"file\" type=\"normal\"></files-type-display>\r\n                                                <!-- <img :src=\"file.url\" alt=\"\" class=\"image-resize\"> -->\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <br>\r\n\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-12\">\r\n                                        <i>{{ i18n.added_by }} <strong>{{todoObject.user_name}}</strong> {{ i18n.on }} {{todoObject.formatted_created}}</i>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"add_form_style\" v-if=\"editTodo\">\r\n                                <div class=\"todo_name inline\">\r\n                                    <input type=\"text\"\r\n                                        v-model=\"todoName\"\r\n                                        class=\"form-control\"\r\n                                        :placeholder=\"i18n.add_todo_placeholder\"\r\n                                        v-focus\r\n                                        required \r\n                                        @keyup.esc=\"hideTodoForm\">\r\n                                </div>\r\n                                <div>\r\n                                    <select v-model=\"selected\" class=\"form-control\">\r\n                                        <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                                        <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                        {{ option.display_name }}\r\n                                        </option>\r\n                                    </select>\r\n                                </div>\r\n                                <date-picker id=\"update-duedate\" v-model=\"updateDueDate\"></date-picker>\r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateEditAttachments\"\r\n                                    v-on:remove=\"removeEditAttachment\"\r\n                                    :attachments=\"attachmentsToEdit\"></file-upload>\r\n                                <br>\r\n\r\n                                <div class=\"inline\">\r\n                                    <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"updateTodo\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.update\">\r\n                                    <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"cancelTodoEdit\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                        <comments :i18n=\"i18n\" :comments=\"todoObject.comments\" type=\"todo\"></comments>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.todos }}\r\n                </router-link>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid\" class=\"link-style t-d-none\">\r\n                    {{list.list_title | truncate('15')}}\r\n                </router-link>\r\n            </project-nav>\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.todos }}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + $route.params.listid\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{list.list_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row \">\r\n                    <div class=\"col-12\">\r\n                        <div class=\"text-center\" v-if=\"loading\">\r\n                            <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        </div>\r\n                        <div v-if=\"todoObject && !loading\" class=\"single-todo\">\r\n                            <div>\r\n                                <div v-if=\"isShowEdit && !editTodo\">\r\n                                    <button class=\"button button-default\"\r\n                                            @click=\"showTodoEdit(todoObject)\">{{ i18n.edit }}</button>\r\n                                    <span style=\"float:right\" @click=\"deleteTodo(todoObject)\">\r\n                                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                            <br>\r\n                            <div v-if=\"!editTodo\" class=\"todo-details-div\">\r\n                                <div>\r\n                                    <h1>\r\n                                        <input type=\"checkbox\"\r\n                                        @click=\"toggleCheckbox(todoObject)\"\r\n                                        v-model=\"todoObject.is_complete\"\r\n                                        v-bind:true-value=\"1\"\r\n                                        v-bind:false-value=\"0\">\r\n                                        <span :class=\"{ completed: is_complete }\">{{todoObject.todo}}</span>\r\n                                    </h1>\r\n                                </div>\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.assign_to_label }}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <div>\r\n                                            <img :src=\"todoObject.avatar_url\"\r\n                                                alt=\"\"\r\n                                                class=\"small-round-image\"\r\n                                                style=\"margin-right: 7px; margin-bottom: -3px;\">\r\n                                                {{todoObject.assignee_name}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right todo-info-title\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.due_date_label}}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <span v-if=\"todoObject.formatted_due_date\"\r\n                                                v-bind:class=\"[is_overdue ? 'overdue' : 'due']\">\r\n                                                <i>{{todoObject.formatted_due_date}}</i>\r\n                                        </span>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"row todo-info\">\r\n                                    <div class=\"col-3 text-right todo-info-title\">\r\n                                        <strong style=\"padding-right: 15%\">{{ i18n.attachment_label }}</strong>\r\n                                    </div>\r\n                                    <div class=\"col-9\">\r\n                                        <div v-if=\"todoObject.files.length > 0\">\r\n                                            <div v-for=\"file in todoObject.files\">\r\n                                                <files-type-display :file=\"file\" type=\"normal\"></files-type-display>\r\n                                                <!-- <img :src=\"file.url\" alt=\"\" class=\"image-resize\"> -->\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <br>\r\n\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-12\">\r\n                                        <i>{{ i18n.added_by }} <strong>{{todoObject.user_name}}</strong> {{ i18n.on }} {{todoObject.formatted_created}}</i>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"add_form_style\" v-if=\"editTodo\">\r\n                                <div class=\"todo_name inline\">\r\n                                    <input type=\"text\"\r\n                                        v-model=\"todoName\"\r\n                                        class=\"form-control\"\r\n                                        :placeholder=\"i18n.add_todo_placeholder\"\r\n                                        v-focus\r\n                                        required \r\n                                        @keyup.esc=\"hideTodoForm\">\r\n                                </div>\r\n                                <div>\r\n                                    <select v-model=\"selected\" class=\"form-control\">\r\n                                        <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                                        <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                        {{ option.display_name }}\r\n                                        </option>\r\n                                    </select>\r\n                                </div>\r\n                                <date-picker id=\"update-duedate\" v-model=\"updateDueDate\"></date-picker>\r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateEditAttachments\"\r\n                                    v-on:remove=\"removeEditAttachment\"\r\n                                    :attachments=\"attachmentsToEdit\"></file-upload>\r\n                                <br>\r\n\r\n                                <div class=\"inline\">\r\n                                    <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"updateTodo\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.update\">\r\n                                    <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"cancelTodoEdit\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-12\">\r\n                        <comments :i18n=\"i18n\" :comments=\"todoObject.comments\" type=\"todo\"></comments>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 146 */
@@ -31220,7 +31279,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px;*/\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        border-radius: 5px;\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px;*/\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        border-radius: 5px;\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n    li.folder-list {\r\n        display: inline-block;\r\n        border: 1px solid #eee;\r\n        padding: 5px;\r\n        margin: 5px;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -31265,6 +31324,7 @@ exports.default = {
             listSummary: [],
             messages: [],
             users: [],
+            folders: [],
             project: ''
         };
     },
@@ -31301,6 +31361,24 @@ exports.default = {
                 vm.loading = false;
                 if (resp.success) {
                     vm.listSummary = resp.data;
+                }
+            });
+        },
+        fetchFolderSummary: function fetchFolderSummary() {
+            var vm = this,
+                data;
+            // vm.loading = true;
+
+            data = {
+                action: 'fpm-get-folders',
+                project_id: vm.$route.params.projectid,
+                nonce: fpm.nonce,
+                limit: 4
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    vm.folders = resp.data;
                 }
             });
         },
@@ -31359,6 +31437,7 @@ exports.default = {
         vm.loading = true;
         vm.fetchProject();
         vm.fetchTodoSummary();
+        vm.fetchFolderSummary();
         vm.fetchMessageSummary();
         vm.currentUser = fpm.currentUserInfo;
 
@@ -31509,10 +31588,16 @@ exports.default = {
 //         border-radius: 45px;
 //         margin-right: 5px;
 //     }
+//     li.folder-list {
+//         display: inline-block;
+//         border: 1px solid #eee;
+//         padding: 5px;
+//         margin: 5px;
+//     }
 // </style>
 // <template>
 //     <div>
-//         <div class="container summary-section">
+//         <div class="container lists">
 //             <div class="row">
 //                 <div class="col-12">
 //                     <div class="text-center project-info">
@@ -31639,6 +31724,42 @@ exports.default = {
 //                     </div>
 //                 </div>
 //             </div>
+//             <div class="row">
+//                 <div class="col-1"></div>
+//                 <div class="col-5">
+//                     <div class="summary-card">
+//                         <router-link :to="'/projects/' + $route.params.projectid + '/folders'" tag="h3" class="link-style">
+//                             <a>{{i18n.docs_and_files}}</a>
+//                         </router-link>
+//                         <hr>
+//                         <div style="row text-center">
+//                             <div class="col-12">
+//                                 <ul class="folders">
+//                                     <li class="folder-list" v-for="folder in folders">
+//                                         <div class="summary-doc-title">
+//                                             <strong>{{folder.folder_title | truncate('8')}}</strong>
+//                                         </div>
+//                                         <div>
+//                                             <i class="fa fa-folder-open" style="color: #267cb5"></i>
+//                                         </div>
+//                                         <div style="margin-top:5px;font-size:12px">
+//                                             by {{folder.user_name}}
+//                                         </div>
+//                                     </li>
+//                                 </ul>
+//                             </div>
+//                         </div>
+//                         <div v-if="folders.length < 1">
+//                             <div style="margin-top:12%">
+//                                 <span class="summary-icon">
+//                                     <i class="fa fa-folder fa-3x"></i>
+//                                 </span>
+//                             </div>
+//                         </div>
+//                         <span class="preview-fade"></span>
+//                     </div>
+//                 </div>
+//             </div>
 //             <!-- <activities :i18n="i18n"></activities> -->
 //         </div>
 //     </div>
@@ -31704,7 +31825,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    li.action-item {\r\n        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);\r\n        padding: 5px;\r\n        transition: background-color 0.2s;\r\n        color: #fff;\r\n        cursor: pointer;\r\n    }\r\n    /*li.action-item a {\r\n        color: #fff;\r\n        cursor: pointer;\r\n        text-decoration: none;\r\n    }*/\r\n    li.action-item i {\r\n        padding-right: 5px;\r\n    }\r\n    li.action-item:hover {\r\n        background-color: rgba(0,0,0,0.25);\r\n    }\r\n    .action-close {\r\n        float: right;\r\n        margin-top: 10px;\r\n        margin-right: 10px;\r\n        padding:5px 9px;\r\n        border: 1px solid #fff;\r\n        border-radius: 40px;\r\n        display: block;\r\n        cursor: pointer;\r\n    }\r\n    .action-icon {\r\n        position:absolute;\r\n        top: 10px;\r\n        right: 10px;\r\n        padding:5px 9px;\r\n        border:1px solid #eee;\r\n        border-radius:40px;\r\n        cursor: pointer;\r\n    }\r\n    .div-to-slide {\r\n        position: absolute;\r\n        top: 0px;\r\n        right: 0px;\r\n        background: #0073AA;\r\n        overflow: hidden;\r\n        color: #fff;\r\n        width: 30%;\r\n        z-index: 999;\r\n    }\r\n    .hide-action-div {\r\n        /*display: block;*/\r\n        color:#fff;\r\n        text-align: right;\r\n        /*width:100%*/\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    li.action-item {\r\n        border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);\r\n        padding: 5px;\r\n        transition: background-color 0.2s;\r\n        color: #fff;\r\n        cursor: pointer;\r\n    }\r\n    /*li.action-item a {\r\n        color: #fff;\r\n        cursor: pointer;\r\n        text-decoration: none;\r\n    }*/\r\n    li.action-item i {\r\n        padding-right: 5px;\r\n    }\r\n    li.action-item:hover {\r\n        background-color: rgba(0,0,0,0.25);\r\n    }\r\n    .action-close {\r\n        float: right;\r\n        margin-top: 10px;\r\n        margin-right: 10px;\r\n        padding:5px 9px;\r\n        border: 1px solid #fff;\r\n        border-radius: 40px;\r\n        display: block;\r\n        cursor: pointer;\r\n    }\r\n    .action-icon {\r\n        position:absolute;\r\n        top: -5px;\r\n        right: -15px;\r\n        padding:5px 9px;\r\n        border:1px solid #eee;\r\n        border-radius:40px;\r\n        cursor: pointer;\r\n    }\r\n    .div-to-slide {\r\n        position: absolute;\r\n        top: -15px;\r\n        right: -25px;\r\n        background: #0073AA;\r\n        overflow: hidden;\r\n        color: #fff;\r\n        width: 30%;\r\n        z-index: 999;\r\n    }\r\n    .hide-action-div {\r\n        /*display: block;*/\r\n        color:#fff;\r\n        text-align: right;\r\n        /*width:100%*/\r\n    }\r\n", ""]);
 
 // exports
 
@@ -31762,9 +31883,9 @@ exports.default = {
     },
     created: function created() {
         var vm = this;
-        Event.$on('toggle-actions', function () {
-            vm.showAction();
-        });
+        // Event.$on('toggle-actions', function() {
+        //     vm.showAction();
+        // });
     }
 };
 // </script>
@@ -31800,8 +31921,8 @@ exports.default = {
 //     }
 //     .action-icon {
 //         position:absolute;
-//         top: 10px;
-//         right: 10px;
+//         top: -5px;
+//         right: -15px;
 //         padding:5px 9px;
 //         border:1px solid #eee;
 //         border-radius:40px;
@@ -31809,8 +31930,8 @@ exports.default = {
 //     }
 //     .div-to-slide {
 //         position: absolute;
-//         top: 0px;
-//         right: 0px;
+//         top: -15px;
+//         right: -25px;
 //         background: #0073AA;
 //         overflow: hidden;
 //         color: #fff;
@@ -32067,7 +32188,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .m-t-5 {\r\n        margin-top: 5px;\r\n    }\r\n    .checkbox-checked-style {\r\n        padding: 0px 2px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px*/\r\n    }\r\n    .activity-time {\r\n        font-style: italic;\r\n        margin-left: 5px;\r\n        color: #72777c;\r\n    }\r\n    .activity-info-block {\r\n        /*display: flex; */\r\n        padding-bottom: 15px; \r\n        padding-left: 10px;\r\n        text-align: left;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .m-t-5 {\r\n        margin-top: 5px;\r\n    }\r\n    .checkbox-checked-style {\r\n        padding: 0px 2px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n    }\r\n    .activity-time {\r\n        font-style: italic;\r\n        margin-left: 5px;\r\n        color: #72777c;\r\n    }\r\n    .activity-info-block {\r\n        padding-bottom: 15px;\r\n        padding-left: 10px;\r\n        text-align: left;\r\n        line-height: 1.5;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -32151,32 +32272,46 @@ Object.defineProperty(exports, "__esModule", {
 //             <i style="color: #D54E21">"{{activity.activity}}"</i>
 //             at {{ activity.formatted_time }}
 //         </div>
+//
+//         <div v-if="isCreateFolder" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> added a new <strong>Folder</strong> called
+//             <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity }}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
+//         </div>
+//
+//         <div v-if="isUpdateFolder" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> updated a <strong>Folder</strong> called
+//             <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity }}</a>
+//             </router-link>
+//             at {{ activity.formatted_time }}
+//         </div>
+//
+//         <div v-if="isDeleteFolder" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> deleted <strong>a Folder</strong> called
+//             <i style="color:#d54e21;">"{{activity.activity }}"</i>
+//             at {{ activity.formatted_time }}
+//         </div>
+//
+//         <div v-if="isAddFile" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> added a <strong>File</strong> to
+//
+//             <router-link :to="'/projects/' + activity.projectID + '/folders/' + activity.parentID + '/files/' + activity.activity_id" tag="span">
+//                 <a>{{activity.activity }}</a> folder
+//             </router-link>
+//             at {{ activity.formatted_time }}  
+//
+//         </div>
+//
+//         <div v-if="isDeleteFile" class="activity-info-block">
+//             <strong>{{activity.user_name}}</strong> deleted a <strong>File, </strong>
+//             <i style="color: #d54e21;">"{{activity.activity }}"</i> folder
+//             at {{ activity.formatted_time }}
+//         </div>
 //     </div>
 // </template>
-//
-// <style>
-//     .m-t-5 {
-//         margin-top: 5px;
-//     }
-//     .checkbox-checked-style {
-//         padding: 0px 2px;
-//         margin-right: 10px;
-//         margin-left: 10px;
-//         border: 1px solid #ccc;
-//         /*border-radius: 3px*/
-//     }
-//     .activity-time {
-//         font-style: italic;
-//         margin-left: 5px;
-//         color: #72777c;
-//     }
-//     .activity-info-block {
-//         /*display: flex; */
-//         padding-bottom: 15px; 
-//         padding-left: 10px;
-//         text-align: left;
-//     }
-// </style>
 //
 // <script>
 exports.default = {
@@ -32215,9 +32350,47 @@ exports.default = {
         },
         isDeleteMessage: function isDeleteMessage() {
             return this.activity.activity_type === 'delete_message';
+        },
+        isCreateFolder: function isCreateFolder() {
+            return this.activity.activity_type === 'create_folder';
+        },
+        isUpdateFolder: function isUpdateFolder() {
+            return this.activity.activity_type === 'update_folder';
+        },
+        isDeleteFolder: function isDeleteFolder() {
+            return this.activity.activity_type === 'delete_folder';
+        },
+        isAddFile: function isAddFile() {
+            return this.activity.activity_type === 'add_file';
+        },
+        isDeleteFile: function isDeleteFile() {
+            return this.activity.activity_type === 'delete_file';
         }
     }
     // </script>
+    //
+    // <style>
+    //     .m-t-5 {
+    //         margin-top: 5px;
+    //     }
+    //     .checkbox-checked-style {
+    //         padding: 0px 2px;
+    //         margin-right: 10px;
+    //         margin-left: 10px;
+    //         border: 1px solid #ccc;
+    //     }
+    //     .activity-time {
+    //         font-style: italic;
+    //         margin-left: 5px;
+    //         color: #72777c;
+    //     }
+    //     .activity-info-block {
+    //         padding-bottom: 15px;
+    //         padding-left: 10px;
+    //         text-align: left;
+    //         line-height: 1.5;
+    //     }
+    // </style>
 
 };
 
@@ -32225,7 +32398,7 @@ exports.default = {
 /* 166 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\" style=\"margin-right:15px; margin-top: 0px;\">\r\n\r\n        <div v-if=\"isCreateTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateTodo\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>\r\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isCheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> checked off a <strong class=\"ml-5\">Todo</strong>\r\n            <span class=\"checkbox-checked-style\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isUncheckTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> re-opened a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong>\r\n            <i style=\"color: #D54E21;\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isCreateMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called \r\n            <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateMessage\">\r\n            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called\r\n            <div class=\"m-t-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isDeleteMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called\r\n            <i style=\"color: #D54E21\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <img :src=\"activity.avatar_url\" alt=\"\" class=\"small-round-image activity-avatar\" style=\"margin-right:15px; margin-top: 0px;\">\r\n\r\n        <div v-if=\"isCreateTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> created a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateTodo\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Todo</strong> <br>\r\n            <div class=\"m-t-5\" style=\"cursor:pointer\">\r\n                <span class=\"checkbox-style\"></span>\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isCheckTodo\" class=\"activity-info-block\">\r\n            <strong class=\"mr-5\">{{activity.user_name}}</strong> checked off a <strong class=\"ml-5\">Todo</strong>\r\n            <span class=\"checkbox-checked-style\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isUncheckTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> re-opened a <strong>Todo</strong>\r\n            <span class=\"checkbox-style\"></span>\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/todolists/' + activity.parentID + '/todos/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteTodo\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Todo</strong>\r\n            <i style=\"color: #D54E21;\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isCreateMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> added a new <strong>Message</strong> called \r\n            <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity}}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <!-- <div v-if=\"isUpdateMessage\">\r\n            <strong>{{activity.user_name}}</strong> updated a new <strong>Message</strong> called\r\n            <div class=\"m-t-5\">\r\n                <router-link :to=\"'/projects/' + activity.projectID + '/messages/' + activity.activity_id\" tag=\"span\">\r\n                    <a>{{activity.activity | truncate('28')}}</a>\r\n                </router-link>  \r\n            </div>\r\n        </div> -->\r\n\r\n        <div v-if=\"isDeleteMessage\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>Message</strong> called\r\n            <i style=\"color: #D54E21\">\"{{activity.activity}}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isCreateFolder\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> added a new <strong>Folder</strong> called\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/folders/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity }}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isUpdateFolder\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> updated a <strong>Folder</strong> called\r\n            <router-link :to=\"'/projects/' + activity.projectID + '/folders/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity }}</a>\r\n            </router-link>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isDeleteFolder\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted <strong>a Folder</strong> called\r\n            <i style=\"color:#d54e21;\">\"{{activity.activity }}\"</i>\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n\r\n        <div v-if=\"isAddFile\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> added a <strong>File</strong> to\r\n            \r\n            <router-link :to=\"'/projects/' + activity.projectID + '/folders/' + activity.parentID + '/files/' + activity.activity_id\" tag=\"span\">\r\n                <a>{{activity.activity }}</a> folder\r\n            </router-link>\r\n            at {{ activity.formatted_time }}  \r\n            \r\n        </div>\r\n\r\n        <div v-if=\"isDeleteFile\" class=\"activity-info-block\">\r\n            <strong>{{activity.user_name}}</strong> deleted a <strong>File, </strong>\r\n            <i style=\"color: #d54e21;\">\"{{activity.activity }}\"</i> folder\r\n            at {{ activity.formatted_time }}\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 167 */
@@ -32237,7 +32410,7 @@ module.exports = "\r\n    <!-- <div class=\"container\"> -->\r\n        <div cla
 /* 168 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"container summary-section\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center project-info\">\r\n                        <h1><strong>{{project.project_title}}</strong></h1>\r\n                        <span>{{project.project_desc}}</span>\r\n\r\n                        <!-- <span class=\"dropdown project-settings show-edit\" v-if=\"isShowEdit\">\r\n                            <a data-target=\"#\" class=\"setting-icon dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" title=\"Settings\">\r\n                                <i class=\"fa fa-gear\" aria-hidden=\"true\" style=\"font-size:15px;\"></i>\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-edit p-r-10\" aria-hidden=\"true\"></i>{{ i18n.edit_info }}</a>\r\n                                </router-link>\r\n                                <li role=\"separator\" class=\"divider\"></li>\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-trash p-r-10\" aria-hidden=\"true\"></i>{{ i18n.delete }}</a>\r\n                                </router-link>\r\n                            </ul>\r\n                        </span> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 text-center\" v-if=\"loading\">\r\n                    <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                    <p>Loading. . .</p>\r\n                </div>\r\n                <div class=\"col-12\" v-if=\"!loading\">\r\n                    <div class=\"users-summary\">\r\n                        <div style=\"display: inline-block\">\r\n                        \r\n                            <img :src=\"user.avatar_url\" v-for=\"user in users\" alt=\"\" class=\"small-round-image\">\r\n                        </div>\r\n                        <div v-if=\"project.user_count > 10\" style=\"display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;\">\r\n                            <a>+{{project.user_count - 10}} {{ i18n.people }}</a>\r\n                        </div>\r\n\r\n                        <div style=\"margin-top: 15px;\">\r\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/users'\" class=\"link-style button button-default\">\r\n                                {{ i18n.add_remove_people }}\r\n                            </router-link>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <component-actions>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-edit\" aria-hidden=\"true\"></i>\r\n                        {{i18n.edit_info}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n                        {{i18n.delete}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/reports'\"\r\n                                    tag=\"li\" class=\"action-item\">\r\n                        <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\r\n                        {{i18n.activities}}\r\n                    </router-link>\r\n                </component-actions>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-1\"></div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.todos }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"\" class=\"text-left\">\r\n                            <div v-for=\"list in listSummary\">\r\n                                <h4>{{list.list_title}}</h4>\r\n                                <ul>\r\n                                    <li v-for=\"todo in list.todos\">\r\n                                        <span class=\"checkbox-style ellipsis-90\"></span>{{todo.todo}}\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"listSummary.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-check fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.message_board }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"position: absolute;margin-top:10px;\" class=\"text-left\">\r\n                            <div v-for=\"messageObj in messages\" class=\"messages\">\r\n                                <div class=\"message-list\">\r\n                                    <img class=\"inbox-user-img\" \r\n                                    :src=\"messageObj.avatar_url\" width=\"20\">\r\n                                    <span class=\"inline-block\">\r\n                                        {{messageObj.message_title | truncate('38')}}\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"messages.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <!-- <img :src=\"assetsDistPath+messageIcon\" width=\"80\" height=\"80\" alt=\"\"> -->\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-envelope fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <activities :i18n=\"i18n\"></activities> -->\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"container lists\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center project-info\">\r\n                        <h1><strong>{{project.project_title}}</strong></h1>\r\n                        <span>{{project.project_desc}}</span>\r\n\r\n                        <!-- <span class=\"dropdown project-settings show-edit\" v-if=\"isShowEdit\">\r\n                            <a data-target=\"#\" class=\"setting-icon dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" title=\"Settings\">\r\n                                <i class=\"fa fa-gear\" aria-hidden=\"true\" style=\"font-size:15px;\"></i>\r\n                            </a>\r\n                            <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-edit p-r-10\" aria-hidden=\"true\"></i>{{ i18n.edit_info }}</a>\r\n                                </router-link>\r\n                                <li role=\"separator\" class=\"divider\"></li>\r\n                                <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    class=\"link-style\"\r\n                                    tag=\"li\">\r\n                                    <a><i class=\"fa fa-trash p-r-10\" aria-hidden=\"true\"></i>{{ i18n.delete }}</a>\r\n                                </router-link>\r\n                            </ul>\r\n                        </span> -->\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 text-center\" v-if=\"loading\">\r\n                    <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                    <p>Loading. . .</p>\r\n                </div>\r\n                <div class=\"col-12\" v-if=\"!loading\">\r\n                    <div class=\"users-summary\">\r\n                        <div style=\"display: inline-block\">\r\n                        \r\n                            <img :src=\"user.avatar_url\" v-for=\"user in users\" alt=\"\" class=\"small-round-image\">\r\n                        </div>\r\n                        <div v-if=\"project.user_count > 10\" style=\"display: inline-block;position: absolute;padding-top: 15px;padding-left:5px;\">\r\n                            <a>+{{project.user_count - 10}} {{ i18n.people }}</a>\r\n                        </div>\r\n\r\n                        <div style=\"margin-top: 15px;\">\r\n                            <router-link :to=\"'/projects/' + $route.params.projectid + '/users'\" class=\"link-style button button-default\">\r\n                                {{ i18n.add_remove_people }}\r\n                            </router-link>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <component-actions>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/edit'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-edit\" aria-hidden=\"true\"></i>\r\n                        {{i18n.edit_info}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/status'\"\r\n                                    tag=\"li\" class=\"action-item\" \r\n                                    v-if=\"isShowEdit\">\r\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\r\n                        {{i18n.delete}}\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/reports'\"\r\n                                    tag=\"li\" class=\"action-item\">\r\n                        <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\r\n                        {{i18n.activities}}\r\n                    </router-link>\r\n                </component-actions>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-1\"></div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.todos }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"\" class=\"text-left\">\r\n                            <div v-for=\"list in listSummary\">\r\n                                <h4>{{list.list_title}}</h4>\r\n                                <ul>\r\n                                    <li v-for=\"todo in list.todos\">\r\n                                        <span class=\"checkbox-style ellipsis-90\"></span>{{todo.todo}}\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"listSummary.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-check fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{ i18n.message_board }}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"position: absolute;margin-top:10px;\" class=\"text-left\">\r\n                            <div v-for=\"messageObj in messages\" class=\"messages\">\r\n                                <div class=\"message-list\">\r\n                                    <img class=\"inbox-user-img\" \r\n                                    :src=\"messageObj.avatar_url\" width=\"20\">\r\n                                    <span class=\"inline-block\">\r\n                                        {{messageObj.message_title | truncate('38')}}\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"messages.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <!-- <img :src=\"assetsDistPath+messageIcon\" width=\"80\" height=\"80\" alt=\"\"> -->\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-envelope fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-1\"></div>\r\n                <div class=\"col-5\">\r\n                    <div class=\"summary-card\">\r\n                        <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" tag=\"h3\" class=\"link-style\">\r\n                            <a>{{i18n.docs_and_files}}</a>\r\n                        </router-link>\r\n                        <hr>\r\n                        <div style=\"row text-center\">\r\n                            <div class=\"col-12\">\r\n                                <ul class=\"folders\">\r\n                                    <li class=\"folder-list\" v-for=\"folder in folders\">\r\n                                        <div class=\"summary-doc-title\">\r\n                                            <strong>{{folder.folder_title | truncate('8')}}</strong>\r\n                                        </div>\r\n                                        <div>\r\n                                            <i class=\"fa fa-folder-open\" style=\"color: #267cb5\"></i>\r\n                                        </div>\r\n                                        <div style=\"margin-top:5px;font-size:12px\">\r\n                                            by {{folder.user_name}}\r\n                                        </div>\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div v-if=\"folders.length < 1\">\r\n                            <div style=\"margin-top:12%\">\r\n                                <span class=\"summary-icon\">\r\n                                    <i class=\"fa fa-folder fa-3x\"></i>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <span class=\"preview-fade\"></span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <activities :i18n=\"i18n\"></activities> -->\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 169 */
@@ -32793,7 +32966,8 @@ exports.default = {
             loading: false,
             currentUser: '',
             listCount: '',
-            project: ''
+            project: '',
+            creatingList: false
         };
     },
 
@@ -32881,8 +33055,11 @@ exports.default = {
                 user_name: vm.currentUser.data.display_name
             };
 
+            vm.creatingList = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.creatingList = false;
                     resp.data.listInfo.list_title = vm.listTitle;
                     resp.data.listInfo.todos = [];
                     vm.lists.unshift(resp.data.listInfo);
@@ -32946,7 +33123,11 @@ exports.default = {
 //                         <div class="action">
 //                             <button class="button button-primary"
 //                                     @click.prevent="createList"
-//                                     >{{ i18n.create_list }}</button>
+//                                     :disabled="creatingList" 
+//                                     >
+//                                 <i v-if="creatingList" class="fa fa-refresh fa-spin mr-5"></i>
+//                                 {{ i18n.create_list }}
+//                             </button>
 //                             <button class="button button-default" @click="toggleListForm">{{ i18n.cancel }}</button>
 //                         </div>
 //                     </div>
@@ -33095,7 +33276,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                             <div class="action">
 //                                 <button class="button button-primary"
 //                                         @click.prevent="updateList"
-//                                         >{{ i18n.update }}</button>
+//                                         :disabled="updatingList"
+//                                         >
+//                                         <i v-if="updatingList" class="fa fa-refresh fa-spin mr-5"></i>
+//                                         {{ i18n.update }}
+//                                 </button>
 //                                 <button class="button button-default" @click="cancelListEdit">{{ i18n.cancel }}</button>
 //                             </div>
 //                         </div>
@@ -33141,7 +33326,8 @@ exports.default = {
             isListEdit: false,
             listTitle: '',
             listCloneObj: '',
-            currentUser: ''
+            currentUser: '',
+            updatingList: false
         };
     },
 
@@ -33183,14 +33369,16 @@ exports.default = {
                 list_id: vm.$route.params.listid,
                 user_name: vm.currentUser.data.display_name
             };
-
+            vm.updatingList = true;
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.updatingList = false;
                     vm.list.list_title = vm.listTitle;
                     vm.listTitle = '';
                     vm.isListEdit = false;
                 } else {
-                    // vm.message = resp.data;
+                    vm.updatingList = false;
+                    // TODO: Show message "There is no change to update"
                 }
             });
         },
@@ -33383,10 +33571,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                     <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
 //
 //                     <div class="inline">
-//                         <input style="vertical-align: middle;" type="submit" @click.prevent="updateTodo(todo)" name="add_todo" class="button button-primary" :value="i18n.update">
-//                         <input style="vertical-align: middle;" type="submit" @click.prevent="cancelEdit" class="button button-default" :value="i18n.cancel">
+//                         <button class="button button-primary"
+//                                 @click.prevent="updateTodo(todo)"
+//                                 :disabled="updatingTodo" 
+//                             >
+//                             <i v-if="updatingTodo" class="fa fa-refresh fa-spin mr-5"></i>
+//                             {{ i18n.update }}
+//                         </button>
+//                         <button class="button button-default"
+//                             @click.prevent="cancelEdit">
+//                             {{ i18n.cancel }}
+//                         </button>
 //                     </div>
-//
 //                 </div>
 //             </div>
 //         </div>
@@ -33446,7 +33642,8 @@ exports.default = {
             currentUser: '',
             fileCount: 0,
             selected: '',
-            updateDueDate: ''
+            updateDueDate: '',
+            updatingTodo: false
         };
     },
 
@@ -33496,8 +33693,11 @@ exports.default = {
                 due_date: vm.updateDueDate ? vm.updateDueDate : ''
             };
 
+            vm.updatingTodo = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.updatingTodo = false;
                     todoObject.todo = vm.todoName;
                     todoObject.formatted_due_date = resp.data.todo.formatted_due_date;
                     todoObject.assigneeID = vm.selected.ID;
@@ -33506,7 +33706,8 @@ exports.default = {
                     vm.todoName = '';
                     vm.editindex = -1;
                 } else {
-                    vm.message = resp.data;
+                    vm.updatingTodo = false;
+                    // TODO: Show message "There is no change to update"
                 }
             });
         },
@@ -33602,7 +33803,7 @@ exports.default = {
 /* 190 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n    <li style=\"margin-bottom: 0px; cursor: pointer;\">\r\n        <div class=\"row\" v-if=\"editindex !== tindex\" style=\"margin-bottom: 7px;\">\r\n            <div class=\"col-1 text-right\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div style=\"margin-bottom: 6px; margin-top: 2px;\">\r\n                    <input type=\"checkbox\"\r\n                        @click=\"toggleCheckbox(todo, tindex)\"\r\n                        v-model=\"todo.is_complete\"\r\n                        v-bind:true-value=\"1\"\r\n                        v-bind:false-value=\"0\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-9\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div class=\"todo-item\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID\" class=\"link-style\" tag=\"span\">\r\n                        <span :class=\"{ completed: is_complete }\">{{todo.todo}}</span>\r\n                        <span v-if=\"todo.formatted_due_date\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\"></i> <span style=\"color:#b5b5b5\"><i>{{todo.formatted_due_date}}</i></span>\r\n                        </span>\r\n                        <span v-if=\"todo.assignee_name\" style=\"position:relative;\">\r\n                            <span class=\"pipe\">|</span> \r\n                            <i class=\"fa fa-user p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"color:#b5b5b5\">\r\n                                <i>{{todo.assignee_name}}</i>\r\n                            </span>\r\n                        </span>\r\n                        <span v-if=\"fileCount > 0\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-file p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"font-size:11px;color:#b5b5b5\"><i>{{fileCount}}</i></span>\r\n                        </span>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-2\" style=\"margin-top: 0px; margin-bottom: 5px;\">\r\n                <div class=\"actions text-center\" v-if=\"isShowEdit\">\r\n                    <span @click=\"showEditForm( todo, tindex )\" v-tooltip :title=\"i18n.edit\">\r\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                    <span class=\"trash\" @click=\"deleteTodo(todo, tindex)\" v-tooltip :title=\"i18n.delete\">|\r\n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"row\" v-if=\"editindex === tindex\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\">\r\n\r\n                    <div class=\"todo_name inline\">\r\n                        <input type=\"text\"\r\n                            name=\"todo_text\"\r\n                            v-model=\"todoName\"\r\n                            class=\"form-control\"\r\n                            :placeholder=\"i18n.add_todo_placeholder\"\r\n                            v-focus\r\n                            required\r\n                            @keyup.esc=\"hideTodoForm\">\r\n                    </div>\r\n                    <div>\r\n                        <select v-model=\"selected\" class=\"form-control\">\r\n                            <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                            <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                {{ option.display_name }}\r\n                            </option>\r\n                        </select>\r\n                    </div>\r\n                    <date-picker id=\"update-duedate\" v-model=\"updateDueDate\"></date-picker>\r\n\r\n                    <div class=\"inline\">\r\n                        <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"updateTodo(todo)\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.update\">\r\n                        <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"cancelEdit\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </li>\r\n";
+module.exports = "\r\n\r\n    <li style=\"margin-bottom: 0px; cursor: pointer;\">\r\n        <div class=\"row\" v-if=\"editindex !== tindex\" style=\"margin-bottom: 7px;\">\r\n            <div class=\"col-1 text-right\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div style=\"margin-bottom: 6px; margin-top: 2px;\">\r\n                    <input type=\"checkbox\"\r\n                        @click=\"toggleCheckbox(todo, tindex)\"\r\n                        v-model=\"todo.is_complete\"\r\n                        v-bind:true-value=\"1\"\r\n                        v-bind:false-value=\"0\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-9\" style=\"margin-top:0px; margin-bottom: 5px;\">\r\n                <div class=\"todo-item\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID + '/todos/' + todo.ID\" class=\"link-style\" tag=\"span\">\r\n                        <span :class=\"{ completed: is_complete }\">{{todo.todo}}</span>\r\n                        <span v-if=\"todo.formatted_due_date\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-calendar p-r-5\" aria-hidden=\"true\"></i> <span style=\"color:#b5b5b5\"><i>{{todo.formatted_due_date}}</i></span>\r\n                        </span>\r\n                        <span v-if=\"todo.assignee_name\" style=\"position:relative;\">\r\n                            <span class=\"pipe\">|</span> \r\n                            <i class=\"fa fa-user p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"color:#b5b5b5\">\r\n                                <i>{{todo.assignee_name}}</i>\r\n                            </span>\r\n                        </span>\r\n                        <span v-if=\"fileCount > 0\">\r\n                            <span class=\"pipe\">|</span><i class=\"fa fa-file p-r-5\" aria-hidden=\"true\"></i>\r\n                            <span style=\"font-size:11px;color:#b5b5b5\"><i>{{fileCount}}</i></span>\r\n                        </span>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-2\" style=\"margin-top: 0px; margin-bottom: 5px;\">\r\n                <div class=\"actions text-center\" v-if=\"isShowEdit\">\r\n                    <span @click=\"showEditForm( todo, tindex )\" v-tooltip :title=\"i18n.edit\">\r\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                    <span class=\"trash\" @click=\"deleteTodo(todo, tindex)\" v-tooltip :title=\"i18n.delete\">|\r\n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"row\" v-if=\"editindex === tindex\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\">\r\n\r\n                    <div class=\"todo_name inline\">\r\n                        <input type=\"text\"\r\n                            name=\"todo_text\"\r\n                            v-model=\"todoName\"\r\n                            class=\"form-control\"\r\n                            :placeholder=\"i18n.add_todo_placeholder\"\r\n                            v-focus\r\n                            required\r\n                            @keyup.esc=\"hideTodoForm\">\r\n                    </div>\r\n                    <div>\r\n                        <select v-model=\"selected\" class=\"form-control\">\r\n                            <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                            <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                {{ option.display_name }}\r\n                            </option>\r\n                        </select>\r\n                    </div>\r\n                    <date-picker id=\"update-duedate\" v-model=\"updateDueDate\"></date-picker>\r\n\r\n                    <div class=\"inline\">\r\n                        <button class=\"button button-primary\"\r\n                                @click.prevent=\"updateTodo(todo)\"\r\n                                :disabled=\"updatingTodo\" \r\n                            >\r\n                            <i v-if=\"updatingTodo\" class=\"fa fa-refresh fa-spin mr-5\"></i>\r\n                            {{ i18n.update }}\r\n                        </button>\r\n                        <button class=\"button button-default\"\r\n                            @click.prevent=\"cancelEdit\">\r\n                            {{ i18n.cancel }}\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </li>\r\n";
 
 /***/ }),
 /* 191 */
@@ -33711,7 +33912,8 @@ exports.default = {
             selected: '',
             todoDueDate: '',
             attachments: [],
-            attachmentIDs: []
+            attachmentIDs: [],
+            creatingTodo: false
         };
     },
 
@@ -33767,9 +33969,11 @@ exports.default = {
             if (!vm.todoName) {
                 return;
             }
+            vm.creatingTodo = true;
 
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.creatingTodo = false;
                     todo = resp.data.todo;
                     todo.todo = vm.todoName;
                     todo.is_complete = '0';
@@ -33893,8 +34097,17 @@ exports.default = {
 //                         <br>
 //
 //                         <div class="inline">
-//                             <input style="vertical-align: middle;" type="submit" @click.prevent="createTodo" name="add_todo" class="button button-primary" :value="i18n.add_todo">
-//                             <input style="vertical-align: middle;" type="submit" @click.prevent="hideTodoForm" class="button button-default" :value="i18n.cancel">
+//                             <button class="button button-primary"
+//                                     @click.prevent="createTodo"
+//                                     :disabled="creatingTodo" 
+//                             >
+//                                 <i v-if="creatingTodo" class="fa fa-refresh fa-spin mr-5"></i>
+//                                 {{ i18n.add_todo }}
+//                             </button>
+//                             <button class="button button-default"
+//                                 @click.prevent="hideTodoForm">
+//                                 {{ i18n.cancel }}
+//                             </button>
 //                         </div>
 //                 </div>
 //             </div>
@@ -33913,19 +34126,19 @@ exports.default = {
 /* 195 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <a href=\"#\"\r\n                    @click.prevent=\"showTodoForm(sindex, list)\"\r\n                    v-if=\"sectionIndex !== sindex\"\r\n                    style=\"margin-left: 63px;\">+ {{ i18n.add_new_todo }}</a>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\" v-if=\"sectionIndex === sindex\">\r\n\r\n                        <div class=\"todo_name inline\">\r\n                            <input type=\"text\"\r\n                                v-model=\"todoName\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.add_todo_placeholder\"\r\n                                v-focus\r\n                                required\r\n                                @keyup.esc=\"hideTodoForm\">\r\n                        </div>\r\n                        <div>\r\n                            <select v-model=\"selected\" class=\"form-control\">\r\n                                <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                                <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                    {{ option.display_name }}\r\n                                </option>\r\n                            </select>\r\n                        </div>\r\n                        <div>\r\n                            <date-picker id=\"add-duedate\" v-model=\"todoDueDate\"></date-picker>\r\n                        </div>\r\n                        <file-upload\r\n                            :i18n=\"i18n\"\r\n                            v-on:attach=\"updateAttachments\"\r\n                            v-on:remove=\"removeAttachment\"\r\n                            :attachments=\"attachments\"></file-upload>\r\n                        <br>\r\n\r\n                        <div class=\"inline\">\r\n                            <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"createTodo\" name=\"add_todo\" class=\"button button-primary\" :value=\"i18n.add_todo\">\r\n                            <input style=\"vertical-align: middle;\" type=\"submit\" @click.prevent=\"hideTodoForm\" class=\"button button-default\" :value=\"i18n.cancel\">\r\n                        </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <a href=\"#\"\r\n                    @click.prevent=\"showTodoForm(sindex, list)\"\r\n                    v-if=\"sectionIndex !== sindex\"\r\n                    style=\"margin-left: 63px;\">+ {{ i18n.add_new_todo }}</a>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div class=\"add_form_style\" v-if=\"sectionIndex === sindex\">\r\n\r\n                        <div class=\"todo_name inline\">\r\n                            <input type=\"text\"\r\n                                v-model=\"todoName\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.add_todo_placeholder\"\r\n                                v-focus\r\n                                required\r\n                                @keyup.esc=\"hideTodoForm\">\r\n                        </div>\r\n                        <div>\r\n                            <select v-model=\"selected\" class=\"form-control\">\r\n                                <option disabled value=\"\">{{ i18n.select_user }}</option>\r\n                                <option v-for=\"option in users\" v-bind:value=\"{ID : option.ID, assignee : option.display_name}\">\r\n                                    {{ option.display_name }}\r\n                                </option>\r\n                            </select>\r\n                        </div>\r\n                        <div>\r\n                            <date-picker id=\"add-duedate\" v-model=\"todoDueDate\"></date-picker>\r\n                        </div>\r\n                        <file-upload\r\n                            :i18n=\"i18n\"\r\n                            v-on:attach=\"updateAttachments\"\r\n                            v-on:remove=\"removeAttachment\"\r\n                            :attachments=\"attachments\"></file-upload>\r\n                        <br>\r\n\r\n                        <div class=\"inline\">\r\n                            <button class=\"button button-primary\"\r\n                                    @click.prevent=\"createTodo\"\r\n                                    :disabled=\"creatingTodo\" \r\n                            >\r\n                                <i v-if=\"creatingTodo\" class=\"fa fa-refresh fa-spin mr-5\"></i>\r\n                                {{ i18n.add_todo }}\r\n                            </button>\r\n                            <button class=\"button button-default\"\r\n                                @click.prevent=\"hideTodoForm\">\r\n                                {{ i18n.cancel }}\r\n                            </button>\r\n                        </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
 /* 196 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <li>\r\n            <div v-if=\"isSingle\">\r\n                <div v-if=\"!isListEdit && isShowEdit\" style=\"margin-top: -10px\">\r\n                    <button class=\"button button-default\"\r\n                            @click=\"showListEditForm( list )\">{{ i18n.edit }}</button>\r\n                    <span style=\"float:right\" @click=\"deleteList(list)\">\r\n                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                    </span>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 v-if=\"!isListEdit\" style=\"padding-left: 4%;padding-top:2%\">{{list.list_title}}</h3>\r\n                        <div v-if=\"isListEdit\" class=\"add_form_style\">\r\n                            <div>\r\n                                <input type=\"text\"\r\n                                    name=\"list_title\"\r\n                                    v-model=\"listTitle\"\r\n                                    class=\"form-control\"\r\n                                    :placeholder=\"i18n.name_list_placeholder\"\r\n                                    @keyup.enter=\"updateList(list)\"\r\n                                    @keyup.esc=\"cancelListEdit\"\r\n                                    v-focus>\r\n                            </div>\r\n                            <div class=\"action\">\r\n                                <button class=\"button button-primary\"\r\n                                        @click.prevent=\"updateList\"\r\n                                        >{{ i18n.update }}</button>\r\n                                <button class=\"button button-default\" @click=\"cancelListEdit\">{{ i18n.cancel }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div v-else style=\"padding-left: 4%\">\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID\" tag=\"h3\" class=\"link-style\">\r\n                    <a>{{list.list_title}}</a>\r\n                </router-link>\r\n            </div>\r\n\r\n            <ul v-if=\"list.todos.length > 0\">\r\n                <todo-item :i18n=\"i18n\" v-for=\"(todo, tindex) in list.todos\" :todo=\"todo\" :tindex=\"tindex\" :list=\"list\" :key=\"todo.ID\"></todo-item>\r\n            </ul>\r\n            <add-todo :i18n=\"i18n\" :sindex=\"sindex\" :list=\"list\"></add-todo>\r\n            <br>\r\n            <div class=\"row\" v-if=\"isSingle\">\r\n                <div class=\"col-12\">\r\n                    <span style=\"padding-left:4%;\"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>\r\n                </div>\r\n            </div>\r\n        </li>\r\n    </div>\r\n\r\n";
+module.exports = "\r\n    <div>\r\n        <li>\r\n            <div v-if=\"isSingle\">\r\n                <div v-if=\"!isListEdit && isShowEdit\" style=\"margin-top: -10px\">\r\n                    <button class=\"button button-default\"\r\n                            @click=\"showListEditForm( list )\">{{ i18n.edit }}</button>\r\n                    <span style=\"float:right\" @click=\"deleteList(list)\">\r\n                        <a style=\"color: #d54e21;cursor:pointer;\">{{ i18n.delete }}</a>\r\n                    </span>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 v-if=\"!isListEdit\" style=\"padding-left: 4%;padding-top:2%\">{{list.list_title}}</h3>\r\n                        <div v-if=\"isListEdit\" class=\"add_form_style\">\r\n                            <div>\r\n                                <input type=\"text\"\r\n                                    name=\"list_title\"\r\n                                    v-model=\"listTitle\"\r\n                                    class=\"form-control\"\r\n                                    :placeholder=\"i18n.name_list_placeholder\"\r\n                                    @keyup.enter=\"updateList(list)\"\r\n                                    @keyup.esc=\"cancelListEdit\"\r\n                                    v-focus>\r\n                            </div>\r\n                            <div class=\"action\">\r\n                                <button class=\"button button-primary\"\r\n                                        @click.prevent=\"updateList\"\r\n                                        :disabled=\"updatingList\"\r\n                                        >\r\n                                        <i v-if=\"updatingList\" class=\"fa fa-refresh fa-spin mr-5\"></i>\r\n                                        {{ i18n.update }}\r\n                                </button>\r\n                                <button class=\"button button-default\" @click=\"cancelListEdit\">{{ i18n.cancel }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div v-else style=\"padding-left: 4%\">\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists/' + list.ID\" tag=\"h3\" class=\"link-style\">\r\n                    <a>{{list.list_title}}</a>\r\n                </router-link>\r\n            </div>\r\n\r\n            <ul v-if=\"list.todos.length > 0\">\r\n                <todo-item :i18n=\"i18n\" v-for=\"(todo, tindex) in list.todos\" :todo=\"todo\" :tindex=\"tindex\" :list=\"list\" :key=\"todo.ID\"></todo-item>\r\n            </ul>\r\n            <add-todo :i18n=\"i18n\" :sindex=\"sindex\" :list=\"list\"></add-todo>\r\n            <br>\r\n            <div class=\"row\" v-if=\"isSingle\">\r\n                <div class=\"col-12\">\r\n                    <span style=\"padding-left:4%;\"><i>Started by <strong>{{list.user_name}}</strong> on {{list.formatted_created}}</i></span>\r\n                </div>\r\n            </div>\r\n        </li>\r\n    </div>\r\n\r\n";
 
 /***/ }),
 /* 197 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <!-- <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div v-if=\"project\" class=\"project-navigation\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"h3\" class=\"link-style\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-4\">\r\n                    <button class=\"button button-default\" @click.prevent=\"toggleListForm\" v-if=\"!isShowListForm\">{{ i18n.make_list_btn }}</button>\r\n                </div>\r\n                <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;margin-bottom:35px;\">\r\n                    <h3>{{ i18n.todos }}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div v-if=\"isShowListForm\" class=\"add_form_style\">\r\n                        <div>\r\n                            <input type=\"text\"\r\n                                name=\"list_title\"\r\n                                v-model=\"listTitle\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.name_list_placeholder\"\r\n                                @keyup.enter=\"createList\"\r\n                                @keyup.esc=\"toggleListForm\"\r\n                                v-focus>\r\n                        </div>\r\n                        <div class=\"action\">\r\n                            <button class=\"button button-primary\"\r\n                                    @click.prevent=\"createList\"\r\n                                    >{{ i18n.create_list }}</button>\r\n                            <button class=\"button button-default\" @click=\"toggleListForm\">{{ i18n.cancel }}</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center\" v-if=\"loading\">\r\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        <p>{{ i18n.loading }}</p>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length < 1 && !loading\">\r\n                        <h4>{{ i18n.no_list_added_yet }}</h4>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length > 0 && !loading\">\r\n                        <ul>\r\n                            <list :i18n=\"i18n\" v-for=\"(list, sindex) in lists\" :list=\"list\" :sindex=\"sindex\" :key=\"list.ID\"></list>\r\n                        </ul>\r\n                        <div class=\"row\" v-if=\"lists.length < listCount\">\r\n                            <div class=\"col-12 text-center\">\r\n                                <button class=\"button button-default\" @click=\"loadMoreLists\">{{ i18n.load_more_btn }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <!-- <div class=\"row\">\r\n            <div class=\"col-1\"></div>\r\n            <div class=\"col-10\">\r\n                <div v-if=\"project\" class=\"project-navigation\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"h3\" class=\"link-style\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div>\r\n        </div> -->\r\n\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-4\">\r\n                    <button class=\"button button-default\" @click.prevent=\"toggleListForm\" v-if=\"!isShowListForm\">{{ i18n.make_list_btn }}</button>\r\n                </div>\r\n                <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;margin-bottom:35px;\">\r\n                    <h3>{{ i18n.todos }}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div v-if=\"isShowListForm\" class=\"add_form_style\">\r\n                        <div>\r\n                            <input type=\"text\"\r\n                                name=\"list_title\"\r\n                                v-model=\"listTitle\"\r\n                                class=\"form-control\"\r\n                                :placeholder=\"i18n.name_list_placeholder\"\r\n                                @keyup.enter=\"createList\"\r\n                                @keyup.esc=\"toggleListForm\"\r\n                                v-focus>\r\n                        </div>\r\n                        <div class=\"action\">\r\n                            <button class=\"button button-primary\"\r\n                                    @click.prevent=\"createList\"\r\n                                    :disabled=\"creatingList\" \r\n                                    >\r\n                                <i v-if=\"creatingList\" class=\"fa fa-refresh fa-spin mr-5\"></i>\r\n                                {{ i18n.create_list }}\r\n                            </button>\r\n                            <button class=\"button button-default\" @click=\"toggleListForm\">{{ i18n.cancel }}</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"text-center\" v-if=\"loading\">\r\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\r\n                        <p>{{ i18n.loading }}</p>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length < 1 && !loading\">\r\n                        <h4>{{ i18n.no_list_added_yet }}</h4>\r\n                    </div>\r\n\r\n                    <div v-if=\"lists.length > 0 && !loading\">\r\n                        <ul>\r\n                            <list :i18n=\"i18n\" v-for=\"(list, sindex) in lists\" :list=\"list\" :sindex=\"sindex\" :key=\"list.ID\"></list>\r\n                        </ul>\r\n                        <div class=\"row\" v-if=\"lists.length < listCount\">\r\n                            <div class=\"col-12 text-center\">\r\n                                <button class=\"button button-default\" @click=\"loadMoreLists\">{{ i18n.load_more_btn }}</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 198 */
@@ -33985,7 +34198,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .lists {\r\n        background: #fff;\r\n        padding: 15px 25px;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        /*border-radius: 5px;*/\r\n    }\r\n    .inline-block {\r\n        display: inline-block;\r\n    }\r\n    .t-d-none {\r\n        text-decoration: none;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .lists {\r\n        background: #fff;\r\n        padding: 15px 25px;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n        position: relative;\r\n        /*border-radius: 5px;*/\r\n    }\r\n    .inline-block {\r\n        display: inline-block;\r\n    }\r\n    .t-d-none {\r\n        text-decoration: none;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -34055,6 +34268,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //         padding: 15px 25px;
 //         border: 1px solid #e5e5e5;
 //         box-shadow: 0 1px 1px rgba(0,0,0,.04);
+//         overflow: hidden;
+//         position: relative;
 //         /*border-radius: 5px;*/
 //     }
 //     .inline-block {
@@ -35708,7 +35923,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                                     :attachments="attachments"></file-upload>
 //
 //                                 <div class="new-message-action">
-//                                     <button class="button button-primary" @click.prevent="createMessage">
+//                                     <button class="button button-primary" 
+//                                             @click.prevent="createMessage"
+//                                             :disabled="postingMessage">
+//                                         <i v-if="postingMessage" class="fa fa-refresh fa-spin"></i>
 //                                         {{ i18n.post_new_msg_btn }}
 //                                     </button>
 //                                     <router-link :to="'/projects/' + $route.params.projectid + '/messages'" class="button button-default">
@@ -35769,6 +35987,7 @@ exports.default = {
             attachments: [],
             attachmentIDs: [],
             project: '',
+            postingMessage: false,
             // content: '',
             customToolbar: [['bold', 'italic', 'underline', 'strike'], ['blockquote', 'code-block'], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'indent': '-1' }, { 'indent': '+1' }], [{ 'header': [3, 4, 5, 6, false] }], [{ 'align': [] }]]
 
@@ -35820,8 +36039,11 @@ exports.default = {
                 return;
             }
 
+            vm.postingMessage = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.postingMessage = false;
                     messageID = resp.data.messageInfo.ID;
                     projectID = data.project_id;
                     vm.$router.push({
@@ -35848,7 +36070,7 @@ exports.default = {
 /* 238 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav v-on:get-project=\"setProject\">\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                \r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                \r\n                                <div class=\"new-message-action\">\r\n                                    <button class=\"button button-primary\" @click.prevent=\"createMessage\">\r\n                                        {{ i18n.post_new_msg_btn }}\r\n                                    </button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{project.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav v-on:get-project=\"setProject\">\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                \r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                \r\n                                <div class=\"new-message-action\">\r\n                                    <button class=\"button button-primary\" \r\n                                            @click.prevent=\"createMessage\"\r\n                                            :disabled=\"postingMessage\">\r\n                                        <i v-if=\"postingMessage\" class=\"fa fa-refresh fa-spin\"></i>\r\n                                        {{ i18n.post_new_msg_btn }}\r\n                                    </button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 239 */
@@ -35993,7 +36215,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                                 <div class="action">
 //                                     <button class="button button-primary"
 //                                             @click.prevent="updateMessage"
-//                                             >{{ i18n.update }}</button>
+//                                             :disabled="updating"
+//                                             >
+//                                         <i v-if="updating" class="fa fa-refresh fa-spin"></i>
+//                                         {{ i18n.update }}
+//                                     </button>
 //                                     <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID" class="button button-default">
 //                                         {{ i18n.cancel }}
 //                                     </router-link>
@@ -36045,6 +36271,7 @@ exports.default = {
             i18n: {},
             mindex: 0,
             isShowMessageForm: false,
+            updating: false,
             message: '',
             projectTitle: '',
             messageTitle: '',
@@ -36117,9 +36344,19 @@ exports.default = {
                 attachments: vm.attachmentIDs
             };
 
+            if (!vm.messageTitle) {
+                return;
+            }
+
+            vm.updating = true;
+
             jQuery.post(fpm.ajaxurl, data, function (resp) {
                 if (resp.success) {
+                    vm.updating = false;
                     vm.$router.push({ path: '/projects/' + projectID + '/messages/' + messageID });
+                } else {
+                    vm.updating = false;
+                    // TODO: Show message "There is no change to update"
                 }
             });
         }
@@ -36140,7 +36377,7 @@ exports.default = {
 /* 243 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{messageObject.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{messageObject.message_title}} </a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style t-d-none\">\r\n                    {{messageObject.message_title}}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           required\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                <br>\r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                <br>\r\n                                <div class=\"action\">\r\n                                    <button class=\"button button-primary\"\r\n                                            @click.prevent=\"updateMessage\"\r\n                                            >{{ i18n.update }}</button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"row\"></div> -->\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div>\r\n        <div class=\"container\">\r\n            <!-- <div class=\"row\">\r\n                <div class=\"col-12 text-center\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid \" class=\"link-style inline-block\" tag=\"h3\">\r\n                        <a>{{messageObject.project_title}}</a>\r\n                    </router-link>\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/'\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{ i18n.message_label }}</a>\r\n                    </router-link>\r\n\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style inline-block\" tag=\"h4\">\r\n                        <a><i class=\"fa fa-long-arrow-right p-l-10 p-r-10\" aria-hidden=\"true\"></i>{{messageObject.message_title}} </a>\r\n                    </router-link>\r\n                </div>\r\n            </div> -->\r\n            <project-nav>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style t-d-none\">\r\n                    {{ i18n.message_label }}\r\n                </router-link>\r\n                <span><i class=\"fa fa-angle-right\"></i></span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + $route.params.messageid\" class=\"link-style t-d-none\">\r\n                    {{messageObject.message_title}}\r\n                </router-link>\r\n            </project-nav>\r\n            <div class=\"lists border-for-nav\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <div>\r\n                            <div class=\"add_form_style\">\r\n                                <div>\r\n                                    <input type=\"text\"\r\n                                           v-model=\"messageTitle\"\r\n                                           class=\"form-control\"\r\n                                           v-focus\r\n                                           required\r\n                                           :placeholder=\"i18n.message_title_placeholder\">\r\n                                </div>\r\n                                <div>\r\n                                    <vue-editor v-model=\"message\" :editorToolbar=\"customToolbar\"></vue-editor>\r\n                                </div>\r\n                                <br>\r\n                                <file-upload\r\n                                    :i18n=\"i18n\"\r\n                                    v-on:attach=\"updateAttachments\"\r\n                                    v-on:remove=\"removeAttachment\"\r\n                                    :attachments=\"attachments\"></file-upload>\r\n                                <br>\r\n                                <div class=\"action\">\r\n                                    <button class=\"button button-primary\"\r\n                                            @click.prevent=\"updateMessage\"\r\n                                            :disabled=\"updating\"\r\n                                            >\r\n                                        <i v-if=\"updating\" class=\"fa fa-refresh fa-spin\"></i>\r\n                                        {{ i18n.update }}\r\n                                    </button>\r\n                                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID\" class=\"button button-default\">\r\n                                        {{ i18n.cancel }}\r\n                                    </router-link>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"row\"></div> -->\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 244 */
@@ -36545,6 +36782,1066 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\"><span>My Activity</span></h2>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" @click=\"loadMoreActivities\">Load More</button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        No activity yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        Loading! Please wait... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(255)
+__vue_script__ = __webpack_require__(257)
+__vue_template__ = __webpack_require__(258)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\Folders.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(256);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d206a462&file=Folders.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Folders.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-d206a462&file=Folders.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Folders.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\n    .folder {\n        width: 100%;\n        height: 200px;\n        position: relative;\n        background-color: #ffffff;\n        border-radius: 5px;\n        border: 1px solid #E5E5E5;\n    }\n    .folder i.fa-4x {\n        color: #267cb5;\n        margin-bottom: 20px;\n    }\n    .folder:before {\n        content: '';\n        width: 52%;\n        height: 23px;\n        border-radius: 0px 5px 0px 40px;\n        background-color: #E5E5E5;\n        position: absolute;\n        top: 0px;\n        right: 0px;\n    }\n    .folder-title {\n        padding-top: 5px;\n        text-align: center;\n        font-weight: bold;\n    }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _store = __webpack_require__(3);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _ProjectNavComponent = __webpack_require__(8);
+
+var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// <template>
+//     <div class="container">
+//         <project-nav></project-nav>
+//         <div class="lists border-for-nav">
+//             <div class="row">
+//                 <div class="col-4">
+//                     <button class="button button-default" @click.prevent="toggleFolderForm" v-if="!isShowFolderForm">
+//                         {{i18n.make_folder}}
+//                     </button>
+//                 </div>
+//                 <div class="col-4 text-center" style="border-bottom: 2px solid grey;margin-bottom:35px;">
+//                     <h3>{{i18n.docs_and_files}}</h3>
+//                 </div>
+//             </div>
+//             <div class="row">
+//                 <div class="col-12">
+//                     <div v-if="isShowFolderForm" class="add_form_style">
+//                         <div>
+//                             <input type="text"
+//                                 name="list_title"
+//                                 v-model="folderTitle"
+//                                 class="form-control"
+//                                 :placeholder="i18n.folder_title"
+//                                 @keyup.enter="createFolder"
+//                                 @keyup.esc="toggleFolderForm"
+//                                 v-focus>
+//                         </div>
+//                         <div class="action">
+//                             <button class="button button-primary" @click.prevent="createFolder"
+//                                     >
+//                                 {{i18n.create}}
+//                             </button>
+//                             <button class="button button-default" @click="toggleFolderForm">
+//                                 {{i18n.cancel}}
+//                             </button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="row">
+//                 <div class="col-12">
+//                     <div class="text-center" v-if="loading">
+//                         <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+//                     </div>
+//
+//                     <div v-if="folders.length < 1 && !loading">
+//                         <h4>{{i18n.no_folder_message}}</h4>
+//                     </div>
+//                     <div v-if="folders.length > 0 && !loading">
+//                         <div>
+//                             <div class="row">
+//                                 <div class="col-3 animated fadeIn" v-for="(folder, mindex) in folders" :key="folder.ID">
+//                                     <div class="folder">
+//                                         <div class="folder-title">
+//                                             <router-link :to="'/projects/' + $route.params.projectid + '/folders/' + folder.ID" tag="h4">
+//                                                 <a>{{folder.folder_title | truncate('12')}}</a>
+//                                             </router-link>
+//                                         </div>
+//                                         <div class="text-center">
+//                                             <!-- <img :src="assetsDistPath+imageSource" alt="" width="80" height="80"> -->
+//                                             <i class="fa fa-folder-open-o fa-4x"></i>
+//                                         </div>
+//                                         <div class="row text-center">
+//                                             <div class="col-12">
+//                                                 <span><i>{{i18n.created_by}} <strong>{{folder.user_name}}</strong></i></span>
+//                                             </div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                     <div class="row" v-if="folders.length < folderCount">
+//                         <div class="col-12 text-center">
+//                             <button class="button button-default" @click="fetchFolders(true)">
+//                                 {{i18n.load_more_btn}}
+//                             </button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="row" style="border-top: 1px solid #eee" v-if="+aFolderCount > 0">
+//                 <router-link :to="'/projects/'+$route.params.projectid+'/folders/archive'" tag="p" style="padding-left:20px">
+//                     <a>{{aFolderCount}} {{i18n.archived_folders}}</a>
+//                 </router-link>
+//             </div>
+//         </div>
+//     </div>
+// </template>
+//
+// <script>
+exports.default = {
+    props: [],
+    components: {
+        ProjectNav: _ProjectNavComponent2.default
+    },
+    filters: {
+        truncate: function truncate(string, value) {
+            var dotdot = '';
+            if (!string) string = '';
+            if (string.length > value) {
+                dotdot = '...';
+            }
+            return string.substring(0, value) + dotdot;
+        }
+    },
+    data: function data() {
+        return {
+            i18n: {},
+            isShowFolderForm: false,
+            folderTitle: '',
+            project: {},
+            folders: [],
+            folderCount: '',
+            aFolderCount: '',
+            loading: false,
+            loadMoreFolders: false,
+            currentUser: ''
+            // assetsDistPath: fpm.plugin_dir + 'assets/dist/',
+            // imageSource: require('./icons/if_folder_icon.png')
+            // imageSource: require('./icons/folder-icon-one.png')
+            // foldericon: FolderIcon
+        };
+    },
+
+    directives: {
+        focus: {
+            inserted: function inserted(el) {
+                el.focus();
+            }
+        }
+    },
+    methods: {
+        toggleFolderForm: function toggleFolderForm() {
+            this.isShowFolderForm = !this.isShowFolderForm;
+        },
+
+        fetchFolders: function fetchFolders(isLoadMore) {
+            var vm = this,
+                i;
+
+            if (!isLoadMore) {
+                vm.loading = true;
+            }
+
+            var data = {
+                action: 'fpm-get-folders',
+                project_id: vm.$route.params.projectid,
+                nonce: fpm.nonce
+            };
+
+            if (isLoadMore) {
+                data.offset = vm.folders.length;
+            }
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    for (i = 0; i < resp.data.length; i++) {
+                        vm.folders.push(resp.data[i]);
+                    }
+                    if (!isLoadMore) {
+                        vm.loading = false;
+                        vm.folderCount = resp.data[0].folder_count;
+                        vm.aFolderCount = resp.data[0].a_folder_count;
+                    }
+                }
+                vm.loading = false;
+            });
+        },
+        createFolder: function createFolder() {
+            var vm = this,
+                folder,
+                data = {
+                action: 'fpm-insert-folder',
+                nonce: fpm.nonce,
+                folder_title: vm.folderTitle,
+                project_title: vm.project.project_title,
+                project_id: vm.$route.params.projectid,
+                ac_type: 'create_folder'
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    resp.data.folder.folder_title = vm.folderTitle;
+                    resp.data.folder.user_name = vm.currentUser.data.display_name;
+                    vm.folders.unshift(resp.data.folder);
+                    vm.folderTitle = '';
+                    // Event.$emit('flash', {
+                    //     message: resp.data.message,
+                    //     flashtype:'success',
+                    //     iconfont: 'fa-check',
+                    //     duration: 2000
+                    // });
+                }
+            });
+        }
+    },
+    created: function created() {
+        var vm = this;
+        _store2.default.setLocalization('fpm-get-folder-local-data').then(function (data) {
+            vm.i18n = data;
+        });
+        vm.fetchFolders();
+        vm.currentUser = fpm.currentUserInfo;
+    }
+};
+// </script>
+//
+// <style>
+//     .folder {
+//         width: 100%;
+//         height: 200px;
+//         position: relative;
+//         background-color: #ffffff;
+//         border-radius: 5px;
+//         border: 1px solid #E5E5E5;
+//     }
+//     .folder i.fa-4x {
+//         color: #267cb5;
+//         margin-bottom: 20px;
+//     }
+//     .folder:before {
+//         content: '';
+//         width: 52%;
+//         height: 23px;
+//         border-radius: 0px 5px 0px 40px;
+//         background-color: #E5E5E5;
+//         position: absolute;
+//         top: 0px;
+//         right: 0px;
+//     }
+//     .folder-title {
+//         padding-top: 5px;
+//         text-align: center;
+//         font-weight: bold;
+//     }
+// </style>
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div class=\"container\">\n        <project-nav></project-nav>\n        <div class=\"lists border-for-nav\">\n            <div class=\"row\">\n                <div class=\"col-4\">\n                    <button class=\"button button-default\" @click.prevent=\"toggleFolderForm\" v-if=\"!isShowFolderForm\">\n                        {{i18n.make_folder}}\n                    </button>\n                </div>\n                <div class=\"col-4 text-center\" style=\"border-bottom: 2px solid grey;margin-bottom:35px;\">\n                    <h3>{{i18n.docs_and_files}}</h3>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div v-if=\"isShowFolderForm\" class=\"add_form_style\">\n                        <div>\n                            <input type=\"text\"\n                                name=\"list_title\"\n                                v-model=\"folderTitle\"\n                                class=\"form-control\"\n                                :placeholder=\"i18n.folder_title\"\n                                @keyup.enter=\"createFolder\"\n                                @keyup.esc=\"toggleFolderForm\"\n                                v-focus>\n                        </div>\n                        <div class=\"action\">\n                            <button class=\"button button-primary\" @click.prevent=\"createFolder\"\n                                    >\n                                {{i18n.create}}\n                            </button>\n                            <button class=\"button button-default\" @click=\"toggleFolderForm\">\n                                {{i18n.cancel}}\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"text-center\" v-if=\"loading\">\n                        <i class=\"fa fa-refresh fa-spin fa-3x fa-fw\" aria-hidden=\"true\"></i>\n                    </div>\n\n                    <div v-if=\"folders.length < 1 && !loading\">\n                        <h4>{{i18n.no_folder_message}}</h4>\n                    </div>\n                    <div v-if=\"folders.length > 0 && !loading\">\n                        <div>\n                            <div class=\"row\">\n                                <div class=\"col-3 animated fadeIn\" v-for=\"(folder, mindex) in folders\" :key=\"folder.ID\">\n                                    <div class=\"folder\">\n                                        <div class=\"folder-title\">\n                                            <router-link :to=\"'/projects/' + $route.params.projectid + '/folders/' + folder.ID\" tag=\"h4\">\n                                                <a>{{folder.folder_title | truncate('12')}}</a>\n                                            </router-link>\n                                        </div>\n                                        <div class=\"text-center\">\n                                            <!-- <img :src=\"assetsDistPath+imageSource\" alt=\"\" width=\"80\" height=\"80\"> -->\n                                            <i class=\"fa fa-folder-open-o fa-4x\"></i>\n                                        </div>\n                                        <div class=\"row text-center\">\n                                            <div class=\"col-12\">\n                                                <span><i>{{i18n.created_by}} <strong>{{folder.user_name}}</strong></i></span>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\" v-if=\"folders.length < folderCount\">\n                        <div class=\"col-12 text-center\">\n                            <button class=\"button button-default\" @click=\"fetchFolders(true)\">\n                                {{i18n.load_more_btn}}\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\" style=\"border-top: 1px solid #eee\" v-if=\"+aFolderCount > 0\">\n                <router-link :to=\"'/projects/'+$route.params.projectid+'/folders/archive'\" tag=\"p\" style=\"padding-left:20px\">\n                    <a>{{aFolderCount}} {{i18n.archived_folders}}</a>\n                </router-link>\n            </div>\n        </div>\n    </div>\n";
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(260)
+__vue_script__ = __webpack_require__(262)
+__vue_template__ = __webpack_require__(263)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\Folder.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(261);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1544add4&file=Folder.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Folder.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1544add4&file=Folder.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Folder.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\n    .single-folder-title {\n        border-bottom: 2px solid grey;\n        margin-bottom:35px;\n    }\n    .file-div {\n        padding: 30px 30px 15px;\n        border: 1px solid #eee;\n        border-radius:4px;\n        min-height: 170px;\n    }\n    .file-actions .action-item {\n        display: inline-block;\n        padding: 5px 10px;\n        border: 1px solid #eee;\n        /*cursor: pointer;*/\n    }\n    /*.file-action {\n        margin-top: 8px;\n        bottom: 20px;\n        border: 1px solid #eee;\n        left: 40%;\n        position: absolute;\n        padding: 6px 10px;\n        cursor: pointer;\n    }*/\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _store = __webpack_require__(3);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _FilesTypeDisplay = __webpack_require__(40);
+
+var _FilesTypeDisplay2 = _interopRequireDefault(_FilesTypeDisplay);
+
+var _ProjectNavComponent = __webpack_require__(8);
+
+var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
+
+var _CommentsComponent = __webpack_require__(38);
+
+var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
+
+var _ComponentActions = __webpack_require__(155);
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import Bookmark from './partials/BookmarkComponent.vue';
+// import ArchiveMessage from './partials/ArchiveMessageComponent.vue';
+// import Archive from './partials/ArchiveComponent.vue';
+exports.default = {
+    props: [],
+    components: {
+        FilesTypeDisplay: _FilesTypeDisplay2.default,
+        ProjectNav: _ProjectNavComponent2.default,
+        ComponentActions: _ComponentActions2.default,
+        // Bookmark,
+        Comments: _CommentsComponent2.default
+        // Archive,
+        // ArchiveMessage
+    },
+    data: function data() {
+        return {
+            i18n: {},
+            loading: false,
+            project: '',
+            folder: '',
+            existingFiles: [],
+            editForm: false,
+            editText: '',
+            updatingFolder: false
+        };
+    },
+
+    computed: {
+        isShowEdit: function isShowEdit() {
+            var vm = this;
+            return vm.currentUser.roles.includes('administrator') || vm.currentUser.data.ID === vm.folder.userID;
+        },
+        isArchived: function isArchived() {
+            return +this.folder.is_archive;
+        }
+    },
+    filters: {
+        truncate: function truncate(string, value) {
+            var dotdot = '';
+            if (!string) string = '';
+            if (string.length > value) {
+                dotdot = '...';
+            }
+            return string.substring(0, value) + dotdot;
+        }
+    },
+    methods: {
+        toggleEdit: function toggleEdit() {
+            this.editForm = true;
+            this.editText = this.folder.folder_title;
+            // Event.$emit('toggle-actions');
+        },
+        cancelEdit: function cancelEdit() {
+            this.editForm = false;
+        },
+        deleteFolder: function deleteFolder() {
+            if (confirm("Are you sure ??")) {
+                var vm = this,
+                    projectID = vm.$route.params.projectid,
+                    data = {
+                    action: 'fpm-delete-folder',
+                    nonce: fpm.nonce,
+                    folder_id: vm.$route.params.folderid,
+                    project_id: projectID,
+                    folder_title: vm.folder.folder_title
+                };
+
+                jQuery.post(fpm.ajaxurl, data, function (resp) {
+                    if (resp.success) {
+                        vm.$router.push({
+                            path: '/projects/' + projectID + '/folders?item=folder&op=ds'
+                        });
+                    }
+                    // Event.$emit('flash', {
+                    //     message: resp.data.message,
+                    //     flashtype:'danger',
+                    //     iconfont: 'fa-question-circle',
+                    //     duration: 2000
+                    // });
+                });
+            }
+        },
+        deleteFile: function deleteFile(file, findex) {
+            if (confirm("Are you sure, you want to delete this file ??")) {
+                var vm = this,
+                    index,
+                    folder,
+                    data = {
+                    action: 'fpm-insert-folder',
+                    nonce: fpm.nonce,
+                    project_id: vm.$route.params.projectid,
+                    folder_id: vm.$route.params.folderid,
+                    file_id: file.ID,
+                    folder_title: vm.folder.folder_title,
+                    file_title: file.title + '.' + file.extension,
+                    ac_type: 'delete_file'
+                };
+
+                vm.folder.attachmentIDs.splice(findex, 1);
+                data.attachments = vm.folder.attachmentIDs;
+                jQuery.post(fpm.ajaxurl, data, function (resp) {
+                    if (resp.success) {
+                        vm.folder.files.splice(findex, 1);
+                        // Event.$emit('flash', {
+                        //     message: resp.data.message,
+                        //     flashtype:'success',
+                        //     iconfont: 'fa-check',
+                        //     duration: 2000
+                        // });
+                    } else {
+                        var files = vm.folder.files;
+                        vm.folder.attachmentIDs = [];
+                        for (var j = 0; j < files.length; j++) {
+                            vm.folder.attachmentIDs.push(files[j].ID);
+                        }
+                        // Event.$emit('flash', {
+                        //     message: resp.data.message,
+                        //     flashtype:'danger',
+                        //     iconfont: 'fa-question-circle',
+                        //     duration: 2000
+                        // });
+                    }
+                });
+            }
+        },
+        updateFolder: function updateFolder() {
+            var vm = this,
+                folder,
+                data = {
+                action: 'fpm-insert-folder',
+                nonce: fpm.nonce,
+                folder_title: vm.editText,
+                folder_id: vm.$route.params.folderid,
+                project_id: vm.$route.params.projectid,
+                ac_type: 'update_folder',
+                attachments: vm.folder.attachmentIDs
+            };
+
+            vm.updatingFolder = true;
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    vm.updatingFolder = false;
+                    vm.folder.folder_title = vm.editText;
+                    vm.editText = '';
+                    vm.editForm = false;
+                    // Event.$emit('flash', {
+                    //     message: resp.data.message,
+                    //     flashtype:'success',
+                    //     iconfont: 'fa-check'
+                    // });
+                } else {
+                    vm.updatingFolder = false;
+                }
+            });
+        },
+        fetchFolderDetails: function fetchFolderDetails() {
+            var vm = this;
+            vm.loading = true;
+
+            var data = {
+                action: 'fpm-get-folder-details',
+                project_id: vm.$route.params.projectid,
+                folder_id: vm.$route.params.folderid,
+                nonce: fpm.nonce
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loading = false;
+                if (resp.success) {
+                    vm.folder = resp.data[0];
+                } else {
+                    vm.$router.push({
+                        path: '/?item=Folder&op=rf'
+                    });
+                }
+            });
+        },
+
+        fileUpload: function fileUpload() {
+            var file_frame,
+                vm = this,
+                mime_array,
+                attachment,
+                isAllowedType;
+
+            mime_array = ['image/jpeg', 'image/gif', 'image/png', 'text/plain', 'text/csv', 'text/css', 'text/html', 'application/javascript', 'application/pdf', 'application/x-tar', 'application/zip', 'application/x-gzip', 'application/rar', 'application/x-7z-compressed', 'application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.presentation'];
+
+            self = jQuery(this);
+            if (file_frame) {
+                file_frame.open();
+                return;
+            }
+            // Create the media frame.
+            file_frame = wpmedia.frames.file_frame = wpmedia({
+                title: jQuery(this).data('uploader_title'),
+                button: {
+                    text: jQuery(this).data('uploader_button_text')
+                },
+                multiple: false
+            });
+            file_frame.on('select', function () {
+                attachment = file_frame.state().get('selection').first().toJSON();
+
+                isAllowedType = mime_array.includes(attachment.mime);
+
+                if (isAllowedType) {
+                    if (vm.folder.attachmentIDs.includes(attachment.id.toString())) {
+                        // Event.$emit('flash', {
+                        //     message: 'file already exists',
+                        //     flashtype:'success',
+                        //     iconfont: 'fa-check'
+                        // });
+                    } else {
+                        vm.addFile(attachment);
+                    }
+                }
+            });
+            file_frame.open();
+        },
+        addFile: function addFile(attachment) {
+            var vm = this,
+                folder,
+                data;
+
+            vm.folder.attachmentIDs.push(attachment.id.toString());
+
+            data = {
+                action: 'fpm-insert-folder',
+                nonce: fpm.nonce,
+                project_id: vm.$route.params.projectid,
+                folder_id: vm.$route.params.folderid,
+                attachments: vm.folder.attachmentIDs,
+                folder_title: vm.folder.folder_title,
+                ac_type: 'add_file',
+                file_id: attachment.id
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                if (resp.success) {
+                    attachment.ID = attachment.id;
+                    vm.folder.files.push(attachment);
+
+                    // Event.$emit('flash', {
+                    //     message: resp.data.message,
+                    //     flashtype:'success',
+                    //     iconfont: 'fa-check'
+                    // });
+                }
+            });
+        }
+    },
+    created: function created() {
+        var vm = this;
+        vm.currentUser = fpm.currentUserInfo;
+        vm.fetchFolderDetails();
+        _store2.default.setLocalization('fpm-get-folder-local-data').then(function (data) {
+            vm.i18n = data;
+        });
+    }
+};
+// </script>
+//
+// <style>
+//     .single-folder-title {
+//         border-bottom: 2px solid grey;
+//         margin-bottom:35px;
+//     }
+//     .file-div {
+//         padding: 30px 30px 15px;
+//         border: 1px solid #eee;
+//         border-radius:4px;
+//         min-height: 170px;
+//     }
+//     .file-actions .action-item {
+//         display: inline-block;
+//         padding: 5px 10px;
+//         border: 1px solid #eee;
+//         /*cursor: pointer;*/
+//     }
+//     /*.file-action {
+//         margin-top: 8px;
+//         bottom: 20px;
+//         border: 1px solid #eee;
+//         left: 40%;
+//         position: absolute;
+//         padding: 6px 10px;
+//         cursor: pointer;
+//     }*/
+// </style>
+// <template>
+//     <div class="container">
+//         <project-nav>
+//             <span><i class="fa fa-angle-right"></i></span>
+//             <router-link :to="'/projects/' + $route.params.projectid + '/folders'" class="link-style t-d-none">
+//                 {{i18n.docs_and_files}}
+//             </router-link>
+//         </project-nav>
+//         <div class="lists border-for-nav" style="min-height: 100px;">
+//             <!-- <archive-message v-if="isArchived">
+//                 <span>{{i18n.this_folder_is}} <strong>{{i18n.archived}}</strong></span>
+//             </archive-message> -->
+//             <div class="row">
+//                 <component-actions>
+//                     <li class="action-item" v-if="isShowEdit && !editForm && !isArchived" 
+//                         @click="toggleEdit">
+//                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+//                         {{i18n.edit}}
+//                     </li>
+//                     <li class="action-item" v-if="isShowEdit && !editForm && !isArchived" 
+//                         @click="deleteFolder">
+//                         <i class="fa fa-trash" aria-hidden="true"></i>
+//                         {{i18n.delete}}
+//                     </li>
+//                     <!-- <bookmark :item="folder" type="folder" v-if="!isArchived"></bookmark> -->
+//                     <!-- <archive :item="folder" type="folder"></archive> -->
+//                 </component-actions>
+//                 <div class="col-4">
+//                     <button @click="fileUpload" 
+//                             v-if="!editForm && !isArchived"
+//                             class="button button-default">+ {{i18n.add_files_to_folder}}</button>
+//                 </div>
+//                 <div class="col-4 text-center single-folder-title" v-if="!editForm">
+//                     <h3>{{folder.folder_title}}</h3>
+//                 </div>
+//                 <div v-else class="col-12">
+//                     <div class="text-center">
+//                         <input type="text" class="form-control" v-model="editText" style="width:90%">
+//                     </div>
+//                     <div class="left" style="margin-left:5%">
+//                         <button class="button button-primary" 
+//                                 @click="updateFolder"
+//                                 :disabled="updatingFolder">
+//                             <i v-if="updatingFolder" class="fa fa-refresh fa-spin mr-5"></i>
+//                             {{ i18n.update }}
+//                         </button>
+//                         <button class="button button-default" @click="cancelEdit">{{ i18n.cancel }}</button>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="row">
+//                 <div class="col-12">
+//                     <!-- <div class="loading" v-if="loading">
+//                         <p>Loading . . .</p>
+//                     </div> -->
+//                     <!-- <pre>
+//                         {{folder}}
+//                     </pre> -->
+//                     <div v-if="folder && !loading">
+//                         <div class="row">
+//                             <div class="col-3" v-for="(file, findex) in folder.files">
+//                                     <!-- {{file}} -->
+//                                     <div class="file-div">
+//                                         <div>
+//                                             <router-link :to="'/projects/' + $route.params.projectid + '/folders/' + $route.params.folderid + '/files/' + file.ID">
+//                                                 <files-type-display :file="file" type="folder"></files-type-display>
+//                                             </router-link>
+//                                             <div class="text-center" style="margin-bottom:10px">
+//                                                 <i>{{file.title | truncate('12')}}</i> 
+//                                             </div>
+//                                             <div class="file-actions text-center">
+//                                                 <div class="action-item" v-tooltip title="download">
+//                                                     <a :href="file.url" download>
+//                                                         <i class="fa fa-download" style="color:#c4c4c4" aria-hidden="true"></i>
+//                                                     </a>
+//                                                 </div>
+//                                                 <div class="action-item" 
+//                                                     v-tooltip 
+//                                                     title="delete"
+//                                                     @click="deleteFile(file, findex)"
+//                                                     style="cursor:pointer">
+//                                                     <!-- <a> -->
+//                                                         <i class="fa fa-trash" style="color:#c4c4c4" aria-hidden="true"></i>
+//                                                     <!-- </a> -->
+//                                                 </div>
+//                                             </div>
+//                                         </div>
+//                                     </div>
+//
+//                             </div>
+//                         </div>
+//                     </div>
+//                     <comments :comments="folder.comments" 
+//                                 type="folder"
+//                                 :archive="folder.is_archive"
+//                                 :title="folder.folder_title"
+//                                 :key="folder.ID">
+//                     </comments>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </template>
+//
+// <script>
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div class=\"container\">\n        <project-nav>\n            <span><i class=\"fa fa-angle-right\"></i></span>\n            <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" class=\"link-style t-d-none\">\n                {{i18n.docs_and_files}}\n            </router-link>\n        </project-nav>\n        <div class=\"lists border-for-nav\" style=\"min-height: 100px;\">\n            <!-- <archive-message v-if=\"isArchived\">\n                <span>{{i18n.this_folder_is}} <strong>{{i18n.archived}}</strong></span>\n            </archive-message> -->\n            <div class=\"row\">\n                <component-actions>\n                    <li class=\"action-item\" v-if=\"isShowEdit && !editForm && !isArchived\" \n                        @click=\"toggleEdit\">\n                        <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                        {{i18n.edit}}\n                    </li>\n                    <li class=\"action-item\" v-if=\"isShowEdit && !editForm && !isArchived\" \n                        @click=\"deleteFolder\">\n                        <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                        {{i18n.delete}}\n                    </li>\n                    <!-- <bookmark :item=\"folder\" type=\"folder\" v-if=\"!isArchived\"></bookmark> -->\n                    <!-- <archive :item=\"folder\" type=\"folder\"></archive> -->\n                </component-actions>\n                <div class=\"col-4\">\n                    <button @click=\"fileUpload\" \n                            v-if=\"!editForm && !isArchived\"\n                            class=\"button button-default\">+ {{i18n.add_files_to_folder}}</button>\n                </div>\n                <div class=\"col-4 text-center single-folder-title\" v-if=\"!editForm\">\n                    <h3>{{folder.folder_title}}</h3>\n                </div>\n                <div v-else class=\"col-12\">\n                    <div class=\"text-center\">\n                        <input type=\"text\" class=\"form-control\" v-model=\"editText\" style=\"width:90%\">\n                    </div>\n                    <div class=\"left\" style=\"margin-left:5%\">\n                        <button class=\"button button-primary\" \n                                @click=\"updateFolder\"\n                                :disabled=\"updatingFolder\">\n                            <i v-if=\"updatingFolder\" class=\"fa fa-refresh fa-spin mr-5\"></i>\n                            {{ i18n.update }}\n                        </button>\n                        <button class=\"button button-default\" @click=\"cancelEdit\">{{ i18n.cancel }}</button>\n                    </div>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <!-- <div class=\"loading\" v-if=\"loading\">\n                        <p>Loading . . .</p>\n                    </div> -->\n                    <!-- <pre>\n                        {{folder}}\n                    </pre> -->\n                    <div v-if=\"folder && !loading\">\n                        <div class=\"row\">\n                            <div class=\"col-3\" v-for=\"(file, findex) in folder.files\">\n                                    <!-- {{file}} -->\n                                    <div class=\"file-div\">\n                                        <div>\n                                            <router-link :to=\"'/projects/' + $route.params.projectid + '/folders/' + $route.params.folderid + '/files/' + file.ID\">\n                                                <files-type-display :file=\"file\" type=\"folder\"></files-type-display>\n                                            </router-link>\n                                            <div class=\"text-center\" style=\"margin-bottom:10px\">\n                                                <i>{{file.title | truncate('12')}}</i> \n                                            </div>\n                                            <div class=\"file-actions text-center\">\n                                                <div class=\"action-item\" v-tooltip title=\"download\">\n                                                    <a :href=\"file.url\" download>\n                                                        <i class=\"fa fa-download\" style=\"color:#c4c4c4\" aria-hidden=\"true\"></i>\n                                                    </a>\n                                                </div>\n                                                <div class=\"action-item\" \n                                                    v-tooltip \n                                                    title=\"delete\"\n                                                    @click=\"deleteFile(file, findex)\"\n                                                    style=\"cursor:pointer\">\n                                                    <!-- <a> -->\n                                                        <i class=\"fa fa-trash\" style=\"color:#c4c4c4\" aria-hidden=\"true\"></i>\n                                                    <!-- </a> -->\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                \n                            </div>\n                        </div>\n                    </div>\n                    <comments :comments=\"folder.comments\" \n                                type=\"folder\"\n                                :archive=\"folder.is_archive\"\n                                :title=\"folder.folder_title\"\n                                :key=\"folder.ID\">\n                    </comments>\n                </div>\n            </div>\n        </div>\n    </div>\n";
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_script__, __vue_template__
+__webpack_require__(265)
+__vue_script__ = __webpack_require__(267)
+__vue_template__ = __webpack_require__(268)
+module.exports = __vue_script__ || {}
+if (module.exports.__esModule) module.exports = module.exports.default
+if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+if (false) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\xampp\\htdocs\\woopress\\wp-content\\plugins\\awesome-project-manager\\assets\\js\\components\\SingleFile.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, __vue_template__)
+  }
+})()}
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(266);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-38c2d94a&file=SingleFile.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./SingleFile.vue", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-38c2d94a&file=SingleFile.vue!../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./SingleFile.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\n    .file-info {\n\n    }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _store = __webpack_require__(3);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _CommentsComponent = __webpack_require__(38);
+
+var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
+
+var _ProjectNavComponent = __webpack_require__(8);
+
+var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
+
+var _ComponentActions = __webpack_require__(155);
+
+var _ComponentActions2 = _interopRequireDefault(_ComponentActions);
+
+var _FilesTypeDisplay = __webpack_require__(40);
+
+var _FilesTypeDisplay2 = _interopRequireDefault(_FilesTypeDisplay);
+
+var _HelpComponent = __webpack_require__(223);
+
+var _HelpComponent2 = _interopRequireDefault(_HelpComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import Bookmark from './partials/BookmarkComponent.vue';
+// <template>
+//     <div class="container">
+//         <project-nav>
+//             <span><i class="fa fa-angle-right"></i></span>
+//             <router-link :to="'/projects/' + $route.params.projectid + '/folders'" class="link-style t-d-none">
+//                 {{i18n.docs_and_files}}
+//             </router-link>
+//             <span><i class="fa fa-angle-right"></i></span>
+//             <router-link :to="'/projects/' + $route.params.projectid + '/folders/' + $route.params.folderid" class="link-style t-d-none">
+//                 {{folder.folder_title | truncate('15')}}
+//             </router-link>
+//         </project-nav>
+//         <div class="lists border-for-nav">
+//             <div class="row">
+//                 <!-- <component-actions> -->
+//                     <!-- <bookmark :item="attachment" type="file"></bookmark> -->
+//                 <!-- </component-actions> -->
+//                 <div class="col-12">
+//                     <div class="text-center">
+//                         <div style="margin-top:40px;">
+//                             <files-type-display :file="attachment" type="folder"></files-type-display>
+//                         </div>
+//                         <div class="file-info">
+//                             <h3>{{attachment.title}}.{{attachment.extension}}</h3>
+//                             <p><i>{{i18n.posted_by}}</i> <strong>{{attachment.author_name}}</strong></p>
+//                         </div>
+//                         <div>
+//                             <a :href="attachment.url" download>
+//                                 {{i18n.download}}
+//                             </a>
+//                         </div>
+//                     </div>
+//                     <comments :comments="attachment.comments" 
+//                                 type="file"
+//                                 :title="attachmentTitle"
+//                                 :key="attachment.ID"></comments>
+//                 </div>
+//                 <!-- <help-component></help-component>   -->
+//             </div>
+//         </div>
+//     </div>
+// </template>
+//
+// <script>
+exports.default = {
+    props: [],
+    components: {
+        ComponentActions: _ComponentActions2.default,
+        Comments: _CommentsComponent2.default,
+        FilesTypeDisplay: _FilesTypeDisplay2.default,
+        ProjectNav: _ProjectNavComponent2.default,
+        HelpComponent: _HelpComponent2.default
+        // Bookmark
+    },
+    data: function data() {
+        return {
+            loading: false,
+            attachment: '',
+            author: '',
+            i18n: {},
+            folder: '',
+            showHelp: false
+        };
+    },
+
+    computed: {
+        isShowEdit: function isShowEdit() {
+            var vm = this;
+            return vm.currentUser.roles.includes('administrator') || vm.currentUser.data.ID === vm.attachment.userID;
+        },
+        attachmentTitle: function attachmentTitle() {
+            return this.attachment.title + '.' + this.attachment.extension;
+        }
+    },
+    filters: {
+        truncate: function truncate(string, value) {
+            var dotdot = '';
+            if (!string) string = '';
+            if (string.length > value) {
+                dotdot = '...';
+            }
+            return string.substring(0, value) + dotdot;
+        }
+    },
+    methods: {
+        fetchFileDetails: function fetchFileDetails() {
+            var vm = this;
+            vm.loading = true;
+
+            var data = {
+                action: 'fpm-get-file-details',
+                project_id: vm.$route.params.projectid,
+                folder_id: vm.$route.params.folderid,
+                file_id: vm.$route.params.fileid,
+                nonce: fpm.nonce
+            };
+
+            jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loading = false;
+                if (resp.success) {
+                    vm.folder = resp.data[0];
+                    vm.attachment = vm.folder.attachment;
+                } else {
+                    vm.$router.push({
+                        path: '/?item=Folder&op=rf'
+                    });
+                }
+            });
+        }
+    },
+    created: function created() {
+        var vm = this;
+        vm.currentUser = fpm.currentUserInfo;
+        _store2.default.setLocalization('fpm-get-single-file-local-data').then(function (data) {
+            vm.i18n = data;
+        });
+        vm.fetchFileDetails();
+    }
+};
+// </script>
+//
+// <style>
+//     .file-info {
+//
+//     }
+// </style>
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports) {
+
+module.exports = "\n    <div class=\"container\">\n        <project-nav>\n            <span><i class=\"fa fa-angle-right\"></i></span>\n            <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" class=\"link-style t-d-none\">\n                {{i18n.docs_and_files}}\n            </router-link>\n            <span><i class=\"fa fa-angle-right\"></i></span>\n            <router-link :to=\"'/projects/' + $route.params.projectid + '/folders/' + $route.params.folderid\" class=\"link-style t-d-none\">\n                {{folder.folder_title | truncate('15')}}\n            </router-link>\n        </project-nav>\n        <div class=\"lists border-for-nav\">\n            <div class=\"row\">\n                <!-- <component-actions> -->\n                    <!-- <bookmark :item=\"attachment\" type=\"file\"></bookmark> -->\n                <!-- </component-actions> -->\n                <div class=\"col-12\">\n                    <div class=\"text-center\">\n                        <div style=\"margin-top:40px;\">\n                            <files-type-display :file=\"attachment\" type=\"folder\"></files-type-display>\n                        </div>\n                        <div class=\"file-info\">\n                            <h3>{{attachment.title}}.{{attachment.extension}}</h3>\n                            <p><i>{{i18n.posted_by}}</i> <strong>{{attachment.author_name}}</strong></p>\n                        </div>\n                        <div>\n                            <a :href=\"attachment.url\" download>\n                                {{i18n.download}}\n                            </a>\n                        </div>\n                    </div>\n                    <comments :comments=\"attachment.comments\" \n                                type=\"file\"\n                                :title=\"attachmentTitle\"\n                                :key=\"attachment.ID\"></comments>\n                </div>\n                <!-- <help-component></help-component>   -->\n            </div>\n        </div>\n    </div>\n";
 
 /***/ })
 /******/ ]);

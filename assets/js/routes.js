@@ -22,6 +22,10 @@ const Message = require('./components/Message.vue');
 const NewMessage = require('./components/partials/NewMessage.vue');
 const EditMessage = require('./components/partials/EditMessage.vue');
 
+const Folders = require('./components/Folders.vue');
+const Folder = require('./components/Folder.vue');
+const SingleFile = require('./components/SingleFile.vue');
+
 const MyAssignments = require('./components/MyAssignments.vue');
 const MyActivity = require('./components/MyActivity.vue');
 
@@ -62,6 +66,14 @@ const routes = [
     { path: '/projects/:projectid/messages/:messageid', component: Message },
 
     { path: '/projects/:projectid/messages/:messageid/edit', component: EditMessage },
+
+    { path: '/projects/:projectid/folders', component: Folders },
+
+    { path: '/projects/:projectid/folders/:folderid', component: Folder },
+
+    { path: '/projects/:projectid/folders/:folderid/files', component: Folder },
+
+    { path: '/projects/:projectid/folders/:folderid/files/:fileid', component: SingleFile },
 
     { path: '*', redirect: '/' }
 ];
