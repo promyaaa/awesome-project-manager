@@ -77,12 +77,15 @@
                         <router-link :to="'/projects/' + $route.params.projectid + '/todolists'" tag="h3" class="link-style">
                             <a>{{ i18n.todos }}</a>
                         </router-link>
+                        <h3 v-if="loadingLocal">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </h3>
                         <hr>
                         <div style="" class="text-left">
                             <div v-for="list in listSummary">
-                                <h4>{{list.list_title}}</h4>
+                                <h4 class="animated fadeIn">{{list.list_title}}</h4>
                                 <ul>
-                                    <li v-for="todo in list.todos">
+                                    <li v-for="todo in list.todos" class="animated fadeIn">
                                         <span class="checkbox-style ellipsis-90"></span>{{todo.todo}}
                                     </li>
                                 </ul>
@@ -103,9 +106,12 @@
                         <router-link :to="'/projects/' + $route.params.projectid + '/messages'" tag="h3" class="link-style">
                             <a>{{ i18n.message_board }}</a>
                         </router-link>
+                        <h3 v-if="loadingLocal">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </h3>
                         <hr>
                         <div style="position: absolute;margin-top:10px;" class="text-left">
-                            <div v-for="messageObj in messages" class="messages">
+                            <div v-for="messageObj in messages" class="messages animated fadeIn">
                                 <div class="message-list">
                                     <img class="inbox-user-img" 
                                     :src="messageObj.avatar_url" width="20">
@@ -134,11 +140,14 @@
                         <router-link :to="'/projects/' + $route.params.projectid + '/folders'" tag="h3" class="link-style">
                             <a>{{i18n.docs_and_files}}</a>
                         </router-link>
+                        <h3 v-if="loadingLocal">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </h3>
                         <hr>
                         <div style="row text-center">
                             <div class="col-12">
                                 <ul class="folders">
-                                    <li class="folder-list" v-for="folder in folders">
+                                    <li v-for="folder in folders" class="folder-list animated fadeIn">
                                         <div class="summary-doc-title">
                                             <strong>{{folder.folder_title | truncate('8')}}</strong>
                                         </div>
@@ -160,6 +169,26 @@
                             </div>
                         </div>
                         <span class="preview-fade"></span>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="summary-card">
+                        <router-link :to="'/projects/' + $route.params.projectid + '/calendar'" tag="h3" class="link-style">
+                            <!-- <a>{{ i18n.message_board }}</a> -->
+                            <a>Calendar View</a>
+                        </router-link>
+                        <h3 v-if="loadingLocal">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </h3>
+                        <hr>
+                        <div>
+                            <div style="margin-top:12%">
+                                <!-- <img :src="assetsDistPath+messageIcon" width="80" height="80" alt=""> -->
+                                <span class="summary-icon">
+                                    <i class="fa fa-calendar fa-3x"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,7 +213,8 @@
                 messages: [],
                 users: [],
                 folders: [],
-                project: ''
+                project: '',
+                loadingLocal: false,
             }
         },
         filters:{
@@ -294,9 +324,10 @@
                 prevID,
                 prevKey;
 
-            var self = this;
+            vm.loadingLocal = true;
             store.setLocalization( 'fpm-get-summary-local-data' ).then( function( data ) {
-                self.i18n = data;
+                vm.loadingLocal = false;
+                vm.i18n = data;
             });
             vm.loading = true;
             vm.fetchProject();

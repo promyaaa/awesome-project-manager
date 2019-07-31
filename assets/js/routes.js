@@ -26,6 +26,8 @@ const Folders = require('./components/Folders.vue');
 const Folder = require('./components/Folder.vue');
 const SingleFile = require('./components/SingleFile.vue');
 
+const Calendar = require('./components/Calendar.vue');
+
 const MyAssignments = require('./components/MyAssignments.vue');
 const MyActivity = require('./components/MyActivity.vue');
 
@@ -74,6 +76,8 @@ const routes = [
     { path: '/projects/:projectid/folders/:folderid/files', component: Folder },
 
     { path: '/projects/:projectid/folders/:folderid/files/:fileid', component: SingleFile },
+
+    { path: '/projects/:projectid/calendar', component: Calendar },
 
     { path: '*', redirect: '/' }
 ];

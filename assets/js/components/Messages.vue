@@ -34,7 +34,7 @@
                     </div>
                     <div v-if="messages.length > 0 && !loading">
                         <ul>
-                            <li v-for="(messageObj, mindex) in messages" style="border-bottom: 1px solid #f2f2f2">
+                            <li class="animated fadeIn" v-for="(messageObj, mindex) in messages" style="border-bottom: 1px solid #f2f2f2">
                                 <div class="row">
                                     <div class="col-2 text-center">
                                         <img :src="messageObj.avatar_url" class="small-round-image" style="margin-top: 10px">

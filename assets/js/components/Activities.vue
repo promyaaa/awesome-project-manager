@@ -23,7 +23,12 @@
                     
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
-                            <button class="button" @click="loadMoreActivities">Load More</button>
+                            <button class="button" 
+                                    @click="loadMoreActivities"
+                                    :disabled="loadMore">
+                                <i v-if="loadMore" class="fa fa-refresh fa-spin"></i>
+                                Load More
+                            </button>
                         </div>
                     </div>
                     <div v-if="noActivity && !loading">
@@ -73,6 +78,7 @@
                 totalActivityCount: '',
                 currentCount: '',
                 loading: false,
+                loadMore: false,
             }
         },
 
