@@ -27,8 +27,14 @@
                 </div>
                 <div class="nav-section">
                     <router-link :to="'/projects/' + $route.params.projectid + '/folders'" class="link-style" tag="div">
-                        <strong style="display:block;padding-bottom:5px;cursor: pointer;">Docs&Files</strong>
+                        <strong style="display:block;padding-bottom:5px;cursor: pointer;">Docs & Files</strong>
                         <i class="fa fa-folder"></i>
+                    </router-link>   
+                </div>
+                <div class="nav-section">
+                    <router-link :to="'/projects/' + $route.params.projectid + '/calendar'" class="link-style" tag="div">
+                        <strong style="display:block;padding-bottom:5px;cursor: pointer;">Calendar</strong>
+                        <i class="fa fa-calendar"></i>
                     </router-link>   
                 </div>
             </div>
@@ -78,7 +84,9 @@
                     
                     if ( resp.success ) {
                         vm.project = resp.data[0];
-                        vm.$emit( 'get-project', vm.project );
+                        vm.$nextTick(function () {
+                            vm.$emit( 'get-project', vm.project );
+                        })
                     } else {
                         vm.$router.push({
                             path: `/?item=Project&op=rf`

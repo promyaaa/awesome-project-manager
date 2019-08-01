@@ -429,7 +429,7 @@
     .summary-card {
         position: relative;
         padding: 10px 25px;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
         text-align: center;
         position: relative;
         border: 1px solid #e5e5e5;

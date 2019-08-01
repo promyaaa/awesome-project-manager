@@ -472,18 +472,6 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store  = __webpack_require__(49)('wks')
-  , uid    = __webpack_require__(34)
-  , Symbol = __webpack_require__(7).Symbol;
-module.exports = function(name){
-  return store[name] || (store[name] =
-    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var __vue_script__, __vue_template__
 __webpack_require__(144)
 __vue_script__ = __webpack_require__(146)
@@ -502,6 +490,18 @@ if (false) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, __vue_template__)
   }
 })()}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var store  = __webpack_require__(49)('wks')
+  , uid    = __webpack_require__(34)
+  , Symbol = __webpack_require__(7).Symbol;
+module.exports = function(name){
+  return store[name] || (store[name] =
+    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
+};
 
 /***/ }),
 /* 7 */
@@ -682,7 +682,7 @@ module.exports = {};
 
 var def = __webpack_require__(3).setDesc
   , has = __webpack_require__(26)
-  , TAG = __webpack_require__(5)('toStringTag');
+  , TAG = __webpack_require__(6)('toStringTag');
 
 module.exports = function(it, tag, stat){
   if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
@@ -869,7 +869,7 @@ var LIBRARY        = __webpack_require__(31)
   , $iterCreate    = __webpack_require__(78)
   , setToStringTag = __webpack_require__(19)
   , getProto       = __webpack_require__(3).getProto
-  , ITERATOR       = __webpack_require__(5)('iterator')
+  , ITERATOR       = __webpack_require__(6)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
   , KEYS           = 'keys'
@@ -986,7 +986,7 @@ module.exports = function(it, Constructor, name){
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = __webpack_require__(15)
-  , TAG = __webpack_require__(5)('toStringTag')
+  , TAG = __webpack_require__(6)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -11362,7 +11362,7 @@ module.exports = function(done, value){
 var core        = __webpack_require__(4)
   , $           = __webpack_require__(3)
   , DESCRIPTORS = __webpack_require__(13)
-  , SPECIES     = __webpack_require__(5)('species');
+  , SPECIES     = __webpack_require__(6)('species');
 
 module.exports = function(KEY){
   var C = core[KEY];
@@ -31933,7 +31933,7 @@ var $              = __webpack_require__(3)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(17)(IteratorPrototype, __webpack_require__(5)('iterator'), function(){ return this; });
+__webpack_require__(17)(IteratorPrototype, __webpack_require__(6)('iterator'), function(){ return this; });
 
 module.exports = function(Constructor, NAME, next){
   Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
@@ -32192,7 +32192,7 @@ module.exports = function(iterator, fn, value, entries){
 
 // check on default Array iterator
 var Iterators  = __webpack_require__(18)
-  , ITERATOR   = __webpack_require__(5)('iterator')
+  , ITERATOR   = __webpack_require__(6)('iterator')
   , ArrayProto = Array.prototype;
 
 module.exports = function(it){
@@ -32215,7 +32215,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof   = __webpack_require__(37)
-  , ITERATOR  = __webpack_require__(5)('iterator')
+  , ITERATOR  = __webpack_require__(6)('iterator')
   , Iterators = __webpack_require__(18);
 module.exports = __webpack_require__(4).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
@@ -32338,7 +32338,7 @@ var $          = __webpack_require__(3)
   , forOf      = __webpack_require__(27)
   , setProto   = __webpack_require__(92).set
   , same       = __webpack_require__(93)
-  , SPECIES    = __webpack_require__(5)('species')
+  , SPECIES    = __webpack_require__(6)('species')
   , speciesConstructor = __webpack_require__(94)
   , asap       = __webpack_require__(95)
   , PROMISE    = 'Promise'
@@ -32665,7 +32665,7 @@ module.exports = Object.is || function is(x, y){
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject  = __webpack_require__(11)
   , aFunction = __webpack_require__(29)
-  , SPECIES   = __webpack_require__(5)('species');
+  , SPECIES   = __webpack_require__(6)('species');
 module.exports = function(O, D){
   var C = anObject(O).constructor, S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
@@ -32863,7 +32863,7 @@ module.exports = function(it){
 /* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ITERATOR     = __webpack_require__(5)('iterator')
+var ITERATOR     = __webpack_require__(6)('iterator')
   , SAFE_CLOSING = false;
 
 try {
@@ -32946,7 +32946,7 @@ var $              = __webpack_require__(3)
   , shared         = __webpack_require__(49)
   , setToStringTag = __webpack_require__(19)
   , uid            = __webpack_require__(34)
-  , wks            = __webpack_require__(5)
+  , wks            = __webpack_require__(6)
   , keyOf          = __webpack_require__(107)
   , $names         = __webpack_require__(46)
   , enumKeys       = __webpack_require__(108)
@@ -33330,8 +33330,8 @@ var SingleFile = __webpack_require__(255);
 
 var Calendar = __webpack_require__(260);
 
-var MyAssignments = __webpack_require__(272);
-var MyActivity = __webpack_require__(277);
+var MyAssignments = __webpack_require__(270);
+var MyActivity = __webpack_require__(275);
 
 var routes = [{ path: '/', component: Home }, { path: '/my/assignments', component: MyAssignments }, { path: '/my/activity', component: MyActivity }, { path: '/projects', component: Home }, { path: '/projects/:projectid', component: Summary }, { path: '/projects/:projectid/reports', component: ProjectActivities },
 
@@ -35855,7 +35855,7 @@ module.exports = { "default": __webpack_require__(121), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(25);
-module.exports = __webpack_require__(5)('toStringTag');
+module.exports = __webpack_require__(6)('toStringTag');
 
 /***/ }),
 /* 122 */
@@ -35955,7 +35955,7 @@ var _FileUploadComponent = __webpack_require__(28);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -39405,8 +39405,14 @@ Object.defineProperty(exports, "__esModule", {
 //                 </div>
 //                 <div class="nav-section">
 //                     <router-link :to="'/projects/' + $route.params.projectid + '/folders'" class="link-style" tag="div">
-//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">Docs&Files</strong>
+//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">Docs & Files</strong>
 //                         <i class="fa fa-folder"></i>
+//                     </router-link>   
+//                 </div>
+//                 <div class="nav-section">
+//                     <router-link :to="'/projects/' + $route.params.projectid + '/calendar'" class="link-style" tag="div">
+//                         <strong style="display:block;padding-bottom:5px;cursor: pointer;">Calendar</strong>
+//                         <i class="fa fa-calendar"></i>
 //                     </router-link>   
 //                 </div>
 //             </div>
@@ -39457,7 +39463,9 @@ exports.default = {
 
                 if (resp.success) {
                     vm.project = resp.data[0];
-                    vm.$emit('get-project', vm.project);
+                    vm.$nextTick(function () {
+                        vm.$emit('get-project', vm.project);
+                    });
                 } else {
                     vm.$router.push({
                         path: '/?item=Project&op=rf'
@@ -39527,7 +39535,7 @@ exports.default = {
 /* 147 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div v-if=\"!isClient\">\r\n        <div class=\"project-navigation\">\r\n            <div class=\"nav-link\">\r\n                <span style=\"display:inline-block; cursor: pointer;\" @click=\"toggleNavSection\">\r\n                    <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\r\n                </span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"div\" class=\"link-style\" style=\"display:inline-block\">\r\n                    <a style=\"font-weight:bold;font-size:16px;padding-left:5px;\">\r\n                        {{project.project_title | truncate('20')}}\r\n                    </a>\r\n                </router-link>\r\n                <slot></slot>\r\n            </div>\r\n            <div v-if=\"isShowNavSection\">\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">To-Dos</strong>\r\n                        <i class=\"fa fa-check\"></i>\r\n                    </router-link>   \r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Messages</strong>\r\n                        <i class=\"fa fa-envelope\"></i>\r\n                    </router-link>\r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Docs&Files</strong>\r\n                        <i class=\"fa fa-folder\"></i>\r\n                    </router-link>   \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div v-if=\"!isClient\">\r\n        <div class=\"project-navigation\">\r\n            <div class=\"nav-link\">\r\n                <span style=\"display:inline-block; cursor: pointer;\" @click=\"toggleNavSection\">\r\n                    <i class=\"fa fa-bars\" aria-hidden=\"true\"></i>\r\n                </span>\r\n                <router-link :to=\"'/projects/' + $route.params.projectid\" tag=\"div\" class=\"link-style\" style=\"display:inline-block\">\r\n                    <a style=\"font-weight:bold;font-size:16px;padding-left:5px;\">\r\n                        {{project.project_title | truncate('20')}}\r\n                    </a>\r\n                </router-link>\r\n                <slot></slot>\r\n            </div>\r\n            <div v-if=\"isShowNavSection\">\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/todolists'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">To-Dos</strong>\r\n                        <i class=\"fa fa-check\"></i>\r\n                    </router-link>   \r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/messages'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Messages</strong>\r\n                        <i class=\"fa fa-envelope\"></i>\r\n                    </router-link>\r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/folders'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Docs & Files</strong>\r\n                        <i class=\"fa fa-folder\"></i>\r\n                    </router-link>   \r\n                </div>\r\n                <div class=\"nav-section\">\r\n                    <router-link :to=\"'/projects/' + $route.params.projectid + '/calendar'\" class=\"link-style\" tag=\"div\">\r\n                        <strong style=\"display:block;padding-bottom:5px;cursor: pointer;\">Calendar</strong>\r\n                        <i class=\"fa fa-calendar\"></i>\r\n                    </router-link>   \r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 148 */
@@ -40012,7 +40020,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px;*/\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        border-radius: 5px;\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n    li.folder-list {\r\n        display: inline-block;\r\n        border: 1px solid #eee;\r\n        padding: 5px;\r\n        margin: 5px;\r\n    }\r\n", ""]);
+exports.push([module.i, "\r\n    .p-r-10 {\r\n        padding-right: 10px;\r\n    }\r\n    .p-l-10 {\r\n        padding-left: 10px;\r\n    }\r\n    .checkbox-style {\r\n        padding: 0px 9px;\r\n        margin-right: 10px;\r\n        margin-left: 10px;\r\n        border: 1px solid #ccc;\r\n        /*border-radius: 3px;*/\r\n    }\r\n    .link-style a:link {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:visited {\r\n        text-decoration: none;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:hover {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .link-style a:active {\r\n        text-decoration: underline;\r\n        cursor: pointer;\r\n    }\r\n    .small-round-image {\r\n        border-radius: 40%;\r\n    }\r\n    .text-center {\r\n        text-align: center;\r\n    }\r\n    .text-left {\r\n        text-align: left;\r\n    }\r\n    .text-right {\r\n        text-align: right;\r\n    }\r\n\r\n    .summary-section {\r\n        background: #ffffff;\r\n        padding-bottom: 40px;\r\n        /*border-radius: 5px;*/\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,.04);\r\n        overflow: hidden;\r\n    }\r\n    span.summary-icon i {\r\n        padding: 9px 12px 12px;\r\n        border-radius: 50px;\r\n        border: 1px solid #267cb5;\r\n        color: white;\r\n        background: #267cb5;\r\n    }\r\n    .summary-card {\r\n        position: relative;\r\n        padding: 10px 25px;\r\n        /*border-radius: 5px;*/\r\n        text-align: center;\r\n        position: relative;\r\n        border: 1px solid #e5e5e5;\r\n        box-shadow: 0 1px 1px rgba(0,0,0,0.04);\r\n        background: #fff;\r\n        height: 200px;\r\n        overflow: hidden;\r\n    }\r\n\r\n    .summary-card ul li{\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .summary-card h3,\r\n    .summary-card h4 {\r\n        margin: 15px 0px;\r\n        padding: 0px;\r\n    }\r\n\r\n    .users-summary {\r\n        padding: 0.7em 2em 1em;\r\n        border-radius: 3px;\r\n        text-align: center;\r\n        height: auto;\r\n    }\r\n    .project-info {\r\n        position: relative;\r\n        padding: 30px 40px 10px;\r\n    }\r\n\r\n    .messages .message-list {\r\n        overflow: hidden;\r\n        margin-bottom: 10px;\r\n    }\r\n\r\n    .show-edit {\r\n        padding-top: 7px;\r\n        padding-right: 7px;\r\n        position: absolute;\r\n        right: 0;\r\n        top: 0;\r\n        cursor: pointer;\r\n    }\r\n    .project-settings .fa {\r\n        color: #b5b5b5;\r\n    }\r\n    .inbox-user-img {\r\n        display: inline-block;\r\n        vertical-align: top;\r\n        border-radius: 45px;\r\n        margin-right: 5px;\r\n    }\r\n    li.folder-list {\r\n        display: inline-block;\r\n        border: 1px solid #eee;\r\n        padding: 5px;\r\n        margin: 5px;\r\n    }\r\n", ""]);
 
 // exports
 
@@ -40269,7 +40277,7 @@ exports.default = {
 //     .summary-card {
 //         position: relative;
 //         padding: 10px 25px;
-//         border-radius: 5px;
+//         /*border-radius: 5px;*/
 //         text-align: center;
 //         position: relative;
 //         border: 1px solid #e5e5e5;
@@ -41447,7 +41455,7 @@ var _ActivityInfo = __webpack_require__(43);
 
 var _ActivityInfo2 = _interopRequireDefault(_ActivityInfo);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -41684,7 +41692,7 @@ var _ListComponent = __webpack_require__(60);
 
 var _ListComponent2 = _interopRequireDefault(_ListComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -42973,7 +42981,7 @@ var _CommentsComponent = __webpack_require__(20);
 
 var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -43175,7 +43183,7 @@ var _SingleUserComponent = __webpack_require__(209);
 
 var _SingleUserComponent2 = _interopRequireDefault(_SingleUserComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -43915,7 +43923,7 @@ var _store = __webpack_require__(2);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -44291,7 +44299,7 @@ var _FilesTypeDisplay = __webpack_require__(21);
 
 var _FilesTypeDisplay2 = _interopRequireDefault(_FilesTypeDisplay);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -44599,7 +44607,7 @@ var _FileUploadComponent = __webpack_require__(28);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -44880,7 +44888,7 @@ var _FileUploadComponent = __webpack_require__(28);
 
 var _FileUploadComponent2 = _interopRequireDefault(_FileUploadComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -45181,7 +45189,7 @@ var _store = __webpack_require__(2);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -45513,7 +45521,7 @@ var _FilesTypeDisplay = __webpack_require__(21);
 
 var _FilesTypeDisplay2 = _interopRequireDefault(_FilesTypeDisplay);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -46011,7 +46019,7 @@ var _CommentsComponent = __webpack_require__(20);
 
 var _CommentsComponent2 = _interopRequireDefault(_CommentsComponent);
 
-var _ProjectNavComponent = __webpack_require__(6);
+var _ProjectNavComponent = __webpack_require__(5);
 
 var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
@@ -46169,8 +46177,8 @@ module.exports = "\n    <div class=\"container\">\n        <project-nav>\n      
 
 var __vue_script__, __vue_template__
 __webpack_require__(261)
-__vue_script__ = __webpack_require__(263)
-__vue_template__ = __webpack_require__(271)
+__vue_script__ = __webpack_require__(265)
+__vue_template__ = __webpack_require__(269)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -46218,8 +46226,9 @@ if(false) {
 
 exports = module.exports = __webpack_require__(0)();
 // imports
-exports.i(__webpack_require__(268), "");
-exports.i(__webpack_require__(270), "");
+exports.i(__webpack_require__(263), "");
+exports.i(__webpack_require__(264), "");
+exports.i(__webpack_require__(281), "");
 
 // module
 exports.push([module.i, "\r\n\r\n", ""]);
@@ -46231,20 +46240,56 @@ exports.push([module.i, "\r\n\r\n", ""]);
 /* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "/*!\nFullCalendar Core Package v4.2.0\nDocs & License: https://fullcalendar.io/\n(c) 2019 Adam Shaw\n*/\n.fc {\n  direction: ltr;\n  text-align: left; }\n\n.fc-rtl {\n  text-align: right; }\n\nbody .fc {\n  /* extra precedence to overcome jqui */\n  font-size: 1em; }\n\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-highlight {\n  /* when user is selecting cells */\n  background: #bce8f1;\n  opacity: .3; }\n\n.fc-bgevent {\n  /* default look for background events */\n  background: #8fdf82;\n  opacity: .3; }\n\n.fc-nonbusiness {\n  /* default look for non-business-hours areas */\n  /* will inherit .fc-bgevent's styles */\n  background: #d7d7d7; }\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-popover {\n  position: absolute;\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }\n\n.fc-popover .fc-header {\n  /* TODO: be more consistent with fc-head/fc-body */\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 2px 4px; }\n\n.fc-rtl .fc-popover .fc-header {\n  flex-direction: row-reverse; }\n\n.fc-popover .fc-header .fc-title {\n  margin: 0 2px; }\n\n.fc-popover .fc-header .fc-close {\n  cursor: pointer;\n  opacity: 0.65;\n  font-size: 1.1em; }\n\n/* Misc Reusable Components\n--------------------------------------------------------------------------------------------------*/\n.fc-divider {\n  border-style: solid;\n  border-width: 1px; }\n\nhr.fc-divider {\n  height: 0;\n  margin: 0;\n  padding: 0 0 2px;\n  /* height is unreliable across browsers, so use padding */\n  border-width: 1px 0; }\n\n.fc-bg,\n.fc-bgevent-skeleton,\n.fc-highlight-skeleton,\n.fc-mirror-skeleton {\n  /* these element should always cling to top-left/right corners */\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n.fc-bg {\n  bottom: 0;\n  /* strech bg to bottom edge */ }\n\n.fc-bg table {\n  height: 100%;\n  /* strech bg to bottom edge */ }\n\n/* Tables\n--------------------------------------------------------------------------------------------------*/\n.fc table {\n  width: 100%;\n  box-sizing: border-box;\n  /* fix scrollbar issue in firefox */\n  table-layout: fixed;\n  border-collapse: collapse;\n  border-spacing: 0;\n  font-size: 1em;\n  /* normalize cross-browser */ }\n\n.fc th {\n  text-align: center; }\n\n.fc th,\n.fc td {\n  border-style: solid;\n  border-width: 1px;\n  padding: 0;\n  vertical-align: top; }\n\n.fc td.fc-today {\n  border-style: double;\n  /* overcome neighboring borders */ }\n\n/* Internal Nav Links\n--------------------------------------------------------------------------------------------------*/\na[data-goto] {\n  cursor: pointer; }\n\na[data-goto]:hover {\n  text-decoration: underline; }\n\n/* Fake Table Rows\n--------------------------------------------------------------------------------------------------*/\n.fc .fc-row {\n  /* extra precedence to overcome themes forcing a 1px border */\n  /* no visible border by default. but make available if need be (scrollbar width compensation) */\n  border-style: solid;\n  border-width: 0; }\n\n.fc-row table {\n  /* don't put left/right border on anything within a fake row.\n     the outer tbody will worry about this */\n  border-left: 0 hidden transparent;\n  border-right: 0 hidden transparent;\n  /* no bottom borders on rows */\n  border-bottom: 0 hidden transparent; }\n\n.fc-row:first-child table {\n  border-top: 0 hidden transparent;\n  /* no top border on first row */ }\n\n/* Day Row (used within the header and the DayGrid)\n--------------------------------------------------------------------------------------------------*/\n.fc-row {\n  position: relative; }\n\n.fc-row .fc-bg {\n  z-index: 1; }\n\n/* highlighting cells & background event skeleton */\n.fc-row .fc-bgevent-skeleton,\n.fc-row .fc-highlight-skeleton {\n  bottom: 0;\n  /* stretch skeleton to bottom of row */ }\n\n.fc-row .fc-bgevent-skeleton table,\n.fc-row .fc-highlight-skeleton table {\n  height: 100%;\n  /* stretch skeleton to bottom of row */ }\n\n.fc-row .fc-highlight-skeleton td,\n.fc-row .fc-bgevent-skeleton td {\n  border-color: transparent; }\n\n.fc-row .fc-bgevent-skeleton {\n  z-index: 2; }\n\n.fc-row .fc-highlight-skeleton {\n  z-index: 3; }\n\n/*\nrow content (which contains day/week numbers and events) as well as \"mirror\" (which contains\ntemporary rendered events).\n*/\n.fc-row .fc-content-skeleton {\n  position: relative;\n  z-index: 4;\n  padding-bottom: 2px;\n  /* matches the space above the events */ }\n\n.fc-row .fc-mirror-skeleton {\n  z-index: 5; }\n\n.fc .fc-row .fc-content-skeleton table,\n.fc .fc-row .fc-content-skeleton td,\n.fc .fc-row .fc-mirror-skeleton td {\n  /* see-through to the background below */\n  /* extra precedence to prevent theme-provided backgrounds */\n  background: none;\n  /* in case <td>s are globally styled */\n  border-color: transparent; }\n\n.fc-row .fc-content-skeleton td,\n.fc-row .fc-mirror-skeleton td {\n  /* don't put a border between events and/or the day number */\n  border-bottom: 0; }\n\n.fc-row .fc-content-skeleton tbody td,\n.fc-row .fc-mirror-skeleton tbody td {\n  /* don't put a border between event cells */\n  border-top: 0; }\n\n/* Scrolling Container\n--------------------------------------------------------------------------------------------------*/\n.fc-scroller {\n  -webkit-overflow-scrolling: touch; }\n\n/* TODO: move to timegrid/daygrid */\n.fc-scroller > .fc-day-grid,\n.fc-scroller > .fc-time-grid {\n  position: relative;\n  /* re-scope all positions */\n  width: 100%;\n  /* hack to force re-sizing this inner element when scrollbars appear/disappear */ }\n\n/* Global Event Styles\n--------------------------------------------------------------------------------------------------*/\n.fc-event {\n  position: relative;\n  /* for resize handle and other inner positioning */\n  display: block;\n  /* make the <a> tag block */\n  font-size: .85em;\n  line-height: 1.4;\n  border-radius: 3px;\n  border: 1px solid #3788d8; }\n\n.fc-event,\n.fc-event-dot {\n  background-color: #3788d8;\n  /* default BACKGROUND color */ }\n\n.fc-event,\n.fc-event:hover {\n  color: #fff;\n  /* default TEXT color */\n  text-decoration: none;\n  /* if <a> has an href */ }\n\n.fc-event[href],\n.fc-event.fc-draggable {\n  cursor: pointer;\n  /* give events with links and draggable events a hand mouse pointer */ }\n\n.fc-not-allowed,\n.fc-not-allowed .fc-event {\n  /* to override an event's custom cursor */\n  cursor: not-allowed; }\n\n.fc-event .fc-content {\n  position: relative;\n  z-index: 2; }\n\n/* resizer (cursor AND touch devices) */\n.fc-event .fc-resizer {\n  position: absolute;\n  z-index: 4; }\n\n/* resizer (touch devices) */\n.fc-event .fc-resizer {\n  display: none; }\n\n.fc-event.fc-allow-mouse-resize .fc-resizer,\n.fc-event.fc-selected .fc-resizer {\n  /* only show when hovering or selected (with touch) */\n  display: block; }\n\n/* hit area */\n.fc-event.fc-selected .fc-resizer:before {\n  /* 40x40 touch area */\n  content: \"\";\n  position: absolute;\n  z-index: 9999;\n  /* user of this util can scope within a lower z-index */\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  margin-left: -20px;\n  margin-top: -20px; }\n\n/* Event Selection (only for touch devices)\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-selected {\n  z-index: 9999 !important;\n  /* overcomes inline z-index */\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }\n\n.fc-event.fc-selected:after {\n  content: \"\";\n  position: absolute;\n  z-index: 1;\n  /* same z-index as fc-bg, behind text */\n  /* overcome the borders */\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  /* darkening effect */\n  background: #000;\n  opacity: .25; }\n\n/* Event Dragging\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-dragging.fc-selected {\n  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3); }\n\n.fc-event.fc-dragging:not(.fc-selected) {\n  opacity: .75; }\n\n/* Horizontal Events\n--------------------------------------------------------------------------------------------------*/\n/* bigger touch area when selected */\n.fc-h-event.fc-selected:before {\n  content: \"\";\n  position: absolute;\n  z-index: 3;\n  /* below resizers */\n  top: -10px;\n  bottom: -10px;\n  left: 0;\n  right: 0; }\n\n/* events that are continuing to/from another week. kill rounded corners and butt up against edge */\n.fc-ltr .fc-h-event.fc-not-start,\n.fc-rtl .fc-h-event.fc-not-end {\n  margin-left: 0;\n  border-left-width: 0;\n  padding-left: 1px;\n  /* replace the border with padding */\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.fc-ltr .fc-h-event.fc-not-end,\n.fc-rtl .fc-h-event.fc-not-start {\n  margin-right: 0;\n  border-right-width: 0;\n  padding-right: 1px;\n  /* replace the border with padding */\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n/* resizer (cursor AND touch devices) */\n/* left resizer  */\n.fc-ltr .fc-h-event .fc-start-resizer,\n.fc-rtl .fc-h-event .fc-end-resizer {\n  cursor: w-resize;\n  left: -1px;\n  /* overcome border */ }\n\n/* right resizer */\n.fc-ltr .fc-h-event .fc-end-resizer,\n.fc-rtl .fc-h-event .fc-start-resizer {\n  cursor: e-resize;\n  right: -1px;\n  /* overcome border */ }\n\n/* resizer (mouse devices) */\n.fc-h-event.fc-allow-mouse-resize .fc-resizer {\n  width: 7px;\n  top: -1px;\n  /* overcome top border */\n  bottom: -1px;\n  /* overcome bottom border */ }\n\n/* resizer (touch devices) */\n.fc-h-event.fc-selected .fc-resizer {\n  /* 8x8 little dot */\n  border-radius: 4px;\n  border-width: 1px;\n  width: 6px;\n  height: 6px;\n  border-style: solid;\n  border-color: inherit;\n  background: #fff;\n  /* vertically center */\n  top: 50%;\n  margin-top: -4px; }\n\n/* left resizer  */\n.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {\n  margin-left: -4px;\n  /* centers the 8x8 dot on the left edge */ }\n\n/* right resizer */\n.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {\n  margin-right: -4px;\n  /* centers the 8x8 dot on the right edge */ }\n\n/* DayGrid events\n----------------------------------------------------------------------------------------------------\nWe use the full \"fc-day-grid-event\" class instead of using descendants because the event won't\nbe a descendant of the grid when it is being dragged.\n*/\n.fc-day-grid-event {\n  margin: 1px 2px 0;\n  /* spacing between events and edges */\n  padding: 0 1px; }\n\ntr:first-child > td > .fc-day-grid-event {\n  margin-top: 2px;\n  /* a little bit more space before the first event */ }\n\n.fc-mirror-skeleton tr:first-child > td > .fc-day-grid-event {\n  margin-top: 0;\n  /* except for mirror skeleton */ }\n\n.fc-day-grid-event .fc-content {\n  /* force events to be one-line tall */\n  white-space: nowrap;\n  overflow: hidden; }\n\n.fc-day-grid-event .fc-time {\n  font-weight: bold; }\n\n/* resizer (cursor devices) */\n/* left resizer  */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {\n  margin-left: -2px;\n  /* to the day cell's edge */ }\n\n/* right resizer */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {\n  margin-right: -2px;\n  /* to the day cell's edge */ }\n\n/* Event Limiting\n--------------------------------------------------------------------------------------------------*/\n/* \"more\" link that represents hidden events */\na.fc-more {\n  margin: 1px 3px;\n  font-size: .85em;\n  cursor: pointer;\n  text-decoration: none; }\n\na.fc-more:hover {\n  text-decoration: underline; }\n\n.fc-limited {\n  /* rows and cells that are hidden because of a \"more\" link */\n  display: none; }\n\n/* popover that appears when \"more\" link is clicked */\n.fc-day-grid .fc-row {\n  z-index: 1;\n  /* make the \"more\" popover one higher than this */ }\n\n.fc-more-popover {\n  z-index: 2;\n  width: 220px; }\n\n.fc-more-popover .fc-event-container {\n  padding: 10px; }\n\n/* Now Indicator\n--------------------------------------------------------------------------------------------------*/\n.fc-now-indicator {\n  position: absolute;\n  border: 0 solid red; }\n\n/* Utilities\n--------------------------------------------------------------------------------------------------*/\n.fc-unselectable {\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }\n\n/*\nTODO: more distinction between this file and common.css\n*/\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed th,\n.fc-unthemed td,\n.fc-unthemed thead,\n.fc-unthemed tbody,\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-row,\n.fc-unthemed .fc-content,\n.fc-unthemed .fc-popover,\n.fc-unthemed .fc-list-view,\n.fc-unthemed .fc-list-heading td {\n  border-color: #ddd; }\n\n.fc-unthemed .fc-popover {\n  background-color: #fff; }\n\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-popover .fc-header,\n.fc-unthemed .fc-list-heading td {\n  background: #eee; }\n\n.fc-unthemed td.fc-today {\n  background: #fcf8e3; }\n\n.fc-unthemed .fc-disabled-day {\n  background: #d7d7d7;\n  opacity: .3; }\n\n/* Icons\n--------------------------------------------------------------------------------------------------\nfrom https://feathericons.com/ and built with IcoMoon\n*/\n@font-face {\n  font-family: 'fcicons';\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBfAAAAC8AAAAYGNtYXAXVtKNAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZgYydxIAAAF4AAAFNGhlYWQUJ7cIAAAGrAAAADZoaGVhB20DzAAABuQAAAAkaG10eCIABhQAAAcIAAAALGxvY2ED4AU6AAAHNAAAABhtYXhwAA8AjAAAB0wAAAAgbmFtZXsr690AAAdsAAABhnBvc3QAAwAAAAAI9AAAACAAAwPAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpBgPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6Qb//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAWIAjQKeAskAEwAAJSc3NjQnJiIHAQYUFwEWMjc2NCcCnuLiDQ0MJAz/AA0NAQAMJAwNDcni4gwjDQwM/wANIwz/AA0NDCMNAAAAAQFiAI0CngLJABMAACUBNjQnASYiBwYUHwEHBhQXFjI3AZ4BAA0N/wAMJAwNDeLiDQ0MJAyNAQAMIw0BAAwMDSMM4uINIwwNDQAAAAIA4gC3Ax4CngATACcAACUnNzY0JyYiDwEGFB8BFjI3NjQnISc3NjQnJiIPAQYUHwEWMjc2NCcB87e3DQ0MIw3VDQ3VDSMMDQ0BK7e3DQ0MJAzVDQ3VDCQMDQ3zuLcMJAwNDdUNIwzWDAwNIwy4twwkDA0N1Q0jDNYMDA0jDAAAAgDiALcDHgKeABMAJwAAJTc2NC8BJiIHBhQfAQcGFBcWMjchNzY0LwEmIgcGFB8BBwYUFxYyNwJJ1Q0N1Q0jDA0Nt7cNDQwjDf7V1Q0N1QwkDA0Nt7cNDQwkDLfWDCMN1Q0NDCQMt7gMIw0MDNYMIw3VDQ0MJAy3uAwjDQwMAAADAFUAAAOrA1UAMwBoAHcAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMhMjY1NCYjISIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAAVYRGRkR/qoRGRkRA1UFBAUOCQkVDAsZDf2rDRkLDBUJCA4FBQUFBQUOCQgVDAsZDQJVDRkLDBUJCQ4FBAVVAgECBQMCBwQECAX9qwQJAwQHAwMFAQICAgIBBQMDBwQDCQQCVQUIBAQHAgMFAgEC/oAZEhEZGRESGQAAAAADAFUAAAOrA1UAMwBoAIkAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMzFRQWMzI2PQEzMjY1NCYrATU0JiMiBh0BIyIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAgBkSEhmAERkZEYAZEhIZgBEZGREDVQUEBQ4JCRUMCxkN/asNGQsMFQkIDgUFBQUFBQ4JCBUMCxkNAlUNGQsMFQkJDgUEBVUCAQIFAwIHBAQIBf2rBAkDBAcDAwUBAgICAgEFAwMHBAMJBAJVBQgEBAcCAwUCAQL+gIASGRkSgBkSERmAEhkZEoAZERIZAAABAOIAjQMeAskAIAAAExcHBhQXFjI/ARcWMjc2NC8BNzY0JyYiDwEnJiIHBhQX4uLiDQ0MJAzi4gwkDA0N4uINDQwkDOLiDCQMDQ0CjeLiDSMMDQ3h4Q0NDCMN4uIMIw0MDOLiDAwNIwwAAAABAAAAAQAAa5n0y18PPPUACwQAAAAAANivOVsAAAAA2K85WwAAAAADqwNVAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAALBAAAAAAAAAAAAAAAAgAAAAQAAWIEAAFiBAAA4gQAAOIEAABVBAAAVQQAAOIAAAAAAAoAFAAeAEQAagCqAOoBngJkApoAAQAAAAsAigADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAcAAAABAAAAAAACAAcAYAABAAAAAAADAAcANgABAAAAAAAEAAcAdQABAAAAAAAFAAsAFQABAAAAAAAGAAcASwABAAAAAAAKABoAigADAAEECQABAA4ABwADAAEECQACAA4AZwADAAEECQADAA4APQADAAEECQAEAA4AfAADAAEECQAFABYAIAADAAEECQAGAA4AUgADAAEECQAKADQApGZjaWNvbnMAZgBjAGkAYwBvAG4Ac1ZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMGZjaWNvbnMAZgBjAGkAYwBvAG4Ac2ZjaWNvbnMAZgBjAGkAYwBvAG4Ac1JlZ3VsYXIAUgBlAGcAdQBsAGEAcmZjaWNvbnMAZgBjAGkAYwBvAG4Ac0ZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal; }\n.fc-icon {\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'fcicons' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.fc-icon-chevron-left:before {\n  content: \"\\E900\"; }\n\n.fc-icon-chevron-right:before {\n  content: \"\\E901\"; }\n\n.fc-icon-chevrons-left:before {\n  content: \"\\E902\"; }\n\n.fc-icon-chevrons-right:before {\n  content: \"\\E903\"; }\n\n.fc-icon-minus-square:before {\n  content: \"\\E904\"; }\n\n.fc-icon-plus-square:before {\n  content: \"\\E905\"; }\n\n.fc-icon-x:before {\n  content: \"\\E906\"; }\n\n.fc-icon {\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  text-align: center; }\n\n/* Buttons\n--------------------------------------------------------------------------------------------------\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\n*/\n/* reset */\n.fc-button {\n  border-radius: 0;\n  overflow: visible;\n  text-transform: none;\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\n\n.fc-button:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\n\n.fc-button {\n  -webkit-appearance: button; }\n\n.fc-button:not(:disabled) {\n  cursor: pointer; }\n\n.fc-button::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\n\n/* theme */\n.fc-button {\n  display: inline-block;\n  font-weight: 400;\n  color: #212529;\n  text-align: center;\n  vertical-align: middle;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  background-color: transparent;\n  border: 1px solid transparent;\n  padding: 0.4em 0.65em;\n  font-size: 1em;\n  line-height: 1.5;\n  border-radius: 0.25em; }\n\n.fc-button:hover {\n  color: #212529;\n  text-decoration: none; }\n\n.fc-button:focus {\n  outline: 0;\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25); }\n\n.fc-button:disabled {\n  opacity: 0.65; }\n\n/* \"primary\" coloring */\n.fc-button-primary {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50; }\n\n.fc-button-primary:hover {\n  color: #fff;\n  background-color: #1e2b37;\n  border-color: #1a252f; }\n\n.fc-button-primary:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }\n\n.fc-button-primary:disabled {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50; }\n\n.fc-button-primary:not(:disabled):active,\n.fc-button-primary:not(:disabled).fc-button-active {\n  color: #fff;\n  background-color: #1a252f;\n  border-color: #151e27; }\n\n.fc-button-primary:not(:disabled):active:focus,\n.fc-button-primary:not(:disabled).fc-button-active:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }\n\n/* icons within buttons */\n.fc-button .fc-icon {\n  vertical-align: middle;\n  font-size: 1.5em; }\n\n/* Buttons Groups\n--------------------------------------------------------------------------------------------------*/\n.fc-button-group {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  vertical-align: middle; }\n\n.fc-button-group > .fc-button {\n  position: relative;\n  -webkit-box-flex: 1;\n  -ms-flex: 1 1 auto;\n  flex: 1 1 auto; }\n\n.fc-button-group > .fc-button:hover {\n  z-index: 1; }\n\n.fc-button-group > .fc-button:focus,\n.fc-button-group > .fc-button:active,\n.fc-button-group > .fc-button.fc-button-active {\n  z-index: 1; }\n\n.fc-button-group > .fc-button:not(:first-child) {\n  margin-left: -1px; }\n\n.fc-button-group > .fc-button:not(:last-child) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.fc-button-group > .fc-button:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-popover {\n  border-width: 1px;\n  border-style: solid; }\n\n/* List View\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-list-item:hover td {\n  background-color: #f5f5f5; }\n\n/* Toolbar\n--------------------------------------------------------------------------------------------------*/\n.fc-toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center; }\n\n.fc-toolbar.fc-header-toolbar {\n  margin-bottom: 1.5em; }\n\n.fc-toolbar.fc-footer-toolbar {\n  margin-top: 1.5em; }\n\n/* inner content */\n.fc-toolbar > * > :not(:first-child) {\n  margin-left: .75em; }\n\n.fc-toolbar h2 {\n  font-size: 1.75em;\n  margin: 0; }\n\n/* View Structure\n--------------------------------------------------------------------------------------------------*/\n.fc-view-container {\n  position: relative; }\n\n/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */\n/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */\n.fc-view-container *,\n.fc-view-container *:before,\n.fc-view-container *:after {\n  -webkit-box-sizing: content-box;\n  -moz-box-sizing: content-box;\n  box-sizing: content-box; }\n\n.fc-view,\n.fc-view > table {\n  /* so dragged elements can be above the view's main element */\n  position: relative;\n  z-index: 1; }\n\n@media print {\n  .fc {\n    max-width: 100% !important; }\n\n  /* Global Event Restyling\n  --------------------------------------------------------------------------------------------------*/\n  .fc-event {\n    background: #fff !important;\n    color: #000 !important;\n    page-break-inside: avoid; }\n\n  .fc-event .fc-resizer {\n    display: none; }\n\n  /* Table & Day-Row Restyling\n  --------------------------------------------------------------------------------------------------*/\n  .fc th,\n  .fc td,\n  .fc hr,\n  .fc thead,\n  .fc tbody,\n  .fc-row {\n    border-color: #ccc !important;\n    background: #fff !important; }\n\n  /* kill the overlaid, absolutely-positioned components */\n  /* common... */\n  .fc-bg,\n  .fc-bgevent-skeleton,\n  .fc-highlight-skeleton,\n  .fc-mirror-skeleton,\n  .fc-bgevent-container,\n  .fc-business-container,\n  .fc-highlight-container,\n  .fc-mirror-container {\n    display: none; }\n\n  /* don't force a min-height on rows (for DayGrid) */\n  .fc tbody .fc-row {\n    height: auto !important;\n    /* undo height that JS set in distributeHeight */\n    min-height: 0 !important;\n    /* undo the min-height from each view's specific stylesheet */ }\n\n  .fc tbody .fc-row .fc-content-skeleton {\n    position: static;\n    /* undo .fc-rigid */\n    padding-bottom: 0 !important;\n    /* use a more border-friendly method for this... */ }\n\n  .fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {\n    /* only works in newer browsers */\n    padding-bottom: 1em;\n    /* ...gives space within the skeleton. also ensures min height in a way */ }\n\n  .fc tbody .fc-row .fc-content-skeleton table {\n    /* provides a min-height for the row, but only effective for IE, which exaggerates this value,\n       making it look more like 3em. for other browers, it will already be this tall */\n    height: 1em; }\n\n  /* Undo month-view event limiting. Display all events and hide the \"more\" links\n  --------------------------------------------------------------------------------------------------*/\n  .fc-more-cell,\n  .fc-more {\n    display: none !important; }\n\n  .fc tr.fc-limited {\n    display: table-row !important; }\n\n  .fc td.fc-limited {\n    display: table-cell !important; }\n\n  .fc-popover {\n    display: none;\n    /* never display the \"more..\" popover in print mode */ }\n\n  /* TimeGrid Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* undo the min-height 100% trick used to fill the container's height */\n  .fc-time-grid {\n    min-height: 0 !important; }\n\n  /* don't display the side axis at all (\"all-day\" and time cells) */\n  .fc-timeGrid-view .fc-axis {\n    display: none; }\n\n  /* don't display the horizontal lines */\n  .fc-slats,\n  .fc-time-grid hr {\n    /* this hr is used when height is underused and needs to be filled */\n    display: none !important;\n    /* important overrides inline declaration */ }\n\n  /* let the container that holds the events be naturally positioned and create real height */\n  .fc-time-grid .fc-content-skeleton {\n    position: static; }\n\n  /* in case there are no events, we still want some height */\n  .fc-time-grid .fc-content-skeleton table {\n    height: 4em; }\n\n  /* kill the horizontal spacing made by the event container. event margins will be done below */\n  .fc-time-grid .fc-event-container {\n    margin: 0 !important; }\n\n  /* TimeGrid *Event* Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* naturally position events, vertically stacking them */\n  .fc-time-grid .fc-event {\n    position: static !important;\n    margin: 3px 2px !important; }\n\n  /* for events that continue to a future day, give the bottom border back */\n  .fc-time-grid .fc-event.fc-not-end {\n    border-bottom-width: 1px !important; }\n\n  /* indicate the event continues via \"...\" text */\n  .fc-time-grid .fc-event.fc-not-end:after {\n    content: \"...\"; }\n\n  /* for events that are continuations from previous days, give the top border back */\n  .fc-time-grid .fc-event.fc-not-start {\n    border-top-width: 1px !important; }\n\n  /* indicate the event is a continuation via \"...\" text */\n  .fc-time-grid .fc-event.fc-not-start:before {\n    content: \"...\"; }\n\n  /* time */\n  /* undo a previous declaration and let the time text span to a second line */\n  .fc-time-grid .fc-event .fc-time {\n    white-space: normal !important; }\n\n  /* hide the the time that is normally displayed... */\n  .fc-time-grid .fc-event .fc-time span {\n    display: none; }\n\n  /* ...replace it with a more verbose version (includes AM/PM) stored in an html attribute */\n  .fc-time-grid .fc-event .fc-time:after {\n    content: attr(data-full); }\n\n  /* Vertical Scroller & Containers\n  --------------------------------------------------------------------------------------------------*/\n  /* kill the scrollbars and allow natural height */\n  .fc-scroller,\n  .fc-day-grid-container,\n  .fc-time-grid-container {\n    /* */\n    overflow: visible !important;\n    height: auto !important; }\n\n  /* kill the horizontal border/padding used to compensate for scrollbars */\n  .fc-row {\n    border: 0 !important;\n    margin: 0 !important; }\n\n  /* Button Controls\n  --------------------------------------------------------------------------------------------------*/\n  .fc-button-group,\n  .fc button {\n    display: none;\n    /* don't display any button-related controls */ } }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "/*!\nFullCalendar Day Grid Plugin v4.2.0\nDocs & License: https://fullcalendar.io/\n(c) 2019 Adam Shaw\n*/\n/* DayGridView\n--------------------------------------------------------------------------------------------------*/\n/* day row structure */\n.fc-dayGridWeek-view .fc-content-skeleton,\n.fc-dayGridDay-view .fc-content-skeleton {\n  /* there may be week numbers in these views, so no padding-top */\n  padding-bottom: 1em;\n  /* ensure a space at bottom of cell for user selecting/clicking */ }\n\n.fc-dayGrid-view .fc-body .fc-row {\n  min-height: 4em;\n  /* ensure that all rows are at least this tall */ }\n\n/* a \"rigid\" row will take up a constant amount of height because content-skeleton is absolute */\n.fc-row.fc-rigid {\n  overflow: hidden; }\n\n.fc-row.fc-rigid .fc-content-skeleton {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n/* week and day number styling */\n.fc-day-top.fc-other-month {\n  opacity: 0.3; }\n\n.fc-dayGrid-view .fc-week-number,\n.fc-dayGrid-view .fc-day-number {\n  padding: 2px; }\n\n.fc-dayGrid-view th.fc-week-number,\n.fc-dayGrid-view th.fc-day-number {\n  padding: 0 2px;\n  /* column headers can't have as much v space */ }\n\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: right; }\n\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: left; }\n\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: left;\n  border-radius: 0 0 3px 0; }\n\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: right;\n  border-radius: 0 0 0 3px; }\n\n.fc-dayGrid-view .fc-day-top .fc-week-number {\n  min-width: 1.5em;\n  text-align: center;\n  background-color: #f2f2f2;\n  color: #808080; }\n\n/* when week/day number have own column */\n.fc-dayGrid-view td.fc-week-number {\n  text-align: center; }\n\n.fc-dayGrid-view td.fc-week-number > * {\n  /* work around the way we do column resizing and ensure a minimum width */\n  display: inline-block;\n  min-width: 1.25em; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
-var _vue = __webpack_require__(264);
+var _vue = __webpack_require__(266);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _daygrid = __webpack_require__(266);
+var _daygrid = __webpack_require__(268);
 
 var _daygrid2 = _interopRequireDefault(_daygrid);
+
+var _timegrid = __webpack_require__(280);
+
+var _timegrid2 = _interopRequireDefault(_timegrid);
+
+var _ProjectNavComponent = __webpack_require__(5);
+
+var _ProjectNavComponent2 = _interopRequireDefault(_ProjectNavComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46255,16 +46300,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             <div class="row">
 //                 <div class="col-12">
 //                 	<FullCalendar
-// 					  defaultView="dayGridMonth"
-// 					  :plugins="calendarPlugins"
-// 					  :weekends="false"
-// 					  :events="[
-// 					    { title: 'event 1', date: '2019-08-01' },
-// 					    { title: 'event 2', date: '2019-08-02' },
-// 					    { title: 'event 3', date: '2019-07-05' },
-// 					    { title: 'event 4', date: '2019-07-10' }
-// 					  ]"
-// 					  />
+//                 	   	ref="fullCalendar"
+// 					  	:plugins="calendarPlugins"
+// 					  	:weekends="false"
+// 					  	:events="events"
+// 					  	:header="header"
+// 					  	@datesRender="handleMonthChange"
+// 					  	@eventClick="showDetails"
+// 					/>
 //                 </div>
 //             </div>
 //         </div>
@@ -46274,33 +46317,94 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // <script>
 
 exports.default = {
-  components: {
-    FullCalendar: _vue2.default // make the <FullCalendar> tag available
-  },
-  data: function data() {
-    return {
-      calendarPlugins: [_daygrid2.default]
-    };
-  }
+	components: {
+		FullCalendar: _vue2.default, // make the <FullCalendar> tag available
+		ProjectNav: _ProjectNavComponent2.default
+	},
+	data: function data() {
+		return {
+			calendarPlugins: [_daygrid2.default, _timegrid2.default],
+			events: [
+				// { title: 'event 1', date: '2019-08-01', color: 'green' },
+				// { title: 'event 2', date: '2019-08-02' },
+				// { title: 'event 3', date: '2019-07-05' },
+				// { title: 'event 4', date: '2019-07-10' }
+			],
+			todos: [],
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'dayGridMonth,timeGridWeek,timeGridDay' //,listMonth'
+			}
+		};
+	},
+
+	methods: {
+		showDetails: function showDetails(event) {
+			console.log(event);
+		},
+
+		handleMonthChange: function handleMonthChange(arg) {
+			var startDate = arg.view.activeStart;
+			var endDate = arg.view.activeEnd;
+
+			if (arg.view.type === 'dayGridMonth') {
+				this.fetchProjectTodos(startDate, endDate);
+			}
+		},
+		setProject: function setProject(project) {
+			this.project = project;
+		},
+		fetchProjectTodos: function fetchProjectTodos(s, e) {
+			var date = new Date();
+
+			var vm = this,
+			    data = {
+				action: 'fpm-get-todos-for-calendar',
+				project_id: vm.$route.params.projectid,
+				start_date: s.getFullYear() + '-' + s.getMonth() + '-' + s.getDate(),
+				end_date: e.getFullYear() + '-' + e.getMonth() + '-' + e.getDate(),
+				nonce: fpm.nonce
+			};
+
+			jQuery.post(fpm.ajaxurl, data, function (resp) {
+				if (resp.success) {
+					vm.todos = resp.data;
+					for (var i = 0; i < vm.todos.length; i++) {
+						if (!_.find(vm.events, { 'id': vm.todos[i].ID })) {
+							vm.events.push({
+								id: vm.todos[i].ID,
+								title: vm.todos[i].todo,
+								start: vm.todos[i].created,
+								end: vm.todos[i].due_date || ''
+							});
+						}
+					}
+				}
+			});
+		}
+	}
+
+	// </script>
+	//
+	// <style>
+	//
+	// @import '~@fullcalendar/core/main.css';
+	// @import '~@fullcalendar/daygrid/main.css';
+	// @import '~@fullcalendar/timegrid/main.css';
+	//
+	// </style>
+
 };
 
-// </script>
-//
-// <style>
-//
-// @import '~@fullcalendar/core/main.css';
-// @import '~@fullcalendar/daygrid/main.css';
-//
-// </style>
-
 /***/ }),
-/* 264 */
+/* 266 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_fast_deep_equal__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_fast_deep_equal__ = __webpack_require__(267);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_fast_deep_equal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_fast_deep_equal__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fullcalendar_core__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fullcalendar_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__fullcalendar_core__);
@@ -46708,7 +46812,7 @@ if (GlobalVue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(22)))
 
 /***/ }),
-/* 265 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46770,7 +46874,7 @@ module.exports = function equal(a, b) {
 
 
 /***/ }),
-/* 266 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -48415,49 +48519,19 @@ Docs & License: https://fullcalendar.io/
 
 
 /***/ }),
-/* 267 */,
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 269 */
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, "/*!\nFullCalendar Core Package v4.2.0\nDocs & License: https://fullcalendar.io/\n(c) 2019 Adam Shaw\n*/\n.fc {\n  direction: ltr;\n  text-align: left; }\n\n.fc-rtl {\n  text-align: right; }\n\nbody .fc {\n  /* extra precedence to overcome jqui */\n  font-size: 1em; }\n\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-highlight {\n  /* when user is selecting cells */\n  background: #bce8f1;\n  opacity: .3; }\n\n.fc-bgevent {\n  /* default look for background events */\n  background: #8fdf82;\n  opacity: .3; }\n\n.fc-nonbusiness {\n  /* default look for non-business-hours areas */\n  /* will inherit .fc-bgevent's styles */\n  background: #d7d7d7; }\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-popover {\n  position: absolute;\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }\n\n.fc-popover .fc-header {\n  /* TODO: be more consistent with fc-head/fc-body */\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 2px 4px; }\n\n.fc-rtl .fc-popover .fc-header {\n  flex-direction: row-reverse; }\n\n.fc-popover .fc-header .fc-title {\n  margin: 0 2px; }\n\n.fc-popover .fc-header .fc-close {\n  cursor: pointer;\n  opacity: 0.65;\n  font-size: 1.1em; }\n\n/* Misc Reusable Components\n--------------------------------------------------------------------------------------------------*/\n.fc-divider {\n  border-style: solid;\n  border-width: 1px; }\n\nhr.fc-divider {\n  height: 0;\n  margin: 0;\n  padding: 0 0 2px;\n  /* height is unreliable across browsers, so use padding */\n  border-width: 1px 0; }\n\n.fc-bg,\n.fc-bgevent-skeleton,\n.fc-highlight-skeleton,\n.fc-mirror-skeleton {\n  /* these element should always cling to top-left/right corners */\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n.fc-bg {\n  bottom: 0;\n  /* strech bg to bottom edge */ }\n\n.fc-bg table {\n  height: 100%;\n  /* strech bg to bottom edge */ }\n\n/* Tables\n--------------------------------------------------------------------------------------------------*/\n.fc table {\n  width: 100%;\n  box-sizing: border-box;\n  /* fix scrollbar issue in firefox */\n  table-layout: fixed;\n  border-collapse: collapse;\n  border-spacing: 0;\n  font-size: 1em;\n  /* normalize cross-browser */ }\n\n.fc th {\n  text-align: center; }\n\n.fc th,\n.fc td {\n  border-style: solid;\n  border-width: 1px;\n  padding: 0;\n  vertical-align: top; }\n\n.fc td.fc-today {\n  border-style: double;\n  /* overcome neighboring borders */ }\n\n/* Internal Nav Links\n--------------------------------------------------------------------------------------------------*/\na[data-goto] {\n  cursor: pointer; }\n\na[data-goto]:hover {\n  text-decoration: underline; }\n\n/* Fake Table Rows\n--------------------------------------------------------------------------------------------------*/\n.fc .fc-row {\n  /* extra precedence to overcome themes forcing a 1px border */\n  /* no visible border by default. but make available if need be (scrollbar width compensation) */\n  border-style: solid;\n  border-width: 0; }\n\n.fc-row table {\n  /* don't put left/right border on anything within a fake row.\n     the outer tbody will worry about this */\n  border-left: 0 hidden transparent;\n  border-right: 0 hidden transparent;\n  /* no bottom borders on rows */\n  border-bottom: 0 hidden transparent; }\n\n.fc-row:first-child table {\n  border-top: 0 hidden transparent;\n  /* no top border on first row */ }\n\n/* Day Row (used within the header and the DayGrid)\n--------------------------------------------------------------------------------------------------*/\n.fc-row {\n  position: relative; }\n\n.fc-row .fc-bg {\n  z-index: 1; }\n\n/* highlighting cells & background event skeleton */\n.fc-row .fc-bgevent-skeleton,\n.fc-row .fc-highlight-skeleton {\n  bottom: 0;\n  /* stretch skeleton to bottom of row */ }\n\n.fc-row .fc-bgevent-skeleton table,\n.fc-row .fc-highlight-skeleton table {\n  height: 100%;\n  /* stretch skeleton to bottom of row */ }\n\n.fc-row .fc-highlight-skeleton td,\n.fc-row .fc-bgevent-skeleton td {\n  border-color: transparent; }\n\n.fc-row .fc-bgevent-skeleton {\n  z-index: 2; }\n\n.fc-row .fc-highlight-skeleton {\n  z-index: 3; }\n\n/*\nrow content (which contains day/week numbers and events) as well as \"mirror\" (which contains\ntemporary rendered events).\n*/\n.fc-row .fc-content-skeleton {\n  position: relative;\n  z-index: 4;\n  padding-bottom: 2px;\n  /* matches the space above the events */ }\n\n.fc-row .fc-mirror-skeleton {\n  z-index: 5; }\n\n.fc .fc-row .fc-content-skeleton table,\n.fc .fc-row .fc-content-skeleton td,\n.fc .fc-row .fc-mirror-skeleton td {\n  /* see-through to the background below */\n  /* extra precedence to prevent theme-provided backgrounds */\n  background: none;\n  /* in case <td>s are globally styled */\n  border-color: transparent; }\n\n.fc-row .fc-content-skeleton td,\n.fc-row .fc-mirror-skeleton td {\n  /* don't put a border between events and/or the day number */\n  border-bottom: 0; }\n\n.fc-row .fc-content-skeleton tbody td,\n.fc-row .fc-mirror-skeleton tbody td {\n  /* don't put a border between event cells */\n  border-top: 0; }\n\n/* Scrolling Container\n--------------------------------------------------------------------------------------------------*/\n.fc-scroller {\n  -webkit-overflow-scrolling: touch; }\n\n/* TODO: move to timegrid/daygrid */\n.fc-scroller > .fc-day-grid,\n.fc-scroller > .fc-time-grid {\n  position: relative;\n  /* re-scope all positions */\n  width: 100%;\n  /* hack to force re-sizing this inner element when scrollbars appear/disappear */ }\n\n/* Global Event Styles\n--------------------------------------------------------------------------------------------------*/\n.fc-event {\n  position: relative;\n  /* for resize handle and other inner positioning */\n  display: block;\n  /* make the <a> tag block */\n  font-size: .85em;\n  line-height: 1.4;\n  border-radius: 3px;\n  border: 1px solid #3788d8; }\n\n.fc-event,\n.fc-event-dot {\n  background-color: #3788d8;\n  /* default BACKGROUND color */ }\n\n.fc-event,\n.fc-event:hover {\n  color: #fff;\n  /* default TEXT color */\n  text-decoration: none;\n  /* if <a> has an href */ }\n\n.fc-event[href],\n.fc-event.fc-draggable {\n  cursor: pointer;\n  /* give events with links and draggable events a hand mouse pointer */ }\n\n.fc-not-allowed,\n.fc-not-allowed .fc-event {\n  /* to override an event's custom cursor */\n  cursor: not-allowed; }\n\n.fc-event .fc-content {\n  position: relative;\n  z-index: 2; }\n\n/* resizer (cursor AND touch devices) */\n.fc-event .fc-resizer {\n  position: absolute;\n  z-index: 4; }\n\n/* resizer (touch devices) */\n.fc-event .fc-resizer {\n  display: none; }\n\n.fc-event.fc-allow-mouse-resize .fc-resizer,\n.fc-event.fc-selected .fc-resizer {\n  /* only show when hovering or selected (with touch) */\n  display: block; }\n\n/* hit area */\n.fc-event.fc-selected .fc-resizer:before {\n  /* 40x40 touch area */\n  content: \"\";\n  position: absolute;\n  z-index: 9999;\n  /* user of this util can scope within a lower z-index */\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  margin-left: -20px;\n  margin-top: -20px; }\n\n/* Event Selection (only for touch devices)\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-selected {\n  z-index: 9999 !important;\n  /* overcomes inline z-index */\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }\n\n.fc-event.fc-selected:after {\n  content: \"\";\n  position: absolute;\n  z-index: 1;\n  /* same z-index as fc-bg, behind text */\n  /* overcome the borders */\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  /* darkening effect */\n  background: #000;\n  opacity: .25; }\n\n/* Event Dragging\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-dragging.fc-selected {\n  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3); }\n\n.fc-event.fc-dragging:not(.fc-selected) {\n  opacity: .75; }\n\n/* Horizontal Events\n--------------------------------------------------------------------------------------------------*/\n/* bigger touch area when selected */\n.fc-h-event.fc-selected:before {\n  content: \"\";\n  position: absolute;\n  z-index: 3;\n  /* below resizers */\n  top: -10px;\n  bottom: -10px;\n  left: 0;\n  right: 0; }\n\n/* events that are continuing to/from another week. kill rounded corners and butt up against edge */\n.fc-ltr .fc-h-event.fc-not-start,\n.fc-rtl .fc-h-event.fc-not-end {\n  margin-left: 0;\n  border-left-width: 0;\n  padding-left: 1px;\n  /* replace the border with padding */\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.fc-ltr .fc-h-event.fc-not-end,\n.fc-rtl .fc-h-event.fc-not-start {\n  margin-right: 0;\n  border-right-width: 0;\n  padding-right: 1px;\n  /* replace the border with padding */\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n/* resizer (cursor AND touch devices) */\n/* left resizer  */\n.fc-ltr .fc-h-event .fc-start-resizer,\n.fc-rtl .fc-h-event .fc-end-resizer {\n  cursor: w-resize;\n  left: -1px;\n  /* overcome border */ }\n\n/* right resizer */\n.fc-ltr .fc-h-event .fc-end-resizer,\n.fc-rtl .fc-h-event .fc-start-resizer {\n  cursor: e-resize;\n  right: -1px;\n  /* overcome border */ }\n\n/* resizer (mouse devices) */\n.fc-h-event.fc-allow-mouse-resize .fc-resizer {\n  width: 7px;\n  top: -1px;\n  /* overcome top border */\n  bottom: -1px;\n  /* overcome bottom border */ }\n\n/* resizer (touch devices) */\n.fc-h-event.fc-selected .fc-resizer {\n  /* 8x8 little dot */\n  border-radius: 4px;\n  border-width: 1px;\n  width: 6px;\n  height: 6px;\n  border-style: solid;\n  border-color: inherit;\n  background: #fff;\n  /* vertically center */\n  top: 50%;\n  margin-top: -4px; }\n\n/* left resizer  */\n.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {\n  margin-left: -4px;\n  /* centers the 8x8 dot on the left edge */ }\n\n/* right resizer */\n.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {\n  margin-right: -4px;\n  /* centers the 8x8 dot on the right edge */ }\n\n/* DayGrid events\n----------------------------------------------------------------------------------------------------\nWe use the full \"fc-day-grid-event\" class instead of using descendants because the event won't\nbe a descendant of the grid when it is being dragged.\n*/\n.fc-day-grid-event {\n  margin: 1px 2px 0;\n  /* spacing between events and edges */\n  padding: 0 1px; }\n\ntr:first-child > td > .fc-day-grid-event {\n  margin-top: 2px;\n  /* a little bit more space before the first event */ }\n\n.fc-mirror-skeleton tr:first-child > td > .fc-day-grid-event {\n  margin-top: 0;\n  /* except for mirror skeleton */ }\n\n.fc-day-grid-event .fc-content {\n  /* force events to be one-line tall */\n  white-space: nowrap;\n  overflow: hidden; }\n\n.fc-day-grid-event .fc-time {\n  font-weight: bold; }\n\n/* resizer (cursor devices) */\n/* left resizer  */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {\n  margin-left: -2px;\n  /* to the day cell's edge */ }\n\n/* right resizer */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {\n  margin-right: -2px;\n  /* to the day cell's edge */ }\n\n/* Event Limiting\n--------------------------------------------------------------------------------------------------*/\n/* \"more\" link that represents hidden events */\na.fc-more {\n  margin: 1px 3px;\n  font-size: .85em;\n  cursor: pointer;\n  text-decoration: none; }\n\na.fc-more:hover {\n  text-decoration: underline; }\n\n.fc-limited {\n  /* rows and cells that are hidden because of a \"more\" link */\n  display: none; }\n\n/* popover that appears when \"more\" link is clicked */\n.fc-day-grid .fc-row {\n  z-index: 1;\n  /* make the \"more\" popover one higher than this */ }\n\n.fc-more-popover {\n  z-index: 2;\n  width: 220px; }\n\n.fc-more-popover .fc-event-container {\n  padding: 10px; }\n\n/* Now Indicator\n--------------------------------------------------------------------------------------------------*/\n.fc-now-indicator {\n  position: absolute;\n  border: 0 solid red; }\n\n/* Utilities\n--------------------------------------------------------------------------------------------------*/\n.fc-unselectable {\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }\n\n/*\nTODO: more distinction between this file and common.css\n*/\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed th,\n.fc-unthemed td,\n.fc-unthemed thead,\n.fc-unthemed tbody,\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-row,\n.fc-unthemed .fc-content,\n.fc-unthemed .fc-popover,\n.fc-unthemed .fc-list-view,\n.fc-unthemed .fc-list-heading td {\n  border-color: #ddd; }\n\n.fc-unthemed .fc-popover {\n  background-color: #fff; }\n\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-popover .fc-header,\n.fc-unthemed .fc-list-heading td {\n  background: #eee; }\n\n.fc-unthemed td.fc-today {\n  background: #fcf8e3; }\n\n.fc-unthemed .fc-disabled-day {\n  background: #d7d7d7;\n  opacity: .3; }\n\n/* Icons\n--------------------------------------------------------------------------------------------------\nfrom https://feathericons.com/ and built with IcoMoon\n*/\n@font-face {\n  font-family: 'fcicons';\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBfAAAAC8AAAAYGNtYXAXVtKNAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZgYydxIAAAF4AAAFNGhlYWQUJ7cIAAAGrAAAADZoaGVhB20DzAAABuQAAAAkaG10eCIABhQAAAcIAAAALGxvY2ED4AU6AAAHNAAAABhtYXhwAA8AjAAAB0wAAAAgbmFtZXsr690AAAdsAAABhnBvc3QAAwAAAAAI9AAAACAAAwPAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpBgPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6Qb//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAWIAjQKeAskAEwAAJSc3NjQnJiIHAQYUFwEWMjc2NCcCnuLiDQ0MJAz/AA0NAQAMJAwNDcni4gwjDQwM/wANIwz/AA0NDCMNAAAAAQFiAI0CngLJABMAACUBNjQnASYiBwYUHwEHBhQXFjI3AZ4BAA0N/wAMJAwNDeLiDQ0MJAyNAQAMIw0BAAwMDSMM4uINIwwNDQAAAAIA4gC3Ax4CngATACcAACUnNzY0JyYiDwEGFB8BFjI3NjQnISc3NjQnJiIPAQYUHwEWMjc2NCcB87e3DQ0MIw3VDQ3VDSMMDQ0BK7e3DQ0MJAzVDQ3VDCQMDQ3zuLcMJAwNDdUNIwzWDAwNIwy4twwkDA0N1Q0jDNYMDA0jDAAAAgDiALcDHgKeABMAJwAAJTc2NC8BJiIHBhQfAQcGFBcWMjchNzY0LwEmIgcGFB8BBwYUFxYyNwJJ1Q0N1Q0jDA0Nt7cNDQwjDf7V1Q0N1QwkDA0Nt7cNDQwkDLfWDCMN1Q0NDCQMt7gMIw0MDNYMIw3VDQ0MJAy3uAwjDQwMAAADAFUAAAOrA1UAMwBoAHcAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMhMjY1NCYjISIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAAVYRGRkR/qoRGRkRA1UFBAUOCQkVDAsZDf2rDRkLDBUJCA4FBQUFBQUOCQgVDAsZDQJVDRkLDBUJCQ4FBAVVAgECBQMCBwQECAX9qwQJAwQHAwMFAQICAgIBBQMDBwQDCQQCVQUIBAQHAgMFAgEC/oAZEhEZGRESGQAAAAADAFUAAAOrA1UAMwBoAIkAABMiBgcOAQcOAQcOARURFBYXHgEXHgEXHgEzITI2Nz4BNz4BNz4BNRE0JicuAScuAScuASMFITIWFx4BFx4BFx4BFREUBgcOAQcOAQcOASMhIiYnLgEnLgEnLgE1ETQ2Nz4BNz4BNz4BMxMzFRQWMzI2PQEzMjY1NCYrATU0JiMiBh0BIyIGFRQWM9UNGAwLFQkJDgUFBQUFBQ4JCRULDBgNAlYNGAwLFQkJDgUFBQUFBQ4JCRULDBgN/aoCVgQIBAQHAwMFAQIBAQIBBQMDBwQECAT9qgQIBAQHAwMFAQIBAQIBBQMDBwQECASAgBkSEhmAERkZEYAZEhIZgBEZGREDVQUEBQ4JCRUMCxkN/asNGQsMFQkIDgUFBQUFBQ4JCBUMCxkNAlUNGQsMFQkJDgUEBVUCAQIFAwIHBAQIBf2rBAkDBAcDAwUBAgICAgEFAwMHBAMJBAJVBQgEBAcCAwUCAQL+gIASGRkSgBkSERmAEhkZEoAZERIZAAABAOIAjQMeAskAIAAAExcHBhQXFjI/ARcWMjc2NC8BNzY0JyYiDwEnJiIHBhQX4uLiDQ0MJAzi4gwkDA0N4uINDQwkDOLiDCQMDQ0CjeLiDSMMDQ3h4Q0NDCMN4uIMIw0MDOLiDAwNIwwAAAABAAAAAQAAa5n0y18PPPUACwQAAAAAANivOVsAAAAA2K85WwAAAAADqwNVAAAACAACAAAAAAAAAAEAAAPA/8AAAAQAAAAAAAOrAAEAAAAAAAAAAAAAAAAAAAALBAAAAAAAAAAAAAAAAgAAAAQAAWIEAAFiBAAA4gQAAOIEAABVBAAAVQQAAOIAAAAAAAoAFAAeAEQAagCqAOoBngJkApoAAQAAAAsAigADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAcAAAABAAAAAAACAAcAYAABAAAAAAADAAcANgABAAAAAAAEAAcAdQABAAAAAAAFAAsAFQABAAAAAAAGAAcASwABAAAAAAAKABoAigADAAEECQABAA4ABwADAAEECQACAA4AZwADAAEECQADAA4APQADAAEECQAEAA4AfAADAAEECQAFABYAIAADAAEECQAGAA4AUgADAAEECQAKADQApGZjaWNvbnMAZgBjAGkAYwBvAG4Ac1ZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMGZjaWNvbnMAZgBjAGkAYwBvAG4Ac2ZjaWNvbnMAZgBjAGkAYwBvAG4Ac1JlZ3VsYXIAUgBlAGcAdQBsAGEAcmZjaWNvbnMAZgBjAGkAYwBvAG4Ac0ZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal; }\n.fc-icon {\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'fcicons' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale; }\n\n.fc-icon-chevron-left:before {\n  content: \"\\E900\"; }\n\n.fc-icon-chevron-right:before {\n  content: \"\\E901\"; }\n\n.fc-icon-chevrons-left:before {\n  content: \"\\E902\"; }\n\n.fc-icon-chevrons-right:before {\n  content: \"\\E903\"; }\n\n.fc-icon-minus-square:before {\n  content: \"\\E904\"; }\n\n.fc-icon-plus-square:before {\n  content: \"\\E905\"; }\n\n.fc-icon-x:before {\n  content: \"\\E906\"; }\n\n.fc-icon {\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  text-align: center; }\n\n/* Buttons\n--------------------------------------------------------------------------------------------------\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\n*/\n/* reset */\n.fc-button {\n  border-radius: 0;\n  overflow: visible;\n  text-transform: none;\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\n\n.fc-button:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\n\n.fc-button {\n  -webkit-appearance: button; }\n\n.fc-button:not(:disabled) {\n  cursor: pointer; }\n\n.fc-button::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\n\n/* theme */\n.fc-button {\n  display: inline-block;\n  font-weight: 400;\n  color: #212529;\n  text-align: center;\n  vertical-align: middle;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  background-color: transparent;\n  border: 1px solid transparent;\n  padding: 0.4em 0.65em;\n  font-size: 1em;\n  line-height: 1.5;\n  border-radius: 0.25em; }\n\n.fc-button:hover {\n  color: #212529;\n  text-decoration: none; }\n\n.fc-button:focus {\n  outline: 0;\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25); }\n\n.fc-button:disabled {\n  opacity: 0.65; }\n\n/* \"primary\" coloring */\n.fc-button-primary {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50; }\n\n.fc-button-primary:hover {\n  color: #fff;\n  background-color: #1e2b37;\n  border-color: #1a252f; }\n\n.fc-button-primary:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }\n\n.fc-button-primary:disabled {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50; }\n\n.fc-button-primary:not(:disabled):active,\n.fc-button-primary:not(:disabled).fc-button-active {\n  color: #fff;\n  background-color: #1a252f;\n  border-color: #151e27; }\n\n.fc-button-primary:not(:disabled):active:focus,\n.fc-button-primary:not(:disabled).fc-button-active:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }\n\n/* icons within buttons */\n.fc-button .fc-icon {\n  vertical-align: middle;\n  font-size: 1.5em; }\n\n/* Buttons Groups\n--------------------------------------------------------------------------------------------------*/\n.fc-button-group {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  vertical-align: middle; }\n\n.fc-button-group > .fc-button {\n  position: relative;\n  -webkit-box-flex: 1;\n  -ms-flex: 1 1 auto;\n  flex: 1 1 auto; }\n\n.fc-button-group > .fc-button:hover {\n  z-index: 1; }\n\n.fc-button-group > .fc-button:focus,\n.fc-button-group > .fc-button:active,\n.fc-button-group > .fc-button.fc-button-active {\n  z-index: 1; }\n\n.fc-button-group > .fc-button:not(:first-child) {\n  margin-left: -1px; }\n\n.fc-button-group > .fc-button:not(:last-child) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.fc-button-group > .fc-button:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-popover {\n  border-width: 1px;\n  border-style: solid; }\n\n/* List View\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-list-item:hover td {\n  background-color: #f5f5f5; }\n\n/* Toolbar\n--------------------------------------------------------------------------------------------------*/\n.fc-toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center; }\n\n.fc-toolbar.fc-header-toolbar {\n  margin-bottom: 1.5em; }\n\n.fc-toolbar.fc-footer-toolbar {\n  margin-top: 1.5em; }\n\n/* inner content */\n.fc-toolbar > * > :not(:first-child) {\n  margin-left: .75em; }\n\n.fc-toolbar h2 {\n  font-size: 1.75em;\n  margin: 0; }\n\n/* View Structure\n--------------------------------------------------------------------------------------------------*/\n.fc-view-container {\n  position: relative; }\n\n/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */\n/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */\n.fc-view-container *,\n.fc-view-container *:before,\n.fc-view-container *:after {\n  -webkit-box-sizing: content-box;\n  -moz-box-sizing: content-box;\n  box-sizing: content-box; }\n\n.fc-view,\n.fc-view > table {\n  /* so dragged elements can be above the view's main element */\n  position: relative;\n  z-index: 1; }\n\n@media print {\n  .fc {\n    max-width: 100% !important; }\n\n  /* Global Event Restyling\n  --------------------------------------------------------------------------------------------------*/\n  .fc-event {\n    background: #fff !important;\n    color: #000 !important;\n    page-break-inside: avoid; }\n\n  .fc-event .fc-resizer {\n    display: none; }\n\n  /* Table & Day-Row Restyling\n  --------------------------------------------------------------------------------------------------*/\n  .fc th,\n  .fc td,\n  .fc hr,\n  .fc thead,\n  .fc tbody,\n  .fc-row {\n    border-color: #ccc !important;\n    background: #fff !important; }\n\n  /* kill the overlaid, absolutely-positioned components */\n  /* common... */\n  .fc-bg,\n  .fc-bgevent-skeleton,\n  .fc-highlight-skeleton,\n  .fc-mirror-skeleton,\n  .fc-bgevent-container,\n  .fc-business-container,\n  .fc-highlight-container,\n  .fc-mirror-container {\n    display: none; }\n\n  /* don't force a min-height on rows (for DayGrid) */\n  .fc tbody .fc-row {\n    height: auto !important;\n    /* undo height that JS set in distributeHeight */\n    min-height: 0 !important;\n    /* undo the min-height from each view's specific stylesheet */ }\n\n  .fc tbody .fc-row .fc-content-skeleton {\n    position: static;\n    /* undo .fc-rigid */\n    padding-bottom: 0 !important;\n    /* use a more border-friendly method for this... */ }\n\n  .fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {\n    /* only works in newer browsers */\n    padding-bottom: 1em;\n    /* ...gives space within the skeleton. also ensures min height in a way */ }\n\n  .fc tbody .fc-row .fc-content-skeleton table {\n    /* provides a min-height for the row, but only effective for IE, which exaggerates this value,\n       making it look more like 3em. for other browers, it will already be this tall */\n    height: 1em; }\n\n  /* Undo month-view event limiting. Display all events and hide the \"more\" links\n  --------------------------------------------------------------------------------------------------*/\n  .fc-more-cell,\n  .fc-more {\n    display: none !important; }\n\n  .fc tr.fc-limited {\n    display: table-row !important; }\n\n  .fc td.fc-limited {\n    display: table-cell !important; }\n\n  .fc-popover {\n    display: none;\n    /* never display the \"more..\" popover in print mode */ }\n\n  /* TimeGrid Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* undo the min-height 100% trick used to fill the container's height */\n  .fc-time-grid {\n    min-height: 0 !important; }\n\n  /* don't display the side axis at all (\"all-day\" and time cells) */\n  .fc-timeGrid-view .fc-axis {\n    display: none; }\n\n  /* don't display the horizontal lines */\n  .fc-slats,\n  .fc-time-grid hr {\n    /* this hr is used when height is underused and needs to be filled */\n    display: none !important;\n    /* important overrides inline declaration */ }\n\n  /* let the container that holds the events be naturally positioned and create real height */\n  .fc-time-grid .fc-content-skeleton {\n    position: static; }\n\n  /* in case there are no events, we still want some height */\n  .fc-time-grid .fc-content-skeleton table {\n    height: 4em; }\n\n  /* kill the horizontal spacing made by the event container. event margins will be done below */\n  .fc-time-grid .fc-event-container {\n    margin: 0 !important; }\n\n  /* TimeGrid *Event* Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* naturally position events, vertically stacking them */\n  .fc-time-grid .fc-event {\n    position: static !important;\n    margin: 3px 2px !important; }\n\n  /* for events that continue to a future day, give the bottom border back */\n  .fc-time-grid .fc-event.fc-not-end {\n    border-bottom-width: 1px !important; }\n\n  /* indicate the event continues via \"...\" text */\n  .fc-time-grid .fc-event.fc-not-end:after {\n    content: \"...\"; }\n\n  /* for events that are continuations from previous days, give the top border back */\n  .fc-time-grid .fc-event.fc-not-start {\n    border-top-width: 1px !important; }\n\n  /* indicate the event is a continuation via \"...\" text */\n  .fc-time-grid .fc-event.fc-not-start:before {\n    content: \"...\"; }\n\n  /* time */\n  /* undo a previous declaration and let the time text span to a second line */\n  .fc-time-grid .fc-event .fc-time {\n    white-space: normal !important; }\n\n  /* hide the the time that is normally displayed... */\n  .fc-time-grid .fc-event .fc-time span {\n    display: none; }\n\n  /* ...replace it with a more verbose version (includes AM/PM) stored in an html attribute */\n  .fc-time-grid .fc-event .fc-time:after {\n    content: attr(data-full); }\n\n  /* Vertical Scroller & Containers\n  --------------------------------------------------------------------------------------------------*/\n  /* kill the scrollbars and allow natural height */\n  .fc-scroller,\n  .fc-day-grid-container,\n  .fc-time-grid-container {\n    /* */\n    overflow: visible !important;\n    height: auto !important; }\n\n  /* kill the horizontal border/padding used to compensate for scrollbars */\n  .fc-row {\n    border: 0 !important;\n    margin: 0 !important; }\n\n  /* Button Controls\n  --------------------------------------------------------------------------------------------------*/\n  .fc-button-group,\n  .fc button {\n    display: none;\n    /* don't display any button-related controls */ } }\n", ""]);
-
-// exports
-
+module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                \t<FullCalendar\r\n                \t   \tref=\"fullCalendar\"\r\n\t\t\t\t\t  \t:plugins=\"calendarPlugins\"\r\n\t\t\t\t\t  \t:weekends=\"false\"\r\n\t\t\t\t\t  \t:events=\"events\"\r\n\t\t\t\t\t  \t:header=\"header\"\r\n\t\t\t\t\t  \t@datesRender=\"handleMonthChange\"\r\n\t\t\t\t\t  \t@eventClick=\"showDetails\"\r\n\t\t\t\t\t/>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
-/* 269 */,
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, "/*!\nFullCalendar Day Grid Plugin v4.2.0\nDocs & License: https://fullcalendar.io/\n(c) 2019 Adam Shaw\n*/\n/* DayGridView\n--------------------------------------------------------------------------------------------------*/\n/* day row structure */\n.fc-dayGridWeek-view .fc-content-skeleton,\n.fc-dayGridDay-view .fc-content-skeleton {\n  /* there may be week numbers in these views, so no padding-top */\n  padding-bottom: 1em;\n  /* ensure a space at bottom of cell for user selecting/clicking */ }\n\n.fc-dayGrid-view .fc-body .fc-row {\n  min-height: 4em;\n  /* ensure that all rows are at least this tall */ }\n\n/* a \"rigid\" row will take up a constant amount of height because content-skeleton is absolute */\n.fc-row.fc-rigid {\n  overflow: hidden; }\n\n.fc-row.fc-rigid .fc-content-skeleton {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n/* week and day number styling */\n.fc-day-top.fc-other-month {\n  opacity: 0.3; }\n\n.fc-dayGrid-view .fc-week-number,\n.fc-dayGrid-view .fc-day-number {\n  padding: 2px; }\n\n.fc-dayGrid-view th.fc-week-number,\n.fc-dayGrid-view th.fc-day-number {\n  padding: 0 2px;\n  /* column headers can't have as much v space */ }\n\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: right; }\n\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: left; }\n\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: left;\n  border-radius: 0 0 3px 0; }\n\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: right;\n  border-radius: 0 0 0 3px; }\n\n.fc-dayGrid-view .fc-day-top .fc-week-number {\n  min-width: 1.5em;\n  text-align: center;\n  background-color: #f2f2f2;\n  color: #808080; }\n\n/* when week/day number have own column */\n.fc-dayGrid-view td.fc-week-number {\n  text-align: center; }\n\n.fc-dayGrid-view td.fc-week-number > * {\n  /* work around the way we do column resizing and ensure a minimum width */\n  display: inline-block;\n  min-width: 1.25em; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 271 */
-/***/ (function(module, exports) {
-
-module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                \t<FullCalendar\r\n\t\t\t\t\t  defaultView=\"dayGridMonth\"\r\n\t\t\t\t\t  :plugins=\"calendarPlugins\"\r\n\t\t\t\t\t  :weekends=\"false\"\r\n\t\t\t\t\t  :events=\"[\r\n\t\t\t\t\t    { title: 'event 1', date: '2019-08-01' },\r\n\t\t\t\t\t    { title: 'event 2', date: '2019-08-02' },\r\n\t\t\t\t\t    { title: 'event 3', date: '2019-07-05' },\r\n\t\t\t\t\t    { title: 'event 4', date: '2019-07-10' }\r\n\t\t\t\t\t  ]\"\r\n\t\t\t\t\t  />\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var __vue_script__, __vue_template__
-__webpack_require__(273)
-__vue_script__ = __webpack_require__(275)
-__vue_template__ = __webpack_require__(276)
+__webpack_require__(271)
+__vue_script__ = __webpack_require__(273)
+__vue_template__ = __webpack_require__(274)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -48474,13 +48548,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 273 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(274);
+var content = __webpack_require__(272);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -48500,7 +48574,7 @@ if(false) {
 }
 
 /***/ }),
-/* 274 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -48514,7 +48588,7 @@ exports.push([module.i, "\r\n    .assignment-heading {\r\n        border-bottom:
 
 
 /***/ }),
-/* 275 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48628,19 +48702,19 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 276 */
+/* 274 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-2\"></div>\r\n            <div class=\"col-8\">\r\n                <div class=\"text-center assignment-heading\">\r\n                    <h1>{{ i18n.my_assignments }}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div v-if=\"loading\" class=\"text-center\">\r\n                    Loading... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                </div>\r\n                <div class=\"row\" v-for=\"todo in todos\" style=\"padding-left:20px; padding-bottom:5px\">\r\n                    <div class=\"col-2 text-right\">\r\n                        <span class=\"checkbox-checked-style\" v-if=\"+todo.is_complete\">\r\n                            <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <span class=\"checkbox-style\" v-else></span>\r\n                    </div>\r\n                    <div class=\"col-10\" style=\"margin-left:0px\">\r\n                        <router-link :to=\"'/projects/' + todo.projectID + '/todolists/' + todo.listID + '/todos/' +todo.ID\" tag=\"div\" class=\"my-todo\">\r\n                            <a>{{todo.todo}}</a>, <span><i style=\"font-size:12px\">Created at {{todo.formatted_created}}</i></span>,\r\n                            <span v-bind:class=\"[todo.is_overdue ? 'overdue' : 'due']\">\r\n                                <span v-if=\"todo.formatted_due_date\">Due on</span>\r\n                                {{todo.formatted_due_date}}\r\n                            </span>\r\n                        </router-link>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n";
 
 /***/ }),
-/* 277 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_script__, __vue_template__
-__webpack_require__(278)
-__vue_script__ = __webpack_require__(280)
-__vue_template__ = __webpack_require__(281)
+__webpack_require__(276)
+__vue_script__ = __webpack_require__(278)
+__vue_template__ = __webpack_require__(279)
 module.exports = __vue_script__ || {}
 if (module.exports.__esModule) module.exports = module.exports.default
 if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -48657,13 +48731,13 @@ if (false) {(function () {  module.hot.accept()
 })()}
 
 /***/ }),
-/* 278 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(279);
+var content = __webpack_require__(277);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(1)(content, {});
@@ -48683,7 +48757,7 @@ if(false) {
 }
 
 /***/ }),
-/* 279 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -48697,7 +48771,7 @@ exports.push([module.i, "\r\n.activity-content {\r\n    padding: 35px 20px;\r\n 
 
 
 /***/ }),
-/* 280 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48855,10 +48929,1384 @@ exports.default = {
 // <script>
 
 /***/ }),
-/* 281 */
+/* 279 */
 /***/ (function(module, exports) {
 
 module.exports = "\r\n    <div class=\"container lists\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 text-center\">\r\n                <div class=\"activity-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <h2 class=\"decorated-center\"><span>My Activity</span></h2>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    <ul>\r\n                        <li class=\"left\" v-for=\"(value, key, index) in activitiesObject\">\r\n                            <h3>{{ key }}</h3>\r\n                            <div class=\"animated fadeIn\" v-for=\"activity in value\">\r\n                                <activity-info :activity=\"activity\" :i18n=\"i18n\"></activity-info>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                    \r\n                    <div class=\"row\" v-if=\"currentCount < totalActivityCount\">\r\n                        <div class=\"col-12\">\r\n                            <button class=\"button\" \r\n                                    @click=\"loadMoreActivities\"\r\n                                    :disabled=\"loadMore\">\r\n                                <i v-if=\"loadMore\" class=\"fa fa-refresh fa-spin\"></i>\r\n                                Load More\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                    <div v-if=\"noActivity && !loading\">\r\n                        No activity yet\r\n                    </div>\r\n                    <div v-if=\"loading\">\r\n                        Loading! Please wait... <i class=\"fa fa-refresh fa-spin\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+FullCalendar Time Grid Plugin v4.2.0
+Docs & License: https://fullcalendar.io/
+(c) 2019 Adam Shaw
+*/
+(function (global, factory) {
+     true ? factory(exports, __webpack_require__(62), __webpack_require__(268)) :
+    typeof define === 'function' && define.amd ? define(['exports', '@fullcalendar/core', '@fullcalendar/daygrid'], factory) :
+    (global = global || self, factory(global.FullCalendarTimeGrid = {}, global.FullCalendar, global.FullCalendarDayGrid));
+}(this, function (exports, core, daygrid) { 'use strict';
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    /*
+    Only handles foreground segs.
+    Does not own rendering. Use for low-level util methods by TimeGrid.
+    */
+    var TimeGridEventRenderer = /** @class */ (function (_super) {
+        __extends(TimeGridEventRenderer, _super);
+        function TimeGridEventRenderer(timeGrid) {
+            var _this = _super.call(this, timeGrid.context) || this;
+            _this.timeGrid = timeGrid;
+            _this.fullTimeFormat = core.createFormatter({
+                hour: 'numeric',
+                minute: '2-digit',
+                separator: _this.context.options.defaultRangeSeparator
+            });
+            return _this;
+        }
+        // Given an array of foreground segments, render a DOM element for each, computes position,
+        // and attaches to the column inner-container elements.
+        TimeGridEventRenderer.prototype.attachSegs = function (segs, mirrorInfo) {
+            var segsByCol = this.timeGrid.groupSegsByCol(segs);
+            // order the segs within each column
+            // TODO: have groupSegsByCol do this?
+            for (var col = 0; col < segsByCol.length; col++) {
+                segsByCol[col] = this.sortEventSegs(segsByCol[col]);
+            }
+            this.segsByCol = segsByCol;
+            this.timeGrid.attachSegsByCol(segsByCol, this.timeGrid.fgContainerEls);
+        };
+        TimeGridEventRenderer.prototype.detachSegs = function (segs) {
+            segs.forEach(function (seg) {
+                core.removeElement(seg.el);
+            });
+            this.segsByCol = null;
+        };
+        TimeGridEventRenderer.prototype.computeSegSizes = function (allSegs) {
+            var _a = this, timeGrid = _a.timeGrid, segsByCol = _a.segsByCol;
+            var colCnt = timeGrid.colCnt;
+            timeGrid.computeSegVerticals(allSegs); // horizontals relies on this
+            if (segsByCol) {
+                for (var col = 0; col < colCnt; col++) {
+                    this.computeSegHorizontals(segsByCol[col]); // compute horizontal coordinates, z-index's, and reorder the array
+                }
+            }
+        };
+        TimeGridEventRenderer.prototype.assignSegSizes = function (allSegs) {
+            var _a = this, timeGrid = _a.timeGrid, segsByCol = _a.segsByCol;
+            var colCnt = timeGrid.colCnt;
+            timeGrid.assignSegVerticals(allSegs); // horizontals relies on this
+            if (segsByCol) {
+                for (var col = 0; col < colCnt; col++) {
+                    this.assignSegCss(segsByCol[col]);
+                }
+            }
+        };
+        // Computes a default event time formatting string if `eventTimeFormat` is not explicitly defined
+        TimeGridEventRenderer.prototype.computeEventTimeFormat = function () {
+            return {
+                hour: 'numeric',
+                minute: '2-digit',
+                meridiem: false
+            };
+        };
+        // Computes a default `displayEventEnd` value if one is not expliclty defined
+        TimeGridEventRenderer.prototype.computeDisplayEventEnd = function () {
+            return true;
+        };
+        // Renders the HTML for a single event segment's default rendering
+        TimeGridEventRenderer.prototype.renderSegHtml = function (seg, mirrorInfo) {
+            var eventRange = seg.eventRange;
+            var eventDef = eventRange.def;
+            var eventUi = eventRange.ui;
+            var allDay = eventDef.allDay;
+            var isDraggable = eventUi.startEditable;
+            var isResizableFromStart = seg.isStart && eventUi.durationEditable && this.context.options.eventResizableFromStart;
+            var isResizableFromEnd = seg.isEnd && eventUi.durationEditable;
+            var classes = this.getSegClasses(seg, isDraggable, isResizableFromStart || isResizableFromEnd, mirrorInfo);
+            var skinCss = core.cssToStr(this.getSkinCss(eventUi));
+            var timeText;
+            var fullTimeText; // more verbose time text. for the print stylesheet
+            var startTimeText; // just the start time text
+            classes.unshift('fc-time-grid-event');
+            // if the event appears to span more than one day...
+            if (core.isMultiDayRange(eventRange.range)) {
+                // Don't display time text on segments that run entirely through a day.
+                // That would appear as midnight-midnight and would look dumb.
+                // Otherwise, display the time text for the *segment's* times (like 6pm-midnight or midnight-10am)
+                if (seg.isStart || seg.isEnd) {
+                    var unzonedStart = seg.start;
+                    var unzonedEnd = seg.end;
+                    timeText = this._getTimeText(unzonedStart, unzonedEnd, allDay); // TODO: give the timezones
+                    fullTimeText = this._getTimeText(unzonedStart, unzonedEnd, allDay, this.fullTimeFormat);
+                    startTimeText = this._getTimeText(unzonedStart, unzonedEnd, allDay, null, false); // displayEnd=false
+                }
+            }
+            else {
+                // Display the normal time text for the *event's* times
+                timeText = this.getTimeText(eventRange);
+                fullTimeText = this.getTimeText(eventRange, this.fullTimeFormat);
+                startTimeText = this.getTimeText(eventRange, null, false); // displayEnd=false
+            }
+            return '<a class="' + classes.join(' ') + '"' +
+                (eventDef.url ?
+                    ' href="' + core.htmlEscape(eventDef.url) + '"' :
+                    '') +
+                (skinCss ?
+                    ' style="' + skinCss + '"' :
+                    '') +
+                '>' +
+                '<div class="fc-content">' +
+                (timeText ?
+                    '<div class="fc-time"' +
+                        ' data-start="' + core.htmlEscape(startTimeText) + '"' +
+                        ' data-full="' + core.htmlEscape(fullTimeText) + '"' +
+                        '>' +
+                        '<span>' + core.htmlEscape(timeText) + '</span>' +
+                        '</div>' :
+                    '') +
+                (eventDef.title ?
+                    '<div class="fc-title">' +
+                        core.htmlEscape(eventDef.title) +
+                        '</div>' :
+                    '') +
+                '</div>' +
+                /* TODO: write CSS for this
+                (isResizableFromStart ?
+                  '<div class="fc-resizer fc-start-resizer"></div>' :
+                  ''
+                  ) +
+                */
+                (isResizableFromEnd ?
+                    '<div class="fc-resizer fc-end-resizer"></div>' :
+                    '') +
+                '</a>';
+        };
+        // Given an array of segments that are all in the same column, sets the backwardCoord and forwardCoord on each.
+        // Assumed the segs are already ordered.
+        // NOTE: Also reorders the given array by date!
+        TimeGridEventRenderer.prototype.computeSegHorizontals = function (segs) {
+            var levels;
+            var level0;
+            var i;
+            levels = buildSlotSegLevels(segs);
+            computeForwardSlotSegs(levels);
+            if ((level0 = levels[0])) {
+                for (i = 0; i < level0.length; i++) {
+                    computeSlotSegPressures(level0[i]);
+                }
+                for (i = 0; i < level0.length; i++) {
+                    this.computeSegForwardBack(level0[i], 0, 0);
+                }
+            }
+        };
+        // Calculate seg.forwardCoord and seg.backwardCoord for the segment, where both values range
+        // from 0 to 1. If the calendar is left-to-right, the seg.backwardCoord maps to "left" and
+        // seg.forwardCoord maps to "right" (via percentage). Vice-versa if the calendar is right-to-left.
+        //
+        // The segment might be part of a "series", which means consecutive segments with the same pressure
+        // who's width is unknown until an edge has been hit. `seriesBackwardPressure` is the number of
+        // segments behind this one in the current series, and `seriesBackwardCoord` is the starting
+        // coordinate of the first segment in the series.
+        TimeGridEventRenderer.prototype.computeSegForwardBack = function (seg, seriesBackwardPressure, seriesBackwardCoord) {
+            var forwardSegs = seg.forwardSegs;
+            var i;
+            if (seg.forwardCoord === undefined) { // not already computed
+                if (!forwardSegs.length) {
+                    // if there are no forward segments, this segment should butt up against the edge
+                    seg.forwardCoord = 1;
+                }
+                else {
+                    // sort highest pressure first
+                    this.sortForwardSegs(forwardSegs);
+                    // this segment's forwardCoord will be calculated from the backwardCoord of the
+                    // highest-pressure forward segment.
+                    this.computeSegForwardBack(forwardSegs[0], seriesBackwardPressure + 1, seriesBackwardCoord);
+                    seg.forwardCoord = forwardSegs[0].backwardCoord;
+                }
+                // calculate the backwardCoord from the forwardCoord. consider the series
+                seg.backwardCoord = seg.forwardCoord -
+                    (seg.forwardCoord - seriesBackwardCoord) / // available width for series
+                        (seriesBackwardPressure + 1); // # of segments in the series
+                // use this segment's coordinates to computed the coordinates of the less-pressurized
+                // forward segments
+                for (i = 0; i < forwardSegs.length; i++) {
+                    this.computeSegForwardBack(forwardSegs[i], 0, seg.forwardCoord);
+                }
+            }
+        };
+        TimeGridEventRenderer.prototype.sortForwardSegs = function (forwardSegs) {
+            var objs = forwardSegs.map(buildTimeGridSegCompareObj);
+            var specs = [
+                // put higher-pressure first
+                { field: 'forwardPressure', order: -1 },
+                // put segments that are closer to initial edge first (and favor ones with no coords yet)
+                { field: 'backwardCoord', order: 1 }
+            ].concat(this.context.view.eventOrderSpecs);
+            objs.sort(function (obj0, obj1) {
+                return core.compareByFieldSpecs(obj0, obj1, specs);
+            });
+            return objs.map(function (c) {
+                return c._seg;
+            });
+        };
+        // Given foreground event segments that have already had their position coordinates computed,
+        // assigns position-related CSS values to their elements.
+        TimeGridEventRenderer.prototype.assignSegCss = function (segs) {
+            for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
+                var seg = segs_1[_i];
+                core.applyStyle(seg.el, this.generateSegCss(seg));
+                if (seg.level > 0) {
+                    seg.el.classList.add('fc-time-grid-event-inset');
+                }
+                // if the event is short that the title will be cut off,
+                // attach a className that condenses the title into the time area.
+                if (seg.eventRange.def.title && seg.bottom - seg.top < 30) {
+                    seg.el.classList.add('fc-short'); // TODO: "condensed" is a better name
+                }
+            }
+        };
+        // Generates an object with CSS properties/values that should be applied to an event segment element.
+        // Contains important positioning-related properties that should be applied to any event element, customized or not.
+        TimeGridEventRenderer.prototype.generateSegCss = function (seg) {
+            var shouldOverlap = this.context.options.slotEventOverlap;
+            var backwardCoord = seg.backwardCoord; // the left side if LTR. the right side if RTL. floating-point
+            var forwardCoord = seg.forwardCoord; // the right side if LTR. the left side if RTL. floating-point
+            var props = this.timeGrid.generateSegVerticalCss(seg); // get top/bottom first
+            var isRtl = this.timeGrid.isRtl;
+            var left; // amount of space from left edge, a fraction of the total width
+            var right; // amount of space from right edge, a fraction of the total width
+            if (shouldOverlap) {
+                // double the width, but don't go beyond the maximum forward coordinate (1.0)
+                forwardCoord = Math.min(1, backwardCoord + (forwardCoord - backwardCoord) * 2);
+            }
+            if (isRtl) {
+                left = 1 - forwardCoord;
+                right = backwardCoord;
+            }
+            else {
+                left = backwardCoord;
+                right = 1 - forwardCoord;
+            }
+            props.zIndex = seg.level + 1; // convert from 0-base to 1-based
+            props.left = left * 100 + '%';
+            props.right = right * 100 + '%';
+            if (shouldOverlap && seg.forwardPressure) {
+                // add padding to the edge so that forward stacked events don't cover the resizer's icon
+                props[isRtl ? 'marginLeft' : 'marginRight'] = 10 * 2; // 10 is a guesstimate of the icon's width
+            }
+            return props;
+        };
+        return TimeGridEventRenderer;
+    }(core.FgEventRenderer));
+    // Builds an array of segments "levels". The first level will be the leftmost tier of segments if the calendar is
+    // left-to-right, or the rightmost if the calendar is right-to-left. Assumes the segments are already ordered by date.
+    function buildSlotSegLevels(segs) {
+        var levels = [];
+        var i;
+        var seg;
+        var j;
+        for (i = 0; i < segs.length; i++) {
+            seg = segs[i];
+            // go through all the levels and stop on the first level where there are no collisions
+            for (j = 0; j < levels.length; j++) {
+                if (!computeSlotSegCollisions(seg, levels[j]).length) {
+                    break;
+                }
+            }
+            seg.level = j;
+            (levels[j] || (levels[j] = [])).push(seg);
+        }
+        return levels;
+    }
+    // For every segment, figure out the other segments that are in subsequent
+    // levels that also occupy the same vertical space. Accumulate in seg.forwardSegs
+    function computeForwardSlotSegs(levels) {
+        var i;
+        var level;
+        var j;
+        var seg;
+        var k;
+        for (i = 0; i < levels.length; i++) {
+            level = levels[i];
+            for (j = 0; j < level.length; j++) {
+                seg = level[j];
+                seg.forwardSegs = [];
+                for (k = i + 1; k < levels.length; k++) {
+                    computeSlotSegCollisions(seg, levels[k], seg.forwardSegs);
+                }
+            }
+        }
+    }
+    // Figure out which path forward (via seg.forwardSegs) results in the longest path until
+    // the furthest edge is reached. The number of segments in this path will be seg.forwardPressure
+    function computeSlotSegPressures(seg) {
+        var forwardSegs = seg.forwardSegs;
+        var forwardPressure = 0;
+        var i;
+        var forwardSeg;
+        if (seg.forwardPressure === undefined) { // not already computed
+            for (i = 0; i < forwardSegs.length; i++) {
+                forwardSeg = forwardSegs[i];
+                // figure out the child's maximum forward path
+                computeSlotSegPressures(forwardSeg);
+                // either use the existing maximum, or use the child's forward pressure
+                // plus one (for the forwardSeg itself)
+                forwardPressure = Math.max(forwardPressure, 1 + forwardSeg.forwardPressure);
+            }
+            seg.forwardPressure = forwardPressure;
+        }
+    }
+    // Find all the segments in `otherSegs` that vertically collide with `seg`.
+    // Append into an optionally-supplied `results` array and return.
+    function computeSlotSegCollisions(seg, otherSegs, results) {
+        if (results === void 0) { results = []; }
+        for (var i = 0; i < otherSegs.length; i++) {
+            if (isSlotSegCollision(seg, otherSegs[i])) {
+                results.push(otherSegs[i]);
+            }
+        }
+        return results;
+    }
+    // Do these segments occupy the same vertical space?
+    function isSlotSegCollision(seg1, seg2) {
+        return seg1.bottom > seg2.top && seg1.top < seg2.bottom;
+    }
+    function buildTimeGridSegCompareObj(seg) {
+        var obj = core.buildSegCompareObj(seg);
+        obj.forwardPressure = seg.forwardPressure;
+        obj.backwardCoord = seg.backwardCoord;
+        return obj;
+    }
+
+    var TimeGridMirrorRenderer = /** @class */ (function (_super) {
+        __extends(TimeGridMirrorRenderer, _super);
+        function TimeGridMirrorRenderer() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        TimeGridMirrorRenderer.prototype.attachSegs = function (segs, mirrorInfo) {
+            this.segsByCol = this.timeGrid.groupSegsByCol(segs);
+            this.timeGrid.attachSegsByCol(this.segsByCol, this.timeGrid.mirrorContainerEls);
+            this.sourceSeg = mirrorInfo.sourceSeg;
+        };
+        TimeGridMirrorRenderer.prototype.generateSegCss = function (seg) {
+            var props = _super.prototype.generateSegCss.call(this, seg);
+            var sourceSeg = this.sourceSeg;
+            if (sourceSeg && sourceSeg.col === seg.col) {
+                var sourceSegProps = _super.prototype.generateSegCss.call(this, sourceSeg);
+                props.left = sourceSegProps.left;
+                props.right = sourceSegProps.right;
+                props.marginLeft = sourceSegProps.marginLeft;
+                props.marginRight = sourceSegProps.marginRight;
+            }
+            return props;
+        };
+        return TimeGridMirrorRenderer;
+    }(TimeGridEventRenderer));
+
+    var TimeGridFillRenderer = /** @class */ (function (_super) {
+        __extends(TimeGridFillRenderer, _super);
+        function TimeGridFillRenderer(timeGrid) {
+            var _this = _super.call(this, timeGrid.context) || this;
+            _this.timeGrid = timeGrid;
+            return _this;
+        }
+        TimeGridFillRenderer.prototype.attachSegs = function (type, segs) {
+            var timeGrid = this.timeGrid;
+            var containerEls;
+            // TODO: more efficient lookup
+            if (type === 'bgEvent') {
+                containerEls = timeGrid.bgContainerEls;
+            }
+            else if (type === 'businessHours') {
+                containerEls = timeGrid.businessContainerEls;
+            }
+            else if (type === 'highlight') {
+                containerEls = timeGrid.highlightContainerEls;
+            }
+            timeGrid.attachSegsByCol(timeGrid.groupSegsByCol(segs), containerEls);
+            return segs.map(function (seg) {
+                return seg.el;
+            });
+        };
+        TimeGridFillRenderer.prototype.computeSegSizes = function (segs) {
+            this.timeGrid.computeSegVerticals(segs);
+        };
+        TimeGridFillRenderer.prototype.assignSegSizes = function (segs) {
+            this.timeGrid.assignSegVerticals(segs);
+        };
+        return TimeGridFillRenderer;
+    }(core.FillRenderer));
+
+    /* A component that renders one or more columns of vertical time slots
+    ----------------------------------------------------------------------------------------------------------------------*/
+    // potential nice values for the slot-duration and interval-duration
+    // from largest to smallest
+    var AGENDA_STOCK_SUB_DURATIONS = [
+        { hours: 1 },
+        { minutes: 30 },
+        { minutes: 15 },
+        { seconds: 30 },
+        { seconds: 15 }
+    ];
+    var TimeGrid = /** @class */ (function (_super) {
+        __extends(TimeGrid, _super);
+        function TimeGrid(context, el, renderProps) {
+            var _this = _super.call(this, context, el) || this;
+            _this.isSlatSizesDirty = false;
+            _this.isColSizesDirty = false;
+            _this.renderSlats = core.memoizeRendering(_this._renderSlats);
+            var eventRenderer = _this.eventRenderer = new TimeGridEventRenderer(_this);
+            var fillRenderer = _this.fillRenderer = new TimeGridFillRenderer(_this);
+            _this.mirrorRenderer = new TimeGridMirrorRenderer(_this);
+            var renderColumns = _this.renderColumns = core.memoizeRendering(_this._renderColumns, _this._unrenderColumns);
+            _this.renderBusinessHours = core.memoizeRendering(fillRenderer.renderSegs.bind(fillRenderer, 'businessHours'), fillRenderer.unrender.bind(fillRenderer, 'businessHours'), [renderColumns]);
+            _this.renderDateSelection = core.memoizeRendering(_this._renderDateSelection, _this._unrenderDateSelection, [renderColumns]);
+            _this.renderFgEvents = core.memoizeRendering(eventRenderer.renderSegs.bind(eventRenderer), eventRenderer.unrender.bind(eventRenderer), [renderColumns]);
+            _this.renderBgEvents = core.memoizeRendering(fillRenderer.renderSegs.bind(fillRenderer, 'bgEvent'), fillRenderer.unrender.bind(fillRenderer, 'bgEvent'), [renderColumns]);
+            _this.renderEventSelection = core.memoizeRendering(eventRenderer.selectByInstanceId.bind(eventRenderer), eventRenderer.unselectByInstanceId.bind(eventRenderer), [_this.renderFgEvents]);
+            _this.renderEventDrag = core.memoizeRendering(_this._renderEventDrag, _this._unrenderEventDrag, [renderColumns]);
+            _this.renderEventResize = core.memoizeRendering(_this._renderEventResize, _this._unrenderEventResize, [renderColumns]);
+            _this.processOptions();
+            el.innerHTML =
+                '<div class="fc-bg"></div>' +
+                    '<div class="fc-slats"></div>' +
+                    '<hr class="fc-divider ' + _this.theme.getClass('widgetHeader') + '" style="display:none" />';
+            _this.rootBgContainerEl = el.querySelector('.fc-bg');
+            _this.slatContainerEl = el.querySelector('.fc-slats');
+            _this.bottomRuleEl = el.querySelector('.fc-divider');
+            _this.renderProps = renderProps;
+            return _this;
+        }
+        /* Options
+        ------------------------------------------------------------------------------------------------------------------*/
+        // Parses various options into properties of this object
+        TimeGrid.prototype.processOptions = function () {
+            var slotDuration = this.opt('slotDuration');
+            var snapDuration = this.opt('snapDuration');
+            var snapsPerSlot;
+            var input;
+            slotDuration = core.createDuration(slotDuration);
+            snapDuration = snapDuration ? core.createDuration(snapDuration) : slotDuration;
+            snapsPerSlot = core.wholeDivideDurations(slotDuration, snapDuration);
+            if (snapsPerSlot === null) {
+                snapDuration = slotDuration;
+                snapsPerSlot = 1;
+                // TODO: say warning?
+            }
+            this.slotDuration = slotDuration;
+            this.snapDuration = snapDuration;
+            this.snapsPerSlot = snapsPerSlot;
+            // might be an array value (for TimelineView).
+            // if so, getting the most granular entry (the last one probably).
+            input = this.opt('slotLabelFormat');
+            if (Array.isArray(input)) {
+                input = input[input.length - 1];
+            }
+            this.labelFormat = core.createFormatter(input || {
+                hour: 'numeric',
+                minute: '2-digit',
+                omitZeroMinute: true,
+                meridiem: 'short'
+            });
+            input = this.opt('slotLabelInterval');
+            this.labelInterval = input ?
+                core.createDuration(input) :
+                this.computeLabelInterval(slotDuration);
+        };
+        // Computes an automatic value for slotLabelInterval
+        TimeGrid.prototype.computeLabelInterval = function (slotDuration) {
+            var i;
+            var labelInterval;
+            var slotsPerLabel;
+            // find the smallest stock label interval that results in more than one slots-per-label
+            for (i = AGENDA_STOCK_SUB_DURATIONS.length - 1; i >= 0; i--) {
+                labelInterval = core.createDuration(AGENDA_STOCK_SUB_DURATIONS[i]);
+                slotsPerLabel = core.wholeDivideDurations(labelInterval, slotDuration);
+                if (slotsPerLabel !== null && slotsPerLabel > 1) {
+                    return labelInterval;
+                }
+            }
+            return slotDuration; // fall back
+        };
+        /* Rendering
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype.render = function (props) {
+            var cells = props.cells;
+            this.colCnt = cells.length;
+            this.renderSlats(props.dateProfile);
+            this.renderColumns(props.cells, props.dateProfile);
+            this.renderBusinessHours(props.businessHourSegs);
+            this.renderDateSelection(props.dateSelectionSegs);
+            this.renderFgEvents(props.fgEventSegs);
+            this.renderBgEvents(props.bgEventSegs);
+            this.renderEventSelection(props.eventSelection);
+            this.renderEventDrag(props.eventDrag);
+            this.renderEventResize(props.eventResize);
+        };
+        TimeGrid.prototype.destroy = function () {
+            _super.prototype.destroy.call(this);
+            // should unrender everything else too
+            this.renderSlats.unrender();
+            this.renderColumns.unrender();
+        };
+        TimeGrid.prototype.updateSize = function (isResize) {
+            var _a = this, fillRenderer = _a.fillRenderer, eventRenderer = _a.eventRenderer, mirrorRenderer = _a.mirrorRenderer;
+            if (isResize || this.isSlatSizesDirty) {
+                this.buildSlatPositions();
+                this.isSlatSizesDirty = false;
+            }
+            if (isResize || this.isColSizesDirty) {
+                this.buildColPositions();
+                this.isColSizesDirty = false;
+            }
+            fillRenderer.computeSizes(isResize);
+            eventRenderer.computeSizes(isResize);
+            mirrorRenderer.computeSizes(isResize);
+            fillRenderer.assignSizes(isResize);
+            eventRenderer.assignSizes(isResize);
+            mirrorRenderer.assignSizes(isResize);
+        };
+        TimeGrid.prototype._renderSlats = function (dateProfile) {
+            var theme = this.theme;
+            this.slatContainerEl.innerHTML =
+                '<table class="' + theme.getClass('tableGrid') + '">' +
+                    this.renderSlatRowHtml(dateProfile) +
+                    '</table>';
+            this.slatEls = core.findElements(this.slatContainerEl, 'tr');
+            this.slatPositions = new core.PositionCache(this.el, this.slatEls, false, true // vertical
+            );
+            this.isSlatSizesDirty = true;
+        };
+        // Generates the HTML for the horizontal "slats" that run width-wise. Has a time axis on a side. Depends on RTL.
+        TimeGrid.prototype.renderSlatRowHtml = function (dateProfile) {
+            var _a = this, dateEnv = _a.dateEnv, theme = _a.theme, isRtl = _a.isRtl;
+            var html = '';
+            var dayStart = core.startOfDay(dateProfile.renderRange.start);
+            var slotTime = dateProfile.minTime;
+            var slotIterator = core.createDuration(0);
+            var slotDate; // will be on the view's first day, but we only care about its time
+            var isLabeled;
+            var axisHtml;
+            // Calculate the time for each slot
+            while (core.asRoughMs(slotTime) < core.asRoughMs(dateProfile.maxTime)) {
+                slotDate = dateEnv.add(dayStart, slotTime);
+                isLabeled = core.wholeDivideDurations(slotIterator, this.labelInterval) !== null;
+                axisHtml =
+                    '<td class="fc-axis fc-time ' + theme.getClass('widgetContent') + '">' +
+                        (isLabeled ?
+                            '<span>' + // for matchCellWidths
+                                core.htmlEscape(dateEnv.format(slotDate, this.labelFormat)) +
+                                '</span>' :
+                            '') +
+                        '</td>';
+                html +=
+                    '<tr data-time="' + core.formatIsoTimeString(slotDate) + '"' +
+                        (isLabeled ? '' : ' class="fc-minor"') +
+                        '>' +
+                        (!isRtl ? axisHtml : '') +
+                        '<td class="' + theme.getClass('widgetContent') + '"></td>' +
+                        (isRtl ? axisHtml : '') +
+                        '</tr>';
+                slotTime = core.addDurations(slotTime, this.slotDuration);
+                slotIterator = core.addDurations(slotIterator, this.slotDuration);
+            }
+            return html;
+        };
+        TimeGrid.prototype._renderColumns = function (cells, dateProfile) {
+            var _a = this, theme = _a.theme, dateEnv = _a.dateEnv, view = _a.view;
+            var bgRow = new daygrid.DayBgRow(this.context);
+            this.rootBgContainerEl.innerHTML =
+                '<table class="' + theme.getClass('tableGrid') + '">' +
+                    bgRow.renderHtml({
+                        cells: cells,
+                        dateProfile: dateProfile,
+                        renderIntroHtml: this.renderProps.renderBgIntroHtml
+                    }) +
+                    '</table>';
+            this.colEls = core.findElements(this.el, '.fc-day, .fc-disabled-day');
+            for (var col = 0; col < this.colCnt; col++) {
+                this.publiclyTrigger('dayRender', [
+                    {
+                        date: dateEnv.toDate(cells[col].date),
+                        el: this.colEls[col],
+                        view: view
+                    }
+                ]);
+            }
+            if (this.isRtl) {
+                this.colEls.reverse();
+            }
+            this.colPositions = new core.PositionCache(this.el, this.colEls, true, // horizontal
+            false);
+            this.renderContentSkeleton();
+            this.isColSizesDirty = true;
+        };
+        TimeGrid.prototype._unrenderColumns = function () {
+            this.unrenderContentSkeleton();
+        };
+        /* Content Skeleton
+        ------------------------------------------------------------------------------------------------------------------*/
+        // Renders the DOM that the view's content will live in
+        TimeGrid.prototype.renderContentSkeleton = function () {
+            var parts = [];
+            var skeletonEl;
+            parts.push(this.renderProps.renderIntroHtml());
+            for (var i = 0; i < this.colCnt; i++) {
+                parts.push('<td>' +
+                    '<div class="fc-content-col">' +
+                    '<div class="fc-event-container fc-mirror-container"></div>' +
+                    '<div class="fc-event-container"></div>' +
+                    '<div class="fc-highlight-container"></div>' +
+                    '<div class="fc-bgevent-container"></div>' +
+                    '<div class="fc-business-container"></div>' +
+                    '</div>' +
+                    '</td>');
+            }
+            if (this.isRtl) {
+                parts.reverse();
+            }
+            skeletonEl = this.contentSkeletonEl = core.htmlToElement('<div class="fc-content-skeleton">' +
+                '<table>' +
+                '<tr>' + parts.join('') + '</tr>' +
+                '</table>' +
+                '</div>');
+            this.colContainerEls = core.findElements(skeletonEl, '.fc-content-col');
+            this.mirrorContainerEls = core.findElements(skeletonEl, '.fc-mirror-container');
+            this.fgContainerEls = core.findElements(skeletonEl, '.fc-event-container:not(.fc-mirror-container)');
+            this.bgContainerEls = core.findElements(skeletonEl, '.fc-bgevent-container');
+            this.highlightContainerEls = core.findElements(skeletonEl, '.fc-highlight-container');
+            this.businessContainerEls = core.findElements(skeletonEl, '.fc-business-container');
+            if (this.isRtl) {
+                this.colContainerEls.reverse();
+                this.mirrorContainerEls.reverse();
+                this.fgContainerEls.reverse();
+                this.bgContainerEls.reverse();
+                this.highlightContainerEls.reverse();
+                this.businessContainerEls.reverse();
+            }
+            this.el.appendChild(skeletonEl);
+        };
+        TimeGrid.prototype.unrenderContentSkeleton = function () {
+            core.removeElement(this.contentSkeletonEl);
+        };
+        // Given a flat array of segments, return an array of sub-arrays, grouped by each segment's col
+        TimeGrid.prototype.groupSegsByCol = function (segs) {
+            var segsByCol = [];
+            var i;
+            for (i = 0; i < this.colCnt; i++) {
+                segsByCol.push([]);
+            }
+            for (i = 0; i < segs.length; i++) {
+                segsByCol[segs[i].col].push(segs[i]);
+            }
+            return segsByCol;
+        };
+        // Given segments grouped by column, insert the segments' elements into a parallel array of container
+        // elements, each living within a column.
+        TimeGrid.prototype.attachSegsByCol = function (segsByCol, containerEls) {
+            var col;
+            var segs;
+            var i;
+            for (col = 0; col < this.colCnt; col++) { // iterate each column grouping
+                segs = segsByCol[col];
+                for (i = 0; i < segs.length; i++) {
+                    containerEls[col].appendChild(segs[i].el);
+                }
+            }
+        };
+        /* Now Indicator
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype.getNowIndicatorUnit = function () {
+            return 'minute'; // will refresh on the minute
+        };
+        TimeGrid.prototype.renderNowIndicator = function (segs, date) {
+            // HACK: if date columns not ready for some reason (scheduler)
+            if (!this.colContainerEls) {
+                return;
+            }
+            var top = this.computeDateTop(date);
+            var nodes = [];
+            var i;
+            // render lines within the columns
+            for (i = 0; i < segs.length; i++) {
+                var lineEl = core.createElement('div', { className: 'fc-now-indicator fc-now-indicator-line' });
+                lineEl.style.top = top + 'px';
+                this.colContainerEls[segs[i].col].appendChild(lineEl);
+                nodes.push(lineEl);
+            }
+            // render an arrow over the axis
+            if (segs.length > 0) { // is the current time in view?
+                var arrowEl = core.createElement('div', { className: 'fc-now-indicator fc-now-indicator-arrow' });
+                arrowEl.style.top = top + 'px';
+                this.contentSkeletonEl.appendChild(arrowEl);
+                nodes.push(arrowEl);
+            }
+            this.nowIndicatorEls = nodes;
+        };
+        TimeGrid.prototype.unrenderNowIndicator = function () {
+            if (this.nowIndicatorEls) {
+                this.nowIndicatorEls.forEach(core.removeElement);
+                this.nowIndicatorEls = null;
+            }
+        };
+        /* Coordinates
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype.getTotalSlatHeight = function () {
+            return this.slatContainerEl.offsetHeight;
+        };
+        // Computes the top coordinate, relative to the bounds of the grid, of the given date.
+        // A `startOfDayDate` must be given for avoiding ambiguity over how to treat midnight.
+        TimeGrid.prototype.computeDateTop = function (when, startOfDayDate) {
+            if (!startOfDayDate) {
+                startOfDayDate = core.startOfDay(when);
+            }
+            return this.computeTimeTop(when.valueOf() - startOfDayDate.valueOf());
+        };
+        // Computes the top coordinate, relative to the bounds of the grid, of the given time (a Duration).
+        TimeGrid.prototype.computeTimeTop = function (timeMs) {
+            var len = this.slatEls.length;
+            var dateProfile = this.props.dateProfile;
+            var slatCoverage = (timeMs - core.asRoughMs(dateProfile.minTime)) / core.asRoughMs(this.slotDuration); // floating-point value of # of slots covered
+            var slatIndex;
+            var slatRemainder;
+            // compute a floating-point number for how many slats should be progressed through.
+            // from 0 to number of slats (inclusive)
+            // constrained because minTime/maxTime might be customized.
+            slatCoverage = Math.max(0, slatCoverage);
+            slatCoverage = Math.min(len, slatCoverage);
+            // an integer index of the furthest whole slat
+            // from 0 to number slats (*exclusive*, so len-1)
+            slatIndex = Math.floor(slatCoverage);
+            slatIndex = Math.min(slatIndex, len - 1);
+            // how much further through the slatIndex slat (from 0.0-1.0) must be covered in addition.
+            // could be 1.0 if slatCoverage is covering *all* the slots
+            slatRemainder = slatCoverage - slatIndex;
+            return this.slatPositions.tops[slatIndex] +
+                this.slatPositions.getHeight(slatIndex) * slatRemainder;
+        };
+        // For each segment in an array, computes and assigns its top and bottom properties
+        TimeGrid.prototype.computeSegVerticals = function (segs) {
+            var eventMinHeight = this.opt('timeGridEventMinHeight');
+            var i;
+            var seg;
+            var dayDate;
+            for (i = 0; i < segs.length; i++) {
+                seg = segs[i];
+                dayDate = this.props.cells[seg.col].date;
+                seg.top = this.computeDateTop(seg.start, dayDate);
+                seg.bottom = Math.max(seg.top + eventMinHeight, this.computeDateTop(seg.end, dayDate));
+            }
+        };
+        // Given segments that already have their top/bottom properties computed, applies those values to
+        // the segments' elements.
+        TimeGrid.prototype.assignSegVerticals = function (segs) {
+            var i;
+            var seg;
+            for (i = 0; i < segs.length; i++) {
+                seg = segs[i];
+                core.applyStyle(seg.el, this.generateSegVerticalCss(seg));
+            }
+        };
+        // Generates an object with CSS properties for the top/bottom coordinates of a segment element
+        TimeGrid.prototype.generateSegVerticalCss = function (seg) {
+            return {
+                top: seg.top,
+                bottom: -seg.bottom // flipped because needs to be space beyond bottom edge of event container
+            };
+        };
+        /* Sizing
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype.buildPositionCaches = function () {
+            this.buildColPositions();
+            this.buildSlatPositions();
+        };
+        TimeGrid.prototype.buildColPositions = function () {
+            this.colPositions.build();
+        };
+        TimeGrid.prototype.buildSlatPositions = function () {
+            this.slatPositions.build();
+        };
+        /* Hit System
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype.positionToHit = function (positionLeft, positionTop) {
+            var _a = this, dateEnv = _a.dateEnv, snapsPerSlot = _a.snapsPerSlot, slatPositions = _a.slatPositions, colPositions = _a.colPositions;
+            var colIndex = colPositions.leftToIndex(positionLeft);
+            var slatIndex = slatPositions.topToIndex(positionTop);
+            if (colIndex != null && slatIndex != null) {
+                var slatTop = slatPositions.tops[slatIndex];
+                var slatHeight = slatPositions.getHeight(slatIndex);
+                var partial = (positionTop - slatTop) / slatHeight; // floating point number between 0 and 1
+                var localSnapIndex = Math.floor(partial * snapsPerSlot); // the snap # relative to start of slat
+                var snapIndex = slatIndex * snapsPerSlot + localSnapIndex;
+                var dayDate = this.props.cells[colIndex].date;
+                var time = core.addDurations(this.props.dateProfile.minTime, core.multiplyDuration(this.snapDuration, snapIndex));
+                var start = dateEnv.add(dayDate, time);
+                var end = dateEnv.add(start, this.snapDuration);
+                return {
+                    col: colIndex,
+                    dateSpan: {
+                        range: { start: start, end: end },
+                        allDay: false
+                    },
+                    dayEl: this.colEls[colIndex],
+                    relativeRect: {
+                        left: colPositions.lefts[colIndex],
+                        right: colPositions.rights[colIndex],
+                        top: slatTop,
+                        bottom: slatTop + slatHeight
+                    }
+                };
+            }
+        };
+        /* Event Drag Visualization
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype._renderEventDrag = function (state) {
+            if (state) {
+                this.eventRenderer.hideByHash(state.affectedInstances);
+                if (state.isEvent) {
+                    this.mirrorRenderer.renderSegs(state.segs, { isDragging: true, sourceSeg: state.sourceSeg });
+                }
+                else {
+                    this.fillRenderer.renderSegs('highlight', state.segs);
+                }
+            }
+        };
+        TimeGrid.prototype._unrenderEventDrag = function (state) {
+            if (state) {
+                this.eventRenderer.showByHash(state.affectedInstances);
+                this.mirrorRenderer.unrender(state.segs, { isDragging: true, sourceSeg: state.sourceSeg });
+                this.fillRenderer.unrender('highlight');
+            }
+        };
+        /* Event Resize Visualization
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGrid.prototype._renderEventResize = function (state) {
+            if (state) {
+                this.eventRenderer.hideByHash(state.affectedInstances);
+                this.mirrorRenderer.renderSegs(state.segs, { isResizing: true, sourceSeg: state.sourceSeg });
+            }
+        };
+        TimeGrid.prototype._unrenderEventResize = function (state) {
+            if (state) {
+                this.eventRenderer.showByHash(state.affectedInstances);
+                this.mirrorRenderer.unrender(state.segs, { isResizing: true, sourceSeg: state.sourceSeg });
+            }
+        };
+        /* Selection
+        ------------------------------------------------------------------------------------------------------------------*/
+        // Renders a visual indication of a selection. Overrides the default, which was to simply render a highlight.
+        TimeGrid.prototype._renderDateSelection = function (segs) {
+            if (segs) {
+                if (this.opt('selectMirror')) {
+                    this.mirrorRenderer.renderSegs(segs, { isSelecting: true });
+                }
+                else {
+                    this.fillRenderer.renderSegs('highlight', segs);
+                }
+            }
+        };
+        TimeGrid.prototype._unrenderDateSelection = function (segs) {
+            this.mirrorRenderer.unrender(segs, { isSelecting: true });
+            this.fillRenderer.unrender('highlight');
+        };
+        return TimeGrid;
+    }(core.DateComponent));
+
+    var AllDaySplitter = /** @class */ (function (_super) {
+        __extends(AllDaySplitter, _super);
+        function AllDaySplitter() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        AllDaySplitter.prototype.getKeyInfo = function () {
+            return {
+                allDay: {},
+                timed: {}
+            };
+        };
+        AllDaySplitter.prototype.getKeysForDateSpan = function (dateSpan) {
+            if (dateSpan.allDay) {
+                return ['allDay'];
+            }
+            else {
+                return ['timed'];
+            }
+        };
+        AllDaySplitter.prototype.getKeysForEventDef = function (eventDef) {
+            if (!eventDef.allDay) {
+                return ['timed'];
+            }
+            else if (core.hasBgRendering(eventDef)) {
+                return ['timed', 'allDay'];
+            }
+            else {
+                return ['allDay'];
+            }
+        };
+        return AllDaySplitter;
+    }(core.Splitter));
+
+    var TIMEGRID_ALL_DAY_EVENT_LIMIT = 5;
+    var WEEK_HEADER_FORMAT = core.createFormatter({ week: 'short' });
+    /* An abstract class for all timegrid-related views. Displays one more columns with time slots running vertically.
+    ----------------------------------------------------------------------------------------------------------------------*/
+    // Is a manager for the TimeGrid subcomponent and possibly the DayGrid subcomponent (if allDaySlot is on).
+    // Responsible for managing width/height.
+    var TimeGridView = /** @class */ (function (_super) {
+        __extends(TimeGridView, _super);
+        function TimeGridView(context, viewSpec, dateProfileGenerator, parentEl) {
+            var _this = _super.call(this, context, viewSpec, dateProfileGenerator, parentEl) || this;
+            _this.splitter = new AllDaySplitter();
+            /* Header Render Methods
+            ------------------------------------------------------------------------------------------------------------------*/
+            // Generates the HTML that will go before the day-of week header cells
+            _this.renderHeadIntroHtml = function () {
+                var _a = _this, theme = _a.theme, dateEnv = _a.dateEnv;
+                var range = _this.props.dateProfile.renderRange;
+                var dayCnt = core.diffDays(range.start, range.end);
+                var weekText;
+                if (_this.opt('weekNumbers')) {
+                    weekText = dateEnv.format(range.start, WEEK_HEADER_FORMAT);
+                    return '' +
+                        '<th class="fc-axis fc-week-number ' + theme.getClass('widgetHeader') + '" ' + _this.axisStyleAttr() + '>' +
+                        core.buildGotoAnchorHtml(// aside from link, important for matchCellWidths
+                        _this, { date: range.start, type: 'week', forceOff: dayCnt > 1 }, core.htmlEscape(weekText) // inner HTML
+                        ) +
+                        '</th>';
+                }
+                else {
+                    return '<th class="fc-axis ' + theme.getClass('widgetHeader') + '" ' + _this.axisStyleAttr() + '></th>';
+                }
+            };
+            /* Time Grid Render Methods
+            ------------------------------------------------------------------------------------------------------------------*/
+            // Generates the HTML that goes before the bg of the TimeGrid slot area. Long vertical column.
+            _this.renderTimeGridBgIntroHtml = function () {
+                var theme = _this.theme;
+                return '<td class="fc-axis ' + theme.getClass('widgetContent') + '" ' + _this.axisStyleAttr() + '></td>';
+            };
+            // Generates the HTML that goes before all other types of cells.
+            // Affects content-skeleton, mirror-skeleton, highlight-skeleton for both the time-grid and day-grid.
+            _this.renderTimeGridIntroHtml = function () {
+                return '<td class="fc-axis" ' + _this.axisStyleAttr() + '></td>';
+            };
+            /* Day Grid Render Methods
+            ------------------------------------------------------------------------------------------------------------------*/
+            // Generates the HTML that goes before the all-day cells
+            _this.renderDayGridBgIntroHtml = function () {
+                var theme = _this.theme;
+                return '' +
+                    '<td class="fc-axis ' + theme.getClass('widgetContent') + '" ' + _this.axisStyleAttr() + '>' +
+                    '<span>' + // needed for matchCellWidths
+                    core.getAllDayHtml(_this) +
+                    '</span>' +
+                    '</td>';
+            };
+            // Generates the HTML that goes before all other types of cells.
+            // Affects content-skeleton, mirror-skeleton, highlight-skeleton for both the time-grid and day-grid.
+            _this.renderDayGridIntroHtml = function () {
+                return '<td class="fc-axis" ' + _this.axisStyleAttr() + '></td>';
+            };
+            _this.el.classList.add('fc-timeGrid-view');
+            _this.el.innerHTML = _this.renderSkeletonHtml();
+            _this.scroller = new core.ScrollComponent('hidden', // overflow x
+            'auto' // overflow y
+            );
+            var timeGridWrapEl = _this.scroller.el;
+            _this.el.querySelector('.fc-body > tr > td').appendChild(timeGridWrapEl);
+            timeGridWrapEl.classList.add('fc-time-grid-container');
+            var timeGridEl = core.createElement('div', { className: 'fc-time-grid' });
+            timeGridWrapEl.appendChild(timeGridEl);
+            _this.timeGrid = new TimeGrid(_this.context, timeGridEl, {
+                renderBgIntroHtml: _this.renderTimeGridBgIntroHtml,
+                renderIntroHtml: _this.renderTimeGridIntroHtml
+            });
+            if (_this.opt('allDaySlot')) { // should we display the "all-day" area?
+                _this.dayGrid = new daygrid.DayGrid(// the all-day subcomponent of this view
+                _this.context, _this.el.querySelector('.fc-day-grid'), {
+                    renderNumberIntroHtml: _this.renderDayGridIntroHtml,
+                    renderBgIntroHtml: _this.renderDayGridBgIntroHtml,
+                    renderIntroHtml: _this.renderDayGridIntroHtml,
+                    colWeekNumbersVisible: false,
+                    cellWeekNumbersVisible: false
+                });
+                // have the day-grid extend it's coordinate area over the <hr> dividing the two grids
+                _this.dayGrid.bottomCoordPadding = _this.el.querySelector('.fc-divider').offsetHeight;
+            }
+            return _this;
+        }
+        TimeGridView.prototype.destroy = function () {
+            _super.prototype.destroy.call(this);
+            this.timeGrid.destroy();
+            if (this.dayGrid) {
+                this.dayGrid.destroy();
+            }
+            this.scroller.destroy();
+        };
+        /* Rendering
+        ------------------------------------------------------------------------------------------------------------------*/
+        // Builds the HTML skeleton for the view.
+        // The day-grid and time-grid components will render inside containers defined by this HTML.
+        TimeGridView.prototype.renderSkeletonHtml = function () {
+            var theme = this.theme;
+            return '' +
+                '<table class="' + theme.getClass('tableGrid') + '">' +
+                (this.opt('columnHeader') ?
+                    '<thead class="fc-head">' +
+                        '<tr>' +
+                        '<td class="fc-head-container ' + theme.getClass('widgetHeader') + '">&nbsp;</td>' +
+                        '</tr>' +
+                        '</thead>' :
+                    '') +
+                '<tbody class="fc-body">' +
+                '<tr>' +
+                '<td class="' + theme.getClass('widgetContent') + '">' +
+                (this.opt('allDaySlot') ?
+                    '<div class="fc-day-grid"></div>' +
+                        '<hr class="fc-divider ' + theme.getClass('widgetHeader') + '" />' :
+                    '') +
+                '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>';
+        };
+        /* Now Indicator
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGridView.prototype.getNowIndicatorUnit = function () {
+            return this.timeGrid.getNowIndicatorUnit();
+        };
+        // subclasses should implement
+        // renderNowIndicator(date: DateMarker) {
+        // }
+        TimeGridView.prototype.unrenderNowIndicator = function () {
+            this.timeGrid.unrenderNowIndicator();
+        };
+        /* Dimensions
+        ------------------------------------------------------------------------------------------------------------------*/
+        TimeGridView.prototype.updateSize = function (isResize, viewHeight, isAuto) {
+            _super.prototype.updateSize.call(this, isResize, viewHeight, isAuto); // will call updateBaseSize. important that executes first
+            this.timeGrid.updateSize(isResize);
+            if (this.dayGrid) {
+                this.dayGrid.updateSize(isResize);
+            }
+        };
+        // Adjusts the vertical dimensions of the view to the specified values
+        TimeGridView.prototype.updateBaseSize = function (isResize, viewHeight, isAuto) {
+            var _this = this;
+            var eventLimit;
+            var scrollerHeight;
+            var scrollbarWidths;
+            // make all axis cells line up
+            this.axisWidth = core.matchCellWidths(core.findElements(this.el, '.fc-axis'));
+            // hack to give the view some height prior to timeGrid's columns being rendered
+            // TODO: separate setting height from scroller VS timeGrid.
+            if (!this.timeGrid.colEls) {
+                if (!isAuto) {
+                    scrollerHeight = this.computeScrollerHeight(viewHeight);
+                    this.scroller.setHeight(scrollerHeight);
+                }
+                return;
+            }
+            // set of fake row elements that must compensate when scroller has scrollbars
+            var noScrollRowEls = core.findElements(this.el, '.fc-row').filter(function (node) {
+                return !_this.scroller.el.contains(node);
+            });
+            // reset all dimensions back to the original state
+            this.timeGrid.bottomRuleEl.style.display = 'none'; // will be shown later if this <hr> is necessary
+            this.scroller.clear(); // sets height to 'auto' and clears overflow
+            noScrollRowEls.forEach(core.uncompensateScroll);
+            // limit number of events in the all-day area
+            if (this.dayGrid) {
+                this.dayGrid.removeSegPopover(); // kill the "more" popover if displayed
+                eventLimit = this.opt('eventLimit');
+                if (eventLimit && typeof eventLimit !== 'number') {
+                    eventLimit = TIMEGRID_ALL_DAY_EVENT_LIMIT; // make sure "auto" goes to a real number
+                }
+                if (eventLimit) {
+                    this.dayGrid.limitRows(eventLimit);
+                }
+            }
+            if (!isAuto) { // should we force dimensions of the scroll container?
+                scrollerHeight = this.computeScrollerHeight(viewHeight);
+                this.scroller.setHeight(scrollerHeight);
+                scrollbarWidths = this.scroller.getScrollbarWidths();
+                if (scrollbarWidths.left || scrollbarWidths.right) { // using scrollbars?
+                    // make the all-day and header rows lines up
+                    noScrollRowEls.forEach(function (rowEl) {
+                        core.compensateScroll(rowEl, scrollbarWidths);
+                    });
+                    // the scrollbar compensation might have changed text flow, which might affect height, so recalculate
+                    // and reapply the desired height to the scroller.
+                    scrollerHeight = this.computeScrollerHeight(viewHeight);
+                    this.scroller.setHeight(scrollerHeight);
+                }
+                // guarantees the same scrollbar widths
+                this.scroller.lockOverflow(scrollbarWidths);
+                // if there's any space below the slats, show the horizontal rule.
+                // this won't cause any new overflow, because lockOverflow already called.
+                if (this.timeGrid.getTotalSlatHeight() < scrollerHeight) {
+                    this.timeGrid.bottomRuleEl.style.display = '';
+                }
+            }
+        };
+        // given a desired total height of the view, returns what the height of the scroller should be
+        TimeGridView.prototype.computeScrollerHeight = function (viewHeight) {
+            return viewHeight -
+                core.subtractInnerElHeight(this.el, this.scroller.el); // everything that's NOT the scroller
+        };
+        /* Scroll
+        ------------------------------------------------------------------------------------------------------------------*/
+        // Computes the initial pre-configured scroll state prior to allowing the user to change it
+        TimeGridView.prototype.computeDateScroll = function (timeMs) {
+            var top = this.timeGrid.computeTimeTop(timeMs);
+            // zoom can give weird floating-point values. rather scroll a little bit further
+            top = Math.ceil(top);
+            if (top) {
+                top++; // to overcome top border that slots beyond the first have. looks better
+            }
+            return { top: top };
+        };
+        TimeGridView.prototype.queryDateScroll = function () {
+            return { top: this.scroller.getScrollTop() };
+        };
+        TimeGridView.prototype.applyDateScroll = function (scroll) {
+            if (scroll.top !== undefined) {
+                this.scroller.setScrollTop(scroll.top);
+            }
+        };
+        // Generates an HTML attribute string for setting the width of the axis, if it is known
+        TimeGridView.prototype.axisStyleAttr = function () {
+            if (this.axisWidth != null) {
+                return 'style="width:' + this.axisWidth + 'px"';
+            }
+            return '';
+        };
+        return TimeGridView;
+    }(core.View));
+    TimeGridView.prototype.usesMinMaxTime = true; // indicates that minTime/maxTime affects rendering
+
+    var SimpleTimeGrid = /** @class */ (function (_super) {
+        __extends(SimpleTimeGrid, _super);
+        function SimpleTimeGrid(context, timeGrid) {
+            var _this = _super.call(this, context, timeGrid.el) || this;
+            _this.buildDayRanges = core.memoize(buildDayRanges);
+            _this.slicer = new TimeGridSlicer();
+            _this.timeGrid = timeGrid;
+            context.calendar.registerInteractiveComponent(_this, {
+                el: _this.timeGrid.el
+            });
+            return _this;
+        }
+        SimpleTimeGrid.prototype.destroy = function () {
+            _super.prototype.destroy.call(this);
+            this.calendar.unregisterInteractiveComponent(this);
+        };
+        SimpleTimeGrid.prototype.render = function (props) {
+            var dateProfile = props.dateProfile, dayTable = props.dayTable;
+            var dayRanges = this.dayRanges = this.buildDayRanges(dayTable, dateProfile, this.dateEnv);
+            this.timeGrid.receiveProps(__assign({}, this.slicer.sliceProps(props, dateProfile, null, this.timeGrid, dayRanges), { dateProfile: dateProfile, cells: dayTable.cells[0] }));
+        };
+        SimpleTimeGrid.prototype.renderNowIndicator = function (date) {
+            this.timeGrid.renderNowIndicator(this.slicer.sliceNowDate(date, this.timeGrid, this.dayRanges), date);
+        };
+        SimpleTimeGrid.prototype.buildPositionCaches = function () {
+            this.timeGrid.buildPositionCaches();
+        };
+        SimpleTimeGrid.prototype.queryHit = function (positionLeft, positionTop) {
+            var rawHit = this.timeGrid.positionToHit(positionLeft, positionTop);
+            if (rawHit) {
+                return {
+                    component: this.timeGrid,
+                    dateSpan: rawHit.dateSpan,
+                    dayEl: rawHit.dayEl,
+                    rect: {
+                        left: rawHit.relativeRect.left,
+                        right: rawHit.relativeRect.right,
+                        top: rawHit.relativeRect.top,
+                        bottom: rawHit.relativeRect.bottom
+                    },
+                    layer: 0
+                };
+            }
+        };
+        return SimpleTimeGrid;
+    }(core.DateComponent));
+    function buildDayRanges(dayTable, dateProfile, dateEnv) {
+        var ranges = [];
+        for (var _i = 0, _a = dayTable.headerDates; _i < _a.length; _i++) {
+            var date = _a[_i];
+            ranges.push({
+                start: dateEnv.add(date, dateProfile.minTime),
+                end: dateEnv.add(date, dateProfile.maxTime)
+            });
+        }
+        return ranges;
+    }
+    var TimeGridSlicer = /** @class */ (function (_super) {
+        __extends(TimeGridSlicer, _super);
+        function TimeGridSlicer() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        TimeGridSlicer.prototype.sliceRange = function (range, dayRanges) {
+            var segs = [];
+            for (var col = 0; col < dayRanges.length; col++) {
+                var segRange = core.intersectRanges(range, dayRanges[col]);
+                if (segRange) {
+                    segs.push({
+                        start: segRange.start,
+                        end: segRange.end,
+                        isStart: segRange.start.valueOf() === range.start.valueOf(),
+                        isEnd: segRange.end.valueOf() === range.end.valueOf(),
+                        col: col
+                    });
+                }
+            }
+            return segs;
+        };
+        return TimeGridSlicer;
+    }(core.Slicer));
+
+    var TimeGridView$1 = /** @class */ (function (_super) {
+        __extends(TimeGridView, _super);
+        function TimeGridView(_context, viewSpec, dateProfileGenerator, parentEl) {
+            var _this = _super.call(this, _context, viewSpec, dateProfileGenerator, parentEl) || this;
+            _this.buildDayTable = core.memoize(buildDayTable);
+            if (_this.opt('columnHeader')) {
+                _this.header = new core.DayHeader(_this.context, _this.el.querySelector('.fc-head-container'));
+            }
+            _this.simpleTimeGrid = new SimpleTimeGrid(_this.context, _this.timeGrid);
+            if (_this.dayGrid) {
+                _this.simpleDayGrid = new daygrid.SimpleDayGrid(_this.context, _this.dayGrid);
+            }
+            return _this;
+        }
+        TimeGridView.prototype.destroy = function () {
+            _super.prototype.destroy.call(this);
+            if (this.header) {
+                this.header.destroy();
+            }
+            this.simpleTimeGrid.destroy();
+            if (this.simpleDayGrid) {
+                this.simpleDayGrid.destroy();
+            }
+        };
+        TimeGridView.prototype.render = function (props) {
+            _super.prototype.render.call(this, props); // for flags for updateSize
+            var dateProfile = this.props.dateProfile;
+            var dayTable = this.buildDayTable(dateProfile, this.dateProfileGenerator);
+            var splitProps = this.splitter.splitProps(props);
+            if (this.header) {
+                this.header.receiveProps({
+                    dateProfile: dateProfile,
+                    dates: dayTable.headerDates,
+                    datesRepDistinctDays: true,
+                    renderIntroHtml: this.renderHeadIntroHtml
+                });
+            }
+            this.simpleTimeGrid.receiveProps(__assign({}, splitProps['timed'], { dateProfile: dateProfile,
+                dayTable: dayTable }));
+            if (this.simpleDayGrid) {
+                this.simpleDayGrid.receiveProps(__assign({}, splitProps['allDay'], { dateProfile: dateProfile,
+                    dayTable: dayTable, nextDayThreshold: this.nextDayThreshold, isRigid: false }));
+            }
+        };
+        TimeGridView.prototype.renderNowIndicator = function (date) {
+            this.simpleTimeGrid.renderNowIndicator(date);
+        };
+        return TimeGridView;
+    }(TimeGridView));
+    function buildDayTable(dateProfile, dateProfileGenerator) {
+        var daySeries = new core.DaySeries(dateProfile.renderRange, dateProfileGenerator);
+        return new core.DayTable(daySeries, false);
+    }
+
+    var main = core.createPlugin({
+        defaultView: 'timeGridWeek',
+        views: {
+            timeGrid: {
+                class: TimeGridView$1,
+                allDaySlot: true,
+                slotDuration: '00:30:00',
+                slotEventOverlap: true // a bad name. confused with overlap/constraint system
+            },
+            timeGridDay: {
+                type: 'timeGrid',
+                duration: { days: 1 }
+            },
+            timeGridWeek: {
+                type: 'timeGrid',
+                duration: { weeks: 1 }
+            }
+        }
+    });
+
+    exports.AbstractTimeGridView = TimeGridView;
+    exports.TimeGrid = TimeGrid;
+    exports.TimeGridSlicer = TimeGridSlicer;
+    exports.TimeGridView = TimeGridView$1;
+    exports.buildDayRanges = buildDayRanges;
+    exports.buildDayTable = buildDayTable;
+    exports.default = main;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+}));
+
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "/*!\nFullCalendar Time Grid Plugin v4.2.0\nDocs & License: https://fullcalendar.io/\n(c) 2019 Adam Shaw\n*/\n/* TimeGridView all-day area\n--------------------------------------------------------------------------------------------------*/\n.fc-timeGrid-view .fc-day-grid {\n  position: relative;\n  z-index: 2;\n  /* so the \"more..\" popover will be over the time grid */ }\n\n.fc-timeGrid-view .fc-day-grid .fc-row {\n  min-height: 3em;\n  /* all-day section will never get shorter than this */ }\n\n.fc-timeGrid-view .fc-day-grid .fc-row .fc-content-skeleton {\n  padding-bottom: 1em;\n  /* give space underneath events for clicking/selecting days */ }\n\n/* TimeGrid axis running down the side (for both the all-day area and the slot area)\n--------------------------------------------------------------------------------------------------*/\n.fc .fc-axis {\n  /* .fc to overcome default cell styles */\n  vertical-align: middle;\n  padding: 0 4px;\n  white-space: nowrap; }\n\n.fc-ltr .fc-axis {\n  text-align: right; }\n\n.fc-rtl .fc-axis {\n  text-align: left; }\n\n/* TimeGrid Structure\n--------------------------------------------------------------------------------------------------*/\n.fc-time-grid-container,\n.fc-time-grid {\n  /* so slats/bg/content/etc positions get scoped within here */\n  position: relative;\n  z-index: 1; }\n\n.fc-time-grid {\n  min-height: 100%;\n  /* so if height setting is 'auto', .fc-bg stretches to fill height */ }\n\n.fc-time-grid table {\n  /* don't put outer borders on slats/bg/content/etc */\n  border: 0 hidden transparent; }\n\n.fc-time-grid > .fc-bg {\n  z-index: 1; }\n\n.fc-time-grid .fc-slats,\n.fc-time-grid > hr {\n  /* the <hr> TimeGridView injects when grid is shorter than scroller */\n  position: relative;\n  z-index: 2; }\n\n.fc-time-grid .fc-content-col {\n  position: relative;\n  /* because now-indicator lives directly inside */ }\n\n.fc-time-grid .fc-content-skeleton {\n  position: absolute;\n  z-index: 3;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n/* divs within a cell within the fc-content-skeleton */\n.fc-time-grid .fc-business-container {\n  position: relative;\n  z-index: 1; }\n\n.fc-time-grid .fc-bgevent-container {\n  position: relative;\n  z-index: 2; }\n\n.fc-time-grid .fc-highlight-container {\n  position: relative;\n  z-index: 3; }\n\n.fc-time-grid .fc-event-container {\n  position: relative;\n  z-index: 4; }\n\n.fc-time-grid .fc-now-indicator-line {\n  z-index: 5; }\n\n.fc-time-grid .fc-mirror-container {\n  /* also is fc-event-container */\n  position: relative;\n  z-index: 6; }\n\n/* TimeGrid Slats (lines that run horizontally)\n--------------------------------------------------------------------------------------------------*/\n.fc-time-grid .fc-slats td {\n  height: 1.5em;\n  border-bottom: 0;\n  /* each cell is responsible for its top border */ }\n\n.fc-time-grid .fc-slats .fc-minor td {\n  border-top-style: dotted; }\n\n/* TimeGrid Highlighting Slots\n--------------------------------------------------------------------------------------------------*/\n.fc-time-grid .fc-highlight-container {\n  /* a div within a cell within the fc-highlight-skeleton */\n  position: relative;\n  /* scopes the left/right of the fc-highlight to be in the column */ }\n\n.fc-time-grid .fc-highlight {\n  position: absolute;\n  left: 0;\n  right: 0;\n  /* top and bottom will be in by JS */ }\n\n/* TimeGrid Event Containment\n--------------------------------------------------------------------------------------------------*/\n.fc-ltr .fc-time-grid .fc-event-container {\n  /* space on the sides of events for LTR (default) */\n  margin: 0 2.5% 0 2px; }\n\n.fc-rtl .fc-time-grid .fc-event-container {\n  /* space on the sides of events for RTL */\n  margin: 0 2px 0 2.5%; }\n\n.fc-time-grid .fc-event,\n.fc-time-grid .fc-bgevent {\n  position: absolute;\n  z-index: 1;\n  /* scope inner z-index's */ }\n\n.fc-time-grid .fc-bgevent {\n  /* background events always span full width */\n  left: 0;\n  right: 0; }\n\n/* TimeGrid Event Styling\n----------------------------------------------------------------------------------------------------\nWe use the full \"fc-time-grid-event\" class instead of using descendants because the event won't\nbe a descendant of the grid when it is being dragged.\n*/\n.fc-time-grid-event {\n  margin-bottom: 1px; }\n\n.fc-time-grid-event-inset {\n  -webkit-box-shadow: 0px 0px 0px 1px #fff;\n  box-shadow: 0px 0px 0px 1px #fff; }\n\n.fc-time-grid-event.fc-not-start {\n  /* events that are continuing from another day */\n  /* replace space made by the top border with padding */\n  border-top-width: 0;\n  padding-top: 1px;\n  /* remove top rounded corners */\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.fc-time-grid-event.fc-not-end {\n  /* replace space made by the top border with padding */\n  border-bottom-width: 0;\n  padding-bottom: 1px;\n  /* remove bottom rounded corners */\n  border-bottom-left-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.fc-time-grid-event .fc-content {\n  overflow: hidden;\n  max-height: 100%; }\n\n.fc-time-grid-event .fc-time,\n.fc-time-grid-event .fc-title {\n  padding: 0 1px; }\n\n.fc-time-grid-event .fc-time {\n  font-size: .85em;\n  white-space: nowrap; }\n\n/* short mode, where time and title are on the same line */\n.fc-time-grid-event.fc-short .fc-content {\n  /* don't wrap to second line (now that contents will be inline) */\n  white-space: nowrap; }\n\n.fc-time-grid-event.fc-short .fc-time,\n.fc-time-grid-event.fc-short .fc-title {\n  /* put the time and title on the same line */\n  display: inline-block;\n  vertical-align: top; }\n\n.fc-time-grid-event.fc-short .fc-time span {\n  display: none;\n  /* don't display the full time text... */ }\n\n.fc-time-grid-event.fc-short .fc-time:before {\n  content: attr(data-start);\n  /* ...instead, display only the start time */ }\n\n.fc-time-grid-event.fc-short .fc-time:after {\n  content: \"\\A0-\\A0\";\n  /* seperate with a dash, wrapped in nbsp's */ }\n\n.fc-time-grid-event.fc-short .fc-title {\n  font-size: .85em;\n  /* make the title text the same size as the time */\n  padding: 0;\n  /* undo padding from above */ }\n\n/* resizer (cursor device) */\n.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer {\n  left: 0;\n  right: 0;\n  bottom: 0;\n  height: 8px;\n  overflow: hidden;\n  line-height: 8px;\n  font-size: 11px;\n  font-family: monospace;\n  text-align: center;\n  cursor: s-resize; }\n\n.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after {\n  content: \"=\"; }\n\n/* resizer (touch device) */\n.fc-time-grid-event.fc-selected .fc-resizer {\n  /* 10x10 dot */\n  border-radius: 5px;\n  border-width: 1px;\n  width: 8px;\n  height: 8px;\n  border-style: solid;\n  border-color: inherit;\n  background: #fff;\n  /* horizontally center */\n  left: 50%;\n  margin-left: -5px;\n  /* center on the bottom edge */\n  bottom: -5px; }\n\n/* Now Indicator\n--------------------------------------------------------------------------------------------------*/\n.fc-time-grid .fc-now-indicator-line {\n  border-top-width: 1px;\n  left: 0;\n  right: 0; }\n\n/* arrow on axis */\n.fc-time-grid .fc-now-indicator-arrow {\n  margin-top: -5px;\n  /* vertically center on top coordinate */ }\n\n.fc-ltr .fc-time-grid .fc-now-indicator-arrow {\n  left: 0;\n  /* triangle pointing right... */\n  border-width: 5px 0 5px 6px;\n  border-top-color: transparent;\n  border-bottom-color: transparent; }\n\n.fc-rtl .fc-time-grid .fc-now-indicator-arrow {\n  right: 0;\n  /* triangle pointing left... */\n  border-width: 5px 6px 5px 0;\n  border-top-color: transparent;\n  border-bottom-color: transparent; }\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

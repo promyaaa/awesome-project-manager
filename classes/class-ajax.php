@@ -45,6 +45,7 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-delete-todo', array( $this, 'delete_todo' ), 10 );
         add_action( 'wp_ajax_fpm-get-todo-details', array( $this, 'fetch_todo_details' ), 10 );
         add_action( 'wp_ajax_fpm-get-todos', array( $this, 'fetch_todos' ), 10 );
+        add_action( 'wp_ajax_fpm-get-todos-for-calendar', array( $this, 'fetch_todos_for_calendar' ), 10 );
 
         // COMMENT
         add_action( 'wp_ajax_fpm-insert-comment', array( $this, 'insert_comment' ), 10 );
@@ -908,6 +909,28 @@ class FusionPM_Ajax {
         $todoModel = FusionPM_Todo::init();
 
         $todos = $todoModel->get_todos_by_column_info( 'assigneeID', $assigneeID );
+
+        if ( $todos ) {
+            wp_send_json_success( $todos );
+        }
+
+        wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
+
+    }
+
+    public function fetch_todos_for_calendar() {
+        
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $startDate = $this->get_validated_input('start_date');
+        $endDate = $this->get_validated_input('end_date');
+
+        $todoModel = FusionPM_Todo::init();
+
+        $todos = $todoModel->get_todos_for_calendar( $projectID, $startDate, $endDate );
 
         if ( $todos ) {
             wp_send_json_success( $todos );

@@ -81,6 +81,15 @@ class FusionPM_Todo {
         return $result;
     }
 
+    public function get_todos_for_calendar( $projectID, $startDate, $endDate ) {
+        global $wpdb;
+        
+        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID`={$projectID} AND (`created` BETWEEN '{$startDate}' AND '{$endDate}')" );
+        
+        // var_dump($wpdb->last_query);
+        return $result;
+    }
+
     public function get_todo_details( $todo_id ) {
 
         global $wpdb;
