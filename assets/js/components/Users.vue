@@ -46,7 +46,11 @@
                             <br>
                             <div>
                                 <!-- <input type="submit" class="button button-primary" v-model="localString.add_new" @click="createUser"> -->
-                                <button class="button button-primary" @click="createUser">{{i18n.add_new}}</button>
+                                <button class="button button-primary" 
+                                        @click="createUser"
+                                        :disabled="addingUser">
+                                    <i v-if="addingUser" class="fa fa-refresh fa-spin mr-5"></i>{{i18n.add_new}}
+                                </button>
                                 <button class="button button-default" @click="toggleAddForm">{{ i18n.cancel }}</button>
                             </div>
                         </div>
@@ -72,36 +76,6 @@
     </div>
 </template>
 
-<style>
-    .m-default {
-        -webkit-box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
-        box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
-        padding: 1px 12px;
-    } 
-    .m-success {
-        border-left: 4px solid #46b450;
-    }
-    .m-danger {
-        border-left: 4px solid #D54E21;
-    }
-    .m-info {
-        border-left: 4px solid #00A0D2;
-    }
-    .m-warning {
-        border-left: 4px solid #FFBA00;
-    }
-    .user-info {
-        padding-left: 15px;
-    }
-    .user-info .fa {
-        font-size: 13px;
-        color: #b5b5b5;
-    }
-    .user-info span.info{
-        display: block;
-    }
-</style>
-
 <script>
     import store from '../store';
     import SingleUser from './partials/SingleUserComponent.vue';
@@ -124,7 +98,8 @@
                 selected: '',
                 usertitle: '',
                 isShowAddForm: false,
-                message: ''
+                message: '',
+                addingUser: false,
             }
         },
         methods: {
@@ -196,8 +171,14 @@
                         title: vm.usertitle
                     };
 
+                if(!vm.email) {
+                    return;
+                }
+
+                vm.addingUser = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
+                    vm.addingUser = false;
                     if ( resp.success ) {
                         if ( !resp.data.user ) {
                             vm.username = '';
@@ -253,3 +234,33 @@
         }
     }
 </script>
+
+<style>
+    .m-default {
+        -webkit-box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+        box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+        padding: 1px 12px;
+    } 
+    .m-success {
+        border-left: 4px solid #46b450;
+    }
+    .m-danger {
+        border-left: 4px solid #D54E21;
+    }
+    .m-info {
+        border-left: 4px solid #00A0D2;
+    }
+    .m-warning {
+        border-left: 4px solid #FFBA00;
+    }
+    .user-info {
+        padding-left: 15px;
+    }
+    .user-info .fa {
+        font-size: 13px;
+        color: #b5b5b5;
+    }
+    .user-info span.info{
+        display: block;
+    }
+</style>

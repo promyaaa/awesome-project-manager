@@ -4,11 +4,11 @@
             <div class="col-12 text-center">
                 <div class="activity-content">
                     <div class="row">
-                        <div class="col-12">
-                            <h2 class="decorated-center">
-                                <!-- <span>{{ i18n.project_activity }}</span> -->
-                                <span>Activity</span>
-                            </h2>
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="text-center assignment-heading">
+                                <h2>Project Activity</h2>
+                            </div>
                         </div>
                     </div>
                     <ul>
@@ -19,7 +19,6 @@
                             </div>
                         </li>
                     </ul>
-                    
                     
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
@@ -44,24 +43,6 @@
         </div>
     <!-- </div> -->
 </template>
-
-<style>
-
-@media (min-width: 992px) {
-    .activity-content {
-        padding: 0px 20px 35px;
-        background: #fff;
-    }
-    .activity-content ul {
-        padding-left: 25px;
-    }    
-}
-.activity-avatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-</style>
 
 <script>
     import ActivityInfo from './partials/ActivityInfo.vue';
@@ -131,10 +112,9 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loadMore = false;
-
                     if(resp.success) {
+                        vm.currentCount += resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount += resp.data.length;
                             vm.activities.push(resp.data[i]);
                         }
                     }
@@ -148,3 +128,26 @@
         }
     }
 </script>
+
+<style>
+
+@media (min-width: 992px) {
+    .activity-content {
+        padding: 0px 20px 35px;
+        background: #fff;
+    }
+    .activity-content ul {
+        padding-left: 25px;
+    }    
+}
+
+.activity-content {
+    padding: 0px 20px;
+    background: #fff;
+}
+.activity-avatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+</style>

@@ -4,7 +4,7 @@
             <div class="col-2"></div>
             <div class="col-8">
                 <div class="text-center assignment-heading">
-                    <h1>{{ i18n.my_assignments }}</h1>
+                    <h2>{{ i18n.my_assignments }}</h2>
                 </div>
             </div>
         </div>

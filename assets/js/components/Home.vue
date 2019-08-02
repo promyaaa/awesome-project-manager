@@ -51,7 +51,11 @@
                                 <textarea class="form-control" name="project_desc" v-model="projectDesc" rows="3" :placeholder="i18n.project_description_placeholder"></textarea>
                             </div>
                             <div class="action">
-                                <button class="button button-primary" @click.prevent="createProject">{{ i18n.create_project_label }}</button>
+                                <button class="button button-primary" 
+                                        @click.prevent="createProject"
+                                        :disabled="creating">
+                                    <i v-if="creating" class="fa fa-refresh fa-spin mr-5"></i>{{ i18n.create_project_label }}
+                                </button>
                                 <button class="button button-default" @click="toggleProjectForm">{{ i18n.cancel_project_label }}</button>
                             </div>
                         </form>
@@ -74,6 +78,13 @@
                         </router-link>
 
                         <p class="ellipsis-90">{{project.project_desc}}</p>
+
+                        <ul class="project-specific-info">
+                            <li>Completed ToDos</li>
+                            <li>Open ToDos</li>
+                            <li>Discussions</li>
+                            <li>Files</li>
+                        </ul>
 
                         <div class="user-avatars">
                             <img :src="user.avatar_url" v-for="user in project.users" class="small-round-image" width="32" height="32">
@@ -108,7 +119,8 @@
                 projectDesc: '',
                 loading: false,
                 projectCount: '',
-                loadMore: false
+                loadMore: false,
+                creating: false,
             }
         },
 
@@ -200,13 +212,15 @@
                     description: vm.projectDesc
                 };
 
+
                 if( !vm.projectTitle.trim() ) {
                     return;
                 }
+                vm.creating = true;
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
                     if ( resp.success ) {
+                        vm.creating = false;
                         resp.data.project.project_title = vm.projectTitle;
                         resp.data.project.project_desc = vm.projectDesc;
                         user = {
@@ -235,10 +249,19 @@
 </script>
 
 <style>
+    ul.project-specific-info {
+        list-style: none;
+        padding-left: 20px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    ul.project-specific-info li {
+        font-style: italic;
+    }
     .current-user-name h3{
         margin: 5px;
     }
-
     .user-info-sections {
         box-sizing: border-box;
         border-right: 1px solid #eee;

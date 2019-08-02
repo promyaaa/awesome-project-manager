@@ -4,8 +4,11 @@
             <div class="col-12 text-center">
                 <div class="activity-content">
                     <div class="row">
-                        <div class="col-12">
-                            <h2 class="decorated-center"><span>My Activity</span></h2>
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="text-center assignment-heading">
+                                <h2>My Activity</h2>
+                            </div>
                         </div>
                     </div>
                     
@@ -41,17 +44,6 @@
     </div>
 </template>
 
-<style>
-.activity-content {
-    padding: 35px 20px;
-    background: #fff;
-}
-.activity-avatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-</style>
 
 <script>
     import ActivityInfo from './partials/ActivityInfo.vue';
@@ -100,8 +92,8 @@
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
                         vm.loading = false;
+                        vm.currentCount = resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount = resp.data.length;
                             vm.activities.push(resp.data[i]);
                             vm.totalActivityCount = resp.data[0].total_activity;
                         }
@@ -123,8 +115,8 @@
                     vm.loadMore = false;
 
                     if(resp.success) {
+                        vm.currentCount += resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount += resp.data.length;
                             vm.activities.push(resp.data[i]);
                         }
                     }

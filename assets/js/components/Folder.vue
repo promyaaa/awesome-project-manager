@@ -399,7 +399,7 @@
     .file-div {
         padding: 30px 30px 15px;
         border: 1px solid #eee;
-        border-radius:4px;
+        /*border-radius:4px;*/
         min-height: 170px;
     }
     .file-actions .action-item {
