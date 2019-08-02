@@ -191,6 +191,22 @@ class FusionPM_Todo {
         return $result;
     }
 
+    public function get_todo_count( $project_id ) {
+        global $wpdb;
+
+        $todo_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$this->table_name} WHERE `projectID` = {$project_id}" );
+        
+        return $todo_count;
+    }
+
+    public function get_completed_todo_count( $project_id ) {
+        global $wpdb;
+
+        $completed_todo_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$this->table_name} WHERE `projectID` = {$project_id} AND `is_complete`=1" );
+        
+        return $completed_todo_count;
+    }
+
     public function complete_todo( $todo_id, $is_complete ) {
         global $wpdb;
         $result = $wpdb->update( 

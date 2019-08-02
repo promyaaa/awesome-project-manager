@@ -77,13 +77,17 @@
                             </div>
                         </router-link>
 
-                        <p class="ellipsis-90">{{project.project_desc}}</p>
+                        <!-- <p class="ellipsis-90">{{project.project_desc}}</p> -->
 
                         <ul class="project-specific-info">
-                            <li>Completed ToDos</li>
-                            <li>Open ToDos</li>
-                            <li>Discussions</li>
-                            <li>Files</li>
+                            <li>Completed ToDos {{ project.completed_todo_count }}</li>
+                            <li>Open ToDos {{ project.todo_count - project.completed_todo_count }}</li>
+                            <li>Discussions {{ project.message_count }}</li>
+                            <li>Users {{ project.user_count }}</li>
+                            <li v-if="project.todo_count > 0">
+                                Progress {{ Math.floor((project.completed_todo_count/project.todo_count)*100) }}%
+                            </li>
+                            <li v-else>Progress 0%</li>
                         </ul>
 
                         <div class="user-avatars">
@@ -315,6 +319,11 @@
     .project h3 a{
         font-size: 15px;
         color: #333;
+        text-decoration: none;
+    }
+
+    .project h3 a:hover {
+        text-decoration: underline;
     }
 
     .project p{

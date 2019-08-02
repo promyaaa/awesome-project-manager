@@ -80,6 +80,22 @@ class FusionPM_Project {
         return $list_count;
     }
 
+    public function get_project_todo_count( $project_id ) {
+        
+        $todoModel = FusionPM_Todo::init();
+        $todo_count = $todoModel->get_todo_count( $project_id );
+
+        return $todo_count;
+    }
+
+    public function get_project_completed_todo_count( $project_id ) {
+        
+        $todoModel = FusionPM_Todo::init();
+        $todo_count = $todoModel->get_completed_todo_count( $project_id );
+
+        return $todo_count;
+    }
+
     public function get_project_count( $user_id ) {
         global $wpdb;
         if (current_user_can('manage_options')) {
@@ -197,6 +213,9 @@ class FusionPM_Project {
             foreach ($result as $project) {
                 $project->user_count = $this->get_project_user_count( $project->ID );
                 $project->users = $userModel->get_project_users( $project->ID, 32, 5 );
+                $project->todo_count = $this->get_project_todo_count( $project->ID );
+                $project->completed_todo_count = $this->get_project_completed_todo_count( $project->ID );
+                $project->message_count = $this->get_project_message_count( $project->ID );
                 array_push($projects, $project);
             }
         } else {
@@ -216,8 +235,11 @@ class FusionPM_Project {
             );
 
             foreach ($result as $project) {
-                $project->users = $userModel->get_project_users( $project->ID, 32, 5 );
                 $project->user_count = $this->get_project_user_count( $project->ID );
+                $project->users = $userModel->get_project_users( $project->ID, 32, 5 );
+                $project->todo_count = $this->get_project_todo_count( $project->ID );
+                $project->completed_todo_count = $this->get_project_completed_todo_count( $project->ID );
+                $project->message_count = $this->get_project_message_count( $project->ID );
                 array_push($projects, $project);
             }
         }

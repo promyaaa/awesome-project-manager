@@ -37,6 +37,12 @@
                         <i class="fa fa-calendar"></i>
                     </router-link>   
                 </div>
+                <div class="nav-section">
+                    <router-link :to="'/projects/' + $route.params.projectid + '/users'" class="link-style" tag="div">
+                        <strong style="display:block;padding-bottom:5px;cursor: pointer;">Users</strong>
+                        <i class="fa fa-user"></i>
+                    </router-link>   
+                </div>
             </div>
         </div>
     </div>
@@ -131,7 +137,7 @@
     .nav-section {
         padding: 5px;
         border: 1px solid #eee;
-        border-radius: 4px;
+        /*border-radius: 4px;*/
         min-width: 84px;
         display: inline-block;
         margin: 10px;
@@ -144,7 +150,7 @@
         display: inline-block;
         color: #72777c;
         background: #fdda58;
-        border-radius: 4px;
+        /*border-radius: 4px;*/
         padding: 2px 4px;
         float: right;
         font-weight: 600;
