@@ -1,4 +1,4 @@
-=== Project Manager WordPress Plugin ===
+=== Awesome Project Manager WordPress Plugin ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
 Tags: project, project manager, project management, single page app, todo list
@@ -11,7 +11,9 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Project manager WordPress plugin is the best project manager plugin for WordPress. You can manage project simply and easily. The cool thing is, it is single page and lightning fast. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section. It is very easy to use.
+Only **Single Page(SPA)** WordPress project management plugin in WordPress plugin repository. Built with cutting edge technologies like **VueJs**.
+
+Awesome Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section. It is very easy to use.
 
 
 ### Demo
@@ -56,7 +58,7 @@ Messages
 * Post new topic to discuss with other project members
 * Add attachment(s) to that topic
 * Discuss that topic by commenting on that topic
-* 
+
 Discussion boards keep the entire conversation about a specific topic together on a single page. No more digging through your inbox, trying to reassemble a story from a series of fragmented replies.
 
 Activity
@@ -105,6 +107,12 @@ User with 'Project member' role can Edit, Delete Projects, Lists, Todos, Message
 8. Project users
 
 == Changelog ==
+
+v1.0.4 -> November 16, 2018
+---------------------
+- [new] submenu added
+- [tweak] code refactor
+- [tweak] my assignment ui update
 
 v1.0.3 -> july 07, 2018
 ---------------------

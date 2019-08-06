@@ -39,7 +39,6 @@ class FusionPM_Admin {
         // do_action( 'fusion_pm_menu', $capability );
     // }
 
-    // * sabbir kukur
     function register_menu() {
       global $submenu;
 
@@ -48,9 +47,9 @@ class FusionPM_Admin {
     $capability = apply_filters( 'fusion_pm_menu_cap', 'manage_project' );
     add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
 
-    $submenu['fusion-pm'][] = array( __( 'Projects', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/' );
-    $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/assignments' );
-    $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), 'manage_options', 'admin.php?page=fusion-pm#/my/activity' );
+    $submenu['fusion-pm'][] = array( __( 'Projects', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/' );
+    $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/assignments' );
+    $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/activity' );
     do_action( 'fusion_pm_menu', $capability );
     }
     // For line number 8 callback function. where main single page div loaded
