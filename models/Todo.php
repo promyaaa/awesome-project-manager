@@ -108,7 +108,6 @@ class FusionPM_Todo {
         
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID`={$projectID} AND (`created` BETWEEN '{$startDate}' AND '{$endDate}')" );
         
-        // var_dump($wpdb->last_query);
         return $result;
     }
 

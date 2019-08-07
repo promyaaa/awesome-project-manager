@@ -46271,7 +46271,7 @@ exports.i(__webpack_require__(264), "");
 exports.i(__webpack_require__(265), "");
 
 // module
-exports.push([module.i, "\r\n\r\n", ""]);
+exports.push([module.i, "\r\n\r\n.lists.calendar-container {\r\n\toverflow: unset;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -46415,6 +46415,10 @@ exports.default = {
 	// @import '~@fullcalendar/daygrid/main.css';
 	// @import '~@fullcalendar/timegrid/main.css';
 	//
+	// .lists.calendar-container {
+	// 	overflow: unset;
+	// }
+	//
 	// </style>
 
 };
@@ -46422,7 +46426,7 @@ exports.default = {
 // <template>
 //     <div class="container">
 //         <project-nav v-on:get-project="setProject"></project-nav>
-//         <div class="lists border-for-nav">
+//         <div class="lists calendar-container border-for-nav">
 //             <div class="row">
 //                 <div class="col-12">
 //                 	<FullCalendar
@@ -48568,7 +48572,7 @@ Docs & License: https://fullcalendar.io/
 /* 270 */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                \t<FullCalendar\r\n                \t   \tref=\"fullCalendar\"\r\n\t\t\t\t\t  \t:plugins=\"calendarPlugins\"\r\n\t\t\t\t\t  \t:weekends=\"false\"\r\n\t\t\t\t\t  \t:eventLimit=\"true\"\r\n\t\t\t\t\t  \t:events=\"events\"\r\n\t\t\t\t\t  \t:header=\"header\"\r\n\t\t\t\t\t  \t@datesRender=\"handleMonthChange\"\r\n\t\t\t\t\t  \t@eventClick=\"showDetails\"\r\n\t\t\t\t\t/>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
+module.exports = "\r\n    <div class=\"container\">\r\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\r\n        <div class=\"lists calendar-container border-for-nav\">\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                \t<FullCalendar\r\n                \t   \tref=\"fullCalendar\"\r\n\t\t\t\t\t  \t:plugins=\"calendarPlugins\"\r\n\t\t\t\t\t  \t:weekends=\"false\"\r\n\t\t\t\t\t  \t:eventLimit=\"true\"\r\n\t\t\t\t\t  \t:events=\"events\"\r\n\t\t\t\t\t  \t:header=\"header\"\r\n\t\t\t\t\t  \t@datesRender=\"handleMonthChange\"\r\n\t\t\t\t\t  \t@eventClick=\"showDetails\"\r\n\t\t\t\t\t/>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n";
 
 /***/ }),
 /* 271 */
