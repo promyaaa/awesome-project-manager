@@ -74,6 +74,7 @@ class FusionPM_Comment {
         $result       = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `commentable_id` = {$id} AND `commentable_type` = '{$type}'", ARRAY_A );
 
         foreach ( $result as $commentObject ) {
+            $commentObject['formatted_created'] = $this->get_formatted_date( $commentObject->created );
             $commentObject['avatar_url'] = get_avatar_url( $commentObject['userID'], array( 'size'=>50 ) );
             $files = $commentObject['file_ids'];
             $fileIDs = maybe_unserialize( $files );

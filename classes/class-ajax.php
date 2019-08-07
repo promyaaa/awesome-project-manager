@@ -44,7 +44,7 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-insert-todo', array( $this, 'insert_todo' ), 10 );
         add_action( 'wp_ajax_fpm-delete-todo', array( $this, 'delete_todo' ), 10 );
         add_action( 'wp_ajax_fpm-get-todo-details', array( $this, 'fetch_todo_details' ), 10 );
-        add_action( 'wp_ajax_fpm-get-todos', array( $this, 'fetch_todos' ), 10 );
+        add_action( 'wp_ajax_fpm-get-assigned-todos', array( $this, 'fetch_assigned_todos' ), 10 );
         add_action( 'wp_ajax_fpm-get-todos-for-calendar', array( $this, 'fetch_todos_for_calendar' ), 10 );
 
         // COMMENT
@@ -896,7 +896,7 @@ class FusionPM_Ajax {
         wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );     
     }
 
-    public function fetch_todos() {
+    public function fetch_assigned_todos() {
         
         if ( $this->is_nonce_verified() ) {
             wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
@@ -908,7 +908,7 @@ class FusionPM_Ajax {
 
         $todoModel = FusionPM_Todo::init();
 
-        $todos = $todoModel->get_todos_by_column_info( 'assigneeID', $assigneeID );
+        $todos = $todoModel->get_assigned_todos( $assigneeID );
 
         if ( $todos ) {
             wp_send_json_success( $todos );
