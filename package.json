@@ -3,6 +3,10 @@
   "version": "1.0.4",
   "description": "project manager",
   "dependencies": {
+    "@fullcalendar/core": "^4.2.0",
+    "@fullcalendar/daygrid": "^4.2.0",
+    "@fullcalendar/timegrid": "^4.2.0",
+    "@fullcalendar/vue": "^4.2.2",
     "vue2-editor": "^2.3.11"
   },
   "devDependencies": {
@@ -23,7 +27,7 @@
     "uglifyjs-webpack-plugin": "^1.1.8",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.3.0",
-    "webpack": "^3.8.1"
+    "webpack": "^3.12.0"
   },
   "author": "promy89"
 }

@@ -72,6 +72,18 @@
         padding-left: 30px;
         border-left: 3px solid #eaeaea;
     }
+    .message-desc pre.ql-syntax {
+        font-size: 14px;
+        padding: .8em 1em;
+        border: 1px solid #e2e4e7;
+    }
+    .message-desc blockquote {
+        border-left: 2px solid #0073aa;
+        padding-left: 10px;
+        font-size: 1em;
+        font-style: italic;
+        line-height: 1.8;
+    }
     .message-by {
         margin-top: -40px;
         margin-bottom: 30px;

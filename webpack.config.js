@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   plugins: [
-    new UglifyJsPlugin()
+    // new UglifyJsPlugin()
   ],
   // This is the "main" file which should include all other modules
   entry: './assets/js/admin.js',
@@ -30,7 +30,11 @@ module.exports = {
       {
         test: /\.vue$/,
         use: 'vue-loader'
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ]
   },
 }

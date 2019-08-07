@@ -51,7 +51,11 @@
                                 <div class="action">
                                     <button class="button button-primary"
                                             @click.prevent="updateMessage"
-                                            >{{ i18n.update }}</button>
+                                            :disabled="updating"
+                                            >
+                                        <i v-if="updating" class="fa fa-refresh fa-spin"></i>
+                                        {{ i18n.update }}
+                                    </button>
                                     <router-link :to="'/projects/' + $route.params.projectid + '/messages/' + messageObject.ID" class="button button-default">
                                         {{ i18n.cancel }}
                                     </router-link>
@@ -107,6 +111,7 @@
                 i18n:{},
                 mindex: 0,
                 isShowMessageForm: false,
+                updating: false,
                 message: '',
                 projectTitle: '',
                 messageTitle: '',
@@ -185,9 +190,19 @@
                         attachments: vm.attachmentIDs
                     };
 
+                if ( !vm.messageTitle ) {
+                    return;
+                }
+
+                vm.updating = true;
+
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.updating = false;
                         vm.$router.push({ path: `/projects/${projectID}/messages/${messageID}` })
+                    } else {
+                        vm.updating = false;
+                        // TODO: Show message "There is no change to update"
                     }
                 });
             }

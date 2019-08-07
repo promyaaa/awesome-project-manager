@@ -27,8 +27,8 @@
             <div class="lists border-for-nav">
                 <div class="row ">
                     <div class="col-12">
-                        <div class="loading" v-if="loading">
-                            <p>{{ i18n.loading }}</p>
+                        <div class="text-center" v-if="loading">
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>
                         </div>
                         <div v-if="todoObject && !loading" class="single-todo">
                             <div>

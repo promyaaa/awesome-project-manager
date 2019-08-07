@@ -51,7 +51,11 @@
                                 <textarea class="form-control" name="project_desc" v-model="projectDesc" rows="3" :placeholder="i18n.project_description_placeholder"></textarea>
                             </div>
                             <div class="action">
-                                <button class="button button-primary" @click.prevent="createProject">{{ i18n.create_project_label }}</button>
+                                <button class="button button-primary" 
+                                        @click.prevent="createProject"
+                                        :disabled="creating">
+                                    <i v-if="creating" class="fa fa-refresh fa-spin mr-5"></i>{{ i18n.create_project_label }}
+                                </button>
                                 <button class="button button-default" @click="toggleProjectForm">{{ i18n.cancel_project_label }}</button>
                             </div>
                         </form>
@@ -61,19 +65,30 @@
             <div class="row">
                 <div class="col-12" v-if="loading">
                     <div class="loading">
-                        <h2>{{ i18n.loading }}</h2>
+                        <h2><i class="fa fa-refresh fa-spin fa-2x"></i></h2>
                     </div>
                 </div>
 
                 <div class="col-4" v-for="project in projects" v-if="projects.length > 0 && !loading">
                     <div class="project">
-                        <router-link :to="'/projects/' + project.ID" tag="h3" class="link-style">
+                        <router-link :to="'/projects/' + project.ID" tag="h3">
                             <div class="ellipsis-80">
                                 <a class="">{{project.project_title}}</a>
                             </div>
                         </router-link>
 
-                        <p class="ellipsis-90">{{project.project_desc}}</p>
+                        <!-- <p class="ellipsis-90">{{project.project_desc}}</p> -->
+
+                        <ul class="project-specific-info">
+                            <li>Completed ToDos {{ project.completed_todo_count }}</li>
+                            <li>Open ToDos {{ project.todo_count - project.completed_todo_count }}</li>
+                            <li>Discussions {{ project.message_count }}</li>
+                            <li>Users {{ project.user_count }}</li>
+                            <li v-if="project.todo_count > 0">
+                                Progress {{ Math.floor((project.completed_todo_count/project.todo_count)*100) }}%
+                            </li>
+                            <li v-else>Progress 0%</li>
+                        </ul>
 
                         <div class="user-avatars">
                             <img :src="user.avatar_url" v-for="user in project.users" class="small-round-image" width="32" height="32">
@@ -85,7 +100,7 @@
                 </div>
             </div>
             
-            <div class="row" v-if="projects.length < projectCount">
+            <div class="row" v-if="projects.length < projectCount && !loading">
                 <div class="col-12 text-center">
                     <button class="button button-default" @click="loadMoreProjects">{{ i18n.load_more }}</button>
                 </div>
@@ -108,7 +123,8 @@
                 projectDesc: '',
                 loading: false,
                 projectCount: '',
-                loadMore: false
+                loadMore: false,
+                creating: false,
             }
         },
 
@@ -200,13 +216,15 @@
                     description: vm.projectDesc
                 };
 
+
                 if( !vm.projectTitle.trim() ) {
                     return;
                 }
+                vm.creating = true;
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
-                    
                     if ( resp.success ) {
+                        vm.creating = false;
                         resp.data.project.project_title = vm.projectTitle;
                         resp.data.project.project_desc = vm.projectDesc;
                         user = {
@@ -235,10 +253,19 @@
 </script>
 
 <style>
+    ul.project-specific-info {
+        list-style: none;
+        padding-left: 20px;
+        font-size: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    ul.project-specific-info li {
+        font-style: italic;
+    }
     .current-user-name h3{
         margin: 5px;
     }
-
     .user-info-sections {
         box-sizing: border-box;
         border-right: 1px solid #eee;
@@ -267,6 +294,8 @@
         margin:5px;
         padding-bottom: 15px;
         position: relative;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
     }
 
     .project .project-settings{
@@ -281,13 +310,20 @@
 
     }
     .project h3{
-        padding: 10px 15px;
+        /*padding: 10px 15px;*/
+        padding-bottom: 10px;
+        padding-left: 10px;
         border-bottom: 1px solid #eee;
     }
 
     .project h3 a{
         font-size: 15px;
         color: #333;
+        text-decoration: none;
+    }
+
+    .project h3 a:hover {
+        text-decoration: underline;
     }
 
     .project p{

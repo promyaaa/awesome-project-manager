@@ -26,7 +26,11 @@
                             <div class="action">
                                 <button class="button button-primary"
                                         @click.prevent="updateList"
-                                        >{{ i18n.update }}</button>
+                                        :disabled="updatingList"
+                                        >
+                                        <i v-if="updatingList" class="fa fa-refresh fa-spin mr-5"></i>
+                                        {{ i18n.update }}
+                                </button>
                                 <button class="button button-default" @click="cancelListEdit">{{ i18n.cancel }}</button>
                             </div>
                         </div>
@@ -74,7 +78,8 @@
                 isListEdit: false,
                 listTitle: '',
                 listCloneObj: '',
-                currentUser: ''
+                currentUser: '',
+                updatingList: false,
             }
         },
         computed: {
@@ -116,14 +121,16 @@
                     list_id: vm.$route.params.listid,
                     user_name: vm.currentUser.data.display_name
                 };
-
+                vm.updatingList = true;
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.updatingList = false;
                         vm.list.list_title = vm.listTitle;
                         vm.listTitle = '';
                         vm.isListEdit = false;
                     } else {
-                        // vm.message = resp.data;
+                        vm.updatingList = false;
+                        // TODO: Show message "There is no change to update"
                     }
                 });
             },

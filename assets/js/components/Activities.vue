@@ -4,41 +4,38 @@
             <div class="col-12 text-center">
                 <div class="activity-content">
                     <div class="row">
-                        <div class="col-12">
-                            <h2 class="decorated-center"><span>{{ i18n.project_activity }}</span></h2>
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="text-center assignment-heading">
+                                <h2>Project Activity</h2>
+                            </div>
                         </div>
                     </div>
-                    
-                    <ul class="timeline timeline-centered">
-                        <li class="timeline-item animated fadeIn" v-for="(value, key, index) in activitiesObject">
-                            <div>
-                                <h3>{{ key }}</h3>
-                            </div>
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content animated fadeIn" v-for="activity in value">
-                                <div class="row" v-if="index % 2===0" style="margin-bottom: 10px;">
-                                    <div class="col-3">{{activity.formatted_time}}</div>
-                                    <div class="col-9">
-                                        <activity-info :activity="activity" :i18n="i18n"></activity-info>
-                                    </div>
-                                </div>
-                                <div class="row" v-else style="margin-bottom: 10px;">
-                                    <div class="col-9 text-left">
-                                        <activity-info :activity="activity"></activity-info>
-                                    </div>
-                                    <div class="col-3">{{activity.formatted_time}}</div>
-                                </div>
+                    <ul>
+                        <li v-for="(value, key, index) in activitiesObject">
+                            <h3 class="left">{{ key }}</h3>
+                            <div class="animated fadeIn" v-for="activity in value">
+                                <activity-info :activity="activity" :i18n="i18n"></activity-info>
                             </div>
                         </li>
                     </ul>
                     
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
-                            <button class="button" @click="loadMoreActivities">Load More</button>
+                            <button class="button" 
+                                    @click="loadMoreActivities"
+                                    :disabled="loadMore">
+                                <i v-if="loadMore" class="fa fa-refresh fa-spin"></i>
+                                Load More
+                            </button>
                         </div>
                     </div>
-                    <div v-if="noActivity">
-                        {{ i18n.no_activity_yet }}
+                    <div v-if="noActivity && !loading">
+                        <!-- {{ i18n.no_activity_yet }} -->
+                        No activity Yet
+                    </div>
+                    <div v-if="loading">
+                        <h3>Loading! Please wait...<i class="fa fa-refresh fa-spin"></i></h3>
                     </div>
                 </div>
             </div>
@@ -46,18 +43,6 @@
         </div>
     <!-- </div> -->
 </template>
-
-<style>
-.activity-content {
-    padding: 35px 20px;
-    background: #fff;
-}
-.activity-avatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-</style>
 
 <script>
     import ActivityInfo from './partials/ActivityInfo.vue';
@@ -72,7 +57,9 @@
             return {
                 activities: [],
                 totalActivityCount: '',
-                currentCount: ''
+                currentCount: '',
+                loading: false,
+                loadMore: false,
             }
         },
 
@@ -90,6 +77,8 @@
                 var vm = this,
                     data;
 
+                vm.loading = true;
+
                 data = {
                     action: 'fpm-get-activities',
                     project_id: vm.$route.params.projectid,
@@ -101,6 +90,7 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if(resp.success) {
+                        vm.loading = false;
                         for(var i = 0; i < resp.data.length; i++) {
                             vm.currentCount = resp.data.length;
                             vm.activities.push(resp.data[i]);
@@ -122,10 +112,9 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     vm.loadMore = false;
-
                     if(resp.success) {
+                        vm.currentCount += resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount += resp.data.length;
                             vm.activities.push(resp.data[i]);
                         }
                     }
@@ -139,3 +128,26 @@
         }
     }
 </script>
+
+<style>
+
+@media (min-width: 992px) {
+    .activity-content {
+        padding: 0px 20px 35px;
+        background: #fff;
+    }
+    .activity-content ul {
+        padding-left: 25px;
+    }    
+}
+
+.activity-content {
+    padding: 0px 20px;
+    background: #fff;
+}
+.activity-avatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+</style>

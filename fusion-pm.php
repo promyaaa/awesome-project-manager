@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Awesome project manager
+Plugin Name: Fusion project manager
 Plugin URI: http://example.com/
-Description: A single page project manager plugin for wordpress.
+Description: A single page project manager plugin for WordPress.
 Version: 1.0.4
 Author: M Abdur Rokib Promy
 Author URI: https://github.com/promyaaa
@@ -149,6 +149,7 @@ class Fusion_PM {
             require_once FUSION_PM_PATH . '/models/Message.php';
             require_once FUSION_PM_PATH . '/models/User.php';
             require_once FUSION_PM_PATH . '/models/Activity.php';
+            require_once FUSION_PM_PATH . '/models/Folder.php';
 
 
             require_once FUSION_PM_PATH . '/classes/class-ajax.php';

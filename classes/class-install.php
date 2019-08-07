@@ -75,6 +75,19 @@ class FusionPM_Install {
                 PRIMARY KEY (`ID`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
 
+            "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_folders` (
+                `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                `folder_title` varchar(250),
+                `file_ids` longtext,
+                `projectID` int(11) unsigned,
+                `project_title` varchar(255),
+                `userID` int(11) unsigned,
+                `user_name` varchar(100),
+                `is_archive` tinyint(1) NOT NULL DEFAULT '0',
+                `created` datetime,
+                PRIMARY KEY (`ID`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
+
             "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_comments` (
                 `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `userID` int(11) unsigned,

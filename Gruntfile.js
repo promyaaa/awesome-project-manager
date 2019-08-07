@@ -6,13 +6,13 @@ module.exports = function(grunt) {
             target: {
                 options: {
                     exclude: ['dists/.*', 'node_modules/*', 'assets/*', 'tests/*', 'bin/*'],
-                    mainFile: 'advanced-pm.php',
+                    mainFile: 'fusion-pm.php',
                     domainPath: '/languages/',
-                    potFilename: 'advanced-pm.pot',
+                    potFilename: 'fusion-pm.pot',
                     type: 'wp-plugin',
                     updateTimestamp: true,
                     potHeaders: {
-                        'report-msgid-bugs-to': 'https://github.com/promyaaa/advanced-project-manager/issues',
+                        'report-msgid-bugs-to': 'https://github.com/promyaaa/fusion-project-manager/issues',
                         'language-team': 'LANGUAGE <EMAIL@ADDRESS>',
                         poedit: true,
                         'x-poedit-keywordslist': true
@@ -59,12 +59,12 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     mode: 'zip',
-                    archive: './dists/advanced-pm-v' + package.version + '.zip'
+                    archive: './dists/fusion-pm-v' + package.version + '.zip'
                 },
                 expand: true,
                 cwd: 'dists/',
                 src: ['**/*'],
-                dest: 'advanced-pm'
+                dest: 'fusion-pm'
             }
         }
     });

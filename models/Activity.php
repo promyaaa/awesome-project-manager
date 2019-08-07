@@ -47,12 +47,26 @@ class FusionPM_Activity {
         return false;
     }
 
-    public function delete( $activity_id ) {
+    public function delete( $activity_id, $activity_type, $project_id, $activity_meta=NULL ) {
         global $wpdb;
 
+        if ( $activity_meta ) {
+            $where = array( 
+                'activity_meta' => $activity_meta,
+                'activity_type' => $activity_type,
+                'projectID'     => $project_id,
+            );            
+        } else {
+            $where = array( 
+                'activity_id'   => $activity_id,
+                'activity_type' => $activity_type,
+                'projectID'     => $project_id,
+            );
+        }
+        
         $result = $wpdb->delete( 
             $this->table_name,
-            array( 'ID' => $activity_id )
+            $where
         );
         return $result;
     }

@@ -4,41 +4,38 @@
             <div class="col-12 text-center">
                 <div class="activity-content">
                     <div class="row">
-                        <div class="col-12">
-                            <h2 class="decorated-center"><span>My Activity</span></h2>
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="text-center assignment-heading">
+                                <h2>My Activity</h2>
+                            </div>
                         </div>
                     </div>
                     
-                    <ul class="timeline timeline-centered">
-                        <li class="timeline-item animated fadeIn" v-for="(value, key, index) in activitiesObject">
-                            <div>
-                                <h3>{{ key }}</h3>
-                            </div>
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content animated fadeIn" v-for="activity in value">
-                                <div class="row" v-if="index % 2===0" style="margin-bottom: 10px;">
-                                    <div class="col-3">{{activity.formatted_time}}</div>
-                                    <div class="col-9">
-                                        <activity-info :activity="activity" :i18n="i18n"></activity-info>
-                                    </div>
-                                </div>
-                                <div class="row" v-else style="margin-bottom: 10px;">
-                                    <div class="col-9 text-left">
-                                        <activity-info :activity="activity"></activity-info>
-                                    </div>
-                                    <div class="col-3">{{activity.formatted_time}}</div>
-                                </div>
+                    <ul>
+                        <li class="left" v-for="(value, key, index) in activitiesObject">
+                            <h3>{{ key }}</h3>
+                            <div class="animated fadeIn" v-for="activity in value">
+                                <activity-info :activity="activity" :i18n="i18n"></activity-info>
                             </div>
                         </li>
                     </ul>
                     
                     <div class="row" v-if="currentCount < totalActivityCount">
                         <div class="col-12">
-                            <button class="button" @click="loadMoreActivities">Load More</button>
+                            <button class="button" 
+                                    @click="loadMoreActivities"
+                                    :disabled="loadMore">
+                                <i v-if="loadMore" class="fa fa-refresh fa-spin"></i>
+                                Load More
+                            </button>
                         </div>
                     </div>
-                    <div v-if="noActivity">
+                    <div v-if="noActivity && !loading">
                         No activity yet
+                    </div>
+                    <div v-if="loading">
+                        Loading! Please wait... <i class="fa fa-refresh fa-spin"></i>
                     </div>
                 </div>
             </div>
@@ -47,17 +44,6 @@
     </div>
 </template>
 
-<style>
-.activity-content {
-    padding: 35px 20px;
-    background: #fff;
-}
-.activity-avatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-</style>
 
 <script>
     import ActivityInfo from './partials/ActivityInfo.vue';
@@ -68,11 +54,13 @@
 
         props: ['i18n'],
 
-        data () {
+        data() {
             return {
                 activities: [],
                 totalActivityCount: '',
-                currentCount: ''
+                currentCount: '',
+                loading: false,
+                loadMore: false,
             }
         },
 
@@ -90,6 +78,8 @@
                 var vm = this,
                     data;
 
+                vm.loading = true;
+
                 data = {
                     action: 'fpm-get-activities',
                     project_id: vm.$route.params.projectid,
@@ -101,8 +91,9 @@
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     if ( resp.success ) {
+                        vm.loading = false;
+                        vm.currentCount = resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount = resp.data.length;
                             vm.activities.push(resp.data[i]);
                             vm.totalActivityCount = resp.data[0].total_activity;
                         }
@@ -124,8 +115,8 @@
                     vm.loadMore = false;
 
                     if(resp.success) {
+                        vm.currentCount += resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
-                            vm.currentCount += resp.data.length;
                             vm.activities.push(resp.data[i]);
                         }
                     }

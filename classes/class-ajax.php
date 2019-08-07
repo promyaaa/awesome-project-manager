@@ -45,6 +45,7 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-delete-todo', array( $this, 'delete_todo' ), 10 );
         add_action( 'wp_ajax_fpm-get-todo-details', array( $this, 'fetch_todo_details' ), 10 );
         add_action( 'wp_ajax_fpm-get-todos', array( $this, 'fetch_todos' ), 10 );
+        add_action( 'wp_ajax_fpm-get-todos-for-calendar', array( $this, 'fetch_todos_for_calendar' ), 10 );
 
         // COMMENT
         add_action( 'wp_ajax_fpm-insert-comment', array( $this, 'insert_comment' ), 10 );
@@ -61,6 +62,13 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-insert-user', array( $this, 'insert_user' ), 10 );
         add_action( 'wp_ajax_fpm-remove-user', array( $this, 'remove_user' ), 10 );
         add_action( 'wp_ajax_fpm-update-user', array( $this, 'update_user' ), 10 );
+
+        // Folders
+        add_action( 'wp_ajax_fpm-insert-folder', array( $this, 'insert_folder' ), 10 );
+        add_action( 'wp_ajax_fpm-get-folders', array( $this, 'fetch_folders' ), 10 );
+        add_action( 'wp_ajax_fpm-get-folder-details', array( $this, 'fetch_folder_details' ), 10 );
+        add_action( 'wp_ajax_fpm-get-file-details', array( $this, 'fetch_file_details' ), 10 );
+        add_action( 'wp_ajax_fpm-delete-folder', array( $this, 'delete_folder' ), 10 );
                 
     }
 
@@ -91,19 +99,353 @@ class FusionPM_Ajax {
         return $result;
     }
 
+    
+    // public function create_activity( $data ) {
+    //     $activityModel = FusionPM_Activity::init();
+        
+    //     if ( $data['activity_type'] === 'delete_todo' ) {
+    //         $activityModel->delete_activities_by_column( $data['activity_id'], 'create_todo', $data['projectID'] );
+    //         $activityModel->delete_activities_by_column( $data['activity_id'], 'check_todo', $data['projectID'] );
+    //         $activityModel->delete_activities_by_column( $data['activity_id'], 'uncheck_todo', $data['projectID'] );
+    //     }
+    //     if ( $data['activity_type'] === 'delete_message' ) {
+    //         $activityModel->delete_activities_by_column( $data['activity_id'], 'create_message', $data['projectID'] );
+    //     }
+    //     $activityModel->create( $data );
+    // }
+
     // updated
     public function create_activity( $data ) {
         $activityModel = FusionPM_Activity::init();
-        
-        if ( $data['activity_type'] === 'delete_todo' ) {
-            $activityModel->delete_activities_by_column( $data['activity_id'], 'create_todo', $data['projectID'] );
-            $activityModel->delete_activities_by_column( $data['activity_id'], 'check_todo', $data['projectID'] );
-            $activityModel->delete_activities_by_column( $data['activity_id'], 'uncheck_todo', $data['projectID'] );
-        }
-        if ( $data['activity_type'] === 'delete_message' ) {
-            $activityModel->delete_activities_by_column( $data['activity_id'], 'create_message', $data['projectID'] );
-        }
         $activityModel->create( $data );
+    }
+
+    public function delete_activity( $activity_id, $activity_type, $project_id, $activity_meta=NULL ) {
+        $activityModel = FusionPM_Activity::init();
+        $activityModel->delete( $activity_id, $activity_type, $project_id, $activity_meta );
+    }
+
+    public function fetch_folders() {
+        
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $isArchive = !empty( $_POST['is_archive'] ) ? (int)$_POST['is_archive'] : 0;
+
+        if ( ! $projectID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Project ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $offset      = $this->get_validated_input('offset');
+        $limit       = $this->get_validated_input('limit');
+        $folderModel = FusionPM_Folder::init();
+        $folders     = $folderModel->get_folders_by_column_info('projectID', $projectID, $isArchive, $limit, $offset);
+        
+        if ( ! $offset && $folders ) {
+            $folders[0]->folder_count = $folderModel->get_folder_count( $projectID, $isArchive );
+            $folders[0]->a_folder_count = $folderModel->get_folder_count( $projectID, 1 );
+        }
+        if ( $folders ) {
+            wp_send_json_success( $folders );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function fetch_file_details() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $folderID = $this->get_validated_input('folder_id');
+        $fileID = $this->get_validated_input('file_id');
+
+        if ( ! $projectID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Project ID not found', 'fusion-pm' )
+                )
+            );
+        }
+        if ( ! $folderID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Folder ID not found', 'fusion-pm' )
+                )
+            );
+        }
+        if ( ! $fileID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'File ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $folderModel = FusionPM_Folder::init();
+
+        $file = $folderModel->get_file_details( $projectID, $folderID, $fileID );
+
+        if ( $file ) {
+            wp_send_json_success( $file );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function fetch_folder_details() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+
+        $folderID = $this->get_validated_input('folder_id');
+
+        if ( ! $projectID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Project ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        if ( ! $folderID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Folder ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $folderModel = FusionPM_Folder::init();
+
+        $folder = $folderModel->get_folder_details( $projectID, $folderID );
+
+        if ( $folder ) {
+            wp_send_json_success( $folder );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function delete_folder() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $folderID = $this->get_validated_input('folder_id'); 
+        $projectID = $this->get_validated_input('project_id'); 
+        $folderTitle = $this->get_validated_input('folder_title'); 
+
+        if ( ! $folderID ) {
+            wp_send_json_error( __( 'folder ID not provided', 'fusion-pm' ) );
+        }
+        $currentUser = wp_get_current_user();
+
+        $folderModel = FusionPM_Folder::init();
+        $delete = $folderModel->delete( $folderID );
+        $date = current_time( 'mysql' );
+        if ( $delete ) {
+            $activities = array(
+                'userID'        => $currentUser->ID,
+                'user_name'     => $currentUser->display_name,
+                'projectID'     => $projectID,
+                'activity_id'   => $folderID,
+                'activity_type' => 'delete_folder',
+                'activity'      => $folderTitle,
+                'created'       => $date
+            );
+
+            $this->create_activity( $activities );
+            $this->delete_activity( 
+                $activities['activity_id'], 
+                'create_folder', 
+                $activities['projectID'] 
+            );
+            $this->delete_activity( 
+                $activities['activity_id'], 
+                'update_folder',
+                $activities['projectID'] 
+            );
+            // $this->delete_bookmark( $folderID, 'folder', $projectID );
+            wp_send_json_success( array('message' => __( 'Folder successfully deleted', 'fusion-pm' )) );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function insert_folder() {
+
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $folderTitle  = $this->get_validated_input('folder_title');
+
+        $fileTitle    = $this->get_validated_input('file_title');
+        
+        $projectID    = $this->get_validated_input('project_id');
+        
+        $projectTitle = $this->get_validated_input('project_title');
+        
+        $folderID     = $this->get_validated_input('folder_id');
+        
+        $activityType = $this->get_validated_input('ac_type');
+        
+        $fileID       = $this->get_validated_input('file_id');
+
+        if ( ! $folderID ) {
+            if ( ! $projectID ) {
+                wp_send_json_error( 
+                    array(
+                        'message' => __( 'Project ID not found', 'fusion-pm' )
+                    )
+                );
+            }
+
+            if ( ! $folderTitle ) {
+                wp_send_json_error( 
+                    array(
+                        'message' => __( 'Folder title not found', 'fusion-pm' )
+                    )
+                );
+            }
+        }
+        
+        $folderModel = FusionPM_Folder::init();
+
+        $currentUser = wp_get_current_user();
+
+        $date = current_time( 'mysql' );
+
+        if ( $folderID ) {
+            $data = array();
+            $fileIDs = !empty( $_POST['attachments'] ) ? $_POST['attachments'] : [];
+            
+            if ( $fileID ) {
+                $deleteComments = $folderModel->delete_file_comments( $fileID );
+            }
+            // if ( $fileIDs ) {
+            $data['file_ids'] = maybe_serialize( $fileIDs );
+            // }
+            // $data = array(
+            //     'file_ids' => maybe_serialize( $fileIDs )
+            // );
+            if ( $folderTitle ) {
+                $data['folder_title'] = $folderTitle;
+            }
+            // var_dump($data);die();
+            $where = array( 'ID' => intval( $folderID ) );
+            $successResponse = $folderModel->update( $data, $where );
+        } else {
+            $data = array(
+                'folder_title'  => $folderTitle,
+                'userID'        => $currentUser->ID,
+                'user_name'     => $currentUser->display_name,
+                'projectID'     => $projectID,
+                'project_title' => $projectTitle,
+                'created'       => $date
+            );
+            $insertID = $folderModel->create( $data );
+        }
+
+        $resp = array(
+            'folder' => array(
+                'ID' => $insertID ? $insertID : $folderID,
+                'created' => $date
+            )
+        );
+
+        if ( $insertID ) {
+            $resp['message'] = __( 'Folder created successfully', 'fusion-pm' );
+        } else {
+            $resp['message'] = __( 'Folder updated successfully', 'fusion-pm' );
+        } 
+
+        if ( $insertID || $successResponse ) {
+            $activityID = $insertID ? $insertID : $folderID;
+            $activities = array(
+                'userID'        => $currentUser->ID,
+                'user_name'     => $currentUser->display_name,
+                'projectID'     => $projectID,
+                'activity_id'   => $activityID,
+                'activity_type' => $activityType,
+                'activity'      => $folderTitle,
+                'created'       => $date
+            );
+
+            if ( $activityType === 'add_file' ) {
+                $activities['parentID'] = $folderID;
+                $activities['activity_id'] = $fileID;
+                $resp['message'] = __( 'File added to this folder successfully', 'fusion-pm' );
+            }
+
+            if ( $activityType === 'delete_file' ) {
+                $activities['parentID'] = $folderID;
+                $activities['activity_id'] = $fileID;
+                $activities['activity'] = $fileTitle .' from '.$folderTitle;
+
+                // $this->delete_bookmark( $fileID, 'file', $projectID );
+
+                $resp['message'] = __( 'File deleted from this folder successfully', 'fusion-pm' );
+                
+                $this->delete_activity( 
+                    $activities['activity_id'], 
+                    'add_file', 
+                    $activities['projectID'] 
+                );
+            }
+
+            $this->create_activity( $activities );
+            wp_send_json_success( $resp );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
     }
 
     /* Ajax Callbacks */
@@ -567,6 +909,28 @@ class FusionPM_Ajax {
         $todoModel = FusionPM_Todo::init();
 
         $todos = $todoModel->get_todos_by_column_info( 'assigneeID', $assigneeID );
+
+        if ( $todos ) {
+            wp_send_json_success( $todos );
+        }
+
+        wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
+
+    }
+
+    public function fetch_todos_for_calendar() {
+        
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( __( 'Nonce Verification failed.. Cheating uhhh?', 'fusion-pm' ) );
+        }
+
+        $projectID = $this->get_validated_input('project_id');
+        $startDate = $this->get_validated_input('start_date');
+        $endDate = $this->get_validated_input('end_date');
+
+        $todoModel = FusionPM_Todo::init();
+
+        $todos = $todoModel->get_todos_for_calendar( $projectID, $startDate, $endDate );
 
         if ( $todos ) {
             wp_send_json_success( $todos );
