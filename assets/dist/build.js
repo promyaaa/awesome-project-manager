@@ -26362,8 +26362,8 @@ exports.default = {
             }
 
             jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loading = false;
                 if (resp.success) {
-                    vm.loading = false;
                     for (var i = 0; i < resp.data.length; i++) {
                         vm.currentCount = resp.data.length;
                         vm.activities.push(resp.data[i]);
@@ -34204,8 +34204,8 @@ exports.default = {
             vm.loading = true;
 
             jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loading = false;
                 if (resp.success) {
-                    vm.loading = false;
                     vm.todos = resp.data;
                 }
             });
@@ -34370,8 +34370,8 @@ exports.default = {
             }
 
             jQuery.post(fpm.ajaxurl, data, function (resp) {
+                vm.loading = false;
                 if (resp.success) {
-                    vm.loading = false;
                     vm.currentCount = resp.data.length;
                     for (var i = 0; i < resp.data.length; i++) {
                         vm.activities.push(resp.data[i]);

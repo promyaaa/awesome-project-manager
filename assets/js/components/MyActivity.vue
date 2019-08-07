@@ -90,8 +90,8 @@
                 }
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    vm.loading = false;
                     if ( resp.success ) {
-                        vm.loading = false;
                         vm.currentCount = resp.data.length;
                         for(var i = 0; i < resp.data.length; i++) {
                             vm.activities.push(resp.data[i]);

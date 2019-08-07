@@ -76,8 +76,8 @@
                 vm.loading = true;
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
+                    vm.loading = false;
                     if ( resp.success ) {
-                        vm.loading = false;
                         vm.todos = resp.data;
                     }
                 });
