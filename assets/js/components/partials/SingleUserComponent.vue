@@ -6,12 +6,12 @@
             </div>
         </div>
         <div class="col-10">
-            <div class="user-info" v-if="!isShowEdit">
+            <div class="user-info" v-if="!isShowEditForm">
                 <div style="float:right" v-if="isShowAction">
                     <span @click="showUserEdit(user)">
                         <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </span>
-                    <span class="trash" @click="removeUser(index)">| 
+                    <span v-if="isShowDelete" class="trash" @click="removeUser(index)">| 
                         <a style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </span>
                 </div>
@@ -19,9 +19,9 @@
                 <span class="info">{{user.title}}</span>
                 <span class="info"><i>{{user.user_email}}</i></span>
             </div>
-            <div v-if="isShowEdit" class="user-info">
-                <input type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
-                <input type="text" v-model="editUserTitle" :placeholder="i18n.title_placeholder">
+            <div v-if="isShowEditForm" class="user-info add_form_style">
+                <input class="form-control" type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
+                <input class="form-control" type="text" v-model="editUserTitle" :placeholder="i18n.title_placeholder">
                 <br>
                 <button class="button button-small button-primary" @click="updateUser" v-bind:disabled="isButtonDisabled">{{ i18n.update }}</button>
                 <button class="button button-small button-default" @click="cancelUserEdit">{{ i18n.cancel }}</button>
@@ -40,7 +40,7 @@
         data() {
             return {
                 userClone: '',
-                isShowEdit: false,
+                isShowEditForm: false,
                 editUserEmail: '',
                 editUserTitle: ''
             }
@@ -51,16 +51,19 @@
                 return (this.user.user_email === this.editUserEmail) && 
                         (this.user.title === this.editUserTitle);  
             },
-            isShowAction: function() {
+            isShowAction() {
                 return this.currentUser.roles[0] === 'administrator';    
-            }
+            },
+            isShowDelete() {
+                return this.currentUser.roles[0] === 'administrator' && parseInt(this.currentUser.ID) !== parseInt(this.user.ID);  
+            },
         },
         methods: {
             showUserEdit( userect ) {
                 var vm = this;
 
                 vm.userClone = JSON.parse(JSON.stringify(userect));
-                vm.isShowEdit = true;
+                vm.isShowEditForm = true;
                 vm.editUserEmail = userect.user_email;
                 vm.editUserTitle = userect.title;
             },
@@ -68,8 +71,8 @@
             cancelUserEdit( ) {
                 var vm = this;
 
-                vm.user = vm.userClone;
-                vm.isShowEdit = false;
+                // vm.user = vm.userClone;
+                vm.isShowEditForm = false;
                 vm.cloneObject = '';
             },
             removeUser( index ) {
@@ -94,7 +97,7 @@
 
                         localStorage.removeItem(localUsersKey);
 
-                        vm.isShowEdit = false;
+                        vm.isShowEditForm = false;
                         vm.editUserEmail = '';
                         vm.editUserTitle = '';
 

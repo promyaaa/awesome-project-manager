@@ -37,24 +37,6 @@
     </div>
 </template>
 
-<style>
-    .assignment-heading {
-        border-bottom: 2px solid #eee;
-        margin-bottom:20px;
-        padding-bottom:20px;
-    }
-    .my-todo {
-        margin-top: -3px;
-        text-decoration: none;
-        color: #ccc;
-    }
-
-    .my-todo a{
-        text-decoration: none;
-        color: #444;
-    }
-</style>
-
 <script>
     import store from '../store';
     export default {
@@ -69,7 +51,7 @@
             fetchAssignments() {
                 var vm = this;
                 var data = {
-                    action: 'fpm-get-todos',
+                    action: 'fpm-get-assigned-todos',
                     nonce: fpm.nonce,
                 };
 
@@ -94,3 +76,21 @@
         }
     }
 </script>
+
+<style>
+    .assignment-heading {
+        border-bottom: 2px solid #eee;
+        margin-bottom:20px;
+        padding-bottom:20px;
+    }
+    .my-todo {
+        margin-top: -3px;
+        text-decoration: none;
+        color: #ccc;
+    }
+
+    .my-todo a{
+        text-decoration: none;
+        color: #444;
+    }
+</style>

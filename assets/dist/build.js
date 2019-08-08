@@ -24141,7 +24141,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                 <div class="comment-data">
 //                     <div v-html="commentObject.comment" class="comment-body"></div>
 //                     <div class="commented-by">
-//                         -- {{ i18n.comment_by}} {{commentObject.user_name}}
+//                         -- {{ i18n.comment_by}} <strong>{{commentObject.user_name}}</strong> at {{commentObject.formatted_created}}
 //                     </div>
 //                     <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
 //                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
@@ -24437,7 +24437,7 @@ exports.default = {
 /* 130 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class=\"comment-content\">\n        <h3 class=\"decorated\"><span>{{ i18n.comment_label }}</span></h3>\n\n        <div v-for=\"(commentObject, cindex) in comments\" class=\"comment-item\">\n            <div v-if=\"editindex !== cindex\" class=\"comment\">\n                <div class=\"comment-avatar\">\n                    <img :src=\"commentObject.avatar_url\" alt=\"\">\n                </div>\n                <div class=\"comment-data\">\n                    <div v-html=\"commentObject.comment\" class=\"comment-body\"></div>\n                    <div class=\"commented-by\">\n                        -- {{ i18n.comment_by}} {{commentObject.user_name}}\n                    </div>\n                    <div class=\"comment-action\" v-if=\"currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID\">\n                        <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\n                            <!-- <a>{{i18n.edit}}</a> | -->\n                            <a><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a> |\n                        </span>\n                        <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\n                            <!-- <a>{{ i18n.delete }}</a> -->\n                            <a><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                        </span>\n                    </div>\n                </div>\n            </div>\n\n            <!-- edit section -->\n            <div v-if=\"editindex === cindex\" class=\"comment-form\">\n                <div class=\"current-user-avatar\">\n                    <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\n                </div>\n                <div class=\"add_form_style\">\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\n                    <br>\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"updateComment(commentObject)\"\n                        :disabled=\"updatingComment\"\n                        >\n                        <i v-if=\"updatingComment\" class=\"fa fa-refresh fa-spin\"></i>\n                        {{ i18n.update }}\n                    </button>\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">{{ i18n.cancel }}</button>\n                </div>\n            </div>\n        </div>\n\n        <div style=\"margin-top: 15px;\" class=\"comment-form\">\n            <div class=\"current-user-avatar\">\n                <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\n            </div>\n            <div class=\"add_form_style\">\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\n                <br>\n\n                <div class=\"action\">\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"addComment()\"\n                        :disabled=\"commenting\"\n                        >\n                        <i v-if=\"commenting\" class=\"fa fa-refresh fa-spin\"></i>\n                        {{ i18n.add_comment }}\n                    </button>\n                </div>\n            </div>\n            <div class=\"pm-clearfix\"></div>\n        </div>\n\n    </div>\n";
+module.exports = "\n    <div class=\"comment-content\">\n        <h3 class=\"decorated\"><span>{{ i18n.comment_label }}</span></h3>\n\n        <div v-for=\"(commentObject, cindex) in comments\" class=\"comment-item\">\n            <div v-if=\"editindex !== cindex\" class=\"comment\">\n                <div class=\"comment-avatar\">\n                    <img :src=\"commentObject.avatar_url\" alt=\"\">\n                </div>\n                <div class=\"comment-data\">\n                    <div v-html=\"commentObject.comment\" class=\"comment-body\"></div>\n                    <div class=\"commented-by\">\n                        -- {{ i18n.comment_by}} <strong>{{commentObject.user_name}}</strong> at {{commentObject.formatted_created}}\n                    </div>\n                    <div class=\"comment-action\" v-if=\"currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID\">\n                        <span style=\"cursor: pointer;\" @click=\"showCommentEditForm(commentObject, cindex)\">\n                            <!-- <a>{{i18n.edit}}</a> | -->\n                            <a><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a> |\n                        </span>\n                        <span style=\"cursor: pointer;\" @click=\"deleteComment(commentObject, cindex)\">\n                            <!-- <a>{{ i18n.delete }}</a> -->\n                            <a><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                        </span>\n                    </div>\n                </div>\n            </div>\n\n            <!-- edit section -->\n            <div v-if=\"editindex === cindex\" class=\"comment-form\">\n                <div class=\"current-user-avatar\">\n                    <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\n                </div>\n                <div class=\"add_form_style\">\n                    <vue-editor id=\"edit-comment\" v-model=\"commentEditText\" :editorToolbar=\"customToolbar\"></vue-editor>\n                    <br>\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"updateComment(commentObject)\"\n                        :disabled=\"updatingComment\"\n                        >\n                        <i v-if=\"updatingComment\" class=\"fa fa-refresh fa-spin\"></i>\n                        {{ i18n.update }}\n                    </button>\n                    <button class=\"button button-default\" @click=\"cancelCommentEdit(cindex)\">{{ i18n.cancel }}</button>\n                </div>\n            </div>\n        </div>\n\n        <div style=\"margin-top: 15px;\" class=\"comment-form\">\n            <div class=\"current-user-avatar\">\n                <img :src=\"currentUserInfo.data.avatar_url\" :alt=\"currentUserInfo.data.display_name\" width=\"50px\" height=\"50px\">\n            </div>\n            <div class=\"add_form_style\">\n                <vue-editor id=\"add-comment\" v-model=\"comment\" :editorToolbar=\"customToolbar\"></vue-editor>\n                <br>\n\n                <div class=\"action\">\n                    <button class=\"button button-primary\"\n                        @click.prevent=\"addComment()\"\n                        :disabled=\"commenting\"\n                        >\n                        <i v-if=\"commenting\" class=\"fa fa-refresh fa-spin\"></i>\n                        {{ i18n.add_comment }}\n                    </button>\n                </div>\n            </div>\n            <div class=\"pm-clearfix\"></div>\n        </div>\n\n    </div>\n";
 
 /***/ }),
 /* 131 */
@@ -27138,9 +27138,9 @@ exports.default = {
 
     created: function created() {
         var vm = this;
-        _store2.default.setLocalization('fpm-get-activities-local-data').then(function (data) {
-            vm.i18n = data;
-        });
+        // store.setLocalization( 'fpm-get-activities-local-data' ).then( function( data ) {
+        //     vm.i18n = data;
+        // });
 
         if (vm.$route.params.userid) {
             vm.fetchActivities(vm.$route.params.userid);
@@ -27786,7 +27786,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n    .completed {\n        text-decoration: line-through;\n        font-style: italic;\n        color: #a2a2a2;\n    }\n    .pipe {\n        padding-left: 3px;\n        padding-right: 6px;\n        color: #e3e3e3;\n    }\n    h4 .fa {\n        font-size: 13px;\n        color: #b5b5b5;\n    }\n    .todo-item .fa {\n        font-size: 13px;\n        color: #b5b5b5;\n        position: relative;\n        top: -1px;\n    }\n    .actions .fa {\n        /*font-size: 16px;*/\n        color: #b5b5b5;\n        position: relative;\n        top: -1px;\n    }\n\n    /*.actions i.fa {\n        font-size: 12px;\n        color: #b5b5b5;\n        position: relative;\n        top: -1px;\n    }*/\n    .p-r-5 {\n        padding-right: 5px;\n    }\n", ""]);
+exports.push([module.i, "\n    .completed {\n        text-decoration: line-through;\n        font-style: italic;\n        color: #a2a2a2;\n    }\n    .pipe {\n        padding-left: 3px;\n        padding-right: 6px;\n        color: #e3e3e3;\n    }\n    h4 .fa {\n        font-size: 13px;\n        color: #b5b5b5;\n    }\n    .todo-item .fa {\n        font-size: 13px;\n        color: #b5b5b5;\n        position: relative;\n        top: -1px;\n    }\n    .actions .fa {\n        /*font-size: 16px;*/\n        color: #b5b5b5;\n        position: relative;\n        top: -1px;\n    }\n    .p-r-5 {\n        padding-right: 5px;\n    }\n", ""]);
 
 // exports
 
@@ -27907,45 +27907,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //     </li>
 // </template>
 //
-// <style>
-//     .completed {
-//         text-decoration: line-through;
-//         font-style: italic;
-//         color: #a2a2a2;
-//     }
-//     .pipe {
-//         padding-left: 3px;
-//         padding-right: 6px;
-//         color: #e3e3e3;
-//     }
-//     h4 .fa {
-//         font-size: 13px;
-//         color: #b5b5b5;
-//     }
-//     .todo-item .fa {
-//         font-size: 13px;
-//         color: #b5b5b5;
-//         position: relative;
-//         top: -1px;
-//     }
-//     .actions .fa {
-//         /*font-size: 16px;*/
-//         color: #b5b5b5;
-//         position: relative;
-//         top: -1px;
-//     }
-//
-//     /*.actions i.fa {
-//         font-size: 12px;
-//         color: #b5b5b5;
-//         position: relative;
-//         top: -1px;
-//     }*/
-//     .p-r-5 {
-//         padding-right: 5px;
-//     }
-// </style>
-//
 // <script>
 exports.default = {
     props: ['todo', 'tindex', 'list', 'i18n'],
@@ -27981,17 +27942,15 @@ exports.default = {
     methods: {
         showEditForm: function showEditForm(todoObj, index) {
             this.todoName = todoObj.todo;
-            this.updateDueDate = todoObj.due_date;
+            this.updateDueDate = todoObj.due_date || '';
             this.selected = {
                 ID: todoObj.assigneeID, assignee: todoObj.assignee_name
             };
             this.editindex = index;
         },
-
         cancelEdit: function cancelEdit() {
             this.editindex = -1;
         },
-
         updateTodo: function updateTodo(todoObject) {
 
             var vm = this,
@@ -28029,7 +27988,6 @@ exports.default = {
                 }
             });
         },
-
         toggleCheckbox: function toggleCheckbox(todo, tindex) {
             var self = this,
                 data = {
@@ -28065,7 +28023,6 @@ exports.default = {
                 });
             }
         },
-
         deleteTodo: function deleteTodo(todo, tindex) {
 
             if (confirm("Are you sure ??")) {
@@ -28088,8 +28045,6 @@ exports.default = {
             }
         }
     },
-
-    mounted: function mounted() {},
     created: function created() {
         var vm = this,
             projectid,
@@ -28116,6 +28071,38 @@ exports.default = {
     }
 };
 // </script>
+//
+// <style>
+//     .completed {
+//         text-decoration: line-through;
+//         font-style: italic;
+//         color: #a2a2a2;
+//     }
+//     .pipe {
+//         padding-left: 3px;
+//         padding-right: 6px;
+//         color: #e3e3e3;
+//     }
+//     h4 .fa {
+//         font-size: 13px;
+//         color: #b5b5b5;
+//     }
+//     .todo-item .fa {
+//         font-size: 13px;
+//         color: #b5b5b5;
+//         position: relative;
+//         top: -1px;
+//     }
+//     .actions .fa {
+//         /*font-size: 16px;*/
+//         color: #b5b5b5;
+//         position: relative;
+//         top: -1px;
+//     }
+//     .p-r-5 {
+//         padding-right: 5px;
+//     }
+// </style>
 
 /***/ }),
 /* 187 */
@@ -29101,12 +29088,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //             </div>
 //         </div>
 //         <div class="col-10">
-//             <div class="user-info" v-if="!isShowEdit">
+//             <div class="user-info" v-if="!isShowEditForm">
 //                 <div style="float:right" v-if="isShowAction">
 //                     <span @click="showUserEdit(user)">
 //                         <a style="cursor: pointer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 //                     </span>
-//                     <span class="trash" @click="removeUser(index)">| 
+//                     <span v-if="isShowDelete" class="trash" @click="removeUser(index)">| 
 //                         <a style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
 //                     </span>
 //                 </div>
@@ -29114,9 +29101,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //                 <span class="info">{{user.title}}</span>
 //                 <span class="info"><i>{{user.user_email}}</i></span>
 //             </div>
-//             <div v-if="isShowEdit" class="user-info">
-//                 <input type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
-//                 <input type="text" v-model="editUserTitle" :placeholder="i18n.title_placeholder">
+//             <div v-if="isShowEditForm" class="user-info add_form_style">
+//                 <input class="form-control" type="text" v-model="editUserEmail" :placeholder="i18n.email_placeholder">
+//                 <input class="form-control" type="text" v-model="editUserTitle" :placeholder="i18n.title_placeholder">
 //                 <br>
 //                 <button class="button button-small button-primary" @click="updateUser" v-bind:disabled="isButtonDisabled">{{ i18n.update }}</button>
 //                 <button class="button button-small button-default" @click="cancelUserEdit">{{ i18n.cancel }}</button>
@@ -29133,7 +29120,7 @@ exports.default = {
     data: function data() {
         return {
             userClone: '',
-            isShowEdit: false,
+            isShowEditForm: false,
             editUserEmail: '',
             editUserTitle: ''
         };
@@ -29144,9 +29131,11 @@ exports.default = {
         isButtonDisabled: function isButtonDisabled() {
             return this.user.user_email === this.editUserEmail && this.user.title === this.editUserTitle;
         },
-
         isShowAction: function isShowAction() {
             return this.currentUser.roles[0] === 'administrator';
+        },
+        isShowDelete: function isShowDelete() {
+            return this.currentUser.roles[0] === 'administrator' && parseInt(this.currentUser.ID) !== parseInt(this.user.ID);
         }
     },
     methods: {
@@ -29154,15 +29143,15 @@ exports.default = {
             var vm = this;
 
             vm.userClone = JSON.parse((0, _stringify2.default)(userect));
-            vm.isShowEdit = true;
+            vm.isShowEditForm = true;
             vm.editUserEmail = userect.user_email;
             vm.editUserTitle = userect.title;
         },
         cancelUserEdit: function cancelUserEdit() {
             var vm = this;
 
-            vm.user = vm.userClone;
-            vm.isShowEdit = false;
+            // vm.user = vm.userClone;
+            vm.isShowEditForm = false;
             vm.cloneObject = '';
         },
         removeUser: function removeUser(index) {
@@ -29187,7 +29176,7 @@ exports.default = {
 
                     localStorage.removeItem(localUsersKey);
 
-                    vm.isShowEdit = false;
+                    vm.isShowEditForm = false;
                     vm.editUserEmail = '';
                     vm.editUserTitle = '';
                 } else {
@@ -29208,7 +29197,7 @@ exports.default = {
 /* 208 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class=\"row\">\n        <div class=\"col-2\">\n            <div class=\"user-avatar\">\n                <img class=\"avatar small-round-image\" :src=\"user.avatar_url\" alt=\"...\">\n            </div>\n        </div>\n        <div class=\"col-10\">\n            <div class=\"user-info\" v-if=\"!isShowEdit\">\n                <div style=\"float:right\" v-if=\"isShowAction\">\n                    <span @click=\"showUserEdit(user)\">\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\n                    </span>\n                    <span class=\"trash\" @click=\"removeUser(index)\">| \n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                    </span>\n                </div>\n                <span class=\"info\"><strong>{{user.display_name}}</strong></span>\n                <span class=\"info\">{{user.title}}</span>\n                <span class=\"info\"><i>{{user.user_email}}</i></span>\n            </div>\n            <div v-if=\"isShowEdit\" class=\"user-info\">\n                <input type=\"text\" v-model=\"editUserEmail\" :placeholder=\"i18n.email_placeholder\">\n                <input type=\"text\" v-model=\"editUserTitle\" :placeholder=\"i18n.title_placeholder\">\n                <br>\n                <button class=\"button button-small button-primary\" @click=\"updateUser\" v-bind:disabled=\"isButtonDisabled\">{{ i18n.update }}</button>\n                <button class=\"button button-small button-default\" @click=\"cancelUserEdit\">{{ i18n.cancel }}</button>\n            </div>\n        </div>\n    </div>\n";
+module.exports = "\n    <div class=\"row\">\n        <div class=\"col-2\">\n            <div class=\"user-avatar\">\n                <img class=\"avatar small-round-image\" :src=\"user.avatar_url\" alt=\"...\">\n            </div>\n        </div>\n        <div class=\"col-10\">\n            <div class=\"user-info\" v-if=\"!isShowEditForm\">\n                <div style=\"float:right\" v-if=\"isShowAction\">\n                    <span @click=\"showUserEdit(user)\">\n                        <a style=\"cursor: pointer\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>\n                    </span>\n                    <span v-if=\"isShowDelete\" class=\"trash\" @click=\"removeUser(index)\">| \n                        <a style=\"cursor: pointer;\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n                    </span>\n                </div>\n                <span class=\"info\"><strong>{{user.display_name}}</strong></span>\n                <span class=\"info\">{{user.title}}</span>\n                <span class=\"info\"><i>{{user.user_email}}</i></span>\n            </div>\n            <div v-if=\"isShowEditForm\" class=\"user-info add_form_style\">\n                <input class=\"form-control\" type=\"text\" v-model=\"editUserEmail\" :placeholder=\"i18n.email_placeholder\">\n                <input class=\"form-control\" type=\"text\" v-model=\"editUserTitle\" :placeholder=\"i18n.title_placeholder\">\n                <br>\n                <button class=\"button button-small button-primary\" @click=\"updateUser\" v-bind:disabled=\"isButtonDisabled\">{{ i18n.update }}</button>\n                <button class=\"button button-small button-default\" @click=\"cancelUserEdit\">{{ i18n.cancel }}</button>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ }),
 /* 209 */
@@ -31805,7 +31794,7 @@ exports.i(__webpack_require__(259), "");
 exports.i(__webpack_require__(260), "");
 
 // module
-exports.push([module.i, "\n\n", ""]);
+exports.push([module.i, "\n\n.lists.calendar-container {\n\toverflow: unset;\n}\n\n", ""]);
 
 // exports
 
@@ -31949,6 +31938,10 @@ exports.default = {
 	// @import '~@fullcalendar/daygrid/main.css';
 	// @import '~@fullcalendar/timegrid/main.css';
 	//
+	// .lists.calendar-container {
+	// 	overflow: unset;
+	// }
+	//
 	// </style>
 
 };
@@ -31956,7 +31949,7 @@ exports.default = {
 // <template>
 //     <div class="container">
 //         <project-nav v-on:get-project="setProject"></project-nav>
-//         <div class="lists border-for-nav">
+//         <div class="lists calendar-container border-for-nav">
 //             <div class="row">
 //                 <div class="col-12">
 //                 	<FullCalendar
@@ -34102,7 +34095,7 @@ Docs & License: https://fullcalendar.io/
 /* 265 */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class=\"container\">\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\n        <div class=\"lists border-for-nav\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                \t<FullCalendar\n                \t   \tref=\"fullCalendar\"\n\t\t\t\t\t  \t:plugins=\"calendarPlugins\"\n\t\t\t\t\t  \t:weekends=\"false\"\n\t\t\t\t\t  \t:eventLimit=\"true\"\n\t\t\t\t\t  \t:events=\"events\"\n\t\t\t\t\t  \t:header=\"header\"\n\t\t\t\t\t  \t@datesRender=\"handleMonthChange\"\n\t\t\t\t\t  \t@eventClick=\"showDetails\"\n\t\t\t\t\t/>\n                </div>\n            </div>\n        </div>\n    </div>\n";
+module.exports = "\n    <div class=\"container\">\n        <project-nav v-on:get-project=\"setProject\"></project-nav>\n        <div class=\"lists calendar-container border-for-nav\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                \t<FullCalendar\n                \t   \tref=\"fullCalendar\"\n\t\t\t\t\t  \t:plugins=\"calendarPlugins\"\n\t\t\t\t\t  \t:weekends=\"false\"\n\t\t\t\t\t  \t:eventLimit=\"true\"\n\t\t\t\t\t  \t:events=\"events\"\n\t\t\t\t\t  \t:header=\"header\"\n\t\t\t\t\t  \t@datesRender=\"handleMonthChange\"\n\t\t\t\t\t  \t@eventClick=\"showDetails\"\n\t\t\t\t\t/>\n                </div>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ }),
 /* 266 */
@@ -34197,7 +34190,7 @@ exports.default = {
         fetchAssignments: function fetchAssignments() {
             var vm = this;
             var data = {
-                action: 'fpm-get-todos',
+                action: 'fpm-get-assigned-todos',
                 nonce: fpm.nonce
             };
 
@@ -34222,6 +34215,24 @@ exports.default = {
     }
 };
 // </script>
+//
+// <style>
+//     .assignment-heading {
+//         border-bottom: 2px solid #eee;
+//         margin-bottom:20px;
+//         padding-bottom:20px;
+//     }
+//     .my-todo {
+//         margin-top: -3px;
+//         text-decoration: none;
+//         color: #ccc;
+//     }
+//
+//     .my-todo a{
+//         text-decoration: none;
+//         color: #444;
+//     }
+// </style>
 // <template>
 //     <div class="container lists">
 //         <div class="row">
@@ -34260,24 +34271,6 @@ exports.default = {
 //
 //     </div>
 // </template>
-//
-// <style>
-//     .assignment-heading {
-//         border-bottom: 2px solid #eee;
-//         margin-bottom:20px;
-//         padding-bottom:20px;
-//     }
-//     .my-todo {
-//         margin-top: -3px;
-//         text-decoration: none;
-//         color: #ccc;
-//     }
-//
-//     .my-todo a{
-//         text-decoration: none;
-//         color: #444;
-//     }
-// </style>
 //
 // <script>
 

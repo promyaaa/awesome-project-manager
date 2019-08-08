@@ -81,12 +81,33 @@ class FusionPM_Todo {
         return $result;
     }
 
+    public function get_assigned_todos( $assigneeID ) {
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `assigneeID`={$assigneeID} AND `is_complete`=0" );
+
+        foreach ($result as $todo) {
+            $todo->formatted_created = $this->get_formatted_date( $todo->created );
+            if ( $todo->due_date ) {
+                if ( current_time( 'mysql' ) > $todo->due_date ) {
+                    $todo->is_overdue = true;
+                }
+                $todo->formatted_due_date = $this->get_formatted_date( $todo->due_date );
+            } else {
+                $todo->formatted_due_date = '';
+                $todo->due_date = '';
+                $todo->is_overdue = false;
+            }
+        }
+
+        return $result;
+    }
+
     public function get_todos_for_calendar( $projectID, $startDate, $endDate ) {
         global $wpdb;
         
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `projectID`={$projectID} AND (`created` BETWEEN '{$startDate}' AND '{$endDate}')" );
         
-        // var_dump($wpdb->last_query);
         return $result;
     }
 

@@ -89,45 +89,6 @@
     </li>
 </template>
 
-<style>
-    .completed {
-        text-decoration: line-through;
-        font-style: italic;
-        color: #a2a2a2;
-    }
-    .pipe {
-        padding-left: 3px;
-        padding-right: 6px;
-        color: #e3e3e3;
-    }
-    h4 .fa {
-        font-size: 13px;
-        color: #b5b5b5;
-    }
-    .todo-item .fa {
-        font-size: 13px;
-        color: #b5b5b5;
-        position: relative;
-        top: -1px;
-    }
-    .actions .fa {
-        /*font-size: 16px;*/
-        color: #b5b5b5;
-        position: relative;
-        top: -1px;
-    }
-
-    /*.actions i.fa {
-        font-size: 12px;
-        color: #b5b5b5;
-        position: relative;
-        top: -1px;
-    }*/
-    .p-r-5 {
-        padding-right: 5px;
-    }
-</style>
-
 <script>
     import DatePicker from './DatePickerComponent.vue';
     import store from '../../store';
@@ -163,20 +124,20 @@
             }
         },
         methods: {
-            showEditForm: function( todoObj, index ) {
+            showEditForm( todoObj, index ) {
                 this.todoName = todoObj.todo;
-                this.updateDueDate = todoObj.due_date;
+                this.updateDueDate = todoObj.due_date || '';
                 this.selected = {
                     ID: todoObj.assigneeID, assignee: todoObj.assignee_name
                 }
                 this.editindex = index;
             },
 
-            cancelEdit: function() {
+            cancelEdit() {
                 this.editindex = -1;
             },
 
-            updateTodo: function( todoObject ) {
+            updateTodo( todoObject ) {
 
                 var vm = this,
                     todo,
@@ -214,7 +175,7 @@
                 });
             },
 
-            toggleCheckbox: function( todo, tindex ) {
+            toggleCheckbox( todo, tindex ) {
                 var self = this,
                     data = {
                         action : 'fpm-complete-todo',
@@ -250,7 +211,7 @@
                 }
             },
 
-            deleteTodo: function(todo, tindex) {
+            deleteTodo(todo, tindex) {
 
                 if (confirm("Are you sure ??")) {
                     var self = this,
@@ -275,11 +236,6 @@
                 }
             }
         },
-
-        mounted() {
-
-        },
-
         created() {
             var vm = this,
                 projectid,
@@ -306,3 +262,35 @@
         }
     }
 </script>
+
+<style>
+    .completed {
+        text-decoration: line-through;
+        font-style: italic;
+        color: #a2a2a2;
+    }
+    .pipe {
+        padding-left: 3px;
+        padding-right: 6px;
+        color: #e3e3e3;
+    }
+    h4 .fa {
+        font-size: 13px;
+        color: #b5b5b5;
+    }
+    .todo-item .fa {
+        font-size: 13px;
+        color: #b5b5b5;
+        position: relative;
+        top: -1px;
+    }
+    .actions .fa {
+        /*font-size: 16px;*/
+        color: #b5b5b5;
+        position: relative;
+        top: -1px;
+    }
+    .p-r-5 {
+        padding-right: 5px;
+    }
+</style>

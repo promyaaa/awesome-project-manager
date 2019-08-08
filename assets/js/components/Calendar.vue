@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <project-nav v-on:get-project="setProject"></project-nav>
-        <div class="lists border-for-nav">
+        <div class="lists calendar-container border-for-nav">
             <div class="row">
                 <div class="col-12">
                 	<FullCalendar
@@ -100,5 +100,9 @@ export default {
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
+
+.lists.calendar-container {
+	overflow: unset;
+}
 
 </style>

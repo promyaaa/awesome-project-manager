@@ -110,9 +110,9 @@
 
         created() {
             var vm = this;
-            store.setLocalization( 'fpm-get-activities-local-data' ).then( function( data ) {
-                vm.i18n = data;
-            });
+            // store.setLocalization( 'fpm-get-activities-local-data' ).then( function( data ) {
+            //     vm.i18n = data;
+            // });
 
             if ( vm.$route.params.userid ) {
                 vm.fetchActivities( vm.$route.params.userid );
