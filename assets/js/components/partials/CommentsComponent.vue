@@ -10,7 +10,9 @@
                 <div class="comment-data">
                     <div v-html="commentObject.comment" class="comment-body"></div>
                     <div class="commented-by">
-                        -- {{ i18n.comment_by}} <strong>{{commentObject.user_name}}</strong> at {{commentObject.formatted_created}}
+                        -- {{ i18n.comment_by}} <strong>{{commentObject.user_name}}</strong>
+                        <span v-if="commentObject.formatted_created"> at {{commentObject.formatted_created}} </span>
+                        <span v-else> a second ago</span>
                     </div>
                     <div class="comment-action" v-if="currentUserInfo.roles[0] === 'administrator' || currentUserInfo.data.ID === commentObject.userID">
                         <span style="cursor: pointer;" @click="showCommentEditForm(commentObject, cindex)">
