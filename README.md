@@ -1,8 +1,8 @@
-# Awesome Project Manager WordPress Plugin #
+# Fusion Project Manager WordPress Plugin #
 **Contributors:** [promy](https://profiles.wordpress.org/promy89)
-**Tags:** Project, Project Manager, Single page app, Management, Single page, Todo, Todo Manager, Task, Task Management, Task Manager
+**Tags:** Project, Project Manager, Single page app, Management, Single page, Todo, Todo Manager, Task, Task Management, Task Manager, File Management
 **Requires at least:** 4.4
-**Tested up to:** 4.9.2
+**Tested up to:** 5.2.2
 **Requires PHP:** 5.6
 **Stable tag:** trunk
 **License:** GPLv2 or later

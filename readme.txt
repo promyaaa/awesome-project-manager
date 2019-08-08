@@ -1,9 +1,9 @@
-=== Awesome Project Manager WordPress Plugin ===
+=== Fusion Project Manager WordPress Plugin ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
-Tags: project, project manager, project management, single page app, todo list
+Tags: project, project manager, project management, todo list, files, calendar
 Requires at least: 4.6
-Tested up to: 4.9.5
+Tested up to: 5.2.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -13,16 +13,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Only **Single Page(SPA)** WordPress project management plugin in WordPress plugin repository. Built with cutting edge technologies like **VueJs**.
 
-Awesome Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section. It is very easy to use.
-
-
-### Demo
-
-[Demo link](http://demopm.wptarzan.com/wp-login.php)
-
-**username** : john
-
-**password**: password
+Fusion Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section.There is also a built in file management system where you can organize your files by creating separate folders.You can view all your todos in event calendar so that you can have a birds eye view on what is happening throughout each projects. 
 
 
 ### Installation
@@ -61,6 +52,17 @@ Messages
 
 Discussion boards keep the entire conversation about a specific topic together on a single page. No more digging through your inbox, trying to reassemble a story from a series of fragmented replies.
 
+Docs & Files
+
+* Create Folders
+* Add attachment(s) to that folder, remove attachment(s)
+* Comment on folder or comment on individual files
+* Organize files by folder 
+
+Event Calendar
+
+* Every project has a calendar view where you can see what is happening at a glance
+
 Activity
 
 * Keep track of what is happening to the project in summary section
@@ -68,7 +70,7 @@ Activity
 
 Assignment
 
-* Keep track of personal assignments in "My Assignments" section located in home page
+* Keep track of personal assignments in "My Assignments" section located in submenu
 
 
 
@@ -105,8 +107,19 @@ User with 'Project member' role can Edit, Delete Projects, Lists, Todos, Message
 6. Message board
 7. Message details
 8. Project users
+9. Event calendar
+10. Project activity
+11. My activity
 
 == Changelog ==
+
+v1.0.5 -> August 08, 2019
+---------------------
+- [new] Docs & Files Section
+- [new] Event Calendar Section
+- [tweak] Code refactor and form ui update
+- [tweak] Project activity ui update
+- [tweak] My activity ui update
 
 v1.0.4 -> November 16, 2018
 ---------------------
