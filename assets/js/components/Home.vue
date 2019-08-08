@@ -80,14 +80,14 @@
                         <!-- <p class="ellipsis-90">{{project.project_desc}}</p> -->
 
                         <ul class="project-specific-info">
-                            <li>Completed ToDos {{ project.completed_todo_count }}</li>
-                            <li>Open ToDos {{ project.todo_count - project.completed_todo_count }}</li>
-                            <li>Discussions {{ project.message_count }}</li>
-                            <li>Users {{ project.user_count }}</li>
+                            <li>{{ project.completed_todo_count }} - Completed ToDos</li>
+                            <li>{{ project.todo_count - project.completed_todo_count }} - Open ToDos</li>
+                            <li>{{ project.message_count }} - Discussions</li>
+                            <li>{{ project.user_count }} - Users</li>
                             <li v-if="project.todo_count > 0">
-                                Progress {{ Math.floor((project.completed_todo_count/project.todo_count)*100) }}%
+                                {{ Math.floor((project.completed_todo_count/project.todo_count)*100) }}% - Progress
                             </li>
-                            <li v-else>Progress 0%</li>
+                            <li v-else>0% - Progress</li>
                         </ul>
 
                         <div class="user-avatars">
