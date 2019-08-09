@@ -136,7 +136,7 @@ class FusionPM_Localize {
             'add_new_todo'           => __( 'Add New Todo', 'fusion-pm' ),
             'add_todo'           => __( 'Add todo', 'fusion-pm' ),
             'add_todo_placeholder'           => __( 'Enter your todo...', 'fusion-pm' ),
-            'select_user'           => __( '--select user--', 'fusion-pm' ),
+            'select_user'           => __( '--select assignee--', 'fusion-pm' ),
             'add_files'           => __( 'Add files', 'fusion-pm' ),
         );
 

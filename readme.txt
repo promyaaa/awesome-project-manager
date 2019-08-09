@@ -110,6 +110,7 @@ User with 'Project member' role can Edit, Delete Projects, Lists, Todos, Message
 9. Event calendar
 10. Project activity
 11. My activity
+12. Navigation
 
 == Changelog ==
 
