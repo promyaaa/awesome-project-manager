@@ -1117,10 +1117,11 @@ class FusionPM_Ajax {
         }
 
         if ( $insertID && $assigneeMail ) {
+            $todo_link = add_query_arg( array( 'page'=>'fusion-pm'), admin_url( 'admin.php' ) ) . '#/projects/' . $projectID . '/todolists/' . $listID . '/todos/' . $insertID;
             wp_mail( 
                 $assigneeMail, 
-                'Assignment!', 
-                'You have a new assignment - '. $todo
+                'Assignment!',
+                'You have a new assignment - "'. $todo .'". You can access it via following link - ' . $todo_link 
             );
         }
 
