@@ -43,6 +43,12 @@
                         <i class="fa fa-user"></i>
                     </router-link>   
                 </div>
+                <div class="nav-section">
+                    <router-link :to="'/projects/' + $route.params.projectid + '/reports'" class="link-style" tag="div">
+                        <strong style="display:block;padding-bottom:5px;cursor: pointer;">Activity</strong>
+                        <i class="fa fa-history"></i>
+                    </router-link>   
+                </div>
             </div>
         </div>
     </div>

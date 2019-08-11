@@ -1,4 +1,4 @@
-=== Fusion Project Manager WordPress Plugin ===
+=== Awesome Project Manager ===
 Contributors:  promy89
 Donate Link: http://github/promyaaa/
 Tags: project, project manager, project management, todo list, files, calendar
@@ -13,7 +13,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Only **Single Page(SPA)** WordPress project management plugin in WordPress plugin repository. Built with cutting edge technologies like **VueJs**.
 
-Fusion Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section.There is also a built in file management system where you can organize your files by creating separate folders.You can view all your todos in event calendar so that you can have a birds eye view on what is happening throughout each projects. 
+Awesome Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section.There is also a built in file management system where you can organize your files by creating separate folders.You can view all your todos in event calendar so that you can have a birds eye view on what is happening throughout each projects. 
 
 
 ### Installation

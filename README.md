@@ -1,4 +1,4 @@
-# Fusion Project Manager WordPress Plugin #
+# Awesome Project Manager WordPress Plugin #
 **Contributors:** [promy](https://profiles.wordpress.org/promy89)
 **Tags:** Project, Project Manager, Single page app, Management, Single page, Todo, Todo Manager, Task, Task Management, Task Manager, File Management
 **Requires at least:** 4.4
@@ -12,7 +12,7 @@ The best project manager plugin for WordPress
 
 ## Description ##
 
-Fusion project manager WordPress plugin is the best project manager plugin for WordPress. You can manage project simply and easily. The cool thing is, it is single page and lighting fast.
+Awesome project manager WordPress plugin is the best project manager plugin for WordPress. You can manage project simply and easily. The cool thing is, it is single page and lighting fast.
 
 ### Installation ###
  - Clone this repo first
@@ -22,7 +22,7 @@ Fusion project manager WordPress plugin is the best project manager plugin for W
  - For development and compiling on the fly run `webpack --watch`
 
 ### Contribute ###
-This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/promyaaa/fusion-project-manager).
+This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/promyaaa/awesome-project-manager).
 
 ### Author ###
 Brought to you by [Promy](https://github.com/promyaaa)
