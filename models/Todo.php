@@ -188,7 +188,7 @@ class FusionPM_Todo {
         }
 
         if ( !$orderBy ) {
-            $orderBy = 'ASC';
+            $orderBy = 'DESC';
         }
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE {$column} = {$param} ORDER BY `ID` {$orderBy}" );

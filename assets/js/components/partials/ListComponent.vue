@@ -43,10 +43,10 @@
                 </router-link>
             </div>
 
-            <ul v-if="list.todos.length > 0">
+            <add-todo :i18n="i18n" :sindex="sindex" :list="list"></add-todo>
+            <ul v-if="list.todos.length > 0" style="margin-top: 25px;">
                 <todo-item :i18n="i18n" v-for="(todo, tindex) in list.todos" :todo="todo" :tindex="tindex" :list="list" :key="todo.ID"></todo-item>
             </ul>
-            <add-todo :i18n="i18n" :sindex="sindex" :list="list"></add-todo>
             <br>
             <div class="row" v-if="isSingle">
                 <div class="col-12">

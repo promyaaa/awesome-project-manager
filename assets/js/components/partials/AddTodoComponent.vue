@@ -26,7 +26,7 @@
                         <div>
                             <select v-model="selected" class="form-control">
                                 <option disabled value="">{{ i18n.select_user }}</option>
-                                <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
+                                <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name, email : option.user_email}">
                                     {{ option.display_name }}
                                 </option>
                             </select>
@@ -40,6 +40,11 @@
                             v-on:remove="removeAttachment"
                             :attachments="attachments"></file-upload>
                         <br>
+                        
+                        <div v-if="selected" style="margin-bottom: 20px;">
+                            <input type="checkbox" id="checkbox" v-model="notifyAssignee">
+                            notify assignee via email
+                        </div>
 
                         <div class="inline">
                             <button class="button button-primary"
@@ -86,6 +91,7 @@
                 attachments: [],
                 attachmentIDs: [],
                 creatingTodo: false,
+                notifyAssignee: false,
             }
         },
 
@@ -137,6 +143,9 @@
                         due_date: vm.todoDueDate
                     };
 
+                if ( vm.notifyAssignee ) {
+                    data.assignee_email = vm.selected.email;
+                }
 
                 if ( !vm.todoName ) {
                     return;
@@ -163,7 +172,7 @@
                             todo.assignee_name = null;
                         }
 
-                        vm.list.todos.push(todo);
+                        vm.list.todos.unshift(todo);
 
                         vm.selected = '';
                         vm.todoName = '';

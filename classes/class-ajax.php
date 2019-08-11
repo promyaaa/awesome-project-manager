@@ -1039,6 +1039,8 @@ class FusionPM_Ajax {
 
         $assigneeName = !empty( $_POST['assignee_name'] ) ? $_POST['assignee_name'] : NULL;
 
+        $assigneeMail = !empty( $_POST['assignee_email'] ) ? $_POST['assignee_email'] : NULL;
+
         if ( ! $todo ) {
             wp_send_json_error( __( 'Todo is required', 'fusion-pm' ) );
         }
@@ -1112,6 +1114,14 @@ class FusionPM_Ajax {
             );
 
             $this->create_activity($activities);
+        }
+
+        if ( $insertID && $assigneeMail ) {
+            wp_mail( 
+                $assigneeMail, 
+                'Assignment!', 
+                'You have a new assignment - '. $todo
+            );
         }
 
         if ( $insertID || $successResponse ) {

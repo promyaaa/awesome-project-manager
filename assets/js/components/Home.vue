@@ -227,6 +227,11 @@
                         vm.creating = false;
                         resp.data.project.project_title = vm.projectTitle;
                         resp.data.project.project_desc = vm.projectDesc;
+                        resp.data.project.completed_todo_count = 0;
+                        resp.data.project.todo_count = 0;
+                        resp.data.project.message_count = 0;
+                        resp.data.project.user_count = 1;
+
                         user = {
                             avatar_url: vm.currentUser.data.avatar_url
                         }
