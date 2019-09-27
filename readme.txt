@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Only **Single Page(SPA)** WordPress project management plugin in WordPress plugin repository. Built with cutting edge technologies like **VueJs**.
+A **Single Page(SPA)** WordPress project management plugin in WordPress plugin repository. Built with cutting edge technologies like **VueJs**.
 
 Awesome Project Manager WordPress Plugin is the best project manager plugin for WordPress. You can manage your todos with separate to-do lists, post messages for the team and upload files to share. You can discuss every todo and message via the comment section.There is also a built in file management system where you can organize your files by creating separate folders.You can view all your todos in event calendar so that you can have a birds eye view on what is happening throughout each projects. 
 
@@ -29,20 +29,24 @@ This section describes how to install the plugin and get it working.
 
 Projects
 
-* Create New Project
-* Set title and details of the project
+* Create unlimited projects
+* Set the name and description for your project
 * Assign users to that project
+* Keep everyone informed via the message board, where you can send attachments and messages and the team can respond and view the messages
 
-Todo Lists
 
-* Create list to organize todos
-* Edit list
-* Add todos under that list
-* Assign todo to a user
-* Add one/multiple attachment(s) to that todo
-* Set due date for that todo
-* Mark todo as complete/reopen todo
-* Discuss todo by commenting on it
+Todos
+
+* Create to-do lists for all the work you need to do
+* Create, view, edit and customize as many tasks as you want to under that list
+* Assign task to users
+* See details of the task by clicking on them
+* Add one/multiple attachment(s) to that task
+* Set due date for that taks
+* Mark task as complete
+* Reopen task if needed
+* Start discussion with other team members about that task by commenting on that task
+
 
 Messages
 
@@ -54,8 +58,8 @@ Discussion boards keep the entire conversation about a specific topic together o
 
 Docs & Files
 
-* Create Folders
-* Add attachment(s) to that folder, remove attachment(s)
+* Create unlimited Folders
+* Add unlimited attachment(s) to that folder, remove attachment(s)
 * Comment on folder or comment on individual files
 * Organize files by folder 
 
@@ -63,13 +67,10 @@ Event Calendar
 
 * Every project has a calendar view where you can see what is happening at a glance
 
-Activity
+Activity & Assignments
 
-* Keep track of what is happening to the project in summary section
-* Keep track of your acitivity in "My activity" section located in home page
-
-Assignment
-
+* Keep track of what is happening to a project in activity section
+* Keep track of your acitivity in "My activity" section
 * Keep track of personal assignments in "My Assignments" section located in submenu
 
 
