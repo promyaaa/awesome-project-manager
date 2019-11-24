@@ -47,6 +47,12 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-get-assigned-todos', array( $this, 'fetch_assigned_todos' ), 10 );
         add_action( 'wp_ajax_fpm-get-todos-for-calendar', array( $this, 'fetch_todos_for_calendar' ), 10 );
 
+        // SUBTASKS
+        add_action( 'wp_ajax_fpm-get-subtasks', array( $this, 'fetch_subtasks' ), 10 );
+        add_action( 'wp_ajax_fpm-create-subtask', array( $this, 'create_subtask' ), 10 );
+        add_action( 'wp_ajax_fpm-delete-subtask', array( $this, 'delete_subtask' ), 10 );
+        add_action( 'wp_ajax_fpm-complete-subtask', array( $this, 'complete_subtask' ), 10 );
+
         // COMMENT
         add_action( 'wp_ajax_fpm-insert-comment', array( $this, 'insert_comment' ), 10 );
         add_action( 'wp_ajax_fpm-delete-comment', array( $this, 'delete_comment' ), 10 );
@@ -1010,7 +1016,184 @@ class FusionPM_Ajax {
         }
 
         wp_send_json_error( __( 'Something wrong, try again', 'fusion-pm' ) );
-    } 
+    }
+
+    public function fetch_subtasks() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $todoID = $this->get_validated_input('todo_id');
+
+        if ( ! $todoID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Todo ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $subtaskModel = FusionPM_Subtask::init();
+
+        $subtasks = $subtaskModel->get_subtasks_by( $todoID );
+
+        if ( $subtasks ) {
+            wp_send_json_success( $subtasks );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function create_subtask() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $todoID = $this->get_validated_input('todo_id');
+        $subTask = $this->get_validated_input('subtask');
+
+        if ( ! $todoID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Todo ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        if ( ! $subTask ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Subtask not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $subtaskModel = FusionPM_Subtask::init();
+
+        $date = current_time( 'mysql' );
+
+        $data = array(
+            'subtask' => $subTask,
+            'todoID' => $todoID,
+            'userID' => get_current_user_id(),
+            'created' => $date
+        );
+
+        $insertID = $subtaskModel->create( $data );
+        
+        $resp = array(
+            'ID' => $insertID 
+        );
+
+        if ( $insertID ) {
+            wp_send_json_success( $resp );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function delete_subtask() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $subTaskID = $this->get_validated_input('subtask_id');
+
+        if ( ! $subTaskID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Subtask ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        $subtaskModel = FusionPM_Subtask::init();
+        $delete = $subtaskModel->delete( $subTaskID );
+
+        if ( $delete ) {
+            wp_send_json_success( array('message' => __( 'message successfully deleted', 'fusion-pm' )) );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function complete_subtask() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+        
+        $todoID = !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
+        $subtaskID = !empty( $_POST['subtask_id'] ) ? $_POST['subtask_id'] : '';
+        $projectID = !empty( $_POST['project_id'] ) ? $_POST['project_id'] : '';
+        $todo = !empty( $_POST['todo'] ) ? $_POST['todo'] : '';
+
+        $is_complete = (int)$_POST['is_complete'];
+
+        $subtaskModel = FusionPM_Subtask::init();
+        $update = $subtaskModel->complete_subtask( $subtaskID, $is_complete );
+
+        $date = current_time( 'mysql' );
+
+        $currentUser = wp_get_current_user();
+
+        $activities = array(
+            'userID' => $currentUser->ID,
+            'user_name' => $currentUser->display_name,
+            'projectID' => $projectID,
+            'activity_id' => $todoID,
+            'activity' => $todo,
+            'created' => $date
+        );
+
+        if ( $is_complete ) {
+            $activities['activity_type'] = 'check_subtask';
+            $this->create_activity( $activities );
+        } else {
+            $activities['activity_type'] = 'uncheck_subtask';
+            $this->create_activity( $activities );
+        }
+        
+        if ( $update ) {
+            $resp = array(
+                'message' => __( 'Successfully Updated', 'fusion-pm' )
+            );
+            wp_send_json_success( $resp );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+
+    }
 
     // updated
     public function insert_todo() {

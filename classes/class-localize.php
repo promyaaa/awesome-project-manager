@@ -171,6 +171,10 @@ class FusionPM_Localize {
             'comment_by'           => __( 'commented by', 'fusion-pm' ),
             'add_comment'          => __( 'Add Comment', 'fusion-pm' ),
             'overdue'              => __( 'overdue', 'fusion-pm' ),
+            'add_subtask_placeholder' => __( 'Subtask...', 'fusion-pm' ),
+            'subtask_small_label'  => __( '*press Enter to add', 'fusion-pm' ),
+            'subtasks'        => __( 'Subtasks', 'fusion-pm' ),
+
         );
 
         wp_send_json_success( $localize_data );

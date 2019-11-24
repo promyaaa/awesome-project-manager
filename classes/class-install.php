@@ -62,6 +62,16 @@ class FusionPM_Install {
                 PRIMARY KEY (`ID`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
 
+            "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_subtasks` (
+                `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                `subtask` text,
+                `todoID` int(11) unsigned,
+                `userID` int(11) unsigned,
+                `is_complete` tinyint(1) NOT NULL DEFAULT '0',
+                `created` datetime,
+                PRIMARY KEY (`ID`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
+
             "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_messages` (
                 `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `message_title` varchar(300),

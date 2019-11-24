@@ -81,6 +81,15 @@
 
                                 <div class="row todo-info">
                                     <div class="col-3 text-right todo-info-title">
+                                        <strong style="padding-right: 15%">{{i18n.subtasks}} :</strong>
+                                    </div>
+                                    <div class="col-9" style="margin-top: 3px;">
+                                        <sub-tasks :todo="todoObject" :subtasks="todoObject.subtasks" :i18n="i18n"></sub-tasks>   
+                                    </div>
+                                </div>
+
+                                <div class="row todo-info">
+                                    <div class="col-3 text-right todo-info-title">
                                         <strong style="padding-right: 15%">{{ i18n.attachment_label }}</strong>
                                     </div>
                                     <div class="col-9">
@@ -182,13 +191,15 @@
     import FilesTypeDisplay from './partials/FilesTypeDisplay.vue';
     import FileUpload from './partials/FileUploadComponent.vue';
     import ProjectNav from './partials/ProjectNavComponent.vue';
+    import SubTasks from './partials/SubTasksComponent.vue';
     export default {
         components: {
             Comments,
             FileUpload,
             DatePicker,
             FilesTypeDisplay,
-            ProjectNav
+            ProjectNav,
+            SubTasks,
         },
         data() {
             return {

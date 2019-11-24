@@ -155,10 +155,12 @@ class FusionPM_Todo {
             $commentModel = FusionPM_Comment::init();
             $listModel = FusionPM_List::init();
             $projectModel = FusionPM_Project::init();
+            $subtaskModel = FusionPM_Subtask::init();
 
             $result[0]->comments = $commentModel->get_comments_by_column_info( $todo_id, 'todo' );
             $result[0]->list_info = $listModel->get_list_details( $result[0]->listID, true );
             $result[0]->project_info = $projectModel->get_project( $result[0]->projectID, true );
+            $result[0]->subtasks = $subtaskModel->get_subtasks_by( $todo_id );
 
             if ( $result[0]->due_date ) {
                 $result[0]->is_overdue = false;
