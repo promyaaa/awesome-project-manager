@@ -76,6 +76,52 @@ class FusionPM_User {
         return $result;
     }
 
+    public function get_project_user_ids( $project_id ) {
+        global $wpdb;
+
+        $result = $wpdb->get_results( "SELECT `userID` FROM {$this->relation_table_name} WHERE `projectID` = {$project_id}", ARRAY_A );
+        $ids = wp_list_pluck( $result, 'userID' );
+
+        return $ids;
+    }
+
+    public function get_search_users( $projectID, $queryString, $userTypes, $avatar_size = NULL ) {
+
+        if ( !$avatar_size ) {
+            $avatar_size = 50;
+        }
+
+        $userids = $this->get_project_user_ids( $projectID );
+
+        // convert ids from string to int
+        $intIDs = array_map(
+            function($value) { return (int)$value; },
+            $userids
+        );
+
+        $args = array (
+            'include'        => $intIDs,
+            'role__in'       => $userTypes,
+            'number'         => 5,
+            'search'         => '*' . esc_attr( $queryString ) . '*',
+            'search_columns' => array( 'user_login', 'user_nicename', 'user_email' )
+        );
+
+        $user_query = new WP_User_Query( $args );
+        $result = $user_query->get_results();
+        
+        if ( ! $result ) {
+            return false;
+        }
+
+        foreach ($result as $userObject) {
+            $userObject->avatar_url = get_avatar_url($userObject->ID, array('size'=>$avatar_size));
+            $userObject->title = get_user_meta($userObject->ID, 'fpm_user_title', true);
+        }
+        
+        return $result;
+    }
+
     public function remove_user( $user_id, $project_id ) {
         global $wpdb;
 

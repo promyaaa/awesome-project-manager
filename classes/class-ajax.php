@@ -68,6 +68,7 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-insert-user', array( $this, 'insert_user' ), 10 );
         add_action( 'wp_ajax_fpm-remove-user', array( $this, 'remove_user' ), 10 );
         add_action( 'wp_ajax_fpm-update-user', array( $this, 'update_user' ), 10 );
+        add_action( 'wp_ajax_fpm-get-search-users', array( $this, 'fetch_search_users' ), 10 );
 
         // Folders
         add_action( 'wp_ajax_fpm-insert-folder', array( $this, 'insert_folder' ), 10 );
@@ -628,6 +629,38 @@ class FusionPM_Ajax {
             wp_send_json_success( $resp );
         }
 
+    }
+
+    public function fetch_search_users() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $projectID   = $this->get_validated_input('project_id');
+        $queryString = $this->get_validated_input('query_string');
+        $userTypes   = !empty( $_POST['user_types'] ) ? $_POST['user_types'] : [];
+
+        if ( ! $projectID ) {
+            wp_send_json_error( __( 'projectid not provided', 'fusion-pm' ) );
+        }
+
+        $avatarSize = NULL;
+        
+        $userModel = FusionPM_User::init();
+        $users = $userModel->get_search_users( $projectID, $queryString, $userTypes, $avatarSize );
+
+        if ( $users ) {
+            wp_send_json_success( $users );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
     }
 
     public function fetch_users() {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-12">
         <div class="col-12">
             <div class="help-section">
                 <slot></slot>    
@@ -7,32 +7,6 @@
         </div>
     </div>
 </template>
-
-<script>
-    export default{
-        props: [],
-        components: {
-
-        },
-        data() {
-            return {
-
-            }
-        },
-        directives: {
-
-        },
-        methods: {
-
-        },
-        created() {
-
-        },
-        mounted() {
-
-        }
-    }
-</script>
 
 <style>
     .help-section {

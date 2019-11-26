@@ -23,13 +23,11 @@
                                 required
                                 @keyup.esc="hideTodoForm">
                         </div>
+                        
                         <div>
-                            <select v-model="selected" class="form-control">
-                                <option disabled value="">{{ i18n.select_user }}</option>
-                                <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name, email : option.user_email}">
-                                    {{ option.display_name }}
-                                </option>
-                            </select>
+                            <dropdown-autocomplete 
+                                :currentselect="selected.display_name"
+                                v-on:userselect="selectUser"></dropdown-autocomplete>
                         </div>
                         <div>
                             <date-picker id="add-duedate" v-model="todoDueDate"></date-picker>
@@ -74,12 +72,14 @@
     import store from '../../store';
     import FileUpload from './FileUploadComponent.vue';
     import DatePicker from './DatePickerComponent.vue';
+    import DropdownAutocomplete from './DropdownAutocomplete.vue';
     export default {
         props: [ 'sindex', 'list', 'i18n' ],
 
         components: {
             FileUpload,
-            DatePicker
+            DatePicker,
+            DropdownAutocomplete,
         },
 
         data() {
@@ -104,6 +104,10 @@
         },
 
         methods: {
+            selectUser(userObject) {
+                this.selected = userObject;
+            },
+
             updateAttachments: function(attachment) {
                 var vm = this;
 
@@ -138,7 +142,7 @@
                         user_id: vm.currentUser.data.ID,
                         user_name: vm.currentUser.data.display_name,
                         assignee_id: vm.selected.ID,
-                        assignee_name: vm.selected.assignee,
+                        assignee_name: vm.selected.display_name,
                         attachments: vm.attachmentIDs,
                         due_date: vm.todoDueDate
                     };
@@ -166,7 +170,7 @@
 
                         if( vm.selected ) {
                             todo.assigneeID = vm.selected.ID;
-                            todo.assignee_name = vm.selected.assignee;
+                            todo.assignee_name = vm.selected.display_name;
                         } else {
                             todo.assigneeID = null;
                             todo.assignee_name = null;
@@ -212,26 +216,7 @@
                 projectid,
                 key;
 
-                // vm.$on('input', function(data) {
-                    
-                // })
-
             vm.currentUser = fpm.currentUserInfo;
-
-            projectid = vm.$route.params.projectid;
-
-            key = projectid + '-users';
-            vm.users = JSON.parse(localStorage.getItem(key));
-
-            if (!vm.users) {
-
-                localStorage.setItem('pid', projectid);
-
-                store.fetchUsers( projectid ).then(function(resp){
-                    vm.users = resp.data;
-                    localStorage.setItem(key, JSON.stringify(vm.users));
-                });
-            }
         }
     }
 </script>
