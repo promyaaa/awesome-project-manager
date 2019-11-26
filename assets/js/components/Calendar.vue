@@ -55,7 +55,7 @@ export default {
 			var startDate = arg.view.activeStart;
 			var endDate = arg.view.activeEnd;
 			
-			if( arg.view.type === 'dayGridMonth' ) {
+			if(arg.view.type === 'dayGridMonth') {
 				this.fetchProjectTodos(startDate, endDate);
 			}
 		},
@@ -70,9 +70,10 @@ export default {
 			        action: 'fpm-get-todos-for-calendar',
 			        project_id: vm.$route.params.projectid,
 			       	start_date: s.getFullYear() + '-' + s.getMonth() + '-' + s.getDate(),
-			        end_date: e.getFullYear() + '-' + e.getMonth() + '-' + e.getDate(),
+			        end_date: e.getFullYear() + '-' + (e.getMonth()+1) + '-' + e.getDate(),
 			        nonce: fpm.nonce,
 			    };
+
 
 		    jQuery.post( fpm.ajaxurl, data, function( resp ) {
 		        if ( resp.success ) {
