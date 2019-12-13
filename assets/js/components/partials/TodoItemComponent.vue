@@ -61,12 +61,15 @@
                             @keyup.esc="hideTodoForm">
                     </div>
                     <div>
-                        <select v-model="selected" class="form-control">
+                       <!--  <select v-model="selected" class="form-control">
                             <option disabled value="">{{ i18n.select_user }}</option>
                             <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
                                 {{ option.display_name }}
                             </option>
-                        </select>
+                        </select> -->
+                        <dropdown-autocomplete 
+                            :currentselect="selected.display_name"
+                            v-on:userselect="selectUser"></dropdown-autocomplete>
                     </div>
                     <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
 
@@ -91,11 +94,13 @@
 
 <script>
     import DatePicker from './DatePickerComponent.vue';
+    import DropdownAutocomplete from './DropdownAutocomplete.vue';
     import store from '../../store';
     export default {
         props: ['todo', 'tindex', 'list', 'i18n' ],
         components: {
-            DatePicker
+            DatePicker,
+            DropdownAutocomplete,
         },
         data() {
             return {
@@ -117,18 +122,22 @@
             }
         },
         computed: {
-            isShowEdit: function() {
+            isShowEdit() {
                 var vm = this;
                 return (vm.currentUser.roles[0] === 'administrator' && !vm.is_complete) ||
                         (!vm.is_complete && (vm.currentUser.data.ID === vm.todo.userID));
-            }
+            },
         },
         methods: {
+            selectUser(userObject) {
+                this.selected = userObject;
+            },
+
             showEditForm( todoObj, index ) {
                 this.todoName = todoObj.todo;
                 this.updateDueDate = todoObj.due_date || '';
                 this.selected = {
-                    ID: todoObj.assigneeID, assignee: todoObj.assignee_name
+                    ID: todoObj.assigneeID, display_name: todoObj.assignee_name
                 }
                 this.editindex = index;
             },
@@ -151,10 +160,20 @@
                         user_id: vm.currentUser.data.ID,
                         user_name: vm.currentUser.data.display_name,
                         assignee_id: vm.selected.ID,
-                        assignee_name: vm.selected.assignee,
+                        assignee_name: vm.selected.display_name,
                         attachments: todoObject.attachmentIDs,
                         due_date: vm.updateDueDate ? vm.updateDueDate : ''
                     };
+
+                    if ( 
+                        todoObject.todo === data.todo &&
+                        todoObject.assignee_name === data.assignee_name &&
+                        todoObject.due_date === data.due_date &&
+                        _.isEqual(todoObject.attachmentIDs, data.attachments)
+                    ) {
+                        vm.editindex = -1;
+                        return;
+                    }
 
                 vm.updatingTodo = true;
 
@@ -164,7 +183,7 @@
                         todoObject.todo = vm.todoName;
                         todoObject.formatted_due_date = resp.data.todo.formatted_due_date;
                         todoObject.assigneeID = vm.selected.ID;
-                        todoObject.assignee_name = vm.selected.assignee;
+                        todoObject.assignee_name = vm.selected.display_name;
 
                         vm.todoName = '';
                         vm.editindex = -1;
@@ -243,21 +262,6 @@
             vm.currentUser = fpm.currentUserInfo;
             if ( vm.todo.file_ids ) {
                 vm.fileCount = +vm.todo.file_ids.charAt(2);
-            }
-
-            projectid = vm.$route.params.projectid;
-
-            key = projectid + '-users';
-            vm.users = JSON.parse(localStorage.getItem(key));
-
-            if (!vm.users) {
-
-                localStorage.setItem('pid', projectid);
-
-                store.fetchUsers( projectid ).then(function(resp){
-                    vm.users = resp.data;
-                    localStorage.setItem(key, JSON.stringify(vm.users));
-                });
             }
         }
     }

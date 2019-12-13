@@ -231,7 +231,6 @@
             this.currentUserInfo = fpm.currentUserInfo;
 
             store.setLocalization( 'fpm-get-comments-local-data' ).then( function( data ) {
-                console.log(data);
                 vm.i18n = data;
             });
         }

@@ -108,28 +108,29 @@
                 this.selected = userObject;
             },
 
-            updateAttachments: function(attachment) {
+            updateAttachments(attachment) {
                 var vm = this;
 
                 vm.attachments.push(attachment);
                 vm.attachmentIDs.push(attachment.id);
+                console.log(vm.attachmentIDs)
             },
 
-            removeAttachment: function(index) {
+            removeAttachment(index) {
                 this.attachments.splice(index, 1);
                 this.attachmentIDs.splice(index, 1);
             },
 
-            showTodoForm: function( index ) {
+            showTodoForm( index ) {
                 this.sectionIndex = index;
             },
 
-            hideTodoForm: function() {
+            hideTodoForm() {
                 this.sectionIndex = -1;
                 this.todoName = '';
             },
 
-            createTodo: function() {
+            createTodo() {
 
                 var vm = this,
                     todo,
@@ -146,6 +147,8 @@
                         attachments: vm.attachmentIDs,
                         due_date: vm.todoDueDate
                     };
+
+                    console.log(data);
 
                 if ( vm.notifyAssignee ) {
                     data.assignee_email = vm.selected.email;
@@ -202,14 +205,14 @@
 
         },
 
-        mounted() {
+        // mounted() {
             // var self = this;
             // jQuery('#datepicker').datepicker({
             //     onSelect:function(selectedDate, datePicker) {
             //         self.date = selectedDate;
             //     }
             // });
-        },
+        // },
 
         created() {
             var vm = this,

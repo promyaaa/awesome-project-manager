@@ -120,13 +120,18 @@
                                         required 
                                         @keyup.esc="hideTodoForm">
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <select v-model="selected" class="form-control">
                                         <option disabled value="">{{ i18n.select_user }}</option>
                                         <option v-for="option in users" v-bind:value="{ID : option.ID, assignee : option.display_name}">
                                         {{ option.display_name }}
                                         </option>
                                     </select>
+                                </div> -->
+                                 <div>
+                                    <dropdown-autocomplete 
+                                        :currentselect="selected.display_name"
+                                        v-on:userselect="selectUser"></dropdown-autocomplete>
                                 </div>
                                 <date-picker id="update-duedate" v-model="updateDueDate"></date-picker>
                                 <file-upload
@@ -153,37 +158,7 @@
     </div>
 </template>
 
-<style>
 
-.todo-details-div {
-    padding: 15px 50px 10px;
-}
-.overdue {
-    color: #D54E21;
-    font-size: 12px;
-    font-style: italic;
-    /*background: #D54E21;
-    color: white;
-    padding: 2px;
-    border-radius: 5px;*/
-}
-.due {
-    color: #46B450;
-    font-size: 12px;
-    font-style: italic;
-    
-    /*background: #46B450;
-    color: white;
-    padding: 2px;
-    border-radius: 5px;*/
-}
-.todo-info {
-    border-bottom: 1px solid #eee;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-</style>
 <script>
     import store from '../store';
     import DatePicker from './partials/DatePickerComponent.vue';
@@ -192,6 +167,7 @@
     import FileUpload from './partials/FileUploadComponent.vue';
     import ProjectNav from './partials/ProjectNavComponent.vue';
     import SubTasks from './partials/SubTasksComponent.vue';
+    import DropdownAutocomplete from './partials/DropdownAutocomplete.vue';
     export default {
         components: {
             Comments,
@@ -200,6 +176,7 @@
             FilesTypeDisplay,
             ProjectNav,
             SubTasks,
+            DropdownAutocomplete,
         },
         data() {
             return {
@@ -220,7 +197,7 @@
             }
         },
         filters: {
-            truncate: function(string, value) {
+            truncate(string, value) {
                 var dotdot = '';
                 if(!string)
                     string = '';
@@ -246,34 +223,39 @@
         },
         methods: {
 
-            updateEditAttachments: function(attachment) {
+            updateEditAttachments( attachment ) {
                 var vm = this;
                 vm.attachmentsToEdit.push(attachment);
                 vm.attachmentIDsToEdit.push(attachment.id);
             },
 
-            removeEditAttachment: function(index) {
+            removeEditAttachment( index ) {
                 this.attachmentsToEdit.splice(index, 1);
                 this.attachmentIDsToEdit.splice(index, 1);
             },
 
-            showTodoEdit: function( todoObject ) {
+            selectUser( userObject ) {
+                this.selected = userObject;
+            },
+
+            showTodoEdit( todoObject ) {
                 var vm = this;
                 vm.editTodo = true;
                 vm.todoName = vm.todoObject.todo;
                 vm.updateDueDate = vm.todoObject.due_date;
                 vm.selected = {
-                    ID: vm.todoObject.assigneeID, assignee: vm.todoObject.assignee_name
+                    ID: vm.todoObject.assigneeID, 
+                    display_name: vm.todoObject.assignee_name
                 }
                 vm.attachmentsToEdit = todoObject.files;
-                vm.attachmentIDsToEdit = todoObject.attachmentIDs;
+                vm.attachmentIDsToEdit = [...todoObject.attachmentIDs];
             },
 
-            cancelTodoEdit: function() {
+            cancelTodoEdit() {
                 this.editTodo = false;
             },
 
-            fetchTodo: function() {
+            fetchTodo() {
                 var vm = this,
                     listID = vm.$route.params.listid,
                     projectID = vm.$route.params.projectid;
@@ -293,6 +275,7 @@
                     
                     if ( resp.success ) {
                         vm.todoObject = resp.data[0];
+                        
                         vm.is_complete = +vm.todoObject.is_complete;
                         vm.is_overdue = vm.todoObject.is_overdue;
                         vm.list = resp.data[0].list_info;
@@ -339,7 +322,7 @@
                 }
             },
 
-            updateTodo: function() {
+            updateTodo() {
 
                 var vm = this,
                     todo,
@@ -353,10 +336,22 @@
                         user_id: vm.currentUser.data.ID,
                         user_name: vm.currentUser.data.display_name,
                         assignee_id: vm.selected.ID,
-                        assignee_name: vm.selected.assignee,
+                        assignee_name: vm.selected.display_name,
                         attachments: vm.attachmentIDsToEdit,
                         due_date: vm.updateDueDate ? vm.updateDueDate : ''
                     };
+
+
+                if ( 
+                    vm.todoObject.todo === data.todo &&
+                    vm.todoObject.assignee_name === data.assignee_name &&
+                    vm.todoObject.due_date === data.due_date &&
+                    _.isEqual(vm.todoObject.attachmentIDs, data.attachments)
+                    )
+                {
+                    vm.editTodo = false;
+                    return;
+                }
 
                 jQuery.post( fpm.ajaxurl, data, function( resp ) {
                     
@@ -366,7 +361,7 @@
                         vm.todoObject.due_date = resp.data.todo.due_date;
                         vm.is_overdue = resp.data.todo.is_overdue;
                         vm.todoObject.assigneeID = vm.selected.ID;
-                        vm.todoObject.assignee_name = vm.selected.assignee;
+                        vm.todoObject.assignee_name = vm.selected.display_name;
 
                         vm.todoName = '';
                         vm.editTodo = false;
@@ -392,13 +387,9 @@
 
                     jQuery.post( fpm.ajaxurl, data, function( resp ) {
                         if ( resp.success ) {
-
                             vm.$router.push({
                                 path: `/projects/${projectID}/todolists/${listID}`
                             });
-
-                        } else {
-
                         }
                     });
                 }
@@ -411,26 +402,35 @@
                 projectid,
                 key;
 
+            vm.currentUser = fpm.currentUserInfo;
+
             store.setLocalization( 'fpm-get-single-todo-local-data' ).then( function( data ) {
                 vm.i18n = data;
             });
 
-            vm.currentUser = fpm.currentUserInfo;
-
-            projectid = vm.$route.params.projectid;
-
-            key = projectid + '-users';
-            vm.users = JSON.parse(localStorage.getItem(key));
-
-            if (!vm.users) {
-
-                localStorage.setItem('pid', projectid);
-
-                store.fetchUsers( projectid ).then(function(resp){
-                    vm.users = resp.data;
-                    localStorage.setItem(key, JSON.stringify(vm.users));
-                });
-            }
         },
     }
 </script>
+
+<style>
+
+.todo-details-div {
+    padding: 15px 50px 10px;
+}
+.overdue {
+    color: #D54E21;
+    font-size: 12px;
+    font-style: italic;
+}
+.due {
+    color: #46B450;
+    font-size: 12px;
+    font-style: italic;
+}
+.todo-info {
+    border-bottom: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+</style>
