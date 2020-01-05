@@ -33,6 +33,7 @@ class FusionPM_Install {
                 `project_desc` text,
                 `userID` int(11) unsigned,
                 `created` datetime,
+                `is_complete` tinyint(1) NOT NULL DEFAULT '0',
                 PRIMARY KEY (`ID`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
 

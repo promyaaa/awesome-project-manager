@@ -38,8 +38,10 @@ class FusionPM_Admin {
         add_menu_page( 'Fusion PM', 'Project Manager', $capability, 'fusion-pm', array( $this, 'pm_dashboard_cb' ), 'dashicons-editor-table', 15 );
 
         $submenu['fusion-pm'][] = array( __( 'Projects', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/' );
+        // $submenu['fusion-pm'][] = array( __( 'Completed Projects', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/completed-projects' );
         $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/assignments' );
         $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/activity' );
+
         do_action( 'fusion_pm_menu', $capability );
     }
     // For line number 8 callback function. where main single page div loaded
