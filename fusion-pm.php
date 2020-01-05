@@ -3,7 +3,7 @@
 Plugin Name: Fusion project manager
 Plugin URI: http://example.com/
 Description: A single page project manager plugin for WordPress.
-Version: 1.0.5
+Version: 1.0.6
 Author: M Abdur Rokib Promy
 Author URI: https://github.com/promyaaa
 License: GPL2
@@ -50,7 +50,7 @@ class Fusion_PM {
      *
      * @var string
      */
-    public $version = '1.0.5';
+    public $version = '1.0.6';
 
     /**
      * Constructor for the Fusion_PM class
