@@ -105,6 +105,7 @@
 
         methods: {
             selectUser(userObject) {
+                console.log(userObject);
                 this.selected = userObject;
             },
 
@@ -148,11 +149,12 @@
                         due_date: vm.todoDueDate
                     };
 
-                    console.log(data);
 
                 if ( vm.notifyAssignee ) {
-                    data.assignee_email = vm.selected.email;
+                    data.assignee_email = vm.selected.user_email;
                 }
+
+                console.log(data);
 
                 if ( !vm.todoName ) {
                     return;

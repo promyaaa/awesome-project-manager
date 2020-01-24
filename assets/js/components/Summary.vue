@@ -336,31 +336,36 @@
             vm.fetchMessageSummary();
             vm.currentUser = fpm.currentUserInfo;
 
-            prevID = localStorage.getItem('pid');
             projectid = vm.$route.params.projectid;
+            store.fetchUsers( projectid ).then(function(resp){
+                vm.loading = false;
+                vm.users = resp.data;
+            });
 
-            if ( prevID !== projectid ) {
-                prevKey = prevID + '-users';
-                localStorage.removeItem(prevKey);
-                localStorage.setItem('pid', projectid);
+            // prevID = localStorage.getItem('pid');
 
-                store.fetchUsers( projectid ).then(function(resp){
-                    vm.loading = false;
-                    vm.users = resp.data;
-                    var key = projectid + '-users';
-                    localStorage.setItem(key, JSON.stringify(vm.users));
-                });
-            } else {
-                var key = projectid + '-users';
-                vm.users = JSON.parse(localStorage.getItem(key));
-                if (!vm.users) {
-                    store.fetchUsers( projectid ).then(function(resp){
-                        vm.loading = false;
-                        vm.users = resp.data;
-                        localStorage.setItem(key, JSON.stringify(vm.users));
-                    });
-                }
-            }
+            // if ( prevID !== projectid ) {
+            //     prevKey = prevID + '-users';
+            //     localStorage.removeItem(prevKey);
+            //     localStorage.setItem('pid', projectid);
+
+            //     store.fetchUsers( projectid ).then(function(resp){
+            //         vm.loading = false;
+            //         vm.users = resp.data;
+            //         var key = projectid + '-users';
+            //         localStorage.setItem(key, JSON.stringify(vm.users));
+            //     });
+            // } else {
+            //     var key = projectid + '-users';
+            //     vm.users = JSON.parse(localStorage.getItem(key));
+            //     if (!vm.users) {
+            //         store.fetchUsers( projectid ).then(function(resp){
+            //             vm.loading = false;
+            //             vm.users = resp.data;
+            //             localStorage.setItem(key, JSON.stringify(vm.users));
+            //         });
+            //     }
+            // }
         }
     }
 </script>
