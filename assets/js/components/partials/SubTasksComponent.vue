@@ -75,6 +75,8 @@
                     action: 'fpm-create-subtask',
                     todo_id: vm.todo.ID,
                     subtask: vm.subtask,
+                    list_id: vm.todo.listID,
+                    project_id: vm.todo.projectID,
                     nonce: fpm.nonce
                 };
 
@@ -90,16 +92,19 @@
                 });
             },
 
-            toggleCheckbox: function( stask ) {
+            toggleCheckbox( stask ) {
+                console.log(this.$route.params.listid);
                 var vm = this,
                     data = {
                         action : 'fpm-complete-subtask',
                         nonce : fpm.nonce,
                         todo_id: stask.todoID,
                         todo: vm.todo.todo,
+                        subtask: stask.subtask,
                         subtask_id: stask.ID,
                         is_complete: stask.is_complete,
                         project_id: vm.$route.params.projectid,
+                        list_id: vm.$route.params.listid,
                     };
 
                 if ( stask.is_complete ) {

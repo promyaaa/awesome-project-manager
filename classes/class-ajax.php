@@ -1095,11 +1095,29 @@ class FusionPM_Ajax {
 
         $todoID = $this->get_validated_input('todo_id');
         $subTask = $this->get_validated_input('subtask');
+        $parentID = $this->get_validated_input('list_id');
+        $projectID = $this->get_validated_input('project_id');
+
+        if ( ! $projectID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Project ID not found', 'fusion-pm' )
+                )
+            );
+        }
 
         if ( ! $todoID ) {
             wp_send_json_error( 
                 array(
                     'message' => __( 'Todo ID not found', 'fusion-pm' )
+                )
+            );
+        }
+
+        if ( ! $parentID ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'List ID not found', 'fusion-pm' )
                 )
             );
         }
@@ -1116,10 +1134,12 @@ class FusionPM_Ajax {
 
         $date = current_time( 'mysql' );
 
+        $currentUser = wp_get_current_user();
+
         $data = array(
             'subtask' => $subTask,
             'todoID' => $todoID,
-            'userID' => get_current_user_id(),
+            'userID' => $currentUser->ID,
             'created' => $date
         );
 
@@ -1130,8 +1150,24 @@ class FusionPM_Ajax {
         );
 
         if ( $insertID ) {
+            $activities = array(
+                'userID' => $currentUser->ID,
+                'user_name' => $currentUser->display_name,
+                'projectID' => $projectID,
+                'parentID'  => $parentID,
+                'activity_id' => $todoID,
+                'activity' => $subTask,
+                'created' => $date,
+                'activity_type' => 'create_subtask',
+            );
+
+            $this->create_activity($activities);
             wp_send_json_success( $resp );
         }
+
+        // if ( $insertID ) {
+        //     wp_send_json_success( $resp );
+        // }
 
         wp_send_json_error( 
             array(
@@ -1183,8 +1219,10 @@ class FusionPM_Ajax {
         }
         
         $todoID = !empty( $_POST['todo_id'] ) ? $_POST['todo_id'] : '';
+        $subtask = !empty( $_POST['subtask'] ) ? $_POST['subtask'] : '';
         $subtaskID = !empty( $_POST['subtask_id'] ) ? $_POST['subtask_id'] : '';
         $projectID = !empty( $_POST['project_id'] ) ? $_POST['project_id'] : '';
+        $listID = !empty( $_POST['list_id'] ) ? $_POST['list_id'] : '';
         $todo = !empty( $_POST['todo'] ) ? $_POST['todo'] : '';
 
         $is_complete = (int)$_POST['is_complete'];
@@ -1200,8 +1238,9 @@ class FusionPM_Ajax {
             'userID' => $currentUser->ID,
             'user_name' => $currentUser->display_name,
             'projectID' => $projectID,
+            'parentID' => $listID,
             'activity_id' => $todoID,
-            'activity' => $todo,
+            'activity' => $subtask,
             'created' => $date
         );
 
