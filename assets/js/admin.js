@@ -1,6 +1,7 @@
 import Vue from './vue';
 import router from './routes';
 import store from './store';
+import FlashMessage from './components/partials/FlashMessageComponent.vue';
 
 window.wpmedia = wp.media;
 
@@ -15,6 +16,7 @@ Vue.directive('tooltip', {
     }
 });
 
+window.Event = new Vue();
 /**
  * As we are using hash based navigation, hack fix
  * to highlight the current selected menu
@@ -56,7 +58,7 @@ new Vue({
     el: '#app',
     router: router,
     components: {
-
+        FlashMessage
     },
     data: {
         store: store

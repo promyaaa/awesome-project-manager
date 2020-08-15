@@ -99,6 +99,19 @@ class FusionPM_Install {
                 PRIMARY KEY (`ID`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
 
+            "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_bookmarks` (
+                `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                `userID` int(11) unsigned,
+                `projectID` int(11) unsigned,
+                `project_title` varchar(255),
+                `parentID` int(11) unsigned,
+                `bookmark_id` int(11) unsigned,
+                `bookmark_type` varchar(50),
+                `bookmark_title` text,
+                `created` datetime,
+                PRIMARY KEY (`ID`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;",
+
             "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}fpm_comments` (
                 `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `userID` int(11) unsigned,

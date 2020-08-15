@@ -113,6 +113,7 @@
 
 <script>
     import store from '../store';
+
     export default {
         data() {
             return {
@@ -126,6 +127,10 @@
                 loadMore: false,
                 creating: false,
             }
+        },
+
+        components: {
+            
         },
 
         directives: {

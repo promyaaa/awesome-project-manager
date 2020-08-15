@@ -172,12 +172,23 @@ class FusionPM_Project {
             return false;
         }
 
+        $bookmarkModel = FusionPM_Bookmark::init();
+
         if ( $summary ) {
             $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );
             return $result[0];
         }
 
         $result = $wpdb->get_results( "SELECT * FROM {$this->table_name} WHERE `ID` = {$project_id}" );
+
+        $bookmark = $bookmarkModel->get_bookmark( $project_id, $project_id, 'project' );
+
+        if ( $bookmark->ID ) {
+            $result[0]->bookmark_id = $bookmark->ID;
+            $result[0]->is_bookmarked = true;
+        } else {
+            $result[0]->is_bookmarked = false;
+        }
 
         if ( $result ) {
             $result[0]->user_count = $this->get_project_user_count( $project_id );

@@ -30,6 +30,7 @@ const Calendar = require('./components/Calendar.vue');
 
 const MyAssignments = require('./components/MyAssignments.vue');
 const MyActivity = require('./components/MyActivity.vue');
+const MyBookmarks = require('./components/MyBookmarks.vue');
 
 const routes = [
     { path: '/', component: Home },
@@ -37,6 +38,8 @@ const routes = [
     { path: '/my/assignments', component: MyAssignments },
 
     { path: '/my/activity', component: MyActivity },
+    
+    { path: '/my/bookmarks', component: MyBookmarks },
 
     { path: '/projects', component: Home },
 

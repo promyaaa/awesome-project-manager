@@ -151,6 +151,7 @@ class Fusion_PM {
             require_once FUSION_PM_PATH . '/models/Activity.php';
             require_once FUSION_PM_PATH . '/models/Folder.php';
             require_once FUSION_PM_PATH . '/models/Subtask.php';
+            require_once FUSION_PM_PATH . '/models/Bookmark.php';
 
 
             require_once FUSION_PM_PATH . '/classes/class-ajax.php';

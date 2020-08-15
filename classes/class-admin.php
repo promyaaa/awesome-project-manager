@@ -41,6 +41,7 @@ class FusionPM_Admin {
         // $submenu['fusion-pm'][] = array( __( 'Completed Projects', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/completed-projects' );
         $submenu['fusion-pm'][] = array( __( 'Assignments', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/assignments' );
         $submenu['fusion-pm'][] = array( __( 'My Activity', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/activity' );
+        $submenu['fusion-pm'][] = array( __( 'My Bookmarks', 'text-domain' ), $capability, 'admin.php?page=fusion-pm#/my/bookmarks' );
 
         do_action( 'fusion_pm_menu', $capability );
     }

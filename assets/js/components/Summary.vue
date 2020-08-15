@@ -1,5 +1,6 @@
 <template>
     <div>
+        <flash-message></flash-message>
         <div class="container lists">
             <div class="row">
                 <div class="col-12">
@@ -62,6 +63,9 @@
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         {{i18n.delete}}
                     </router-link>
+
+                    <!-- <bookmark :item="project" type="project" v-if="!isArchived"></bookmark> -->
+                    <bookmark :item="project" type="project"></bookmark>
 
                     <router-link :to="'/projects/' + $route.params.projectid + '/reports'"
                                     tag="li" class="action-item">
@@ -200,11 +204,16 @@
 <script>
     import store from '../store';
     import ComponentActions from './partials/ComponentActions.vue';
+    import Bookmark from './partials/BookmarkComponent.vue';
     import Activities from './Activities.vue';
+    import FlashMessage from './partials/FlashMessageComponent.vue';
+
     export default {
         components: {
             Activities,
-            ComponentActions
+            ComponentActions,
+            Bookmark,
+            FlashMessage,
         },
         data() {
             return {
@@ -307,11 +316,12 @@
                     vm.loading = false;
                     
                     if ( resp.success ) {
+                        console.log(resp.data[0]);
                         vm.project = resp.data[0];
                     } else {
-                        vm.$router.push({
-                            path: `/?type=project&info=notfound`
-                        });
+                        // vm.$router.push({
+                        //     path: `/?type=project&info=notfound`
+                        // });
                     }
                 });
                 

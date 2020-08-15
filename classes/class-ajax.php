@@ -76,6 +76,11 @@ class FusionPM_Ajax {
         add_action( 'wp_ajax_fpm-get-folder-details', array( $this, 'fetch_folder_details' ), 10 );
         add_action( 'wp_ajax_fpm-get-file-details', array( $this, 'fetch_file_details' ), 10 );
         add_action( 'wp_ajax_fpm-delete-folder', array( $this, 'delete_folder' ), 10 );
+
+        // BOOKMARK
+        add_action( 'wp_ajax_fpm-get-bookmarks', array( $this, 'fetch_bookmarks' ), 10 );
+        add_action( 'wp_ajax_fpm-bookmark-item', array( $this, 'bookmark_item' ), 10 );
+        add_action( 'wp_ajax_fpm-remove-bookmark', array( $this, 'remove_bookmark' ), 10 );
                 
     }
 
@@ -1770,6 +1775,133 @@ class FusionPM_Ajax {
             wp_send_json_success( $project );
         }
         wp_send_json_error( __( 'something went wrong', 'fusion-pm' ) );
+    }
+
+    public function fetch_bookmarks() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $offset = $this->get_validated_input('offset');
+        $limit = $this->get_validated_input('limit');
+
+        $bookmarkModel = FusionPM_Bookmark::init();
+        $bookmarks = $bookmarkModel->get_bookmarks( $limit, $offset );
+
+        if ( $bookmarks ) {
+            wp_send_json_success( $bookmarks );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function remove_bookmark() {
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $bookmarkID = $this->get_validated_input('bookmark_id');
+
+        if ( ! $bookmarkID ) {
+            wp_send_json_error( __( 'bookmarkID not found', 'fusion-pm' ) );
+        }
+
+        $bookmarkModel = FusionPM_Bookmark::init();
+        $remove = $bookmarkModel->delete( $bookmarkID );
+
+        if ( $remove ) {
+            $resp = array(
+                'message' => __( 'Bookmark removed successfully', 'fusion-pm' ),
+                'bookmark' => array(
+                    'ID' => $bookmarkID
+                )
+            );
+
+            wp_send_json_success( $resp );
+        }
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
+    }
+
+    public function bookmark_item() {
+
+        if ( $this->is_nonce_verified() ) {
+            wp_send_json_error( 
+                array(
+                    'message' => __( 'Nonce Verification failed', 'fusion-pm' )
+                )
+            );
+        }
+
+        $userID = get_current_user_id();
+
+        $projectID = $this->get_validated_input('project_id');
+
+        $parentID = !empty( $_POST['parent_id'] ) ? $_POST['parent_id'] : NULL;
+
+        $bookmarkID = $this->get_validated_input('bookmark_id');
+
+        $bookmarkType = $this->get_validated_input('bookmark_type');
+
+        $bookmarkTitle = $this->get_validated_input('bookmark_title');
+        
+        
+        $bookmarkModel = FusionPM_Bookmark::init();
+
+        $projectModel = FusionPM_Project::init();
+
+        $projectObj = $projectModel->get_project( $projectID, true );
+        
+        
+        $projectTitle = $projectObj->project_title;
+        
+        $date = current_time( 'mysql' );
+
+        $data = array(
+            'userID'         => $userID,
+            'projectID'      => $projectID,
+            'project_title'  => $projectTitle,
+            'parentID'       => $parentID,
+            'bookmark_id'    => $bookmarkID,
+            'bookmark_type'  => $bookmarkType,
+            'bookmark_title' => $bookmarkTitle,
+            'created'        => $date
+        );
+
+        // var_dump($data);
+        // die();
+        
+        $insertID = $bookmarkModel->create( $data );
+
+        if ( $insertID ) {
+            $resp = array(
+                'message' => __( $bookmarkType . ' bookmarked successfully', 'fusion-pm' ),
+                'bookmark' => array(
+                    'ID' => $insertID
+                )
+            );
+            wp_send_json_success( $resp );
+        }
+
+        wp_send_json_error( 
+            array(
+                'message' => __( 'something went wrong', 'fusion-pm' )
+            )
+        );
     }
     
 
